@@ -15,8 +15,6 @@ class Subscriber[T]  () extends Subscription with Observer[T] {
   var destination: PartialObserver[js.Any] = js.native
   def next(value: T = ???): Unit = js.native
   def error(err: js.Any = ???): Unit = js.native
-  def complete(): Unit = js.native
-  def unsubscribe(): Unit = js.native
 }
 
 @js.native

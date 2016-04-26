@@ -47,8 +47,6 @@ object AjaxObservable extends js.Object {
 class AjaxSubscriber[T] protected () extends Subscriber[Event] {
   def this(destination: Subscriber[T], request: AjaxRequest) = this()
   var request: AjaxRequest = js.native
-  def next(e: Event): Unit = js.native
-  def unsubscribe(): Unit = js.native
 }
 
 @js.native
