@@ -10,6 +10,27 @@ package rxscalajs {
   }
 
   @js.native
+  class GroupedObservable[K,T] protected() extends Observable[T] {
+    def this(key: K, groupSubject: Subject[T], refCountSubscription: Subscription) = this()
+  }
+  @js.native
+  class TimeInterval[T] protected() extends js.Object {
+    def this(value: T,interval: Int) = this()
+  }
+
+  @js.native
+  class Timestamp[T] protected() extends js.Object {
+    def this(value: T,interval: Int) = this()
+  }
+
+  @js.native
+  class ErrorObservable protected() extends Observable[js.Any] {
+    def this(error: js.Any,scheduler: Scheduler = ???) = this()
+  }
+
+
+
+  @js.native
   class Observable[T] protected() extends Subscribable[T] {
     def this(subscribe: js.Function = js.native) = this()
 
@@ -44,8 +65,6 @@ package rxscalajs {
     def combineLatest[R](array: js.Array[Observable[js.Any]]): Observable[R] = js.native
     def combineLatest [R](array: js.Array[Observable[js.Any]], project: (js.Any*) => R): Observable[R] = js.native
 
-
-
     def combineLatest(scheduler: Scheduler = ???): Observable[T] = js.native
     def combineLatest[T2](v2: Observable[T2], scheduler: Scheduler = ???): Observable[T | T2] = js.native
     def combineLatest [T2, T3](v2: Observable[T2], v3: Observable[T3], scheduler: Scheduler = ???): Observable[T | T2 | T3] = js.native
@@ -54,18 +73,17 @@ package rxscalajs {
     def combineLatest[T2, T3, T4, T5, T6](v2: Observable[T2], v3: Observable[T3], v4: Observable[T4], v5: Observable[T5], v6: Observable[T6], scheduler: Scheduler = ???): Observable[T | T2 | T3 | T4 | T5 | T6] = js.native
     def combineLatest(observables: (Observable[T] | Scheduler)*): Observable[T] = js.native
     def combineLatest[R](observables: (Observable[js.Any] | Scheduler)*): Observable[R] = js.native
+    def combineLatest[R](project: (T, Int) => Observable[R]): Observable[R] = js.native
+    def combineLatest[I, R](project: ( T,  Int) => Observable[I], resultSelector: ( T, I, Int,  Int) => R): Observable[R] = js.native
 
+    def combineLatest[I, R](observable: Observable[I], resultSelector: (T,  I,  Int,  Int) => R): Observable[R] = js.native
 
     def concatAll(): T = js.native
     def concatMap[T, I, R](project: ( T,  Int) => Observable[I], resultSelector: (T,  I,  Int,  Int) => R = ???): js.Any = js.native
 
-    def combineLatest[R](project: (T, Int) => Observable[R]): Observable[R] = js.native
-    def combineLatest[I, R](project: ( T,  Int) => Observable[I], resultSelector: ( T, I, Int,  Int) => R): Observable[R] = js.native
 
     def concatMapTo[T, I, R](innerObservable: Observable[I], resultSelector: (T, I,  Int,  Int) => R = ???): Observable[R] = js.native
 
-    def combineLatest[R](observable: Observable[R]): Observable[R] = js.native
-    def combineLatest[I, R](observable: Observable[I], resultSelector: (T,  I,  Int,  Int) => R): Observable[R] = js.native
 
     def count(predicate: ( T,  Int,  Observable[T]) => Boolean  = ???): Observable[Int] = js.native
 
@@ -82,7 +100,6 @@ package rxscalajs {
     def distinctKey[T,K](key: String, compare: ( K,  K) => Boolean, flushes: Observable[js.Any] = ???): Observable[T] = js.native
     def distinctKey(key: String): Observable[T] = js.native
     def distinctUntilChanged[ K](compare: ( K,  K) => Boolean = ???, keySelector: ( T) => K = ???): Observable[T] = js.native
-    def distinctUntilChanged[ K](compare: ( K,  K) => Boolean = ???, keySelector: ( T) => K = ???): Observable[T] = js.native
     def distinctUntilKeyChanged(key: String, compare: ( T,  T) => Boolean = ???): Observable[T] = js.native
     def `do`(nextOrObserver: (Observer[T] | ( T => Unit)) = ???, error: js.Any => Unit = ???, complete: () => Unit = ???): Observable[T] = js.native
     def elementAt(index: Int, defaultValue: T = ???): Observable[T] = js.native
@@ -98,7 +115,6 @@ package rxscalajs {
     def groupBy[ K, R](keySelector: ( T) => K, elementSelector:  T => R = ???, durationSelector: ( GroupedObservable[K, R]) => Observable[js.Any] = ???): Observable[GroupedObservable[K, R]] = js.native
     def ignoreElements(): Observable[T] = js.native
     def isEmpty(): Observable[Boolean] = js.native
-    def last[ R](predicate: ( T,  Int,  Observable[T]) => Boolean = ???, resultSelector: ( T,  Int) => R | Unit = ???, defaultValue: R = ???): Observable[T | R] = js.native
     def last[ R](predicate: ( T,  Int,  Observable[T]) => Boolean = ???, resultSelector: ( T,  Int) => R | Unit = ???, defaultValue: R = ???): Observable[T | R] = js.native
     def let[ R](func:  Observable[T] => Observable[R]): Observable[R] = js.native
     def map[ R](project: ( T,  Int) => R, thisArg: js.Any = ???): Observable[R] = js.native
@@ -119,7 +135,6 @@ package rxscalajs {
     def merge[T2, T3, T4, T5, T6](v2: Observable[T2], v3: Observable[T3], v4: Observable[T4], v5: Observable[T5], v6: Observable[T6], scheduler: Scheduler = ???): Observable[T | T2 | T3 | T4 | T5 | T6] = js.native
     def merge[T2, T3, T4, T5, T6](v2: Observable[T2], v3: Observable[T3], v4: Observable[T4], v5: Observable[T5], v6: Observable[T6], concurrent: Int = ???, scheduler: Scheduler = ???): Observable[T | T2 | T3 | T4 | T5 | T6] = js.native
     def merge(observables: (Observable[T] | Scheduler | Int)*): Observable[T] = js.native
-    def merge[R](observables: (Observable[js.Any] | Scheduler | Int)*): Observable[R] = js.native
     def mergeAll(concurrent: Int = ???): T = js.native
     def mergeMap[ I, R](project: ( T,  Int) => Observable[I], resultSelector: (( T,  I,  Int,  Int) => R | Int) = ???, concurrent: Int = ???): Observable[R] = js.native
     def mergeMapTo[ I, R](innerObservable: Observable[I], resultSelector: (( T,  I,  Int,  Int) => R | Int) = ???, concurrent: Int = ???): Observable[R] = js.native
@@ -211,7 +226,7 @@ package rxscalajs {
     
     def lift[R](operator: Operator[T, R]): Observable[R] = js.native
 
-    def subscribe(observerOrNext: PartialObserver[T] | js.Function1[T, Unit] = js.native, error: js.Function1[js.Any, Unit] = js.native, complete: js.Function0[Unit] = js.native): Subscription = js.native
+    def subscribe(observerOrNext: Observer[T] | js.Function1[T, Unit] = js.native, error: js.Function1[js.Any, Unit] = js.native, complete: js.Function0[Unit] = js.native): Subscription = js.native
 
     def forEach(next: js.Function1[T, Unit], PromiseCtor: Promise.type = js.native): Promise[Unit] = js.native
 
@@ -289,8 +304,6 @@ package rxscalajs {
 
 
     var create: js.Function = js.native
-    var `if`: IfObservable.create.type = js.native
-    var `throw`: ErrorObservable.create.type = js.native
   }
 
 }

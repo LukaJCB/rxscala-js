@@ -11,6 +11,7 @@ organization := "org.ltj"
 
 scalaVersion := "2.11.8"
 
+libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "0.9.0"
 
 jsDependencies +=  "org.webjars.npm" % "reactivex__rxjs" % "5.0.0-beta.6" / "global/Rx.umd.js"
 

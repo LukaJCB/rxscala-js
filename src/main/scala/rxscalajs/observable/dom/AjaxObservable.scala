@@ -2,6 +2,7 @@
 import scala.scalajs.js
 import js.annotation._
 import js.|
+import org.scalajs.dom._
 
 package rxscalajs {
 
@@ -60,6 +61,10 @@ class AjaxResponse protected () extends js.Object {
   var responseText: String = js.native
   var responseType: String = js.native
 }
+
+@js.native
+class Error protected() extends js.Object
+
 
 @js.native
 class AjaxError protected () extends Error {

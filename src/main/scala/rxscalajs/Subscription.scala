@@ -10,10 +10,11 @@ trait AnonymousSubscription extends js.Object {
   def unsubscribe(): Unit = js.native
 }
 
+
 @js.native
 trait ISubscription extends AnonymousSubscription {
   var isUnsubscribed: Boolean = js.native
-  def add(teardown: TeardownLogic): Subscription = js.native
+  def add(teardown: AnonymousSubscription ): Subscription = js.native
   def remove(sub: Subscription): Unit = js.native
 }
 
