@@ -15,7 +15,6 @@ class Subject[T] protected () extends Observable[T] with Observer[T] with ISubsc
   var errorValue: js.Any = js.native
   var dispatching: Boolean = js.native
   var hasCompleted: Boolean = js.native
-  def lift[T, R](operator: Operator[T, R]): Observable[T] = js.native
   def next(value: T): Unit = js.native
   def error(err: js.Any = ???): Unit = js.native
   def asObservable(): Observable[T] = js.native
