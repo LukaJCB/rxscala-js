@@ -86,6 +86,8 @@ package rxscalajs {
     def combineLatest[I, R](observable: Observable[I], resultSelector: (T,  I,  Int,  Int) => R): Observable[R] = js.native
     */
 
+    @JSName("concat")
+    def ++[T2, R]( v2: Observable[T2], scheduler: Scheduler = ???): Observable[R] = concat(v2,scheduler)
     def concat[T2, R](that: Observable[T2], scheduler: Scheduler = ???): Observable[R] = js.native
 
     def concatAll(): T = js.native
@@ -187,6 +189,7 @@ package rxscalajs {
     def skipUntil(notifier: Observable[js.Any]): Observable[T] = js.native
     def skipWhile(predicate: ( T,  Int) => Boolean): Observable[T] = js.native
 
+    @JSName("startWith")
     def +:[U >: T](elem: U, scheduler: Scheduler = ???): Observable[U] = startWith(elem)
 
     def startWith[U >: T](v1: U, scheduler: Scheduler = ???): Observable[U] = js.native
@@ -287,7 +290,6 @@ package rxscalajs {
     def combineLatest[T, T2, T3, T4, T5, T6](v1: Observable[T], v2: Observable[T2], v3: Observable[T3], v4: Observable[T4], v5: Observable[T5], v6: Observable[T6], scheduler: Scheduler = ???): Observable[js.Array[T | T2 | T3 | T4 | T5 | T6]] = js.native
     */
 
-    def ++[T](v1: Observable[T], v2: Observable[T], scheduler: Scheduler = ???): Observable[T] = _concat(js.Array(v1,v2): js.Array[Observable[T]],scheduler)
 
 
     def concat[T, R](observables: Seq[Observable[T]], scheduler: Scheduler = ???): Observable[R] = _concat(observables.toJSArray,scheduler)
