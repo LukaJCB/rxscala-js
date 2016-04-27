@@ -31,8 +31,8 @@ package rxscalajs {
   }
 
 
-
   @js.native
+  @JSName("Rx.Observable")
   class Observable[T] protected() extends Subscribable[T] {
     def this(subscribe: js.Function = js.native) = this()
 
@@ -180,6 +180,7 @@ package rxscalajs {
     def share(): Observable[T] = js.native
     def single(predicate: ( T,  Int,  Observable[T]) => Boolean = ???): Observable[T] = js.native
 
+    @JSName("skip")
     def drop(total: Int): Observable[T] = skip(total)
 
     def skip(total: Int): Observable[T] = js.native
@@ -255,6 +256,7 @@ package rxscalajs {
   }
 
   @js.native
+  @JSName("Rx.Observable")
   object Observable extends js.Object {
     def ajax(request: String | js.Object): Observable[js.Any]  = js.native
 
@@ -264,7 +266,7 @@ package rxscalajs {
 
     import js.JSConverters._
 
-    def combineLatest[T,R] (sources: Seq[Observable[T]])(combineFunction: collection.mutable.Seq[T] ⇒ R = ???): Observable[R] = _combineLatest(sources.toJSArray)(combineFunction)
+    def combineLatest[T,R] (sources: Seq[Observable[T]],combineFunction: collection.mutable.Seq[T] ⇒ R = ???): Observable[R] = _combineLatest(sources.toJSArray)(combineFunction)
 
     @JSName("combineLatest")
     private def _combineLatest[T, R](sources: js.Array[Observable[T]])(combineFunction: collection.mutable.Seq[T] ⇒ R = ???): Observable[R] = js.native
@@ -302,7 +304,7 @@ package rxscalajs {
 
     def concatMap[T, I, R](project: ( T,  Int) => Observable[I], resultSelector: ( T,  I,  Int,  Int) => R = ???): js.Any = js.native
 
-    def interval(period: Int = 1000, scheduler: Scheduler = ???): Observable[Int] = js.native
+    def interval(period: Int = 0, scheduler: Scheduler = ???): Observable[Int] = js.native
 
     def merge[T, R](observables: Seq[Observable[T]], scheduler: Scheduler = ???): Observable[T] = _merge(observables.toJSArray, scheduler)
 
