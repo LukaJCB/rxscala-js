@@ -6,6 +6,7 @@ import js.|
 package rxscalajs {
 
 @js.native
+  @JSName("Rx.Subject")
 class Subject[T] protected () extends Observable[T] with Observer[T] with ISubscription {
   def this(destination: Observer[T] = ???, source: Observable[T] = ???) = this()
   var destination: Observer[T] = js.native

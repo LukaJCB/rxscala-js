@@ -6,6 +6,7 @@ import js.|
 package rxscalajs {
 
 @js.native
+@JSName("Rx.Notification")
 class Notification[T] protected () extends js.Object {
   def this(kind: String, value: T = ???, exception: js.Any = ???) = this()
   var kind: String = js.native
@@ -19,6 +20,7 @@ class Notification[T] protected () extends js.Object {
 }
 
 @js.native
+@JSName("Rx.Notification")
 object Notification extends js.Object {
   def createNext[T](value: T): Notification[T] = js.native
   def createError[T](err: js.Any = js.native): Notification[T] = js.native

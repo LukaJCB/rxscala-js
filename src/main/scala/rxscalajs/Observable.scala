@@ -80,20 +80,20 @@ package rxscalajs {
     def dematerialize(): Observable[js.Any] = js.native
     def distinct(compare: js.Function2[T,  T, Boolean] = ???, flushes: Observable[js.Any] = ???): Observable[T] = js.native
     def distinctKey(key: String, compare: js.Function2[T,  T,Boolean] = ???, flushes: Observable[js.Any] = ???): Observable[T] = js.native
-    def distinctUntilChanged[ K](compare: js.Function2[K,  K,Boolean] = ???, keySelector: js.Function1[T,K] = ???): Observable[T] = js.native
+    def distinctUntilChanged[K](compare: js.Function2[K,  K,Boolean] = ???, keySelector: js.Function1[T,K] = ???): Observable[T] = js.native
     def distinctUntilKeyChanged(key: String, compare: js.Function2[ T,  T, Boolean] = ???): Observable[T] = js.native
     def `do`(nextOrObserver: (Observer[T] | js.Function1[T ,Unit]) = ???, error: js.Function1[js.Any ,Unit] = ???, complete: js.Function0[Unit] = ???): Observable[T] = js.native
     def elementAt(index: Int, defaultValue: T = ???): Observable[T] = js.native
     def every(predicate: js.Function3[T,  Int,  Observable[T],Boolean], thisArg: js.Any = ???): Observable[Boolean] = js.native
     def exhaust(): Observable[T] = js.native
-    def exhaustMap[ I, R](project: js.Function2[ T,  Int, Observable[I]], resultSelector: js.Function4[T, I, Int, Int, R] = ???): Observable[R] = js.native
+    def exhaustMap[I, R](project: js.Function2[T, Int, Observable[R]], resultSelector: js.Function4[T, I, Int, Int, R] = ???): Observable[R] = js.native
     def expand[ R](project: js.Function2[ T, Int, Observable[R]], concurrent: Int = ???, scheduler: Scheduler = ???): Observable[R] = js.native
     def filter(predicate: js.Function2[ T,  Int, Boolean], thisArg: js.Any = ???): Observable[T] = js.native
     def _finally(finallySelector: js.Function0[Unit]): Observable[T] = js.native
     def find(predicate: js.Function3[T,  Int,  Observable[T],Boolean], thisArg: js.Any = ???): Observable[T] = js.native
     def findIndex(predicate: js.Function3[T,  Int,  Observable[T],Boolean], thisArg: js.Any = ???): Observable[Int] = js.native
     def first[ R](predicate: js.Function3[T,  Int,  Observable[T],Boolean] = ???, resultSelector: js.Function2[T,Int,R] = ???, defaultValue: R = ???): Observable[T | R] = js.native
-    def groupBy[ K, R](keySelector: js.Function1[T,K], elementSelector:  js.Function1[T,R]= ???, durationSelector:  js.Function1[GroupedObservable[K, R],Observable[js.Any]] = ???): Observable[GroupedObservable[K, R]] = js.native
+    def groupBy[K, R,T2](keySelector: js.Function1[T,K], elementSelector:  js.Function1[T,R]= ???, durationSelector:  js.Function1[GroupedObservable[K, R],Observable[T2]] = ???): Observable[GroupedObservable[K, R]] = js.native
     def ignoreElements(): Observable[T] = js.native
     def isEmpty(): Observable[Boolean] = js.native
     def last[ R](predicate:  js.Function3[T,  Int,  Observable[T],Boolean] = ???, resultSelector: js.Function2[T,Int,R] = ???, defaultValue: R = ???): Observable[T | R] = js.native
@@ -102,11 +102,11 @@ package rxscalajs {
     def mapTo[ R](value: R): Observable[R] = js.native
     def materialize(): Observable[Notification[T]] = js.native
     def max(comparer: js.Function2[T,T,T] = ???): Observable[T] = js.native
-    def merge[R >: T](that: Observable[R], scheduler: Scheduler = ???): Observable[R] = js.native
+    def merge[R >: T](that: Observable[R],concurrent: Int = ???, scheduler: Scheduler = ???): Observable[R] = js.native
 
     def mergeAll(concurrent: Int = ???): T = js.native
-    def mergeMap[ I, R](project: js.Function2[T, Int,Observable[I]], resultSelector: js.Function4[T, I, Int, Int, R | Int] = ???, concurrent: Int = ???): Observable[R] = js.native
-    def mergeMapTo[ I, R](innerObservable: Observable[I], resultSelector: js.Function4[T, I, Int, Int, R| Int] = ???, concurrent: Int = ???): Observable[R] = js.native
+    def mergeMap[I, R](project: js.Function2[T, Int,Observable[I]], resultSelector: js.Function4[T, I, Int, Int, R] = ???, concurrent: Int = ???): Observable[R] = js.native
+    def mergeMapTo[I, R](innerObservable: Observable[I], resultSelector: js.Function4[T, I, Int, Int, R] = ???, concurrent: Int = ???): Observable[R] = js.native
     def mergeScan[ R](project: js.Function2[R,T,Observable[R]], seed: R, concurrent: Int = ???): Observable[R] = js.native
     def min(comparer: js.Function2[T,T,T] = ???): Observable[T] = js.native
     def multicast(subjectOrSubjectFactory: Subject[T] | js.Function0[Subject[T]]): ConnectableObservable[T] = js.native
@@ -124,16 +124,16 @@ package rxscalajs {
     def publishReplay(bufferSize: Int = ???, windowTime: Int = ???, scheduler: Scheduler = ???): ConnectableObservable[T] = js.native
 
     def race(observables: (Observable[T] | js.Array[Observable[T]])*): Observable[T] = js.native
-    def reduce[R](project: js.Function2[R, T,R])(seed: R = ???): Observable[R] = js.native
+    def reduce[R](project: js.Function2[R,T,R],seed: R = ???): Observable[R] = js.native
 
     def repeat(count: Int = ???): Observable[T] = js.native
 
     def retry(count: Int = ???): Observable[T] = js.native
-    def retryWhen(notifier: js.Function1[Observable[js.Any], Observable[js.Any]]): Observable[T] = js.native
-    def sample(notifier: Observable[js.Any]): Observable[T] = js.native
+    def retryWhen[T2,T3](notifier: js.Function1[Observable[T2], Observable[T3]]): Observable[T] = js.native
+    def sample[I](notifier: Observable[I]): Observable[T] = js.native
 
     def sampleTime(delay: Int, scheduler: Scheduler = ???): Observable[T] = js.native
-    def scan[R](accumulator: js.Function2[R, T, R])( seed: T | R = ???): Observable[R] = js.native
+    def scan[R](accumulator: js.Function2[R, T, R],seed: R = ???): Observable[R] = js.native
     def share(): Observable[T] = js.native
     def single(predicate: js.Function3[T, Int, Observable[T],Boolean] = ???): Observable[T] = js.native
 
@@ -141,7 +141,7 @@ package rxscalajs {
     def drop(total: Int): Observable[T] = js.native
 
     def skip(total: Int): Observable[T] = js.native
-    def skipUntil(notifier: Observable[js.Any]): Observable[T] = js.native
+    def skipUntil[T2](notifier: Observable[T2]): Observable[T] = js.native
     def skipWhile(predicate: js.Function2[T,Int,Boolean]): Observable[T] = js.native
 
     @JSName("startWith")
@@ -150,11 +150,11 @@ package rxscalajs {
     def startWith[U >: T](v1: U, scheduler: Scheduler = ???): Observable[U] = js.native
     def subscribeOn(scheduler: Scheduler, delay: Int = ???): Observable[T] = js.native
     def switch(): T = js.native
-    def switchMap[ I, R](project: js.Function2[T,Int,Observable[I]], resultSelector: js.Function4[T, I, Int, Int, R] = ???): Observable[R] = js.native
+    def switchMap[I, R](project: js.Function2[T, Int,Observable[I]], resultSelector: js.Function4[T, I, Int, Int, R] = ???): Observable[R] = js.native
     def switchMapTo[ I, R](innerObservable: Observable[I], resultSelector: js.Function4[T, I, Int, Int, R] = ???): Observable[R] = js.native
     def take(total: Int): Observable[T] = js.native
     def takeLast(total: Int): Observable[T] = js.native
-    def takeUntil(notifier: Observable[js.Any]): Observable[T] = js.native
+    def takeUntil[T2](notifier: Observable[T2]): Observable[T] = js.native
     def takeWhile(predicate: js.Function2[T,Int,Boolean]): Observable[T] = js.native
     def throttle(durationSelector:  js.Function1[T, Subscribable[Int]]): Observable[T] = js.native
     def throttleTime(delay: Int, scheduler: Scheduler = ???): Observable[T] = js.native
@@ -163,13 +163,13 @@ package rxscalajs {
     def timeoutWith[ R](due: Int | Date, withObservable: Observable[R], scheduler: Scheduler = ???): Observable[T | R] = js.native
     def timestamp(scheduler: Scheduler = ???): Observable[Timestamp[T]] = js.native
     def toArray(): Observable[js.Array[T]] = js.native
-    def window(windowBoundaries: Observable[js.Any]): Observable[Observable[T]] = js.native
+    def window[I](windowBoundaries: Observable[I]): Observable[Observable[T]] = js.native
     def windowCount(windowSize: Int, startWindowEvery: Int = ???): Observable[Observable[T]] = js.native
     def windowTime(windowTimeSpan: Int, windowCreationInterval: Int = ???, scheduler: Scheduler = ???): Observable[Observable[T]] = js.native
     def windowToggle[O](openings: Observable[O], closingSelector:  js.Function1[O, Observable[js.Any]]): Observable[Observable[T]] = js.native
     def windowWhen(closingSelector: js.Function0[Observable[js.Any]]): Observable[Observable[T]] = js.native
 
-    def withLatestFrom[T2, R](v2: Observable[T2])(project: (T, T2) ⇒ R): Observable[R] = js.native
+    def withLatestFrom[T2, R](v2: Observable[T2],project: js.Function2[T, T2, R] = ???): Observable[R] = js.native
 
     def zip[T2, R](v2: Observable[T2], project: js.Function2[T,T2,R] = ???): Observable[R] = js.native
 
