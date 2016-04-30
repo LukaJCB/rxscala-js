@@ -41,16 +41,16 @@ package rxscalajs {
 
 
 
-    def audit(durationSelector:  js.Function1[T,Subscribable[js.Any]]): Observable[T] = js.native
+    def audit[T2](durationSelector:  js.Function1[T,Subscribable[T2]]): Observable[T] = js.native
     def auditTime(delay: Int, scheduler: Scheduler = ???): Observable[T] = js.native
-    def buffer(closingNotifier: Observable[js.Any]): Observable[js.Array[T]] = js.native
+    def buffer[T2](closingNotifier: Observable[T2]): Observable[js.Array[T]] = js.native
     def bufferCount(bufferSize: Int, startBufferEvery: Int = ???): Observable[js.Array[T]] = js.native
     def bufferTime(bufferTimeSpan: Int, bufferCreationInterval: Int = ???, scheduler: Scheduler = ???): Observable[js.Array[T]] = js.native
-    def bufferToggle[O](openings: Subscribable[O], closingSelector:  js.Function1[O, Subscribable[js.Any]]): Observable[js.Array[T]] = js.native
-    def bufferWhen(closingSelector: js.Function0[Observable[js.Any]]): Observable[js.Array[T]] = js.native
+    def bufferToggle[T2,O](openings: Subscribable[O], closingSelector:  js.Function1[O, Subscribable[T2]]): Observable[js.Array[T]] = js.native
+    def bufferWhen[T2](closingSelector: js.Function0[Observable[T2]]): Observable[js.Array[T]] = js.native
     def cache(bufferSize: Int = ???, windowTime: Int = ???, scheduler: Scheduler = ???): Observable[T] = js.native
-    def `catch`[R](selector: js.Function2[js.Any, Observable[T],Observable[R]]): Observable[R] = js.native
-    def combineAll[R](project:  js.Function1[js.Array[js.Any],R]= ???): Observable[R] = js.native
+    def `catch`[T2,R](selector: js.Function2[T2, Observable[T],Observable[R]]): Observable[R] = js.native
+    def combineAll[T2,R](project:  js.Function1[js.Array[T2],R]= ???): Observable[R] = js.native
 
 
     def combineLatest[T2, R](v2: Observable[T2], project:  js.Function2[T,T2,R] = ???): Observable[R] = js.native
@@ -77,28 +77,28 @@ package rxscalajs {
     def defaultIfEmpty[R](defaultValue: R): Observable[R] = js.native
     def delay(delay: Int | Date, scheduler: Scheduler = ???): Observable[T] = js.native
     def delayWhen[U,I](delayDurationSelector:  js.Function1[T, Observable[U]], subscriptionDelay: Observable[I] = ???): Observable[T] = js.native
-    def dematerialize(): Observable[js.Any] = js.native
-    def distinct(compare: js.Function2[T,  T, Boolean] = ???, flushes: Observable[js.Any] = ???): Observable[T] = js.native
-    def distinctKey(key: String, compare: js.Function2[T,  T,Boolean] = ???, flushes: Observable[js.Any] = ???): Observable[T] = js.native
+    def dematerialize[T2](): Observable[T2] = js.native
+    def distinct[T2](compare: js.Function2[T,  T, Boolean] = ???, flushes: Observable[T2] = ???): Observable[T] = js.native
+    def distinctKey[T2](key: String, compare: js.Function2[T,  T,Boolean] = ???, flushes: Observable[T2] = ???): Observable[T] = js.native
     def distinctUntilChanged[K](compare: js.Function2[K,  K,Boolean] = ???, keySelector: js.Function1[T,K] = ???): Observable[T] = js.native
     def distinctUntilKeyChanged(key: String, compare: js.Function2[ T,  T, Boolean] = ???): Observable[T] = js.native
-    def `do`(nextOrObserver: (Observer[T] | js.Function1[T ,Unit]) = ???, error: js.Function1[js.Any ,Unit] = ???, complete: js.Function0[Unit] = ???): Observable[T] = js.native
+    def `do`[T2](nextOrObserver: (Observer[T] | js.Function1[T ,Unit]) = ???, error: js.Function1[T2 ,Unit] = ???, complete: js.Function0[Unit] = ???): Observable[T] = js.native
     def elementAt(index: Int, defaultValue: T = ???): Observable[T] = js.native
-    def every(predicate: js.Function3[T,  Int,  Observable[T],Boolean], thisArg: js.Any = ???): Observable[Boolean] = js.native
+    def every[T2](predicate: js.Function3[T,  Int,  Observable[T],Boolean], thisArg: T2 = ???): Observable[Boolean] = js.native
     def exhaust(): Observable[T] = js.native
     def exhaustMap[I, R](project: js.Function2[T, Int, Observable[R]], resultSelector: js.Function4[T, I, Int, Int, R] = ???): Observable[R] = js.native
-    def expand[ R](project: js.Function2[ T, Int, Observable[R]], concurrent: Int = ???, scheduler: Scheduler = ???): Observable[R] = js.native
-    def filter(predicate: js.Function2[ T,  Int, Boolean], thisArg: js.Any = ???): Observable[T] = js.native
+    def expand[R](project: js.Function2[ T, Int, Observable[R]], concurrent: Int = ???, scheduler: Scheduler = ???): Observable[R] = js.native
+    def filter[T2](predicate: js.Function2[ T,  Int, Boolean], thisArg: T2 = ???): Observable[T] = js.native
     def _finally(finallySelector: js.Function0[Unit]): Observable[T] = js.native
-    def find(predicate: js.Function3[T,  Int,  Observable[T],Boolean], thisArg: js.Any = ???): Observable[T] = js.native
-    def findIndex(predicate: js.Function3[T,  Int,  Observable[T],Boolean], thisArg: js.Any = ???): Observable[Int] = js.native
+    def find[T2](predicate: js.Function3[T,  Int,  Observable[T],Boolean], thisArg: T2 = ???): Observable[T] = js.native
+    def findIndex[T2](predicate: js.Function3[T,  Int,  Observable[T],Boolean], thisArg: T2 = ???): Observable[Int] = js.native
     def first[ R](predicate: js.Function3[T,  Int,  Observable[T],Boolean] = ???, resultSelector: js.Function2[T,Int,R] = ???, defaultValue: R = ???): Observable[T | R] = js.native
     def groupBy[K, R,T2](keySelector: js.Function1[T,K], elementSelector:  js.Function1[T,R]= ???, durationSelector:  js.Function1[GroupedObservable[K, R],Observable[T2]] = ???): Observable[GroupedObservable[K, R]] = js.native
     def ignoreElements(): Observable[T] = js.native
     def isEmpty(): Observable[Boolean] = js.native
     def last[ R](predicate:  js.Function3[T,  Int,  Observable[T],Boolean] = ???, resultSelector: js.Function2[T,Int,R] = ???, defaultValue: R = ???): Observable[T | R] = js.native
     def let[ R](func:  js.Function1[Observable[T],Observable[R]]): Observable[R] = js.native
-    def map[ R](project: js.Function2[T, Int,R], thisArg: js.Any = ???): Observable[R] = js.native
+    def map[T2, R](project: js.Function2[T,Int,R], thisArg: T2 = ???): Observable[R] = js.native
     def mapTo[ R](value: R): Observable[R] = js.native
     def materialize(): Observable[Notification[T]] = js.native
     def max(comparer: js.Function2[T,T,T] = ???): Observable[T] = js.native
@@ -114,7 +114,7 @@ package rxscalajs {
     def observeOn(scheduler: Scheduler, delay: Int = ???): Observable[T] = js.native
 
     def pairwise(): Observable[js.Array[T]] = js.native
-    def partition(predicate: js.Function1[T,Boolean], thisArg: js.Any = ???): js.Array[Observable[T]] = js.native
+    def partition[T2](predicate: js.Function1[T,Boolean], thisArg: T2 = ???): js.Array[Observable[T]] = js.native
     def pluck[R](properties: String*): Observable[R] = js.native
     def publish(): ConnectableObservable[T] = js.native
 
@@ -159,21 +159,21 @@ package rxscalajs {
     def throttle(durationSelector:  js.Function1[T, Subscribable[Int]]): Observable[T] = js.native
     def throttleTime(delay: Int, scheduler: Scheduler = ???): Observable[T] = js.native
     def timeInterval(scheduler: Scheduler = ???): Observable[TimeInterval[T]] = js.native
-    def timeout(due: Int | Date, errorToSend: js.Any = ???, scheduler: Scheduler = ???): Observable[T] = js.native
+    def timeout[T2](due: Int | Date, errorToSend: T2 = ???, scheduler: Scheduler = ???): Observable[T] = js.native
     def timeoutWith[ R](due: Int | Date, withObservable: Observable[R], scheduler: Scheduler = ???): Observable[T | R] = js.native
     def timestamp(scheduler: Scheduler = ???): Observable[Timestamp[T]] = js.native
     def toArray(): Observable[js.Array[T]] = js.native
     def window[I](windowBoundaries: Observable[I]): Observable[Observable[T]] = js.native
     def windowCount(windowSize: Int, startWindowEvery: Int = ???): Observable[Observable[T]] = js.native
     def windowTime(windowTimeSpan: Int, windowCreationInterval: Int = ???, scheduler: Scheduler = ???): Observable[Observable[T]] = js.native
-    def windowToggle[O](openings: Observable[O], closingSelector:  js.Function1[O, Observable[js.Any]]): Observable[Observable[T]] = js.native
-    def windowWhen(closingSelector: js.Function0[Observable[js.Any]]): Observable[Observable[T]] = js.native
+    def windowToggle[T2,O](openings: Observable[O], closingSelector:  js.Function1[O, Observable[T2]]): Observable[Observable[T]] = js.native
+    def windowWhen[T2](closingSelector: js.Function0[Observable[T2]]): Observable[Observable[T]] = js.native
 
     def withLatestFrom[T2, R](v2: Observable[T2],project: js.Function2[T, T2, R] = ???): Observable[R] = js.native
 
     def zip[T2, R](v2: Observable[T2], project: js.Function2[T,T2,R] = ???): Observable[R] = js.native
 
-    def zipAll[ R](project: (js.Function1[js.Array[js.Any],R]) = ???): Observable[R] = js.native
+    def zipAll[T2,R](project: (js.Function1[js.Array[T2],R]) = ???): Observable[R] = js.native
 
     
     def lift[R](operator: Operator[T, R]): Observable[R] = js.native
@@ -186,11 +186,11 @@ package rxscalajs {
   @js.native
   @JSName("Rx.Observable")
   object Observable extends js.Object {
-    def ajax(request: String | js.Object): Observable[js.Any]  = js.native
+    def ajax[T2](request: String | js.Object): Observable[T2]  = js.native
 
-    def bindCallback[T](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[js.Any, Observable[T]]  = js.native
+    def bindCallback[T,T2](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[T2, Observable[T]]  = js.native
 
-    def bindNodeCallback[T](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[js.Any, Observable[T]]  = js.native
+    def bindNodeCallback[T,T2](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[T2, Observable[T]]  = js.native
 
     import js.JSConverters._
 
@@ -205,7 +205,7 @@ package rxscalajs {
     @JSName("concat")
     private def _concat[T, R](observables: js.Array[Observable[T]], scheduler: Scheduler = ???): Observable[R] = js.native
 
-    def concatMap[T, I, R](project: js.Function2[T,Int, Observable[I]], resultSelector: js.Function4[T, I, Int, Int, R] = ???): js.Any = js.native
+    def concatMap[T,T2, I, R](project: js.Function2[T,Int, Observable[I]], resultSelector: js.Function4[T, I, Int, Int, R] = ???): T2 = js.native
 
     def interval(period: Int = 0, scheduler: Scheduler = ???): Observable[Int] = js.native
 
