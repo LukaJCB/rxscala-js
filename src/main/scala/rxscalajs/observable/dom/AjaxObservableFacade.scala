@@ -26,21 +26,21 @@ trait AjaxRequest extends js.Object {
 
 @js.native
 trait AjaxCreationMethod extends js.Object {
-  def apply[T](urlOrRequest: String | AjaxRequest): Observable[T] = js.native
-  def get[T](url: String, resultSelector: js.Function1[AjaxResponse, T] = ???, headers: Object = ???): Observable[T] = js.native
-  def post[T](url: String, body: js.Any = ???, headers: Object = ???): Observable[T] = js.native
-  def put[T](url: String, body: js.Any = ???, headers: Object = ???): Observable[T] = js.native
-  def delete[T](url: String, headers: Object = ???): Observable[T] = js.native
-  def getJSON[T, R](url: String, resultSelector: js.Function1[T, R] = ???, headers: Object = ???): Observable[R] = js.native
+  def apply[T](urlOrRequest: String | AjaxRequest): ObservableFacade[T] = js.native
+  def get[T](url: String, resultSelector: js.Function1[AjaxResponse, T] = ???, headers: Object = ???): ObservableFacade[T] = js.native
+  def post[T](url: String, body: js.Any = ???, headers: Object = ???): ObservableFacade[T] = js.native
+  def put[T](url: String, body: js.Any = ???, headers: Object = ???): ObservableFacade[T] = js.native
+  def delete[T](url: String, headers: Object = ???): ObservableFacade[T] = js.native
+  def getJSON[T, R](url: String, resultSelector: js.Function1[T, R] = ???, headers: Object = ???): ObservableFacade[R] = js.native
 }
 
 @js.native
-class AjaxObservable[T] protected () extends Observable[T] {
+class AjaxObservableFacade[T] protected() extends ObservableFacade[T] {
   def this(urlOrRequest: String | AjaxRequest) = this()
 }
 
 @js.native
-object AjaxObservable extends js.Object {
+object AjaxObservableFacade extends js.Object {
   var create: AjaxCreationMethod = js.native
 }
 
@@ -81,11 +81,11 @@ class AjaxTimeoutError protected () extends AjaxError {
 
 @js.native
 object Rxscalajs extends js.GlobalScope {
-  def ajaxGet[T](url: String, resultSelector: js.Function1[AjaxResponse, T] = ???, headers: Object = ???): AjaxObservable[T] = js.native
-  def ajaxPost[T](url: String, body: js.Any = ???, headers: Object = ???): Observable[T] = js.native
-  def ajaxDelete[T](url: String, headers: Object = ???): Observable[T] = js.native
-  def ajaxPut[T](url: String, body: js.Any = ???, headers: Object = ???): Observable[T] = js.native
-  def ajaxGetJSON[T, R](url: String, resultSelector: js.Function1[T, R] = ???, headers: Object = ???): Observable[R] = js.native
+  def ajaxGet[T](url: String, resultSelector: js.Function1[AjaxResponse, T] = ???, headers: Object = ???): AjaxObservableFacade[T] = js.native
+  def ajaxPost[T](url: String, body: js.Any = ???, headers: Object = ???): ObservableFacade[T] = js.native
+  def ajaxDelete[T](url: String, headers: Object = ???): ObservableFacade[T] = js.native
+  def ajaxPut[T](url: String, body: js.Any = ???, headers: Object = ???): ObservableFacade[T] = js.native
+  def ajaxGetJSON[T, R](url: String, resultSelector: js.Function1[T, R] = ???, headers: Object = ???): ObservableFacade[R] = js.native
 }
 
 }
