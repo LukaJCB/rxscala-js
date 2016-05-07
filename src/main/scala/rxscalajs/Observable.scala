@@ -384,6 +384,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def lastOrElse[R >: T](default: => R): Observable[R] = new Observable(inner.last(defaultValue = default))
 
   def map[R](project: (T,Int) => R): Observable[R] = new Observable[R](inner.map(project))
+  def map[R](project: T => R): Observable[R] = new Observable[R](inner.map(project))
 
   def mapTo[R](value: R): Observable[R] = new Observable(inner.mapTo(value))
 
@@ -537,7 +538,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def zip[T2, R](v2: Observable[T2], project: (T,T2) => R): Observable[R] = new Observable(inner.zip(v2,project))
   def zip[T2, R](v2: Observable[T2]): Observable[R] = new Observable(inner.zip(v2))
 
-  def subscribe(onNext: js.Function1[T,Unit], error: js.Function1[js.Any,Unit] = null, complete: js.Function0[Unit] = null): AnonymousSubscription = inner.subscribe(onNext,error,complete)
+  def subscribe(onNext: T => Unit, error: js.Function1[js.Any,Unit] = null, complete: js.Function0[Unit] = null): AnonymousSubscription = inner.subscribe(onNext,error,complete)
 
   private def get = inner
 

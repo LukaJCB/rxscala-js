@@ -287,10 +287,10 @@ object ObservableTest extends TestSuite {
     }
     'WrapperTests{
 
-      val obs = Observable.apply(1,11,21,1211,111221)
+      val obs = Observable(1,11,21,1211,111221)
       val intervalObs = Observable.interval(100).take(5)
-      val hoObs = Observable.of(obs).take(2)
-      val notiObs = Observable.of(Notification.createNext(3),Notification.createComplete())
+      val hoObs = Observable(obs).take(2)
+      val notiObs = Observable(Notification.createNext(3),Notification.createComplete())
       'BufferCount {
         obs.bufferCount(2).subscribe(unit)
         obs.bufferCount(2, 1).subscribe(unit)
@@ -416,6 +416,7 @@ object ObservableTest extends TestSuite {
       }
       'Map {
         obs.map((n: Int, index: Int) => "n: " + n).subscribe(unit)
+        obs.map(_.toString).subscribe(unit)
       }
       'MapTo {
         obs.mapTo("A").subscribe(unit)
