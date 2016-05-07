@@ -85,7 +85,7 @@ package rxscalajs {
     def every[T2](predicate: js.Function3[T,  Int,  ObservableFacade[T],Boolean], thisArg: T2 = ???): ObservableFacade[Boolean] = js.native
     def exhaust(): ObservableFacade[T] = js.native
     def exhaustMap[I, R](project: js.Function2[T, Int, ObservableFacade[R]], resultSelector: js.Function4[T, I, Int, Int, R] = ???): ObservableFacade[R] = js.native
-    def expand[R](project: js.Function2[ T, Int, ObservableFacade[R]], concurrent: Int = ???, scheduler: Scheduler = ???): ObservableFacade[R] = js.native
+    def expand[R](project: js.Function2[ T, Int, ObservableFacade[R]], concurrent: Double = ???, scheduler: Scheduler = ???): ObservableFacade[R] = js.native
     def filter[T2](predicate: js.Function2[ T,  Int, Boolean], thisArg: T2 = ???): ObservableFacade[T] = js.native
     def _finally(finallySelector: js.Function0[Unit]): ObservableFacade[T] = js.native
     def find[T2](predicate: js.Function3[T,  Int,  ObservableFacade[T],Boolean], thisArg: T2 = ???): ObservableFacade[T] = js.native
@@ -102,7 +102,7 @@ package rxscalajs {
     def max(comparer: js.Function2[T,T,T] = ???): ObservableFacade[T] = js.native
     def merge[R >: T](that: ObservableFacade[R], concurrent: Double = ???, scheduler: Scheduler = ???): ObservableFacade[R] = js.native
 
-    def mergeAll(concurrent: Double = ???): Observable[T] = js.native
+    def mergeAll[U](concurrent: Double = ???): ObservableFacade[U] = js.native
     def mergeMap[I, R](project: js.Function2[T, Int,ObservableFacade[I]], resultSelector: js.Function4[T, I, Int, Int, R] = ???, concurrent: Double = ???): ObservableFacade[R] = js.native
     def mergeMapTo[I, R](innerObservable: ObservableFacade[I], resultSelector: js.Function4[T, I, Int, Int, R] = ???, concurrent: Double = ???): ObservableFacade[R] = js.native
     def mergeScan[ R](project: js.Function2[R,T,ObservableFacade[R]], seed: R, concurrent: Int = ???): ObservableFacade[R] = js.native
@@ -119,9 +119,9 @@ package rxscalajs {
     def publishBehavior(value: T): ConnectableObservableFacade[T] = js.native
 
     def publishLast(): ConnectableObservableFacade[T] = js.native
-    def publishReplay(bufferSize: Int = ???, windowTime: Int = ???, scheduler: Scheduler = ???): ConnectableObservableFacade[T] = js.native
+    def publishReplay(bufferSize: Double = ???, windowTime: Double = ???, scheduler: Scheduler = ???): ConnectableObservableFacade[T] = js.native
 
-    def race(observables: (ObservableFacade[T] | js.Array[ObservableFacade[T]])*): ObservableFacade[T] = js.native
+    def race(observables: js.Array[ObservableFacade[T]]): ObservableFacade[T] = js.native
     def reduce[R](project: js.Function2[R,T,R],seed: R = ???): ObservableFacade[R] = js.native
 
     def repeat(count: Int = ???): ObservableFacade[T] = js.native
@@ -135,15 +135,11 @@ package rxscalajs {
     def share(): ObservableFacade[T] = js.native
     def single(predicate: js.Function3[T, Int, ObservableFacade[T],Boolean] = ???): ObservableFacade[T] = js.native
 
-    @JSName("skip")
-    def drop(total: Int): ObservableFacade[T] = js.native
 
     def skip(total: Int): ObservableFacade[T] = js.native
     def skipUntil[T2](notifier: ObservableFacade[T2]): ObservableFacade[T] = js.native
     def skipWhile(predicate: js.Function2[T,Int,Boolean]): ObservableFacade[T] = js.native
 
-    @JSName("startWith")
-    def +:[U >: T](elem: U, scheduler: Scheduler = ???): ObservableFacade[U] = js.native
 
     def startWith[U >: T](v1: U, scheduler: Scheduler = ???): ObservableFacade[U] = js.native
     def subscribeOn(scheduler: Scheduler, delay: Int = ???): ObservableFacade[T] = js.native
@@ -156,9 +152,11 @@ package rxscalajs {
     def takeWhile(predicate: js.Function2[T,Int,Boolean]): ObservableFacade[T] = js.native
     def throttle(durationSelector:  js.Function1[T, Subscribable[Int]]): ObservableFacade[T] = js.native
     def throttleTime(delay: Int, scheduler: Scheduler = ???): ObservableFacade[T] = js.native
+
+
     def timeInterval(scheduler: Scheduler = ???): ObservableFacade[TimeInterval[T]] = js.native
     def timeout[T2](due: Int | Date, errorToSend: T2 = ???, scheduler: Scheduler = ???): ObservableFacade[T] = js.native
-    def timeoutWith[ R](due: Int | Date, withObservable: ObservableFacade[R], scheduler: Scheduler = ???): ObservableFacade[T | R] = js.native
+    def timeoutWith[ R](due: Int | Date, withObservable: ObservableFacade[R], scheduler: Scheduler = ???): ObservableFacade[R] = js.native
     def timestamp(scheduler: Scheduler = ???): ObservableFacade[Timestamp[T]] = js.native
     def toArray(): ObservableFacade[js.Array[T]] = js.native
     def window[I](windowBoundaries: ObservableFacade[I]): ObservableFacade[ObservableFacade[T]] = js.native
@@ -190,39 +188,30 @@ package rxscalajs {
 
     def bindNodeCallback[T,T2](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[T2, ObservableFacade[T]]  = js.native
 
-    import js.JSConverters._
 
-    def combineLatest[T,R] (sources: Seq[ObservableFacade[T]], combineFunction: js.Function1[js.Array[T], R] = ???): ObservableFacade[R] = _combineLatest(sources.toJSArray)(combineFunction)
 
-    @JSName("combineLatest")
-    private def _combineLatest[T, R](sources: js.Array[ObservableFacade[T]])(combineFunction: js.Function1[js.Array[T], R] = ???): ObservableFacade[R] = js.native
+    def combineLatest[T, R](sources: js.Array[ObservableFacade[T]],combineFunction: js.Function1[js.Array[T], R] = ???): ObservableFacade[R] = js.native
 
 
 
-    def concat[T, R](observables: Seq[ObservableFacade[T]], scheduler: Scheduler = ???): ObservableFacade[R] = _concat(observables.toJSArray,scheduler)
-    @JSName("concat")
-    private def _concat[T, R](observables: js.Array[ObservableFacade[T]], scheduler: Scheduler = ???): ObservableFacade[R] = js.native
+    def concat[T, R](observables: js.Array[ObservableFacade[T]], scheduler: Scheduler = ???): ObservableFacade[R] = js.native
 
     def concatMap[T,T2, I, R](project: js.Function2[T,Int, ObservableFacade[I]], resultSelector: js.Function4[T, I, Int, Int, R] = ???): T2 = js.native
 
     def interval(period: Int = 0, scheduler: Scheduler = ???): ObservableFacade[Int] = js.native
 
-    def merge[T, R](observables: Seq[ObservableFacade[T]], scheduler: Scheduler = ???): ObservableFacade[T] = _merge(observables.toJSArray, scheduler)
 
-    @JSName("merge")
-    private def _merge[T, R](observables: js.Array[ObservableFacade[T]], scheduler: Scheduler = ???): ObservableFacade[R] = js.native
+    def merge[T, R](observables: js.Array[ObservableFacade[T]], scheduler: Scheduler = ???): ObservableFacade[R] = js.native
 
     def of[T](elements: T*): ObservableFacade[T] = js.native
-    def race[T](observables: (ObservableFacade[T] | Array[ObservableFacade[T]])*): ObservableFacade[T] = js.native
+    def race[T](observables: ObservableFacade[T]*): ObservableFacade[T] = js.native
 
     def range(start: Int = 0, count: Int = 0, scheduler: Scheduler = ???): ObservableFacade[Int] = js.native
     def timer(initialDelay: Int = 0, period: Int = 1000, scheduler: Scheduler = ???):  ObservableFacade[Int] = js.native
 
 
-    def zip[T,R](observables: Seq[ObservableFacade[T]], project: js.Function1[js.Array[T], R] = ??? ): ObservableFacade[R] = _zip(observables.toJSArray, project)
 
-    @JSName("zip")
-    def _zip[T,R](observables: js.Array[ObservableFacade[T]], project: js.Function1[js.Array[T], R] = ??? ): ObservableFacade[R] = js.native
+    def zip[T,R](observables: js.Array[ObservableFacade[T]], project: js.Function1[js.Array[T], R] = ??? ): ObservableFacade[R] = js.native
 
 
     var create: js.Function = js.native

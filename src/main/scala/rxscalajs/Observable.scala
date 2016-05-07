@@ -1,8 +1,10 @@
 package rxscalajs
 
-import scala.collection.mutable.Seq
+import scala.collection.immutable.Seq
 import scala.scalajs.js
 import js._
+import js.JSConverters._
+
 
 /**
   * Created by Luka on 29.04.2016.
@@ -14,7 +16,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * emits the most recent value from the source Observable, then repeats this
     * process.
     *
-    * <span class="informal">It's like {@link auditTime}, but the silencing
+    * <span class="informal">It's like  auditTime, but the silencing
     * duration is determined by a second Observable.</span>
     *
     * <img src="./img/audit.png" width="100%">
@@ -266,8 +268,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def combineAll[T2,R](project: js.Array[T2] => R): Observable[R] = new Observable(inner.combineAll(project))
 
 
-  def combineLatest[T2, R](v2: ObservableFacade[T2], project: (T,T2) => R): Observable[R] = new Observable(inner.combineLatest(v2,project))
-  def combineLatest[T2, R](v2: ObservableFacade[T2]): Observable[R] = new Observable(inner.combineLatest(v2))
+  def combineLatest[T2, R](v2: Observable[T2], project: (T,T2) => R): Observable[R] = new Observable(inner.combineLatest(v2,project))
+  def combineLatest[T2, R](v2: Observable[T2]): Observable[R] = new Observable(inner.combineLatest(v2))
 
 
   /**
@@ -326,11 +328,18 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def distinct[T2](compare: (T,  T) => Boolean): Observable[T] = new Observable(inner.distinct(compare))
   def distinct[T2](): Observable[T] = new Observable(inner.distinct())
 
-  def distinctKey[T2](key: String, compare: (T,  T) => Boolean = null, flushes: Observable[T2] = null): Observable[T] = new Observable(inner.distinctKey(key,compare,flushes))
+  def distinctKey[T2](key: String, compare: (T,  T) => Boolean, flushes: Observable[T2]): Observable[T] = new Observable(inner.distinctKey(key,compare,flushes))
+  def distinctKey[T2](key: String, compare: (T,  T) => Boolean): Observable[T] = new Observable(inner.distinctKey(key,compare))
+  def distinctKey[T2](key: String, flushes: Observable[T2]): Observable[T] = new Observable(inner.distinctKey(key,flushes = flushes))
+  def distinctKey[T2](key: String): Observable[T] = new Observable(inner.distinctKey(key))
 
-  def distinctUntilChanged[K](compare: (K,  K) => Boolean = null, keySelector: T => K = null): Observable[T] = new Observable(inner.distinctUntilChanged(compare,keySelector))
+  def distinctUntilChanged[K](compare: (K,  K) => Boolean, keySelector: T => K): Observable[T] = new Observable(inner.distinctUntilChanged(compare,keySelector))
+  def distinctUntilChanged[K](keySelector: T => K): Observable[T] = new Observable(inner.distinctUntilChanged(keySelector = keySelector))
+  def distinctUntilChanged[K](compare: (K,  K) => Boolean): Observable[T] = new Observable(inner.distinctUntilChanged(compare))
+  def distinctUntilChanged[K](): Observable[T] = new Observable(inner.distinctUntilChanged())
 
-  def distinctUntilKeyChanged(key: String, compare: (T,  T) => Boolean = null): Observable[T] = new Observable(inner.distinctUntilKeyChanged(key,compare))
+  def distinctUntilKeyChanged(key: String, compare: (T,  T) => Boolean): Observable[T] = new Observable(inner.distinctUntilKeyChanged(key,compare))
+  def distinctUntilKeyChanged(key: String): Observable[T] = new Observable(inner.distinctUntilKeyChanged(key))
 
   def elementAt(index: Int, defaultValue: T): Observable[T] = new Observable(inner.elementAt(index,defaultValue))
 
@@ -338,9 +347,11 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 
   def exhaust(): Observable[T] = new Observable(inner.exhaust())
 
-  def exhaustMap[I, R](project: (T, Int) => ObservableFacade[R], resultSelector: (T, I, Int, Int) => R = null): Observable[R] = new Observable(inner.exhaustMap(project,resultSelector))
+  def exhaustMap[I, R](project: (T, Int) => ObservableFacade[R], resultSelector: (T, I, Int, Int) => R): Observable[R] = new Observable(inner.exhaustMap(project,resultSelector))
+  def exhaustMap[I, R](project: (T, Int) => ObservableFacade[R]): Observable[R] = new Observable(inner.exhaustMap(project))
 
-  def expand[R](project: ( T, Int) => ObservableFacade[R], concurrent: Int = 0, scheduler: Scheduler = null): Observable[R] = new Observable(inner.expand(project,concurrent,scheduler))
+  def expand[R](project: ( T, Int) => ObservableFacade[R], concurrent: Double = Double.PositiveInfinity, scheduler: Scheduler): Observable[R] = new Observable(inner.expand(project,concurrent,scheduler))
+  def expand[R](project: ( T, Int) => ObservableFacade[R]): Observable[R] = new Observable(inner.expand(project))
 
 
   def filter[T2](predicate: (T,  Int) => Boolean): Observable[T] = new Observable(inner.filter(predicate))
@@ -357,8 +368,6 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 
   def groupBy[K,R,T2](keySelector:  T => K, elementSelector: T => R, durationSelector: GroupedObservableFacade[K, R] => ObservableFacade[T2]): Observable[GroupedObservableFacade[K, R]] =
     new Observable(inner.groupBy(keySelector,elementSelector,durationSelector))
-  def groupBy[K,R,T2](keySelector:  T => K, durationSelector: GroupedObservableFacade[K, R] => ObservableFacade[T2] = null): Observable[GroupedObservableFacade[K, R]] =
-    new Observable(inner.groupBy(keySelector,durationSelector = durationSelector))
 
   def groupBy[K,R,T2](keySelector:  T => K, elementSelector: T => R): Observable[GroupedObservableFacade[K, R]] = new Observable(inner.groupBy(keySelector,elementSelector))
   def groupBy[K,R,T2](keySelector:  T => K): Observable[GroupedObservableFacade[K, R]] = new Observable(inner.groupBy(keySelector))
@@ -382,25 +391,24 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 
 
   def merge[R >: T](that: ObservableFacade[R], concurrent: Double = Double.PositiveInfinity, scheduler: Scheduler): Observable[R] = new Observable(inner.merge(that,concurrent,scheduler))
-  def merge[R >: T](that: ObservableFacade[R], concurrent: Double = Double.PositiveInfinity): Observable[R] = new Observable(inner.merge(that,concurrent))
   def merge[R >: T](that: ObservableFacade[R]): Observable[R] = new Observable(inner.merge(that))
 
 
 
-  def mergeAll(concurrent: Double = Double.PositiveInfinity): Observable[T] = new Observable(inner.mergeAll(concurrent))
+  def mergeAll(concurrent: Double = Double.PositiveInfinity): Observable[T] = new Observable(inner.mergeAll[T](concurrent))
 
   def flatten[U]()(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable(inner.mergeAll())
 
   def mergeMap[I, R](project: (T, Int) => ObservableFacade[I], resultSelector: (T, I, Int, Int) => R, concurrent: Double = Double.PositiveInfinity): Observable[R] =
     new Observable(inner.mergeMap(project,resultSelector,concurrent))
-  def mergeMap[I, R](project: (T, Int) => ObservableFacade[I], concurrent: Double = Double.PositiveInfinity): ObservableFacade[R] =
-    new Observable(inner.mergeMap[I,R](project,concurrent = concurrent))
+  def mergeMap[I, R](project: (T, Int) => ObservableFacade[I]): ObservableFacade[R] =
+    new Observable(inner.mergeMap[I,R](project))
 
 
   def mergeMapTo[I, R](innerObservable: ObservableFacade[I], resultSelector: (T, I, Int, Int) => R, concurrent: Double = Double.PositiveInfinity): Observable[R] =
     new Observable(inner.mergeMapTo(innerObservable,resultSelector,concurrent))
-  def mergeMapTo[I, R](innerObservable: ObservableFacade[I], concurrent: Double = Double.PositiveInfinity): Observable[R] =
-    new Observable(inner.mergeMapTo(innerObservable,concurrent = concurrent))
+  def mergeMapTo[I, R](innerObservable: ObservableFacade[I]): Observable[R] =
+    new Observable(inner.mergeMapTo(innerObservable))
 
 
   def min(comparer: (T,T) => T): Observable[T] = new Observable(inner.min(comparer))
@@ -419,7 +427,111 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 
   def publishBehavior(value: T): ConnectableObservableFacade[T] = inner.publishBehavior(value)
 
-  
+  def publishLast(): ConnectableObservableFacade[T] = inner.publishLast()
+  def publishReplay(bufferSize: Double = Double.PositiveInfinity, windowTime: Double = Double.PositiveInfinity): ConnectableObservableFacade[T] =
+    inner.publishReplay(bufferSize,windowTime)
+
+  def race(observables: Observable[T]*): Observable[T] = new Observable(inner.race(observables.map(_.get).toJSArray))
+
+  def reduce[R](project: (R,T) => R,seed: R): Observable[R] = new Observable(inner.reduce(project,seed))
+  def reduce[R](project: (R,T) => R): Observable[R] = new Observable(inner.reduce(project))
+
+  def repeat(count: Int = -1): Observable[T] = new Observable(inner.repeat(count))
+
+  def retry(count: Int = -1): Observable[T] = new Observable(inner.retry(count))
+
+  def retryWhen[T2,T3](notifier: ObservableFacade[T2] => ObservableFacade[T3]): Observable[T] = new Observable(inner.retryWhen(notifier))
+  def sample[I](notifier: Observable[I]): Observable[T] = new Observable(inner.sample(notifier))
+
+  def sampleTime(delay: Int, scheduler: Scheduler): Observable[T] = new Observable(inner.sampleTime(delay,scheduler))
+  def sampleTime(delay: Int): Observable[T] = new Observable(inner.sampleTime(delay))
+
+
+  def scan[R](accumulator: (R, T) => R,seed: R): Observable[R] = new Observable(inner.scan(accumulator,seed))
+  def scan[R](accumulator: (R, T) => R): Observable[R] = new Observable(inner.scan(accumulator))
+
+
+  def share(): Observable[T] = new Observable(inner.share())
+
+  def single(predicate: (T, Int, ObservableFacade[T]) => Boolean): Observable[T] = new Observable(inner.single(predicate))
+  def single(): Observable[T] = new Observable(inner.single())
+
+  def drop(total: Int): Observable[T] = skip(total)
+
+  def dropUntil[T2](notifier: Observable[T2]): Observable[T] = skipUntil(notifier)
+
+  def dropWhile(predicate: (T,Int) => Boolean): Observable[T] = skipWhile(predicate)
+
+  def skip(total: Int): Observable[T] = new Observable(inner.skip(total))
+
+  def skipUntil[T2](notifier: Observable[T2]): Observable[T] = new Observable(inner.skipUntil(notifier))
+
+  def skipWhile(predicate: (T,Int) => Boolean): Observable[T] = new Observable(inner.skipWhile(predicate))
+
+  def +:[U >: T](elem: U): Observable[U] = startWith(elem)
+
+  def startWith[U >: T](v1: U, scheduler: Scheduler): Observable[U] = new Observable[U](inner.startWith(v1,scheduler))
+  def startWith[U >: T](v1: U): Observable[U] = new Observable[U](inner.startWith(v1))
+
+  def switch[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable[U](inner.switch().asInstanceOf[ObservableFacade[U]])
+
+  def switchMap[I, R](project: (T, Int) => ObservableFacade[I]): Observable[R] = new Observable(inner.switchMap(project))
+
+  def switchMapTo[I, R](innerObservable: ObservableFacade[I]): Observable[R] = new Observable(inner.switchMapTo(innerObservable))
+
+  def take(total: Int): Observable[T] = new Observable(inner.take(total))
+
+  def takeLast(total: Int): Observable[T] = new Observable(inner.takeLast(total))
+
+  def takeUntil[T2](notifier: Observable[T2]): Observable[T] = new Observable(inner.takeUntil(notifier))
+
+  def takeWhile(predicate: (T, Int) => Boolean): Observable[T] = new Observable(inner.takeWhile(predicate))
+
+  def throttle(durationSelector: T =>  Subscribable[Int]): Observable[T] = new Observable(inner.throttle(durationSelector))
+
+  def throttleTime(delay: Int, scheduler: Scheduler): Observable[T] = new Observable(inner.throttleTime(delay,scheduler))
+  def throttleTime(delay: Int): Observable[T] = new Observable(inner.throttleTime(delay))
+
+
+  def timeInterval(): Observable[TimeInterval[T]] = new Observable(inner.timeInterval())
+
+  def timeout[T2](due: Int, errorToSend: T2, scheduler: Scheduler ): Observable[T] = new Observable(inner.timeout(due,errorToSend,scheduler))
+  def timeout[T2](due: Int, errorToSend: T2): Observable[T] = new Observable(inner.timeout(due,errorToSend))
+  def timeout[T2](due: Int): Observable[T] = new Observable(inner.timeout(due))
+  def timeout[T2](due: Int, scheduler: Scheduler ): Observable[T] = new Observable(inner.timeout(due,scheduler = scheduler))
+
+  def timeoutWith[R](due: Int, withObservable: Observable[R]): Observable[R] = new Observable(inner.timeoutWith(due,withObservable))
+
+  def timestamp(): Observable[Timestamp[T]] = new Observable(inner.timestamp())
+
+  def toSeq(): Observable[scala.collection.Seq[T]] = new Observable(inner.toArray().map((arr: js.Array[T], index: Int) => arr.toSeq))
+
+
+  def window[I](windowBoundaries: Observable[I]): Observable[Observable[T]] = new Observable(inner.window(windowBoundaries).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+
+  def windowCount(windowSize: Int, startWindowEvery: Int = 0): Observable[Observable[T]] =
+    new Observable(inner.windowCount(windowSize,startWindowEvery).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+
+  def windowTime(windowTimeSpan: Int, windowCreationInterval: Int, scheduler: Scheduler): Observable[Observable[T]] =
+    new Observable(inner.windowTime(windowTimeSpan,windowCreationInterval,scheduler).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+  def windowTime(windowTimeSpan: Int, windowCreationInterval: Int): Observable[Observable[T]] =
+    new Observable(inner.windowTime(windowTimeSpan,windowCreationInterval).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+  def windowTime(windowTimeSpan: Int, scheduler: Scheduler): Observable[Observable[T]] =
+    new Observable(inner.windowTime(windowTimeSpan,scheduler = scheduler).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+  def windowTime(windowTimeSpan: Int): Observable[Observable[T]] =
+    new Observable(inner.windowTime(windowTimeSpan).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+
+  def windowToggle[T2,O](openings: Observable[O], closingSelector: O => ObservableFacade[T2]): Observable[Observable[T]] =
+    new Observable(inner.windowToggle(openings,closingSelector).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+
+  def windowWhen[T2](closingSelector: () => ObservableFacade[T2]): Observable[Observable[T]] =
+    new Observable(inner.windowWhen(closingSelector).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+
+  def withLatestFrom[T2, R](v2: Observable[T2], project: (T, T2) =>  R): Observable[R] = new Observable(inner.withLatestFrom(v2,project))
+  def withLatestFrom[T2, R](v2: Observable[T2]): Observable[R] = new Observable(inner.withLatestFrom(v2))
+
+  def zip[T2, R](v2: Observable[T2], project: (T,T2) => R): Observable[R] = new Observable(inner.zip(v2,project))
+  def zip[T2, R](v2: Observable[T2]): Observable[R] = new Observable(inner.zip(v2))
 
   def subscribe(onNext: js.Function1[T,Unit], error: js.Function1[js.Any,Unit] = null, complete: js.Function0[Unit] = null): AnonymousSubscription = inner.subscribe(onNext,error,complete)
 
@@ -433,5 +545,53 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 
 object Observable {
   def apply[T](values: T*): Observable[T] = new Observable(ObservableFacade.of[T](values: _*))
+
+  def ajax[T](request: String): Observable[T] = new Observable[T](ObservableFacade.ajax(request))
+
+  def bindCallback[T,T2](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[T2, ObservableFacade[T]] =
+    ObservableFacade.bindCallback(callbackFunc,selector,scheduler)
+
+  def bindNodeCallback[T,T2](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[T2, ObservableFacade[T]]  =
+    ObservableFacade.bindNodeCallback(callbackFunc,selector,scheduler)
+
+
+
+  def combineLatest[T,R] (sources: Seq[ObservableFacade[T]])(combineFunction: Seq[T] => R): Observable[R] = {
+    val func = combineFunction.asInstanceOf[js.Array[T] => R]
+    _combineLatest(sources.toJSArray,func)
+  }
+
+
+  private def _combineLatest[T, R](sources: js.Array[ObservableFacade[T]],combineFunction: js.Array[T] => R): Observable[R] =
+    new Observable(ObservableFacade.combineLatest(sources,combineFunction))
+
+
+  def concat[T, R](observables: Seq[ObservableFacade[T]], scheduler: Scheduler): Observable[R] = _concat(observables.toJSArray,scheduler)
+  def concat[T, R](observables: Seq[ObservableFacade[T]]): Observable[R] = _concat(observables.toJSArray)
+
+  private def _concat[T, R](observables: js.Array[ObservableFacade[T]], scheduler: Scheduler): Observable[R] =
+    new Observable[R](ObservableFacade.concat(observables,scheduler))
+  private def _concat[T, R](observables: js.Array[ObservableFacade[T]]): Observable[R] =
+    new Observable[R](ObservableFacade.concat(observables))
+
+
+  def interval(period: Int = 0): Observable[Int] = new Observable(ObservableFacade.interval(period))
+
+
+  def merge[T, R](observables: Seq[ObservableFacade[T]], scheduler: Scheduler): Observable[R] = new Observable(ObservableFacade.merge(observables.toJSArray,scheduler))
+  def merge[T, R](observables: Seq[ObservableFacade[T]]): Observable[R] = new Observable(ObservableFacade.merge(observables.toJSArray))
+
+  def of[T](elements: T*): Observable[T] = apply(elements: _*)
+  def race[T](observables: ObservableFacade[T]*): Observable[T] = new Observable(ObservableFacade.race(observables: _*))
+
+  def range(start: Int = 0, count: Int = 0): Observable[Int] = new Observable(ObservableFacade.range(start,count))
+  def timer(initialDelay: Int = 0, period: Int = -1): Observable[Int] = new Observable(ObservableFacade.timer(initialDelay,period))
+
+
+  def zip[T,R](observables: Seq[ObservableFacade[T]])(project: js.Array[T] => R): Observable[R] =  {
+    val func = project.asInstanceOf[js.Array[T] => R]
+    new Observable(ObservableFacade.zip(observables.toJSArray,func))
+  }
+
 
 }
