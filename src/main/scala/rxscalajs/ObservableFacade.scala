@@ -51,7 +51,7 @@ package rxscalajs {
 
     def cache(bufferSize: Int = ???, windowTime: Int = ???, scheduler: Scheduler = ???): ObservableFacade[T] = js.native
     def `catch`[T2,R](selector: js.Function2[T2, ObservableFacade[T],ObservableFacade[R]]): ObservableFacade[R] = js.native
-    def combineAll[T2,R](project:  js.Function1[js.Array[T2],R]): ObservableFacade[R] = js.native
+    def combineAll[T2,R](project:  js.Function1[js.Array[T2],R] = ???): ObservableFacade[R] = js.native
 
 
     def combineLatest[T2, R](v2: ObservableFacade[T2], project:  js.Function2[T,T2,R] = ???): ObservableFacade[R] = js.native

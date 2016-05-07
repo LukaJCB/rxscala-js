@@ -43,7 +43,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * @return {Observable[T]} An Observable that performs rate-limiting of
     * emissions from the source Observable.
     */
-  def audit[I](durationSelector: T => ObservableFacade[I]): Observable[T] = new Observable(inner.audit(durationSelector))
+  def audit[I](durationSelector: T => Observable[I]): Observable[T] = new Observable(inner.audit(toReturnFacade(durationSelector)))
+
 
   /**
     * Ignores source values for `duration` milliseconds, then emits the most recent
@@ -108,7 +109,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * @return An Observable of buffers, which are arrays of
     * values.
     */
-  def buffer[T2](closingNotifier: Observable[T2]): Observable[js.Array[T]] = new Observable(inner.buffer(closingNotifier))
+  def buffer[T2](closingNotifier: Observable[T2]): Observable[List[T]] = new Observable(inner.buffer(closingNotifier).map((n: js.Array[T], index: Int) => n.toList))
 
   /**
     * Buffers the source Observable values until the size hits the maximum
@@ -143,8 +144,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * beginning of the source by default.
     * @return  An Observable of arrays of buffered values.
     */
-  def bufferCount(bufferSize: Int, startBufferEvery: Int): Observable[js.Array[T]] = new Observable(inner.bufferCount(bufferSize,startBufferEvery))
-  def bufferCount(bufferSize: Int): Observable[js.Array[T]] = new Observable(inner.bufferCount(bufferSize))
+  def bufferCount(bufferSize: Int, startBufferEvery: Int): Observable[List[T]] = new Observable(inner.bufferCount(bufferSize,startBufferEvery).map((n: js.Array[T], index: Int) => n.toList))
+  def bufferCount(bufferSize: Int): Observable[List[T]] = new Observable(inner.bufferCount(bufferSize).map((n: js.Array[T], index: Int) => n.toList))
   /**
     * Buffers the source Observable values for a specific time period.
     *
@@ -178,9 +179,9 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * intervals that determine buffer boundaries.
     * @return An observable of arrays of buffered values.
     */
-  def bufferTime(bufferTimeSpan: Int, bufferCreationInterval: Int, scheduler: Scheduler): Observable[js.Array[T]] = new Observable(inner.bufferTime(bufferTimeSpan,bufferCreationInterval,scheduler))
-  def bufferTime(bufferTimeSpan: Int, bufferCreationInterval: Int): Observable[js.Array[T]] = new Observable(inner.bufferTime(bufferTimeSpan,bufferCreationInterval))
-  def bufferTime(bufferTimeSpan: Int): Observable[js.Array[T]] = new Observable(inner.bufferTime(bufferTimeSpan))
+  def bufferTime(bufferTimeSpan: Int, bufferCreationInterval: Int, scheduler: Scheduler): Observable[List[T]] = new Observable(inner.bufferTime(bufferTimeSpan,bufferCreationInterval,scheduler).map((n: js.Array[T], index: Int) => n.toList))
+  def bufferTime(bufferTimeSpan: Int, bufferCreationInterval: Int): Observable[List[T]] = new Observable(inner.bufferTime(bufferTimeSpan,bufferCreationInterval).map((n: js.Array[T], index: Int) => n.toList))
+  def bufferTime(bufferTimeSpan: Int): Observable[List[T]] = new Observable(inner.bufferTime(bufferTimeSpan).map((n: js.Array[T], index: Int) => n.toList))
   /**
     * Buffers the source Observable values starting from an emission from
     * `openings` and ending when the output of `closingSelector` emits.
@@ -211,7 +212,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * and cleared.
     * @return  An observable of arrays of buffered values.
     */
-  def bufferToggle[T2,O](openings: Subscribable[O], closingSelector:  O => ObservableFacade[T2]): Observable[js.Array[T]] = new Observable(inner.bufferToggle(openings,closingSelector))
+  def bufferToggle[T2,O](openings: Subscribable[O], closingSelector:  O => Observable[T2]): Observable[List[T]] =
+    new Observable(inner.bufferToggle(openings,toReturnFacade(closingSelector)).map((n: js.Array[T], index: Int) => n.toList))
   /**
     * Buffers the source Observable values, using a factory function of closing
     * Observables to determine when to close, emit, and reset the buffer.
@@ -238,7 +240,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * arguments and returns an Observable that signals buffer closure.
     * @return  An observable of arrays of buffered values.
     */
-  def bufferWhen[T2](closingSelector: () => ObservableFacade[T2]): Observable[js.Array[T]] = new Observable(inner.bufferWhen(closingSelector))
+  def bufferWhen[T2](closingSelector: () => Observable[T2]): Observable[List[T]] = new Observable(inner.bufferWhen(toReturnFacade(closingSelector)).map((n: js.Array[T], index: Int) => n.toList))
 
   /**
     * This method has similar behavior to `Observable.replay` except that this auto-subscribes to
@@ -260,12 +262,13 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * @return an Observable that when first subscribed to, caches all of its notifications for
     *         the benefit of subsequent subscribers.
     */
-  def cache(bufferSize: Int, windowTime: Int, scheduler: Scheduler): ObservableFacade[T] = new Observable( inner.cache(bufferSize,windowTime,scheduler))
-  def cache(bufferSize: Int, windowTime: Int): ObservableFacade[T] = new Observable( inner.cache(bufferSize,windowTime))
-  def cache(bufferSize: Int): ObservableFacade[T] = new Observable( inner.cache(bufferSize))
-  def cache(): ObservableFacade[T] = new Observable( inner.cache())
+  def cache(bufferSize: Int, windowTime: Int, scheduler: Scheduler): Observable[T] = new Observable( inner.cache(bufferSize,windowTime,scheduler))
+  def cache(bufferSize: Int, windowTime: Int): Observable[T] = new Observable( inner.cache(bufferSize,windowTime))
+  def cache(bufferSize: Int): Observable[T] = new Observable( inner.cache(bufferSize))
+  def cache(): Observable[T] = new Observable( inner.cache())
 
-  def combineAll[T2,R](project: js.Array[T2] => R): Observable[R] = new Observable(inner.combineAll(project))
+  def combineAll[U,R](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[R] = new Observable(inner.combineAll())
+  def combineAll[U,T2,R](project: js.Array[T2] => R)(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[R] = new Observable(inner.combineAll(project))
 
 
   def combineLatest[T2, R](v2: Observable[T2], project: (T,T2) => R): Observable[R] = new Observable(inner.combineLatest(v2,project))
@@ -298,19 +301,19 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 
   def concatAll[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable[U](inner.concatAll())
 
-  def concatMap[I, R](project: (T,Int) => ObservableFacade[I], resultSelector: (T, I, Int, Int) => R): Observable[R] = new Observable(inner.concatMap(project,resultSelector))
-  def concatMap[I, R](project: (T,Int) => ObservableFacade[I]): Observable[R] = new Observable(inner.concatMap[I,R](project))
+  def concatMap[I, R](project: (T,Int) => Observable[I], resultSelector: (T, I, Int, Int) => R): Observable[R] = new Observable(inner.concatMap(toReturnFacade(project),resultSelector))
+  def concatMap[I, R](project: (T,Int) => Observable[I]): Observable[R] = new Observable(inner.concatMap[I,R](toReturnFacade(project)))
 
 
   def concatMapTo[I, R](innerObservable: Observable[I], resultSelector: (T, I, Int, Int) => R): Observable[R] = new Observable(inner.concatMapTo(innerObservable,resultSelector))
   def concatMapTo[I, R](innerObservable: Observable[I]): Observable[R] = new Observable(inner.concatMapTo[I,R](innerObservable))
 
-  def count(predicate: (T, Int, ObservableFacade[T]) => Boolean): Observable[Int] = new Observable( inner.count(predicate))
+  def count(predicate: (T, Int, Observable[T]) => Boolean): Observable[Int] = new Observable( inner.count(toFacadeFunction(predicate)))
 
-  def count(): ObservableFacade[Int] = new Observable(inner.count())
+  def count(): Observable[Int] = new Observable(inner.count())
 
 
-  def debounce(durationSelector:  T => ObservableFacade[Int]): Observable[T] = new Observable(inner.debounce(durationSelector))
+  def debounce(durationSelector:  T => Observable[Int]): Observable[T] = new Observable(inner.debounce(toReturnFacade(durationSelector)))
   def debounceTime(dueTime: Int): Observable[T] = new Observable(inner.debounceTime(dueTime))
 
 
@@ -318,8 +321,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 
   def delay(delay: Int | Date): Observable[T] = new Observable(inner.delay(delay))
 
-  def delayWhen[U,I](delayDurationSelector: T => ObservableFacade[U], subscriptionDelay: Observable[I]): Observable[T] = new Observable(inner.delayWhen(delayDurationSelector,subscriptionDelay))
-  def delayWhen[U,I](delayDurationSelector: T => ObservableFacade[U]): Observable[T] = new Observable(inner.delayWhen(delayDurationSelector))
+  def delayWhen[U,I](delayDurationSelector: T => Observable[U], subscriptionDelay: Observable[I]): Observable[T] = new Observable(inner.delayWhen(toReturnFacade(delayDurationSelector),subscriptionDelay))
+  def delayWhen[U,I](delayDurationSelector: T => Observable[U]): Observable[T] = new Observable(inner.delayWhen(toReturnFacade(delayDurationSelector)))
 
   def dematerialize[T2](): Observable[T2] = new Observable((inner.dematerialize()))
 
@@ -343,23 +346,24 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 
   def elementAt(index: Int, defaultValue: T): Observable[T] = new Observable(inner.elementAt(index,defaultValue))
 
-  def every[T2](predicate: (T,  Int,  ObservableFacade[T]) => Boolean): Observable[Boolean] = new Observable(inner.every(predicate))
+  def every[T2](predicate: (T,  Int,  Observable[T]) => Boolean): Observable[Boolean] = new Observable(inner.every(toFacadeFunction(predicate)))
 
   def exhaust(): Observable[T] = new Observable(inner.exhaust())
 
-  def exhaustMap[I, R](project: (T, Int) => ObservableFacade[R], resultSelector: (T, I, Int, Int) => R): Observable[R] = new Observable(inner.exhaustMap(project,resultSelector))
-  def exhaustMap[I, R](project: (T, Int) => ObservableFacade[R]): Observable[R] = new Observable(inner.exhaustMap(project))
+  def exhaustMap[I, R](project: (T, Int) => Observable[R], resultSelector: (T, I, Int, Int) => R): Observable[R] = new Observable(inner.exhaustMap(toReturnFacade(project),resultSelector))
+  def exhaustMap[I, R](project: (T, Int) => Observable[R]): Observable[R] = new Observable(inner.exhaustMap(toReturnFacade(project)))
 
-  def expand[R](project: ( T, Int) => ObservableFacade[R], concurrent: Double = Double.PositiveInfinity, scheduler: Scheduler): Observable[R] = new Observable(inner.expand(project,concurrent,scheduler))
-  def expand[R](project: ( T, Int) => ObservableFacade[R]): Observable[R] = new Observable(inner.expand(project))
+  def expand[R](project: ( T, Int) => Observable[R], concurrent: Double = Double.PositiveInfinity, scheduler: Scheduler): Observable[R] =
+    new Observable(inner.expand(toReturnFacade(project),concurrent,scheduler))
+  def expand[R](project: ( T, Int) => Observable[R]): Observable[R] = new Observable(inner.expand(toReturnFacade(project)))
 
 
   def filter[T2](predicate: (T,  Int) => Boolean): Observable[T] = new Observable(inner.filter(predicate))
 
 
-  def find[T2](predicate: (T,  Int,  ObservableFacade[T]) =>Boolean): Observable[T] = new Observable(inner.find(predicate))
+  def find[T2](predicate: (T,  Int,  Observable[T]) =>Boolean): Observable[T] = new Observable(inner.find(toFacadeFunction(predicate)))
 
-  def findIndex[T2](predicate: (T,  Int,  ObservableFacade[T]) =>Boolean): Observable[Int] = new Observable(inner.findIndex(predicate))
+  def findIndex[T2](predicate: (T,  Int,  Observable[T]) =>Boolean): Observable[Int] = new Observable(inner.findIndex(toFacadeFunction(predicate)))
 
 
   def first(): Observable[T] = new Observable(inner.take(1))
@@ -399,15 +403,15 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 
   def flatten[U]()(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable(inner.mergeAll())
 
-  def mergeMap[I, R](project: (T, Int) => ObservableFacade[I], resultSelector: (T, I, Int, Int) => R, concurrent: Double = Double.PositiveInfinity): Observable[R] =
-    new Observable(inner.mergeMap(project,resultSelector,concurrent))
-  def mergeMap[I, R](project: (T, Int) => ObservableFacade[I]): ObservableFacade[R] =
-    new Observable(inner.mergeMap[I,R](project))
+  def mergeMap[I, R](project: (T, Int) => Observable[I], resultSelector: (T, I, Int, Int) => R, concurrent: Double = Double.PositiveInfinity): Observable[R] =
+    new Observable(inner.mergeMap(toReturnFacade(project),resultSelector,concurrent))
+  def mergeMap[I, R](project: (T, Int) => Observable[I]): Observable[R] =
+    new Observable(inner.mergeMap[I,R](toReturnFacade(project)))
 
 
-  def mergeMapTo[I, R](innerObservable: ObservableFacade[I], resultSelector: (T, I, Int, Int) => R, concurrent: Double = Double.PositiveInfinity): Observable[R] =
+  def mergeMapTo[I, R](innerObservable: Observable[I], resultSelector: (T, I, Int, Int) => R, concurrent: Double = Double.PositiveInfinity): Observable[R] =
     new Observable(inner.mergeMapTo(innerObservable,resultSelector,concurrent))
-  def mergeMapTo[I, R](innerObservable: ObservableFacade[I]): Observable[R] =
+  def mergeMapTo[I, R](innerObservable: Observable[I]): Observable[R] =
     new Observable(inner.mergeMapTo(innerObservable))
 
 
@@ -440,7 +444,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 
   def retry(count: Int = -1): Observable[T] = new Observable(inner.retry(count))
 
-  def retryWhen[T2,T3](notifier: ObservableFacade[T2] => ObservableFacade[T3]): Observable[T] = new Observable(inner.retryWhen(notifier))
+  def retryWhen[T2,T3](notifier: Observable[T2] => Observable[T3]): Observable[T] = new Observable(inner.retryWhen(toFacadeFunction(toReturnFacade(notifier))))
   def sample[I](notifier: Observable[I]): Observable[T] = new Observable(inner.sample(notifier))
 
   def sampleTime(delay: Int, scheduler: Scheduler): Observable[T] = new Observable(inner.sampleTime(delay,scheduler))
@@ -453,7 +457,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 
   def share(): Observable[T] = new Observable(inner.share())
 
-  def single(predicate: (T, Int, ObservableFacade[T]) => Boolean): Observable[T] = new Observable(inner.single(predicate))
+  def single(predicate: (T, Int, Observable[T]) => Boolean): Observable[T] = new Observable(inner.single(toFacadeFunction(predicate)))
   def single(): Observable[T] = new Observable(inner.single())
 
   def drop(total: Int): Observable[T] = skip(total)
@@ -475,7 +479,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 
   def switch[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable[U](inner.switch().asInstanceOf[ObservableFacade[U]])
 
-  def switchMap[I, R](project: (T, Int) => ObservableFacade[I]): Observable[R] = new Observable(inner.switchMap(project))
+  def switchMap[I, R](project: (T, Int) => Observable[I]): Observable[R] = new Observable(inner.switchMap(toReturnFacade(project)))
 
   def switchMapTo[I, R](innerObservable: Observable[I]): Observable[R] = new Observable(inner.switchMapTo(innerObservable))
 
@@ -538,8 +542,16 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   private def get = inner
 
   implicit def toFacade[A](observable: Observable[A]): ObservableFacade[A] = observable.get
-  //implicit def toOuter[A](facade: ObservableFacade[A]): Observable[A] = new Observable[A](facade)
-  //implicit def convertParameter[U <% T](observable: Observable[T]): Observable[U] = this
+
+  private def toFacadeFunction[U,I](func: Observable[I] => U): ObservableFacade[I] => U = (facade) => func(new Observable(facade))
+  private def toFacadeFunction[U,U2,I,R](func: (U, U2, Observable[I]) => R): (U, U2, ObservableFacade[I]) => R = (arg, arg2, obs) => func(arg,arg2,new Observable(obs))
+
+  private def toReturnFacade[I](func: () => Observable[I]): () => ObservableFacade[I] = () => func()
+  private def toReturnFacade[U,I](func: U => Observable[I]): U => ObservableFacade[I] = (arg) => func(arg)
+  private def toReturnFacade[U,U2,I](func: (U,U2) => Observable[I]): (U,U2) => ObservableFacade[I] = (arg,arg2) => func(arg,arg2)
+
+
+
 
 }
 

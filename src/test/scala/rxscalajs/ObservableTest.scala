@@ -301,8 +301,7 @@ object ObservableTest extends TestSuite {
       }
       'CombineAll {
         //hoObs.combineAll().subscribe(unit)
-        val func = (n: js.Array[js.Any]) => "Hello"
-        hoObs.combineAll(func).subscribe(unit)
+        hoObs.combineAll.take(3).subscribe(unit)
       }
       'CombineLatest {
         obs.combineLatest(intervalObs).subscribe(unit)
@@ -315,8 +314,8 @@ object ObservableTest extends TestSuite {
         hoObs.concatAll.subscribe(unit)
       }
       'ConcatMap {
-        obs.concatMap((n: Int, index: Int) => ObservableFacade.range(0, n)).subscribe(unit)
-        obs.concatMap[String, Double]((n: Int, index: Int) => ObservableFacade.of("Hello", "world"), (n: Int, n2: String, index1: Int, index2: Int) => 0.4).subscribe(unit)
+        obs.concatMap((n: Int, index: Int) => Observable.range(0, n)).subscribe(unit)
+        obs.concatMap[String, Double]((n: Int, index: Int) => Observable.of("Hello", "world"), (n: Int, n2: String, index1: Int, index2: Int) => 0.4).subscribe(unit)
       }
       'ConcatMapTo {
         obs.concatMapTo(Observable('H')).subscribe(unit)
@@ -324,10 +323,10 @@ object ObservableTest extends TestSuite {
       }
       'Count {
         obs.count().subscribe(unit)
-        obs.count((i: Int, n: Int, ob: ObservableFacade[Int]) => i % 2 == 1).subscribe(unit)
+        obs.count((i: Int, n: Int, ob: Observable[Int]) => i % 2 == 1).subscribe(unit)
       }
       'Debounce {
-        obs.debounce((n: Int) => ObservableFacade.interval(100).take(6)).subscribe(unit)
+        obs.debounce((n: Int) => Observable.interval(100).take(6)).subscribe(unit)
       }
       'DebounceTime {
         obs.debounceTime(500).subscribe(unit)
@@ -339,8 +338,8 @@ object ObservableTest extends TestSuite {
         obs.delay(50).subscribe(unit)
       }
       'DelayWhen {
-        obs.delayWhen((n: Int) => ObservableFacade.of(34)).subscribe(unit)
-        obs.delayWhen((n: Int) => ObservableFacade.of("asd"), Observable("as")).subscribe(unit)
+        obs.delayWhen((n: Int) => Observable(34)).subscribe(unit)
+        obs.delayWhen((n: Int) => Observable("asd"), Observable("as")).subscribe(unit)
       }
       'Dematerialize {
         notiObs.dematerialize().subscribe(unit)
@@ -379,7 +378,7 @@ object ObservableTest extends TestSuite {
       obs.elementAt(20,-3).subscribe(unit)
     }*/
       'Every {
-        obs.every((n: Int, n2: Int, o: ObservableFacade[Int]) => n > n2).subscribe(unit)
+        obs.every((n: Int, n2: Int, o: Observable[Int]) => n > n2).subscribe(unit)
       } /*
     'Exhaust{
       hoObs.exhaust().subscribe(unit)
@@ -388,7 +387,7 @@ object ObservableTest extends TestSuite {
       hoObs.exhaustMap((n: Observable[Int], index: Int) => Observable.range(0,index)).subscribe(unit)
     }*/
       'Expand {
-        intervalObs.expand((n: Int, n2: Int) => ObservableFacade.of(n)).take(1).subscribe(unit)
+        intervalObs.expand((n: Int, n2: Int) => Observable(n)).take(1).subscribe(unit)
       }
       'Filter {
         obs.filter((n: Int, n2: Int) => n % 2 == 0).subscribe(unit)
@@ -431,12 +430,12 @@ object ObservableTest extends TestSuite {
         hoObs.mergeAll(3).subscribe(unit)
       }
       'MergeMap {
-        obs.mergeMap((n: Int, index: Int) => ObservableFacade.of(n)).subscribe(unit)
-        obs.mergeMap((n: Int, index: Int) => ObservableFacade.of(n), (out: Int, in: Int, index1: Int, index2: Int) => -1).subscribe(unit)
+        obs.mergeMap((n: Int, index: Int) => Observable(n)).subscribe(unit)
+        obs.mergeMap((n: Int, index: Int) => Observable(n), (out: Int, in: Int, index1: Int, index2: Int) => -1).subscribe(unit)
       }
       'MergeMapTo {
-        obs.mergeMapTo(ObservableFacade.of("34")).subscribe(unit)
-        obs.mergeMapTo(ObservableFacade.of(34), (out: Int, in: Int, index1: Int, index2: Int) => -1).subscribe(unit)
+        obs.mergeMapTo(Observable("34")).subscribe(unit)
+        obs.mergeMapTo(Observable(34), (out: Int, in: Int, index1: Int, index2: Int) => -1).subscribe(unit)
       }
       'Multicast {
         val func: js.Function0[Subject[Int]] = () => new Subject[Int]()
@@ -472,7 +471,7 @@ object ObservableTest extends TestSuite {
         obs.retry(4).subscribe(unit)
       }
       'RetryWhen {
-        val func = (o: ObservableFacade[Any]) => o
+        val func = (o: Observable[Any]) => o
         obs.retryWhen(func).subscribe(unit)
       }
       'Sample {
@@ -489,7 +488,7 @@ object ObservableTest extends TestSuite {
         obs.share().subscribe(unit)
       }
       'Single {
-        obs.single((n: Int, n2: Int, o: ObservableFacade[Int]) => n == 1).subscribe(unit)
+        obs.single((n: Int, n2: Int, o: Observable[Int]) => n == 1).subscribe(unit)
       }
       'Skip {
         obs.skip(2).subscribe(unit)
@@ -504,13 +503,13 @@ object ObservableTest extends TestSuite {
         obs.startWith(0).subscribe(unit)
       }
       'Switch {
-        val interval = ObservableFacade.interval(2000).take(2)
-        val higherOrder = interval.map((n: Int, index: Int) => ObservableFacade.interval(500).take(10))
-        higherOrder.switch().subscribe(unit)
+        val interval = Observable.interval(2000).take(2)
+        val higherOrder = interval.map((n: Int, index: Int) => Observable.interval(500).take(10))
+        //higherOrder.switch().subscribe(unit)
         //hoObs.switch[Observable[Int]]().subscribe(unit)
       }
       'SwitchMap {
-        val func = (n: Observable[Int], n2: Int) => ObservableFacade.of(n2)
+        val func = (n: Observable[Int], n2: Int) => Observable.of(n2)
         hoObs.switchMap[Int,Int](func).subscribe(unit)
       }
       'SwitchMapTo {
