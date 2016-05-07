@@ -390,8 +390,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def max(): Observable[T] = new Observable(inner.max())
 
 
-  def merge[R >: T](that: ObservableFacade[R], concurrent: Double = Double.PositiveInfinity, scheduler: Scheduler): Observable[R] = new Observable(inner.merge(that,concurrent,scheduler))
-  def merge[R >: T](that: ObservableFacade[R]): Observable[R] = new Observable(inner.merge(that))
+  def merge[R >: T](that: Observable[R], concurrent: Double = Double.PositiveInfinity, scheduler: Scheduler): Observable[R] = new Observable(inner.merge(that,concurrent,scheduler))
+  def merge[R >: T](that: Observable[R]): Observable[R] = new Observable(inner.merge(that))
 
 
 
@@ -477,7 +477,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 
   def switchMap[I, R](project: (T, Int) => ObservableFacade[I]): Observable[R] = new Observable(inner.switchMap(project))
 
-  def switchMapTo[I, R](innerObservable: ObservableFacade[I]): Observable[R] = new Observable(inner.switchMapTo(innerObservable))
+  def switchMapTo[I, R](innerObservable: Observable[I]): Observable[R] = new Observable(inner.switchMapTo(innerObservable))
 
   def take(total: Int): Observable[T] = new Observable(inner.take(total))
 

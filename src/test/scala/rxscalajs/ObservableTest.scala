@@ -287,14 +287,13 @@ object ObservableTest extends TestSuite {
     }
     'WrapperTests{
 
-      val tObs = Observable.apply(3,5,2)
-      val obs = ObservableFacade.of(1,11,21,1211,111221)
-      val intervalObs = ObservableFacade.interval(100).take(5)
-      val hoObs = ObservableFacade.of(obs).take(2)
-      val notiObs = ObservableFacade.of(Notification.createNext(3),Notification.createComplete())
+      val obs = Observable.apply(1,11,21,1211,111221)
+      val intervalObs = Observable.interval(100).take(5)
+      val hoObs = Observable.of(obs).take(2)
+      val notiObs = Observable.of(Notification.createNext(3),Notification.createComplete())
       'BufferCount {
-        tObs.bufferCount(2).subscribe(unit)
-        tObs.bufferCount(2, 1).subscribe(unit)
+        obs.bufferCount(2).subscribe(unit)
+        obs.bufferCount(2, 1).subscribe(unit)
       }
       'BufferTime {
         intervalObs.bufferTime(1000).subscribe(unit)
@@ -316,22 +315,22 @@ object ObservableTest extends TestSuite {
         hoObs.concatAll.subscribe(unit)
       }
       'ConcatMap {
-        tObs.concatMap((n: Int, index: Int) => ObservableFacade.range(0, n)).subscribe(unit)
-        tObs.concatMap[String, Double]((n: Int, index: Int) => ObservableFacade.of("Hello", "world"), (n: Int, n2: String, index1: Int, index2: Int) => 0.4).subscribe(unit)
+        obs.concatMap((n: Int, index: Int) => ObservableFacade.range(0, n)).subscribe(unit)
+        obs.concatMap[String, Double]((n: Int, index: Int) => ObservableFacade.of("Hello", "world"), (n: Int, n2: String, index1: Int, index2: Int) => 0.4).subscribe(unit)
       }
       'ConcatMapTo {
-        obs.concatMapTo(ObservableFacade.of('H')).subscribe(unit)
-        obs.concatMapTo[String, Double](ObservableFacade.of("Hello"), (n: Int, n2: String, index1: Int, index2: Int) => 0.4).subscribe(unit)
+        obs.concatMapTo(Observable('H')).subscribe(unit)
+        obs.concatMapTo[String, Double](Observable("Hello"), (n: Int, n2: String, index1: Int, index2: Int) => 0.4).subscribe(unit)
       }
       'Count {
-        tObs.count().subscribe(unit)
-        tObs.count((i: Int, n: Int, ob: ObservableFacade[Int]) => i % 2 == 1).subscribe(unit)
+        obs.count().subscribe(unit)
+        obs.count((i: Int, n: Int, ob: ObservableFacade[Int]) => i % 2 == 1).subscribe(unit)
       }
       'Debounce {
         obs.debounce((n: Int) => ObservableFacade.interval(100).take(6)).subscribe(unit)
       }
       'DebounceTime {
-        tObs.debounceTime(500).subscribe(unit)
+        obs.debounceTime(500).subscribe(unit)
       }
       'DefaultIfEmpty {
         ObservableFacade.of().defaultIfEmpty(5).subscribe(unit)
@@ -341,7 +340,7 @@ object ObservableTest extends TestSuite {
       }
       'DelayWhen {
         obs.delayWhen((n: Int) => ObservableFacade.of(34)).subscribe(unit)
-        obs.delayWhen((n: Int) => ObservableFacade.of("asd"), ObservableFacade.of("as")).subscribe(unit)
+        obs.delayWhen((n: Int) => ObservableFacade.of("asd"), Observable("as")).subscribe(unit)
       }
       'Dematerialize {
         notiObs.dematerialize().subscribe(unit)
@@ -358,15 +357,14 @@ object ObservableTest extends TestSuite {
       obs.distinctKey("A",(n: Int,n2: Int) => n > n2,Observable.of("A")).subscribe(unit)
     }*/
       'DistinctUntilChanged {
-        tObs.distinctUntilChanged().subscribe(unit)
-        tObs.distinctUntilChanged((n: Int, n2: Int) => n > n2).subscribe(unit)
-        tObs.distinctUntilChanged((n: Int, n2: Int) => n > n2, (n: Int) => n).subscribe(unit)
-        tObs.distinctUntilChanged(keySelector = (n: Int) => n).subscribe(unit)
+        obs.distinctUntilChanged().subscribe(unit)
+        obs.distinctUntilChanged((n: Int, n2: Int) => n > n2).subscribe(unit)
+        obs.distinctUntilChanged((n: Int, n2: Int) => n > n2, (n: Int) => n).subscribe(unit)
       } /*
     'DistinctUntilKeyChanged{
       obs.distinctUntilKeyChanged("A").subscribe(unit)
       obs.distinctUntilKeyChanged("A",(n: Int,n2: Int) => n > n2).subscribe(unit)
-    }*/
+    }
       'Do {
         val intToUnit: js.Function1[Int, Unit] = (n: Int) => ()
         obs.`do`(intToUnit).subscribe(unit)
@@ -375,13 +373,13 @@ object ObservableTest extends TestSuite {
         obs.`do`(intToUnit, complete = () => ()).subscribe(unit)
         obs.`do`(error = (n: Any) => (), complete = () => ()).subscribe(unit)
         obs.`do`(intToUnit, error = (n: Any) => (), complete = () => ()).subscribe(unit)
-      } /*
+      }
     'ElementAt{
       obs.elementAt(2).subscribe(unit)
       obs.elementAt(20,-3).subscribe(unit)
     }*/
       'Every {
-        tObs.every((n: Int, n2: Int, o: ObservableFacade[Int]) => n > n2).subscribe(unit)
+        obs.every((n: Int, n2: Int, o: ObservableFacade[Int]) => n > n2).subscribe(unit)
       } /*
     'Exhaust{
       hoObs.exhaust().subscribe(unit)
@@ -393,47 +391,41 @@ object ObservableTest extends TestSuite {
         intervalObs.expand((n: Int, n2: Int) => ObservableFacade.of(n)).take(1).subscribe(unit)
       }
       'Filter {
-        tObs.filter((n: Int, n2: Int) => n % 2 == 0).subscribe(unit)
+        obs.filter((n: Int, n2: Int) => n % 2 == 0).subscribe(unit)
       }
       'First {
-        tObs.first().subscribe(unit)
-        obs.first(defaultValue = 4).subscribe(unit)
-        obs.first(defaultValue = 4, resultSelector = (n: Int, n2: Int) => n).subscribe(unit)
-        obs.first((n: Int, n2: Int, src: ObservableFacade[Int]) => true).subscribe(unit)
-        obs.first((n: Int, n2: Int, src: ObservableFacade[Int]) => true, (n: Int, n2: Int) => n).subscribe(unit)
-        obs.first((n: Int, n2: Int, src: ObservableFacade[Int]) => true, (n: Int, n2: Int) => n, 4).subscribe(unit)
-        obs.first(resultSelector = (n: Int, n2: Int) => n).subscribe(unit)
+        obs.first().subscribe(unit)
       }
-      'ForEach {
-        obs.forEach(unit).toFuture
+      'FirstOrElse {
+        obs.firstOrElse(2342).subscribe(unit)
       }
+
       'GroupBy {
-        tObs.groupBy((n: Int) => n % 2 == 0).subscribe(unit)
+        obs.groupBy((n: Int) => n % 2 == 0).subscribe(unit)
         val func: js.Function1[GroupedObservableFacade[Int, Int], ObservableFacade[Int]] = (grouped: GroupedObservableFacade[Int, Int]) => ObservableFacade.of(-1)
-        tObs.groupBy((n: Int) => n, (n: Int) => n, func).subscribe(unit)
-        tObs.groupBy((n: Int) => n % 2 == 0, (n: Int) => n).subscribe(unit)
+        obs.groupBy((n: Int) => n, (n: Int) => n, func).subscribe(unit)
+        obs.groupBy((n: Int) => n % 2 == 0, (n: Int) => n).subscribe(unit)
       }
       'IgnoreElements {
-        tObs.ignoreElements().subscribe(unit)
+        obs.ignoreElements().subscribe(unit)
       } /*
     'IsEmpty{
       obs.isEmpty().subscribe(unit)
     }*/
       'Last {
-        tObs.last().subscribe(unit)
+        obs.last().subscribe(unit)
       }
       'Map {
-        tObs.map((n: Int, index: Int) => "n: " + n).subscribe(unit)
+        obs.map((n: Int, index: Int) => "n: " + n).subscribe(unit)
       }
       'MapTo {
-        tObs.mapTo("A").subscribe(unit)
+        obs.mapTo("A").subscribe(unit)
       }
       'Materialize {
-        tObs.materialize().subscribe(unit)
+        obs.materialize().subscribe(unit)
       }
       'Merge {
         obs.merge(intervalObs).subscribe(unit)
-        obs.merge(intervalObs, 3).subscribe(unit)
       }
       'MergeAll {
         hoObs.mergeAll(3).subscribe(unit)
@@ -451,7 +443,7 @@ object ObservableTest extends TestSuite {
         obs.multicast(func).subscribe(unit)
       }
       'Partition {
-        obs.partition((n: Int) => n > 4)(0).subscribe(unit)
+        obs.partition((n: Int) => n > 4)._1.subscribe(unit)
       }
       'Publish {
         obs.publish().subscribe(unit)
@@ -466,7 +458,7 @@ object ObservableTest extends TestSuite {
         obs.publishReplay(5).subscribe(unit)
       }
       'Race {
-        intervalObs.race(js.Array(intervalObs)).subscribe(unit)
+        intervalObs.race(intervalObs).subscribe(unit)
       }
       'Reduce {
         obs.reduce((n: Int, n2: Int) => n).subscribe(unit)
@@ -518,8 +510,8 @@ object ObservableTest extends TestSuite {
         //hoObs.switch[Observable[Int]]().subscribe(unit)
       }
       'SwitchMap {
-        val func: js.Function2[ObservableFacade[Int], Int, ObservableFacade[Int]] = (n: ObservableFacade[Int], n2: Int) => ObservableFacade.of(n2)
-        hoObs.switchMap(func).subscribe(unit)
+        val func = (n: Observable[Int], n2: Int) => ObservableFacade.of(n2)
+        hoObs.switchMap[Int,Int](func).subscribe(unit)
       }
       'SwitchMapTo {
         obs.switchMapTo(intervalObs).subscribe(unit)
