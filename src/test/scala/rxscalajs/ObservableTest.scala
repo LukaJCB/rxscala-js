@@ -300,8 +300,8 @@ object ObservableTest extends TestSuite {
         intervalObs.bufferTime(1000, 2000).subscribe(unit)
       }
       'CombineAll {
-        //hoObs.combineAll().subscribe(unit)
-        hoObs.combineAll.take(3).subscribe(unit)
+        val combined = hoObs.combineAll.take(3)
+          combined.subscribe(unit)
       }
       'CombineLatest {
         obs.combineLatest(intervalObs).subscribe(unit)
@@ -413,6 +413,9 @@ object ObservableTest extends TestSuite {
     }*/
       'Last {
         obs.last().subscribe(unit)
+      }
+      'Let {
+        obs.let(n => n.concat(n)).subscribe(unit)
       }
       'Map {
         obs.map((n: Int, index: Int) => "n: " + n).subscribe(unit)

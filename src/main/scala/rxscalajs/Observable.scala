@@ -267,8 +267,11 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def cache(bufferSize: Int): Observable[T] = new Observable( inner.cache(bufferSize))
   def cache(): Observable[T] = new Observable( inner.cache())
 
-  def combineAll[U,R](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[R] = new Observable(inner.combineAll())
-  def combineAll[U,T2,R](project: js.Array[T2] => R)(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[R] = new Observable(inner.combineAll(project))
+  def combineAll[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[Seq[U]] =
+    new Observable(inner.asInstanceOf[ObservableFacade[Observable[U]]].map((n: Observable[U]) => n.get).combineAll())
+
+  def combineAll[U,R](project: js.Array[U] => R)(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[R] =
+    new Observable(inner.asInstanceOf[ObservableFacade[Observable[U]]].map((n: Observable[U]) => n.get).combineAll(project))
 
 
   def combineLatest[T2, R](v2: Observable[T2], project: (T,T2) => R): Observable[R] = new Observable(inner.combineLatest(v2,project))
@@ -299,7 +302,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     */
   def concat[U](other: Observable[U]): Observable[U] = new Observable(inner concat other)
 
-  def concatAll[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable[U](inner.concatAll())
+  def concatAll[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] =
+    new Observable(inner.asInstanceOf[ObservableFacade[Observable[U]]].map((n: Observable[U]) => n.get).concatAll())
 
   def concatMap[I, R](project: (T,Int) => Observable[I], resultSelector: (T, I, Int, Int) => R): Observable[R] = new Observable(inner.concatMap(toReturnFacade(project),resultSelector))
   def concatMap[I, R](project: (T,Int) => Observable[I]): Observable[R] = new Observable(inner.concatMap[I,R](toReturnFacade(project)))
@@ -383,6 +387,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def last(): Observable[T] = new Observable(inner.last[T]())
   def lastOrElse[R >: T](default: => R): Observable[R] = new Observable(inner.last(defaultValue = default))
 
+  def let[R](func:  Observable[T] => Observable[R]): Observable[R] = new Observable(inner.let(toReturnFacade(toFacadeFunction(func))))
+
   def map[R](project: (T,Int) => R): Observable[R] = new Observable[R](inner.map(project))
   def map[R](project: T => R): Observable[R] = new Observable[R](inner.map(project))
 
@@ -400,7 +406,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 
 
 
-  def mergeAll(concurrent: Double = Double.PositiveInfinity): Observable[T] = new Observable(inner.mergeAll[T](concurrent))
+  def mergeAll[U](concurrent: Double = Double.PositiveInfinity)(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] =
+    new Observable(inner.asInstanceOf[ObservableFacade[Observable[U]]].map((n: Observable[U]) => n.get).mergeAll(concurrent))
 
   def flatten[U]()(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable(inner.mergeAll())
 
@@ -550,7 +557,6 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   private def toReturnFacade[I](func: () => Observable[I]): () => ObservableFacade[I] = () => func()
   private def toReturnFacade[U,I](func: U => Observable[I]): U => ObservableFacade[I] = (arg) => func(arg)
   private def toReturnFacade[U,U2,I](func: (U,U2) => Observable[I]): (U,U2) => ObservableFacade[I] = (arg,arg2) => func(arg,arg2)
-
 
 
 
