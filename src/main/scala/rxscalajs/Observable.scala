@@ -6,6 +6,7 @@ import js._
 import js.JSConverters._
 
 
+
 /**
   * Created by Luka on 29.04.2016.
   */
@@ -273,9 +274,16 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def combineAll[U,R](project: js.Array[U] => R)(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[R] =
     new Observable(inner.asInstanceOf[ObservableFacade[Observable[U]]].map((n: Observable[U]) => n.get).combineAll(project))
 
-
-  def combineLatest[T2, R](v2: Observable[T2], project: (T,T2) => R): Observable[R] = new Observable(inner.combineLatest(v2,project))
-  def combineLatest[T2, R](v2: Observable[T2]): Observable[R] = new Observable(inner.combineLatest(v2))
+  /**
+    * Combines two observables, emitting a pair of the latest values of each of
+    * the source observables each time an event is received from one of the source observables.
+    *
+    * @param that
+    *            The second source observable.
+    * @return An Observable that combines the source Observables
+    */
+  def combineLatest[T2, R](that: Observable[T2], project: (T,T2) => R): Observable[R] = new Observable(inner.combineLatest(v2,project))
+  def combineLatest[T2, R](that: Observable[T2]): Observable[R] = new Observable(inner.combineLatest(v2))
 
 
   /**
@@ -305,6 +313,18 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def concatAll[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] =
     new Observable(inner.asInstanceOf[ObservableFacade[Observable[U]]].map((n: Observable[U]) => n.get).concatAll())
 
+
+  /**
+  * Returns a new Observable that emits items resulting from applying a function that you supply to each item
+  * emitted by the source Observable, where that function returns an Observable, and then emitting the items
+  * that result from concatinating those resulting Observables.
+  *
+  * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/concatMap.png" alt="" />
+  *
+  * @param f a function that, when applied to an item emitted by the source Observable, returns an Observable
+  * @return an Observable that emits the result of applying the transformation function to each item emitted
+  *         by the source Observable and concatinating the Observables obtained from this transformation
+  */
   def concatMap[I, R](project: (T,Int) => Observable[I], resultSelector: (T, I, Int, Int) => R): Observable[R] = new Observable(inner.concatMap(toReturnFacade(project),resultSelector))
   def concatMap[I, R](project: (T,Int) => Observable[I]): Observable[R] = new Observable(inner.concatMap[I,R](toReturnFacade(project)))
 
@@ -312,24 +332,104 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def concatMapTo[I, R](innerObservable: Observable[I], resultSelector: (T, I, Int, Int) => R): Observable[R] = new Observable(inner.concatMapTo(innerObservable,resultSelector))
   def concatMapTo[I, R](innerObservable: Observable[I]): Observable[R] = new Observable(inner.concatMapTo[I,R](innerObservable))
 
+  /**
+    * Return an [[Observable]] which emits the number of elements in the source [[Observable]] which satisfy a predicate.
+    *
+    * @param predicate the predicate used to test elements.
+    * @return an [[Observable]] which emits the number of elements in the source [[Observable]] which satisfy a predicate.
+    */
   def count(predicate: (T, Int, Observable[T]) => Boolean): Observable[Int] = new Observable( inner.count(toFacadeFunction(predicate)))
 
   def count(): Observable[Int] = new Observable(inner.count())
 
-
-  def debounce(durationSelector:  T => Observable[Int]): Observable[T] = new Observable(inner.debounce(toReturnFacade(durationSelector)))
-  def debounceTime(dueTime: Int): Observable[T] = new Observable(inner.debounceTime(dueTime))
+  /**
+    * Return an Observable that mirrors the source Observable, except that it drops items emitted by the source
+    * Observable that are followed by another item within a computed debounce duration.
+    *
+    * <img width="640" height="425" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/debounce.f.png" alt="" />
+    *
+    * @param debounceSelector function to retrieve a sequence that indicates the throttle duration for each item
+    * @return an Observable that omits items emitted by the source Observable that are followed by another item
+    *         within a computed debounce duration
+    */
+  def debounce(debounceSelector:  T => Observable[Int]): Observable[T] = new Observable(inner.debounce(toReturnFacade(debounceSelector)))
+  /**
+    * Debounces by dropping all values that are followed by newer values before the timeout value expires. The timer resets on each `onNext` call.
+    *
+    * NOTE: If events keep firing faster than the timeout then no data will be emitted.
+    *
+    * <img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/debounce.png" alt="" />
+    *
+    * $debounceVsThrottle
+    *
+    * @param timeout
+    *            The time each value has to be 'the most recent' of the Observable to ensure that it's not dropped.
+    *
+    * @return An Observable which filters out values which are too quickly followed up with newer values.
+    * @see `Observable.throttleWithTimeout`
+    */
+  def debounceTime(timeout: Int): Observable[T] = new Observable(inner.debounceTime(timeout))
 
 
   def defaultIfEmpty[R](defaultValue: R): Observable[R] = new Observable(inner.defaultIfEmpty(defaultValue))
 
+  /**
+    * Returns an Observable that emits the items emitted by the source Observable shifted forward in time by a
+    * specified delay. Error notifications from the source Observable are not delayed.
+    *
+    * <img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/delay.png" alt="" />
+    *
+    * @param delay the delay to shift the source by
+    * @return the source Observable shifted in time by the specified delay
+    */
   def delay(delay: Int | Date): Observable[T] = new Observable(inner.delay(delay))
 
+  /**
+    * Returns an Observable that delays the emissions of the source Observable via another Observable on a
+    * per-item basis.
+    * <p>
+    * <img width="640" height="450" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/delay.o.png" alt="" />
+    * <p>
+    * Note: the resulting Observable will immediately propagate any `onError` notification
+    * from the source Observable.
+    *
+    * @param itemDelay a function that returns an Observable for each item emitted by the source Observable, which is
+    *                  then used to delay the emission of that item by the resulting Observable until the Observable
+    *                  returned from `itemDelay` emits an item
+    * @return an Observable that delays the emissions of the source Observable via another Observable on a per-item basis
+    */
   def delayWhen[U,I](delayDurationSelector: T => Observable[U], subscriptionDelay: Observable[I]): Observable[T] = new Observable(inner.delayWhen(toReturnFacade(delayDurationSelector),subscriptionDelay))
   def delayWhen[U,I](delayDurationSelector: T => Observable[U]): Observable[T] = new Observable(inner.delayWhen(toReturnFacade(delayDurationSelector)))
 
+  /**
+    * Returns an Observable that reverses the effect of [[rx.lang.scala.Observable.materialize]] by
+    * transforming the [[rx.lang.scala.Notification]] objects emitted by the source Observable into the items
+    * or notifications they represent.
+    *
+    * This operation is only available if `this` is of type `Observable[Notification[U]]` for some `U`,
+    * otherwise you will get a compilation error.
+    *
+    * <img width="640" height="335" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/dematerialize.png" alt="" />
+    *
+    * @return an Observable that emits the items and notifications embedded in the [[rx.lang.scala.Notification]] objects emitted by the source Observable
+    *
+    * @usecase def dematerialize[U]: Observable[U]
+    *   @inheritdoc
+    *
+    */
   def dematerialize[T2](): Observable[T2] = new Observable((inner.dematerialize()))
 
+  /**
+    * Returns an Observable that forwards all items emitted from the source Observable that are distinct according
+    * to a key selector function.
+    *
+    * <img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/distinct.key.png" alt="" />
+    *
+    * @param compare
+    *            a function that projects an emitted item to a key value which is used for deciding whether an item is
+    *            distinct from another one or not
+    * @return an Observable of distinct items
+    */
   def distinct[T2](compare: (T,  T) => Boolean, flushes: Observable[T2]): Observable[T] = new Observable(inner.distinct(compare,flushes))
   def distinct[T2]( flushes: Observable[T2]): Observable[T] = new Observable(inner.distinct(flushes = flushes))
   def distinct[T2](compare: (T,  T) => Boolean): Observable[T] = new Observable(inner.distinct(compare))
@@ -340,6 +440,18 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def distinctKey[T2](key: String, flushes: Observable[T2]): Observable[T] = new Observable(inner.distinctKey(key,flushes = flushes))
   def distinctKey[T2](key: String): Observable[T] = new Observable(inner.distinctKey(key))
 
+
+  /**
+  * Returns an Observable that forwards all items emitted from the source Observable that are sequentially
+    * distinct according to a key selector function.
+  *
+  * <img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/distinctUntilChanged.key.png" alt="" />
+  *
+  * @param keySelector
+    *            a function that projects an emitted item to a key value which is used for deciding whether an item is sequentially
+    *            distinct from another one or not
+  * @return an Observable of sequentially distinct items
+    */
   def distinctUntilChanged[K](compare: (K,  K) => Boolean, keySelector: T => K): Observable[T] = new Observable(inner.distinctUntilChanged(compare,keySelector))
   def distinctUntilChanged[K](keySelector: T => K): Observable[T] = new Observable(inner.distinctUntilChanged(keySelector = keySelector))
   def distinctUntilChanged[K](compare: (K,  K) => Boolean): Observable[T] = new Observable(inner.distinctUntilChanged(compare))
@@ -348,6 +460,20 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def distinctUntilKeyChanged(key: String, compare: (T,  T) => Boolean): Observable[T] = new Observable(inner.distinctUntilKeyChanged(key,compare))
   def distinctUntilKeyChanged(key: String): Observable[T] = new Observable(inner.distinctUntilKeyChanged(key))
 
+  /**
+    * Returns an Observable that emits the single item at a specified index in a sequence of emissions from a
+    * source Observbable.
+    *
+    * <img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/elementAt.png" alt="" />
+    *
+    * @param index
+    *            the zero-based index of the item to retrieve
+    * @return an Observable that emits a single item: the item at the specified position in the sequence of
+    *         those emitted by the source Observable
+    * @throws java.lang.IndexOutOfBoundsException
+    *             if index is greater than or equal to the number of items emitted by the source
+    *             Observable, or index is less than 0
+    */
   def elementAt(index: Int, defaultValue: T): Observable[T] = new Observable(inner.elementAt(index,defaultValue))
 
   def every[T2](predicate: (T,  Int,  Observable[T]) => Boolean): Observable[Boolean] = new Observable(inner.every(toFacadeFunction(predicate)))
@@ -361,7 +487,16 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     new Observable(inner.expand(toReturnFacade(project),concurrent,scheduler))
   def expand[R](project: ( T, Int) => Observable[R]): Observable[R] = new Observable(inner.expand(toReturnFacade(project)))
 
-
+  /**
+    * Returns an Observable which only emits those items for which a given predicate holds.
+    *
+    * <img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/filter.png" alt="" />
+    *
+    * @param predicate
+    *            a function that evaluates the items emitted by the source Observable, returning `true` if they pass the filter
+    * @return an Observable that emits only those items in the original Observable that the filter
+    *         evaluates as `true`
+    */
   def filter[T2](predicate: (T,  Int) => Boolean): Observable[T] = new Observable(inner.filter(predicate))
 
 
@@ -369,38 +504,146 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 
   def findIndex[T2](predicate: (T,  Int,  Observable[T]) =>Boolean): Observable[Int] = new Observable(inner.findIndex(toFacadeFunction(predicate)))
 
-
+  /**
+    * Returns an Observable that emits only the very first item emitted by the source Observable, or raises an
+    * `NoSuchElementException` if the source Observable is empty.
+    * <p>
+    * <img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/first.png" alt="" />
+    *
+    * @return an Observable that emits only the very first item emitted by the source Observable, or raises an
+    *         `NoSuchElementException` if the source Observable is empty
+    * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Filtering-Observables#wiki-first">RxJava Wiki: first()</a>
+    * @see "MSDN: Observable.firstAsync()"
+    */
   def first(): Observable[T] = new Observable(inner.take(1))
+  /**
+    * Returns an Observable that emits only the very first item emitted by the source Observable, or
+    * a default value if the source Observable is empty.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/firstOrDefault.png" alt="" />
+    *
+    * @param default
+    *            The default value to emit if the source Observable doesn't emit anything.
+    *            This is a by-name parameter, so it is only evaluated if the source Observable doesn't emit anything.
+    * @return an Observable that emits only the very first item from the source, or a default value
+    *         if the source Observable completes without emitting any item.
+    */
   def firstOrElse[R >: T](default: => R): Observable[R] = new Observable(inner.first(defaultValue = default))
 
-
-  def groupBy[K,R,T2](keySelector:  T => K, elementSelector: T => R, durationSelector: GroupedObservableFacade[K, R] => ObservableFacade[T2]): Observable[GroupedObservableFacade[K, R]] =
-    new Observable(inner.groupBy(keySelector,elementSelector,durationSelector))
+  /**
+    * Groups the items emitted by an [[Observable]] according to a specified criterion, and emits these
+    * grouped items as `(key, observable)` pairs.
+    *
+    * <img width="640" height="360" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/groupBy.png" alt="" />
+    *
+    * Note: A `(key, observable)` will cache the items it is to emit until such time as it
+    * is subscribed to. For this reason, in order to avoid memory leaks, you should not simply ignore those
+    * `(key, observable)` pairs that do not concern you. Instead, you can signal to them that they may
+    * discard their buffers by applying an operator like `take(0)` to them.
+    *
+    * ===Backpressure Support:===
+    * This operator does not support backpressure as splitting a stream effectively turns it into a "hot observable"
+    * and blocking any one group would block the entire parent stream. If you need backpressure on individual groups
+    * then you should use operators such as `nBackpressureDrop` or `@link #onBackpressureBuffer`.</dd>
+    * ===Scheduler:===
+    * groupBy` does not operate by default on a particular `Scheduler`.
+    *
+    * @param keySelector a function that extracts the key for each item
+    * @param valueSelector a function that extracts the return element for each item
+    * @tparam K the key type
+    * @tparam V the value type
+    * @return an [[Observable]] that emits `(key, observable)` pairs, each of which corresponds to a
+    *         unique key value and each of which emits those items from the source Observable that share that
+    *         key value
+    * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Transforming-Observables#groupby-and-groupbyuntil">RxJava wiki: groupBy</a>
+    * @see <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.groupby.aspx">MSDN: Observable.GroupBy</a>
+    */
+  def groupBy[K,R,T2](keySelector:  T => K, elementSelector: T => R, durationSelector: GroupedObservableFacade[K, R] => Observable[T2]): Observable[GroupedObservableFacade[K, R]] =
+    new Observable(inner.groupBy(keySelector,elementSelector,toReturnFacade(durationSelector)))
 
   def groupBy[K,R,T2](keySelector:  T => K, elementSelector: T => R): Observable[GroupedObservableFacade[K, R]] = new Observable(inner.groupBy(keySelector,elementSelector))
   def groupBy[K,R,T2](keySelector:  T => K): Observable[GroupedObservableFacade[K, R]] = new Observable(inner.groupBy(keySelector))
 
   def ignoreElements(): Observable[T] = new Observable(inner.ignoreElements())
 
+  /** Tests whether this `Observable` emits no elements.
+    *
+    *  @return        an Observable emitting one single Boolean, which is `true` if this `Observable`
+    *                 emits no elements, and `false` otherwise.
+    */
   def isEmpty(): Observable[Boolean] = new Observable(inner.isEmpty())
 
+  /**
+    * Returns an Observable that emits the last item emitted by the source Observable or notifies observers of
+    * an `NoSuchElementException` if the source Observable is empty.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/last.png" alt="" />
+    *
+    * @return an Observable that emits the last item from the source Observable or notifies observers of an
+    *         error
+    * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Filtering-Observable-Operators#wiki-last">RxJava Wiki: last()</a>
+    * @see "MSDN: Observable.lastAsync()"
+    */
   def last(): Observable[T] = new Observable(inner.last[T]())
+  /**
+    * Returns an Observable that emits only the last item emitted by the source Observable, or a default item
+    * if the source Observable completes without emitting any items.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/lastOrDefault.png" alt="" />
+    *
+    * @param default the default item to emit if the source Observable is empty.
+    *                This is a by-name parameter, so it is only evaluated if the source Observable doesn't emit anything.
+    * @return an Observable that emits only the last item emitted by the source Observable, or a default item
+    *         if the source Observable is empty
+    */
   def lastOrElse[R >: T](default: => R): Observable[R] = new Observable(inner.last(defaultValue = default))
 
   def let[R](func:  Observable[T] => Observable[R]): Observable[R] = new Observable(inner.let(toReturnFacade(toFacadeFunction(func))))
 
+  /**
+    * Returns an Observable that applies the given function to each item emitted by an
+    * Observable and emits the result.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/map.png" alt="" />
+    *
+    * @param project
+    *            a function to apply to each item emitted by the Observable
+    * @return an Observable that emits the items from the source Observable, transformed by the
+    *         given function
+    */
   def map[R](project: (T,Int) => R): Observable[R] = new Observable[R](inner.map(project))
   def map[R](project: T => R): Observable[R] = new Observable[R](inner.map(project))
 
   def mapTo[R](value: R): Observable[R] = new Observable(inner.mapTo(value))
 
+  /**
+    * Turns all of the notifications from a source Observable into [[rx.lang.scala.Observer.onNext onNext]] emissions,
+    * and marks them with their original notification types within [[rx.lang.scala.Notification]] objects.
+    *
+    * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/materialize.png" alt="" />
+    *
+    * @return an Observable whose items are the result of materializing the items and
+    *         notifications of the source Observable
+    */
   def materialize(): Observable[Notification[T]] = new Observable(inner.materialize())
 
 
   def max(comparer: (T,T) => T): Observable[T] = new Observable(inner.max(comparer))
   def max(): Observable[T] = new Observable(inner.max())
 
-
+  /**
+    * Flattens two Observables into one Observable, without any transformation.
+    *
+    * <img width="640" height="380" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/merge.png" alt="" />
+    *
+    * You can combine items emitted by two Observables so that they act like a single
+    * Observable by using the `merge` method.
+    *
+    * @param that
+    *            an Observable to be merged
+    * @return an Observable that emits items from `this` and `that` until
+    *            `this` or `that` emits `onError` or both Observables emit `onCompleted`.
+    */
   def merge[R >: T](that: Observable[R], concurrent: Double = Double.PositiveInfinity, scheduler: Scheduler): Observable[R] = new Observable(inner.merge(that,concurrent,scheduler))
   def merge[R >: T](that: Observable[R]): Observable[R] = new Observable(inner.merge(that))
 
@@ -426,7 +669,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def min(comparer: (T,T) => T): Observable[T] = new Observable(inner.min(comparer))
   def min(): Observable[T] = new Observable(inner.min())
 
-  def multicast(subjectOrSubjectFactory: () => Subject[T]): ConnectableObservableFacade[T] = inner.multicast(subjectOrSubjectFactory)
+  def multicast(subjectOrSubjectFactory: () => Subject[T]): Observable[T] = new Observable(inner.multicast(subjectOrSubjectFactory))
 
   def pairwise(): Observable[(T,T)] = new Observable[(T, T)](inner.pairwise().map((arr: js.Array[T], index: Int) => (arr(0), arr(1))))
 
@@ -435,87 +678,474 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     (new Observable(partitioned(0)),new Observable(partitioned(1)))
   }
 
-  def publish(): ConnectableObservableFacade[T] = inner.publish()
+  /**
+    * Returns a ConnectableObservable, which waits until the `connect` function is called
+    * before it begins emitting items from `this` [Observable to those Observers that
+    * have subscribed to it.
+    *
+    * <img width="640" height="510" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/publishConnect.png" alt="" />
+    *
+    * @return an ConnectableObservable
+    */
+  def publish(): Observable[T] = new Observable(inner.publish())
 
-  def publishBehavior(value: T): ConnectableObservableFacade[T] = inner.publishBehavior(value)
+  def publishBehavior(value: T): Observable[T] = new Observable(inner.publishBehavior(value))
 
-  def publishLast(): ConnectableObservableFacade[T] = inner.publishLast()
-  def publishReplay(bufferSize: Double = Double.PositiveInfinity, windowTime: Double = Double.PositiveInfinity): ConnectableObservableFacade[T] =
-    inner.publishReplay(bufferSize,windowTime)
+  def publishLast(): Observable[T] = new Observable(inner.publishLast())
+  def publishReplay(bufferSize: Double = Double.PositiveInfinity, windowTime: Double = Double.PositiveInfinity): Observable[T] =
+    new Observable(inner.publishReplay(bufferSize,windowTime))
 
   def race(observables: Observable[T]*): Observable[T] = new Observable(inner.race(observables.map(_.get).toJSArray))
+  /**
+    * Returns an Observable that applies a function of your choosing to the first item emitted by a
+    * source Observable, then feeds the result of that function along with the second item emitted
+    * by the source Observable into the same function, and so on until all items have been emitted
+    * by the source Observable, and emits the final result from the final call to your function as
+    * its sole item.
+    *
+    * <img width="640" height="320" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/reduce.png" alt="" />
+    *
+    * This technique, which is called "reduce" or "aggregate" here, is sometimes called "fold,"
+    * "accumulate," "compress," or "inject" in other programming contexts. Groovy, for instance,
+    * has an `inject` method that does a similar operation on lists.
+    *
+    * @param accumulator
+    *            An accumulator function to be invoked on each item emitted by the source
+    *            Observable, whose result will be used in the next accumulator call
+    * @return an Observable that emits a single item that is the result of accumulating the
+    *         output from the source Observable
+    */
+  def reduce[R](accumulator: (R,T) => R,seed: R): Observable[R] = new Observable(inner.reduce(accumulator,seed))
+  def reduce[R](accumulator: (R,T) => R): Observable[R] = new Observable(inner.reduce(accumulator))
 
-  def reduce[R](project: (R,T) => R,seed: R): Observable[R] = new Observable(inner.reduce(project,seed))
-  def reduce[R](project: (R,T) => R): Observable[R] = new Observable(inner.reduce(project))
-
+  /**
+    * Returns an Observable that repeats the sequence of items emitted by the source Observable at most `count` times.
+    * <p>
+    * <img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/repeat.on.png" alt="" />
+    *
+    * @param count the number of times the source Observable items are repeated,
+    *              a count of 0 will yield an empty sequence
+    * @return an Observable that repeats the sequence of items emitted by the source Observable at most `count` times
+    * @throws java.lang.IllegalArgumentException if `count` is less than zero
+    * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Creating-Observables#wiki-repeat">RxJava Wiki: repeat()</a>
+    * @see <a href="http://msdn.microsoft.com/en-us/library/hh229428.aspx">MSDN: Observable.Repeat</a>
+    */
   def repeat(count: Int = -1): Observable[T] = new Observable(inner.repeat(count))
 
+  /**
+    * Retry subscription to origin Observable upto given retry count.
+    *
+    * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/retry.png" alt="" />
+    *
+    * If [[rx.lang.scala.Observer.onError]] is invoked the source Observable will be re-subscribed to as many times as defined by retryCount.
+    *
+    * Any [[rx.lang.scala.Observer.onNext]] calls received on each attempt will be emitted and concatenated together.
+    *
+    * For example, if an Observable fails on first time but emits [1, 2] then succeeds the second time and
+    * emits [1, 2, 3, 4, 5] then the complete output would be [1, 2, 1, 2, 3, 4, 5, onCompleted].
+    *
+    * @param retryCount
+    *            Number of retry attempts before failing.
+    * @return Observable with retry logic.
+    */
   def retry(count: Int = -1): Observable[T] = new Observable(inner.retry(count))
-
+  /**
+    * Returns an Observable that emits the same values as the source observable with the exception of an
+    * `onError`. An `onError` notification from the source will result in the emission of a
+    * `Throwable` to the Observable provided as an argument to the `notificationHandler`
+    *  function. If the Observable returned `onCompletes` or `onErrors` then `retry` will call
+    * `onCompleted` or `onError` on the child subscription. Otherwise, this Observable will
+    * resubscribe to the source Observable.
+    * <p>
+    * <img width="640" height="430" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/retryWhen.f.png" alt="" />
+    *
+    * Example:
+    *
+    * This retries 3 times, each time incrementing the number of seconds it waits.
+    *
+    * @example
+    *
+    * This retries 3 times, each time incrementing the number of seconds it waits.
+    *
+    * {{{
+    * Observable[String]({ subscriber =>
+    *   println("subscribing")
+    *   subscriber.onError(new RuntimeException("always fails"))
+    * }).retryWhen({ throwableObservable =>
+    *   throwableObservable.zipWith(Observable.from(1 to 3))((t, i) => i).flatMap(i => {
+    *     println("delay retry by " + i + " second(s)")
+    *     Observable.timer(Duration(i, TimeUnit.SECONDS))
+    *   })
+    * }).toBlocking.foreach(s => println(s))
+    * }}}
+    *
+    * Output is:
+    *
+    * {{{
+    * subscribing
+    * delay retry by 1 second(s)
+    * subscribing
+    * delay retry by 2 second(s)
+    * subscribing
+    * delay retry by 3 second(s)
+    * subscribing
+    * }}}
+    *
+    * <dl>
+    *  <dt><b>Scheduler:</b></dt>
+    *  <dd>`retryWhen` operates by default on the `trampoline` [[Scheduler]].</dd>
+    * </dl>
+    *
+    * @param notificationHandler receives an Observable of a Throwable with which a user can complete or error, aborting the
+    *            retry
+    * @return the source Observable modified with retry logic
+    * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Error-Handling-Operators#retrywhen">RxJava Wiki: retryWhen()</a>
+    * @see RxScalaDemo.retryWhenDifferentExceptionsExample for a more intricate example
+    * @since 0.20
+    */
   def retryWhen[T2,T3](notifier: Observable[T2] => Observable[T3]): Observable[T] = new Observable(inner.retryWhen(toFacadeFunction(toReturnFacade(notifier))))
-  def sample[I](notifier: Observable[I]): Observable[T] = new Observable(inner.sample(notifier))
-
+  /**
+    * Return an Observable that emits the results of sampling the items emitted by the source Observable
+    * whenever the specified sampler Observable emits an item or completes.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/sample.o.png" alt="" />
+    *
+    * @param sampler
+    *            the Observable to use for sampling the source Observable
+    * @return an Observable that emits the results of sampling the items emitted by this Observable whenever
+    *         the sampler Observable emits an item or completes
+    */
+  def sample[I](sampler: Observable[I]): Observable[T] = new Observable(inner.sample(sampler))
+  /**
+    * Returns an Observable that emits the results of sampling the items emitted by the source
+    * Observable at a specified time interval.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/sample.png" alt="" />
+    *
+    * @param duration the sampling rate
+    * @param scheduler
+    *            the [[rx.lang.scala.Scheduler]] to use when sampling
+    * @return an Observable that emits the results of sampling the items emitted by the source
+    *         Observable at the specified time interval
+    */
   def sampleTime(delay: Int, scheduler: Scheduler): Observable[T] = new Observable(inner.sampleTime(delay,scheduler))
   def sampleTime(delay: Int): Observable[T] = new Observable(inner.sampleTime(delay))
 
-
+  /**
+  * Returns an Observable that applies a function of your choosing to the first item emitted by a
+    * source Observable, then feeds the result of that function along with the second item emitted
+    * by an Observable into the same function, and so on until all items have been emitted by the
+  * source Observable, emitting the result of each of these iterations.
+  *
+  * <img width="640" height="320" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/scanSeed.png" alt="" />
+  *
+  * This sort of function is sometimes called an accumulator.
+  *
+  * Note that when you pass a seed to `scan()` the resulting Observable will emit
+  * that seed as its first emitted item.
+  *
+  * @param seed
+    *            the initial (seed) accumulator value
+  * @param accumulator
+    *            an accumulator function to be invoked on each item emitted by the source
+    *            Observable, whose result will be emitted to [[rx.lang.scala.Observer]]s via
+    *            [[rx.lang.scala.Observer.onNext onNext]] and used in the next accumulator call.
+    * @return an Observable that emits the results of each call to the accumulator function
+  */
   def scan[R](accumulator: (R, T) => R,seed: R): Observable[R] = new Observable(inner.scan(accumulator,seed))
   def scan[R](accumulator: (R, T) => R): Observable[R] = new Observable(inner.scan(accumulator))
 
-
+  /**
+    * Returns a new [[Observable]] that multicasts (shares) the original [[Observable]]. As long a
+    * there is more than 1 [[Subscriber]], this [[Observable]] will be subscribed and emitting data.
+    * When all subscribers have unsubscribed it will unsubscribe from the source [[Observable]].
+    *
+    * This is an alias for `publish().refCount()`
+    *
+    * <img width="640" height="510" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/publishRefCount.png" alt="" />
+    *
+    * @return a [[Observable]] that upon connection causes the source Observable to emit items to its [[Subscriber]]s
+    * @since 0.19
+    */
   def share(): Observable[T] = new Observable(inner.share())
-
+  /**
+    * If the source Observable completes after emitting a single item, return an Observable that emits that
+    * item. If the source Observable emits more than one item or no items, notify of an `IllegalArgumentException`
+    * or `NoSuchElementException` respectively.
+    *
+    * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/single.png" alt="" />
+    *
+    * @return an Observable that emits the single item emitted by the source Observable
+    * @throws java.lang.IllegalArgumentException if the source emits more than one item
+    * @throws java.util.NoSuchElementException if the source emits no items
+    * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Observable-Utility-Operators#wiki-single-and-singleordefault">RxJava Wiki: single()</a>
+    * @see "MSDN: Observable.singleAsync()"
+    */
   def single(predicate: (T, Int, Observable[T]) => Boolean): Observable[T] = new Observable(inner.single(toFacadeFunction(predicate)))
   def single(): Observable[T] = new Observable(inner.single())
-
+  /**
+    * Returns an Observable that skips the first `num` items emitted by the source
+    * Observable and emits the remainder.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/skip.png" alt="" />
+    *
+    * @param total
+    *            the number of items to skip
+    * @return an Observable that is identical to the source Observable except that it does not
+    *         emit the first `num` items that the source emits
+    */
   def drop(total: Int): Observable[T] = skip(total)
-
+  /**
+    * Returns an Observable that skips items emitted by the source Observable until a second Observable emits an item.
+    * <p>
+    * <img width="640" height="375" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/skipUntil.png" alt="" />
+    *
+    * @param notifier the second Observable that has to emit an item before the source Observable's elements begin
+    *              to be mirrored by the resulting Observable
+    * @return an Observable that skips items from the source Observable until the second Observable emits an
+    *         item, then emits the remaining items
+    * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Filtering-Observables#wiki-skipuntil">RxJava Wiki: skipUntil()</a>
+    * @see <a href="http://msdn.microsoft.com/en-us/library/hh229358.aspx">MSDN: Observable.SkipUntil</a>
+    */
   def dropUntil[T2](notifier: Observable[T2]): Observable[T] = skipUntil(notifier)
 
+  /**
+    * Returns an Observable that bypasses all items from the source Observable as long as the specified
+    * condition holds true. Emits all further source items as soon as the condition becomes false.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/skipWhile.png" alt="" />
+    *
+    * @param predicate
+    *            A function to test each item emitted from the source Observable for a condition.
+    * @return an Observable that emits all items from the source Observable as soon as the condition
+    *         becomes false.
+    */
   def dropWhile(predicate: (T,Int) => Boolean): Observable[T] = skipWhile(predicate)
-
+  /**
+    * Returns an Observable that skips the first `num` items emitted by the source
+    * Observable and emits the remainder.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/skip.png" alt="" />
+    *
+    * @param total
+    *            the number of items to skip
+    * @return an Observable that is identical to the source Observable except that it does not
+    *         emit the first `num` items that the source emits
+    */
   def skip(total: Int): Observable[T] = new Observable(inner.skip(total))
-
+  /**
+    * Returns an Observable that skips items emitted by the source Observable until a second Observable emits an item.
+    * <p>
+    * <img width="640" height="375" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/skipUntil.png" alt="" />
+    *
+    * @param notifier the second Observable that has to emit an item before the source Observable's elements begin
+    *              to be mirrored by the resulting Observable
+    * @return an Observable that skips items from the source Observable until the second Observable emits an
+    *         item, then emits the remaining items
+    * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Filtering-Observables#wiki-skipuntil">RxJava Wiki: skipUntil()</a>
+    * @see <a href="http://msdn.microsoft.com/en-us/library/hh229358.aspx">MSDN: Observable.SkipUntil</a>
+    */
   def skipUntil[T2](notifier: Observable[T2]): Observable[T] = new Observable(inner.skipUntil(notifier))
-
+  /**
+    * Returns an Observable that bypasses all items from the source Observable as long as the specified
+    * condition holds true. Emits all further source items as soon as the condition becomes false.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/skipWhile.png" alt="" />
+    *
+    * @param predicate
+    *            A function to test each item emitted from the source Observable for a condition.
+    * @return an Observable that emits all items from the source Observable as soon as the condition
+    *         becomes false.
+    */
   def skipWhile(predicate: (T,Int) => Boolean): Observable[T] = new Observable(inner.skipWhile(predicate))
-
+  /**
+    * Returns an Observable that emits a specified item before it begins to emit items emitted by the source Observable.
+    * <p>
+    * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/startWith.png" alt="" />
+    *
+    * @param elem the item to emit
+    * @return an Observable that emits the specified item before it begins to emit items emitted by the source Observable
+    */
   def +:[U >: T](elem: U): Observable[U] = startWith(elem)
-
-  def startWith[U >: T](v1: U, scheduler: Scheduler): Observable[U] = new Observable[U](inner.startWith(v1,scheduler))
+  /**
+    * Returns an Observable that emits a specified item before it begins to emit items emitted by the source Observable.
+    * <p>
+    * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/startWith.png" alt="" />
+    *
+    * @param elem the item to emit
+    * @return an Observable that emits the specified item before it begins to emit items emitted by the source Observable
+    */
+  def startWith[U >: T](elem: U, scheduler: Scheduler): Observable[U] = new Observable[U](inner.startWith(v1,scheduler))
   def startWith[U >: T](v1: U): Observable[U] = new Observable[U](inner.startWith(v1))
-
+  /**
+    * Given an Observable that emits Observables, creates a single Observable that
+    * emits the items emitted by the most recently published of those Observables.
+    *
+    * <img width="640" height="370" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/switchDo.png" alt="" />
+    *
+    * This operation is only available if `this` is of type `Observable[Observable[U]]` for some `U`,
+    * otherwise you'll get a compilation error.
+    *
+    * @return an Observable that emits only the items emitted by the most recently published
+    *         Observable
+    *
+    * @usecase def switch[U]: Observable[U]
+    *   @inheritdoc
+    */
   def switch[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable[U](inner.switch().asInstanceOf[ObservableFacade[U]])
 
+  /**
+    * Returns a new Observable by applying a function that you supply to each item emitted by the source
+    * Observable that returns an Observable, and then emitting the items emitted by the most recently emitted
+    * of these Observables.
+    *
+    * <img width="640" height="350" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/switchMap.png" alt="" />
+    *
+    * @param project a function that, when applied to an item emitted by the source Observable, returns an Observable
+    * @return an Observable that emits the items emitted by the Observable returned from applying a function to
+    *         the most recently emitted item emitted by the source Observable
+    */
   def switchMap[I, R](project: (T, Int) => Observable[I]): Observable[R] = new Observable(inner.switchMap(toReturnFacade(project)))
 
   def switchMapTo[I, R](innerObservable: Observable[I]): Observable[R] = new Observable(inner.switchMapTo(innerObservable))
 
+  /**
+    * Returns an Observable that emits only the first `num` items emitted by the source
+    * Observable.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/take.png" alt="" />
+    *
+    * This method returns an Observable that will invoke a subscribing [[rx.lang.scala.Observer]]'s
+    * [[rx.lang.scala.Observer.onNext onNext]] function a maximum of `num` times before invoking
+    * [[rx.lang.scala.Observer.onCompleted onCompleted]].
+    *
+    * @param n
+    *            the number of items to take
+    * @return an Observable that emits only the first `num` items from the source
+    *         Observable, or all of the items from the source Observable if that Observable emits
+    *         fewer than `num` items
+    */
   def take(total: Int): Observable[T] = new Observable(inner.take(total))
-
+  /**
+    * Returns an Observable that emits only the last `count` items emitted by the source
+    * Observable.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/last.png" alt="" />
+    *
+    * @param count
+    *            the number of items to emit from the end of the sequence emitted by the source
+    *            Observable
+    * @return an Observable that emits only the last `count` items emitted by the source
+    *         Observable
+    */
   def takeLast(total: Int): Observable[T] = new Observable(inner.takeLast(total))
-
+  /**
+    * $experimental Returns an [[Observable]] that emits items emitted by the source [[Observable]], checks the specified predicate
+    * for each item, and then completes if the condition is satisfied.
+    *
+    * <img width="640" height="305" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/takeUntil.p.png" alt="">
+    *
+    * The difference between this operator and `takeWhile(T => Boolean)` is that here, the condition is
+    * evaluated '''after''' the item is emitted.
+    *
+    * $noDefaultScheduler
+    *
+    * @param stopPredicate a function that evaluates an item emitted by the source [[Observable]] and returns a Boolean
+    * @return an [[Observable]] that first emits items emitted by the source [[Observable]], checks the specified
+    *         condition after each item, and then completes if the condition is satisfied.
+    * @see <a href="http://reactivex.io/documentation/operators/takeuntil.html">ReactiveX operators documentation: TakeUntil</a>
+    * @see [[Observable.takeWhile]]
+    * @since (if this graduates from Experimental/Beta to supported, replace this parenthetical with the release number)
+    */
   def takeUntil[T2](notifier: Observable[T2]): Observable[T] = new Observable(inner.takeUntil(notifier))
-
+  /**
+    * Returns an Observable that emits items emitted by the source Observable so long as a
+    * specified condition is true.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/takeWhile.png" alt="" />
+    *
+    * @param predicate
+    *            a function that evaluates an item emitted by the source Observable and returns a
+    *            Boolean
+    * @return an Observable that emits the items from the source Observable so long as each item
+    *         satisfies the condition defined by `predicate`
+    */
   def takeWhile(predicate: (T, Int) => Boolean): Observable[T] = new Observable(inner.takeWhile(predicate))
 
   def throttle(durationSelector: T =>  Subscribable[Int]): Observable[T] = new Observable(inner.throttle(durationSelector))
-
+  /**
+    * Debounces by dropping all values that are followed by newer values before the timeout value expires. The timer resets on each `onNext` call.
+    *
+    * NOTE: If events keep firing faster than the timeout then no data will be emitted.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/throttleWithTimeout.png" alt="" />
+    *
+    * @param timeout
+    *            The time each value has to be 'the most recent' of the [[rx.lang.scala.Observable]] to ensure that it's not dropped.
+    * @param scheduler
+    *            The [[rx.lang.scala.Scheduler]] to use internally to manage the timers which handle timeout for each event.
+    * @return Observable which performs the throttle operation.
+    * @see `Observable.debounce`
+    */
   def throttleTime(delay: Int, scheduler: Scheduler): Observable[T] = new Observable(inner.throttleTime(delay,scheduler))
   def throttleTime(delay: Int): Observable[T] = new Observable(inner.throttleTime(delay))
 
-
+  /**
+    * Returns an Observable that emits records of the time interval between consecutive items emitted by the
+    * source Observable.
+    * <p>
+    * <img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/timeInterval.png" alt="" />
+    *
+    * @return an Observable that emits time interval information items
+    */
   def timeInterval(): Observable[TimeInterval[T]] = new Observable(inner.timeInterval())
-
+  /**
+    * Applies a timeout policy for each item emitted by the Observable, using
+    * the specified scheduler to run timeout timers. If the next item isn't
+    * observed within the specified timeout duration starting from its
+    * predecessor, a specified fallback Observable sequence produces future
+    * items and notifications from that point on.
+    * <p>
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/timeout.2s.png" alt="" />
+    *
+    * @param due maximum duration between items before a timeout occurs
+    * @param errorToSend the error to send.
+    * @param scheduler Scheduler to run the timeout timers on
+    * @return the source Observable modified so that it will switch to the
+    *         fallback Observable in case of a timeout
+    */
   def timeout[T2](due: Int, errorToSend: T2, scheduler: Scheduler ): Observable[T] = new Observable(inner.timeout(due,errorToSend,scheduler))
   def timeout[T2](due: Int, errorToSend: T2): Observable[T] = new Observable(inner.timeout(due,errorToSend))
   def timeout[T2](due: Int): Observable[T] = new Observable(inner.timeout(due))
   def timeout[T2](due: Int, scheduler: Scheduler ): Observable[T] = new Observable(inner.timeout(due,scheduler = scheduler))
 
   def timeoutWith[R](due: Int, withObservable: Observable[R]): Observable[R] = new Observable(inner.timeoutWith(due,withObservable))
-
+  /**
+    * Wraps each item emitted by a source Observable in a timestamped tuple.
+    *
+    * <img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/timestamp.png" alt="" />
+    *
+    * @return an Observable that emits timestamped items from the source Observable
+    */
   def timestamp(): Observable[Timestamp[T]] = new Observable(inner.timestamp())
-
+  /**
+    * Returns an Observable that emits a single item, a list composed of all the items emitted by
+    * the source Observable.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/toList.png" alt="" />
+    *
+    * Normally, an Observable that returns multiple items will do so by invoking its [[rx.lang.scala.Observer]]'s
+    * [[rx.lang.scala.Observer.onNext onNext]] method for each such item. You can change
+    * this behavior, instructing the Observable to compose a list of all of these items and then to
+    * invoke the Observer's `onNext` function once, passing it the entire list, by
+    * calling the Observable's `toList` method prior to calling its `Observable.subscribe` method.
+    *
+    * Be careful not to use this operator on Observables that emit infinite or very large numbers
+    * of items, as you do not have the option to unsubscribe.
+    *
+    * @return an Observable that emits a single item: a List containing all of the items emitted by
+    *         the source Observable.
+    */
   def toSeq(): Observable[scala.collection.Seq[T]] = new Observable(inner.toArray().map((arr: js.Array[T], index: Int) => arr.toSeq))
 
 
@@ -536,15 +1166,63 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def windowToggle[T2,O](openings: Observable[O], closingSelector: O => ObservableFacade[T2]): Observable[Observable[T]] =
     new Observable(inner.windowToggle(openings,closingSelector).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
 
-  def windowWhen[T2](closingSelector: () => ObservableFacade[T2]): Observable[Observable[T]] =
-    new Observable(inner.windowWhen(closingSelector).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+  def windowWhen[T2](closingSelector: () => Observable[T2]): Observable[Observable[T]] =
+    new Observable(inner.windowWhen(toReturnFacade(closingSelector)).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+  /**
+    * $experimental Merges the specified [[Observable]] into this [[Observable]] sequence by using the `resultSelector`
+    * function only when the source [[Observable]] (this instance) emits an item.
+    *
+    * <img width="640" height="380" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/withLatestFrom.png" alt="">
+    *
+    * $noDefaultScheduler
+    *
+    * @param other the other [[Observable]]
+    * @param project the function to call when this [[Observable]] emits an item and the other [[Observable]] has already
+    *                       emitted an item, to generate the item to be emitted by the resulting [[Observable]]
+    * @return an [[Observable]] that merges the specified [[Observable]] into this [[Observable]] by using the
+    *         `resultSelector` function only when the source [[Observable]] sequence (this instance) emits an item
+    * @see <a href="http://reactivex.io/documentation/operators/combinelatest.html">ReactiveX operators documentation: CombineLatest</a>
+    * @since (if this graduates from Experimental/Beta to supported, replace this parenthetical with the release number)
+    */
+  def withLatestFrom[T2, R](other: Observable[T2], project: (T, T2) =>  R): Observable[R] = new Observable(inner.withLatestFrom(other,project))
+  def withLatestFrom[T2, R](other: Observable[T2]): Observable[R] = new Observable(inner.withLatestFrom(other))
 
-  def withLatestFrom[T2, R](v2: Observable[T2], project: (T, T2) =>  R): Observable[R] = new Observable(inner.withLatestFrom(v2,project))
-  def withLatestFrom[T2, R](v2: Observable[T2]): Observable[R] = new Observable(inner.withLatestFrom(v2))
-
+  /**
+    * Returns an Observable that emits items that are the result of applying a specified function to pairs of
+    * values, one each from the source Observable and a specified Iterable sequence.
+    * <p>
+    * <img width="640" height="380" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/zip.i.png" alt="" />
+    * <p>
+    * Note that the `other` Iterable is evaluated as items are observed from the source Observable; it is
+    * not pre-consumed. This allows you to zip infinite streams on either side.
+    *
+    * @param that the Iterable sequence
+    * @param selector a function that combines the pairs of items from the Observable and the Iterable to generate
+    *                 the items to be emitted by the resulting Observable
+    * @return an Observable that pairs up values from the source Observable and the `other` Iterable
+    *         sequence and emits the results of `selector` applied to these pairs
+    */
   def zip[T2, R](v2: Observable[T2], project: (T,T2) => R): Observable[R] = new Observable(inner.zip(v2,project))
+  /**
+    * Returns an Observable formed from this Observable and another Observable by combining
+    * corresponding elements in pairs.
+    * The number of `onNext` invocations of the resulting `Observable[(T, U)]`
+    * is the minumum of the number of `onNext` invocations of `this` and `that`.
+    *
+    * @param that the Observable to zip with
+    * @return an Observable that pairs up values from `this` and `that` Observables.
+    */
   def zip[T2, R](v2: Observable[T2]): Observable[R] = new Observable(inner.zip(v2))
 
+  /**
+    * $subscribeSubscriberMain
+    *
+    * $noDefaultScheduler
+    *
+    * @param subscriber $subscribeSubscriberParamObserver
+    * @return $subscribeAllReturn
+    * @see <a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a>
+    */
   def subscribe(onNext: T => Unit, error: js.Function1[js.Any,Unit] = null, complete: js.Function0[Unit] = null): AnonymousSubscription = inner.subscribe(onNext,error,complete)
 
   private def get = inner

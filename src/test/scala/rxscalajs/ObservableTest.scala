@@ -401,8 +401,6 @@ object ObservableTest extends TestSuite {
 
       'GroupBy {
         obs.groupBy((n: Int) => n % 2 == 0).subscribe(unit)
-        val func: js.Function1[GroupedObservableFacade[Int, Int], ObservableFacade[Int]] = (grouped: GroupedObservableFacade[Int, Int]) => ObservableFacade.of(-1)
-        obs.groupBy((n: Int) => n, (n: Int) => n, func).subscribe(unit)
         obs.groupBy((n: Int) => n % 2 == 0, (n: Int) => n).subscribe(unit)
       }
       'IgnoreElements {
