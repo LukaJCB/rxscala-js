@@ -1,7 +1,5 @@
 package rxscalajs
 
-import rxscalajs.facades.ObservableFacade
-
 import scala.collection.immutable.Seq
 import scala.scalajs.js
 import js._

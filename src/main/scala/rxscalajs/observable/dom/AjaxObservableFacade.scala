@@ -6,9 +6,7 @@ import org.scalajs.dom._
 
 package rxscalajs {
 
-  import rxscalajs.facades.ObservableFacade
-
-  @js.native
+@js.native
 trait AjaxRequest extends js.Object {
   var url: String = js.native
   var body: js.Any = js.native

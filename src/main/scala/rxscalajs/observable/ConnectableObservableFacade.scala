@@ -5,9 +5,7 @@ import js.|
 
 package rxscalajs {
 
-  import rxscalajs.facades.ObservableFacade
-
-  @js.native
+@js.native
 class ConnectableObservableFacade[T] protected() extends ObservableFacade[T] {
   def this(source: ObservableFacade[T], subjectFactory: js.Function0[Subject[T]]) = this()
   def connect(): Subscription = js.native
