@@ -282,8 +282,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     *            The second source observable.
     * @return An Observable that combines the source Observables
     */
-  def combineLatest[T2, R](that: Observable[T2], project: (T,T2) => R): Observable[R] = new Observable(inner.combineLatest(v2,project))
-  def combineLatest[T2, R](that: Observable[T2]): Observable[R] = new Observable(inner.combineLatest(v2))
+  def combineLatest[T2, R](that: Observable[T2], project: (T,T2) => R): Observable[R] = new Observable(inner.combineLatest(that,project))
+  def combineLatest[T2, R](that: Observable[T2]): Observable[R] = new Observable(inner.combineLatest(that))
 
 
   /**
@@ -321,7 +321,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   *
   * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/concatMap.png" alt="" />
   *
-  * @param f a function that, when applied to an item emitted by the source Observable, returns an Observable
+  * @param project a function that, when applied to an item emitted by the source Observable, returns an Observable
   * @return an Observable that emits the result of applying the transformation function to each item emitted
   *         by the source Observable and concatinating the Observables obtained from this transformation
   */
@@ -393,7 +393,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * Note: the resulting Observable will immediately propagate any `onError` notification
     * from the source Observable.
     *
-    * @param itemDelay a function that returns an Observable for each item emitted by the source Observable, which is
+    * @param delayDurationSelector a function that returns an Observable for each item emitted by the source Observable, which is
     *                  then used to delay the emission of that item by the resulting Observable until the Observable
     *                  returned from `itemDelay` emits an item
     * @return an Observable that delays the emissions of the source Observable via another Observable on a per-item basis
@@ -402,8 +402,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def delayWhen[U,I](delayDurationSelector: T => Observable[U]): Observable[T] = new Observable(inner.delayWhen(toReturnFacade(delayDurationSelector)))
 
   /**
-    * Returns an Observable that reverses the effect of [[rx.lang.scala.Observable.materialize]] by
-    * transforming the [[rx.lang.scala.Notification]] objects emitted by the source Observable into the items
+    * Returns an Observable that reverses the effect of [[rxscalajs.Observable.materialize]] by
+    * transforming the [[rxscalajs.Notification]] objects emitted by the source Observable into the items
     * or notifications they represent.
     *
     * This operation is only available if `this` is of type `Observable[Notification[U]]` for some `U`,
@@ -411,7 +411,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     *
     * <img width="640" height="335" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/dematerialize.png" alt="" />
     *
-    * @return an Observable that emits the items and notifications embedded in the [[rx.lang.scala.Notification]] objects emitted by the source Observable
+    * @return an Observable that emits the items and notifications embedded in the [[rxscalajs.Notification]] objects emitted by the source Observable
     *
     * @usecase def dematerialize[U]: Observable[U]
     *   @inheritdoc
@@ -549,9 +549,9 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * groupBy` does not operate by default on a particular `Scheduler`.
     *
     * @param keySelector a function that extracts the key for each item
-    * @param valueSelector a function that extracts the return element for each item
+    * @param elementSelector a function that extracts the return element for each item
     * @tparam K the key type
-    * @tparam V the value type
+    * @tparam R the value type
     * @return an [[Observable]] that emits `(key, observable)` pairs, each of which corresponds to a
     *         unique key value and each of which emits those items from the source Observable that share that
     *         key value
@@ -617,8 +617,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def mapTo[R](value: R): Observable[R] = new Observable(inner.mapTo(value))
 
   /**
-    * Turns all of the notifications from a source Observable into [[rx.lang.scala.Observer.onNext onNext]] emissions,
-    * and marks them with their original notification types within [[rx.lang.scala.Notification]] objects.
+    * Turns all of the notifications from a source Observable into [[rxscalajs.Observer.onNext onNext]] emissions,
+    * and marks them with their original notification types within [[rxscalajs.Notification]] objects.
     *
     * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/materialize.png" alt="" />
     *
@@ -737,14 +737,14 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     *
     * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/retry.png" alt="" />
     *
-    * If [[rx.lang.scala.Observer.onError]] is invoked the source Observable will be re-subscribed to as many times as defined by retryCount.
+    * If [[rxscalajs.Observer.onError]] is invoked the source Observable will be re-subscribed to as many times as defined by retryCount.
     *
-    * Any [[rx.lang.scala.Observer.onNext]] calls received on each attempt will be emitted and concatenated together.
+    * Any [[rxscalajs.Observer.onNext]] calls received on each attempt will be emitted and concatenated together.
     *
     * For example, if an Observable fails on first time but emits [1, 2] then succeeds the second time and
     * emits [1, 2, 3, 4, 5] then the complete output would be [1, 2, 1, 2, 3, 4, 5, onCompleted].
     *
-    * @param retryCount
+    * @param count
     *            Number of retry attempts before failing.
     * @return Observable with retry logic.
     */
@@ -796,7 +796,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     *  <dd>`retryWhen` operates by default on the `trampoline` [[Scheduler]].</dd>
     * </dl>
     *
-    * @param notificationHandler receives an Observable of a Throwable with which a user can complete or error, aborting the
+    * @param notifier receives an Observable of a Throwable with which a user can complete or error, aborting the
     *            retry
     * @return the source Observable modified with retry logic
     * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Error-Handling-Operators#retrywhen">RxJava Wiki: retryWhen()</a>
@@ -822,9 +822,9 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     *
     * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/sample.png" alt="" />
     *
-    * @param duration the sampling rate
+    * @param delay the sampling rate
     * @param scheduler
-    *            the [[rx.lang.scala.Scheduler]] to use when sampling
+    *            the [[rxscalajs.Scheduler]] to use when sampling
     * @return an Observable that emits the results of sampling the items emitted by the source
     *         Observable at the specified time interval
     */
@@ -848,8 +848,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     *            the initial (seed) accumulator value
   * @param accumulator
     *            an accumulator function to be invoked on each item emitted by the source
-    *            Observable, whose result will be emitted to [[rx.lang.scala.Observer]]s via
-    *            [[rx.lang.scala.Observer.onNext onNext]] and used in the next accumulator call.
+    *            Observable, whose result will be emitted to [[rxscalajs.Observer]]s via
+    *            [[rxscalajs.Observer.onNext onNext]] and used in the next accumulator call.
     * @return an Observable that emits the results of each call to the accumulator function
   */
   def scan[R](accumulator: (R, T) => R,seed: R): Observable[R] = new Observable(inner.scan(accumulator,seed))
@@ -975,8 +975,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * @param elem the item to emit
     * @return an Observable that emits the specified item before it begins to emit items emitted by the source Observable
     */
-  def startWith[U >: T](elem: U, scheduler: Scheduler): Observable[U] = new Observable[U](inner.startWith(v1,scheduler))
-  def startWith[U >: T](v1: U): Observable[U] = new Observable[U](inner.startWith(v1))
+  def startWith[U >: T](elem: U, scheduler: Scheduler): Observable[U] = new Observable[U](inner.startWith(elem,scheduler))
+  def startWith[U >: T](elem: U): Observable[U] = new Observable[U](inner.startWith(elem))
   /**
     * Given an Observable that emits Observables, creates a single Observable that
     * emits the items emitted by the most recently published of those Observables.
@@ -1015,11 +1015,11 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     *
     * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/take.png" alt="" />
     *
-    * This method returns an Observable that will invoke a subscribing [[rx.lang.scala.Observer]]'s
-    * [[rx.lang.scala.Observer.onNext onNext]] function a maximum of `num` times before invoking
-    * [[rx.lang.scala.Observer.onCompleted onCompleted]].
+    * This method returns an Observable that will invoke a subscribing [[rxscalajs.Observer]]'s
+    * [[rxscalajs.Observer.onNext onNext]] function a maximum of `num` times before invoking
+    * [[rxscalajs.Observer.onCompleted onCompleted]].
     *
-    * @param n
+    * @param total
     *            the number of items to take
     * @return an Observable that emits only the first `num` items from the source
     *         Observable, or all of the items from the source Observable if that Observable emits
@@ -1032,31 +1032,15 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     *
     * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/last.png" alt="" />
     *
-    * @param count
+    * @param total
     *            the number of items to emit from the end of the sequence emitted by the source
     *            Observable
     * @return an Observable that emits only the last `count` items emitted by the source
     *         Observable
     */
   def takeLast(total: Int): Observable[T] = new Observable(inner.takeLast(total))
-  /**
-    * $experimental Returns an [[Observable]] that emits items emitted by the source [[Observable]], checks the specified predicate
-    * for each item, and then completes if the condition is satisfied.
-    *
-    * <img width="640" height="305" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/takeUntil.p.png" alt="">
-    *
-    * The difference between this operator and `takeWhile(T => Boolean)` is that here, the condition is
-    * evaluated '''after''' the item is emitted.
-    *
-    * $noDefaultScheduler
-    *
-    * @param stopPredicate a function that evaluates an item emitted by the source [[Observable]] and returns a Boolean
-    * @return an [[Observable]] that first emits items emitted by the source [[Observable]], checks the specified
-    *         condition after each item, and then completes if the condition is satisfied.
-    * @see <a href="http://reactivex.io/documentation/operators/takeuntil.html">ReactiveX operators documentation: TakeUntil</a>
-    * @see [[Observable.takeWhile]]
-    * @since (if this graduates from Experimental/Beta to supported, replace this parenthetical with the release number)
-    */
+
+
   def takeUntil[T2](notifier: Observable[T2]): Observable[T] = new Observable(inner.takeUntil(notifier))
   /**
     * Returns an Observable that emits items emitted by the source Observable so long as a
@@ -1080,10 +1064,10 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     *
     * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/throttleWithTimeout.png" alt="" />
     *
-    * @param timeout
-    *            The time each value has to be 'the most recent' of the [[rx.lang.scala.Observable]] to ensure that it's not dropped.
+    * @param delay
+    *            The time each value has to be 'the most recent' of the [[rxscalajs.Observable]] to ensure that it's not dropped.
     * @param scheduler
-    *            The [[rx.lang.scala.Scheduler]] to use internally to manage the timers which handle timeout for each event.
+    *            The [[rxscalajs.Scheduler]] to use internally to manage the timers which handle timeout for each event.
     * @return Observable which performs the throttle operation.
     * @see `Observable.debounce`
     */
@@ -1134,8 +1118,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     *
     * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/toList.png" alt="" />
     *
-    * Normally, an Observable that returns multiple items will do so by invoking its [[rx.lang.scala.Observer]]'s
-    * [[rx.lang.scala.Observer.onNext onNext]] method for each such item. You can change
+    * Normally, an Observable that returns multiple items will do so by invoking its [[rxscalajs.Observer]]'s
+    * [[rxscalajs.Observer.onNext onNext]] method for each such item. You can change
     * this behavior, instructing the Observable to compose a list of all of these items and then to
     * invoke the Observer's `onNext` function once, passing it the entire list, by
     * calling the Observable's `toList` method prior to calling its `Observable.subscribe` method.
@@ -1197,12 +1181,12 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * not pre-consumed. This allows you to zip infinite streams on either side.
     *
     * @param that the Iterable sequence
-    * @param selector a function that combines the pairs of items from the Observable and the Iterable to generate
+    * @param project a function that combines the pairs of items from the Observable and the Iterable to generate
     *                 the items to be emitted by the resulting Observable
     * @return an Observable that pairs up values from the source Observable and the `other` Iterable
     *         sequence and emits the results of `selector` applied to these pairs
     */
-  def zip[T2, R](v2: Observable[T2], project: (T,T2) => R): Observable[R] = new Observable(inner.zip(v2,project))
+  def zip[T2, R](that: Observable[T2], project: (T,T2) => R): Observable[R] = new Observable(inner.zip(that,project))
   /**
     * Returns an Observable formed from this Observable and another Observable by combining
     * corresponding elements in pairs.
@@ -1212,7 +1196,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * @param that the Observable to zip with
     * @return an Observable that pairs up values from `this` and `that` Observables.
     */
-  def zip[T2, R](v2: Observable[T2]): Observable[R] = new Observable(inner.zip(v2))
+  def zip[T2, R](that: Observable[T2]): Observable[R] = new Observable(inner.zip(that))
 
   /**
     * $subscribeSubscriberMain
@@ -1241,6 +1225,22 @@ class Observable[T] private(inner: ObservableFacade[T]) {
 }
 
 object Observable {
+  /**
+    * Converts a sequence of values into an Observable.
+    *
+    * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" />
+    *
+    * Implementation note: the entire array will be immediately emitted each time an [[rxscalajs.Observer]] subscribes.
+    * Since this occurs before the [[rxscalajs.Subscription]] is returned,
+    * it in not possible to unsubscribe from the sequence before it completes.
+    *
+    * @param values
+    *            the source Array
+    * @tparam T
+    *            the type of items in the Array, and the type of items to be emitted by the
+    *            resulting Observable
+    * @return an Observable that emits each item in the source Array
+    */
   def apply[T](values: T*): Observable[T] = new Observable(ObservableFacade.of[T](values: _*))
 
   def ajax[T](request: String): Observable[T] = new Observable[T](ObservableFacade.ajax(request))
@@ -1252,7 +1252,18 @@ object Observable {
     ObservableFacade.bindNodeCallback(callbackFunc,selector,scheduler)
 
 
-
+  /**
+    * Combines a list of source Observables by emitting an item that aggregates the latest values of each of
+    * the source Observables each time an item is received from any of the source Observables, where this
+    * aggregation is defined by a specified function.
+    *
+    * @tparam T the common base type of source values
+    * @tparam R the result type
+    * @param sources the list of source Observables
+    * @param combineFunction the aggregation function used to combine the items emitted by the source Observables
+    * @return an Observable that emits items that are the result of combining the items emitted by the source
+    *         Observables by means of the given aggregation function
+    */
   def combineLatest[T,R] (sources: Seq[ObservableFacade[T]])(combineFunction: Seq[T] => R): Observable[R] = {
     val func = combineFunction.asInstanceOf[js.Array[T] => R]
     _combineLatest(sources.toJSArray,func)
@@ -1262,7 +1273,15 @@ object Observable {
   private def _combineLatest[T, R](sources: js.Array[ObservableFacade[T]],combineFunction: js.Array[T] => R): Observable[R] =
     new Observable(ObservableFacade.combineLatest(sources,combineFunction))
 
-
+  /**
+    * Returns an Observable that emits the items emitted by several Observables, one after the
+    * other.
+    *
+    * This operation is only available if `this` is of type `Observable[Observable[U]]` for some `U`,
+    * otherwise you'll get a compilation error.
+    *
+    * @usecase def concat[U]: Observable[U]
+    */
   def concat[T, R](observables: Seq[ObservableFacade[T]], scheduler: Scheduler): Observable[R] = _concat(observables.toJSArray,scheduler)
   def concat[T, R](observables: Seq[ObservableFacade[T]]): Observable[R] = _concat(observables.toJSArray)
 
@@ -1271,18 +1290,47 @@ object Observable {
   private def _concat[T, R](observables: js.Array[ObservableFacade[T]]): Observable[R] =
     new Observable[R](ObservableFacade.concat(observables))
 
+  /**
+    * Emits `0`, `1`, `2`, `...` with a delay of `duration` between consecutive numbers.
+    *
+    * <img width="640" height="195" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/interval.png" alt="" />
+    *
+    * @param duration
+    *            duration between two consecutive numbers
+    * @return An Observable that emits a number each time interval.
+    */
+  def interval(duration: Int = 0): Observable[Int] = new Observable(ObservableFacade.interval(duration))
 
-  def interval(period: Int = 0): Observable[Int] = new Observable(ObservableFacade.interval(period))
-
-
+  /**
+    * Flattens Observables into one Observable, without any transformation.
+    *
+    * <img width="640" height="380" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/merge.png" alt="" />
+    *
+    * You can combine items emitted by two Observables so that they act like a single
+    * Observable by using the `merge` method.
+    *
+    * @param observables
+    *            Observables to be merged
+    * @return an Observable that emits items from `this` and `that` until
+    *            `this` or `that` emits `onError` or both Observables emit `onCompleted`.
+    */
   def merge[T, R](observables: Seq[ObservableFacade[T]], scheduler: Scheduler): Observable[R] = new Observable(ObservableFacade.merge(observables.toJSArray,scheduler))
   def merge[T, R](observables: Seq[ObservableFacade[T]]): Observable[R] = new Observable(ObservableFacade.merge(observables.toJSArray))
 
   def of[T](elements: T*): Observable[T] = apply(elements: _*)
   def race[T](observables: ObservableFacade[T]*): Observable[T] = new Observable(ObservableFacade.race(observables: _*))
 
-  def range(start: Int = 0, count: Int = 0): Observable[Int] = new Observable(ObservableFacade.range(start,count))
+  /**
+    * Returns an Observable that emits `0L` after a specified delay, and then completes.
+    *
+    * <img width="640" height="200" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/timer.png" alt="" />
+    *
+    * @param initialDelay the initial delay before emitting a single `0L`
+    * @return Observable that emits `0L` after a specified delay, and then completes
+    */
   def timer(initialDelay: Int = 0, period: Int = -1): Observable[Int] = new Observable(ObservableFacade.timer(initialDelay,period))
+  
+  def range(start: Int = 0, count: Int = 0): Observable[Int] = new Observable(ObservableFacade.range(start,count))
 
 
   def zip[T,R](observables: Seq[ObservableFacade[T]])(project: js.Array[T] => R): Observable[R] =  {
