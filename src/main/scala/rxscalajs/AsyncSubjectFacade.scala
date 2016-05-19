@@ -6,7 +6,7 @@ import js.|
 package rxscalajs {
 
 @js.native
-class AsyncSubject[T] extends Subject[T] {
+class AsyncSubjectFacade[T] extends SubjectFacade[T] {
   var value: T = js.native
   var hasNext: Boolean = js.native
   def _subscribe(subscriber: Subscriber[js.Any]): AnonymousSubscription = js.native

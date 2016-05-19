@@ -30,7 +30,6 @@ object Subscription extends js.Object {
 @js.native
 class UnsubscriptionError protected () extends Error {
   def this(errors: js.Array[js.Any]) = this()
-  var errors: js.Array[js.Any] = js.native
 }
 
 }

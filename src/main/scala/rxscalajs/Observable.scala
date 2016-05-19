@@ -669,7 +669,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def min(comparer: (T,T) => T): Observable[T] = new Observable(inner.min(comparer))
   def min(): Observable[T] = new Observable(inner.min())
 
-  def multicast(subjectOrSubjectFactory: () => Subject[T]): Observable[T] = new Observable(inner.multicast(subjectOrSubjectFactory))
+  def multicast(subjectOrSubjectFactory: () => SubjectFacade[T]): Observable[T] = new Observable(inner.multicast(subjectOrSubjectFactory))
 
   def pairwise(): Observable[(T,T)] = new Observable[(T, T)](inner.pairwise().map((arr: js.Array[T], index: Int) => (arr(0), arr(1))))
 
