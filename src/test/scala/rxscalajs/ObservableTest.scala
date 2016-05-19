@@ -174,7 +174,7 @@ object ObservableTest extends TestSuite {
         obs.mergeMapTo(ObservableFacade.of(34), (out: Int, in: Int, index1: Int, index2: Int) => -1).subscribe(unit)
       }
       'Multicast {
-        val func: js.Function0[Subject[Int]] = () => new Subject[Int]()
+        val func: js.Function0[SubjectFacade[Int]] = () => new SubjectFacade[Int]()
         obs.multicast(func).subscribe(unit)
       }
       'Partition {
@@ -440,7 +440,7 @@ object ObservableTest extends TestSuite {
         obs.mergeMapTo(Observable(34), (out: Int, in: Int, index1: Int, index2: Int) => -1).subscribe(unit)
       }
       'Multicast {
-        val func: js.Function0[Subject[Int]] = () => new Subject[Int]()
+        val func: js.Function0[SubjectFacade[Int]] = () => new SubjectFacade[Int]()
         obs.multicast(func).subscribe(unit)
       }
       'Partition {

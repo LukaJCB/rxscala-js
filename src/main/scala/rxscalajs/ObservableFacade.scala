@@ -13,7 +13,7 @@ package rxscalajs {
 
   @js.native
   class GroupedObservableFacade[K,T] protected() extends ObservableFacade[T] {
-    def this(key: K, groupSubject: Subject[T], refCountSubscription: Subscription) = this()
+    def this(key: K, groupSubject: SubjectFacade[T], refCountSubscription: Subscription) = this()
   }
   @js.native
   class TimeInterval[T] protected() extends js.Object {
@@ -37,7 +37,6 @@ package rxscalajs {
     def this(subscribe: js.Function = js.native) = this()
 
     var source: ObservableFacade[js.Any] = js.native
-    var operator: Operator[js.Any, T] = js.native
 
 
 
@@ -108,7 +107,7 @@ package rxscalajs {
     def mergeMapTo[I, R](innerObservable: ObservableFacade[I], resultSelector: js.Function4[T, I, Int, Int, R] = ???, concurrent: Double = ???): ObservableFacade[R] = js.native
     def mergeScan[ R](project: js.Function2[R,T,ObservableFacade[R]], seed: R, concurrent: Int = ???): ObservableFacade[R] = js.native
     def min(comparer: js.Function2[T,T,T] = ???): ObservableFacade[T] = js.native
-    def multicast(subjectOrSubjectFactory: js.Function0[Subject[T]]): ConnectableObservableFacade[T] = js.native
+    def multicast(subjectOrSubjectFactory: js.Function0[SubjectFacade[T]]): ConnectableObservableFacade[T] = js.native
 
     def observeOn(scheduler: Scheduler, delay: Int = ???): ObservableFacade[T] = js.native
 
@@ -173,7 +172,6 @@ package rxscalajs {
     def zipAll[T2,R](project: (js.Function1[js.Array[T2],R]) = ???): ObservableFacade[R] = js.native
 
 
-    def lift[R](operator: Operator[T, R]): ObservableFacade[R] = js.native
 
 
     def forEach(next: js.Function1[T, Unit], PromiseCtor: Promise.type = js.native): Promise[Unit] = js.native

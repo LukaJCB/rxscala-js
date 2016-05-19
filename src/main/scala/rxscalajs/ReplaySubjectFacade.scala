@@ -6,7 +6,7 @@ import js.|
 package rxscalajs {
 
 @js.native
-class ReplaySubject[T] protected () extends Subject[T] {
+class ReplaySubjectFacade[T] protected() extends SubjectFacade[T] {
   def this(bufferSize: Double = ???, windowTime: Double = ???, scheduler: Scheduler = ???) = this()
 }
 
