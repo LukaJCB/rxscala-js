@@ -1,0 +1,12 @@
+package rxscalajs
+
+/**
+  * Created by Luka on 21.05.2016.
+  */
+class BehaviorSubject[T] protected(inner: BehaviorSubjectFacade[T]) extends Subject[T](inner)
+
+
+object BehaviorSubject {
+  def apply[T](): BehaviorSubject[T] = new BehaviorSubject(new BehaviorSubjectFacade())
+  def apply[T](defaultValue: T): BehaviorSubject[T] = new BehaviorSubject(new BehaviorSubjectFacade(defaultValue))
+}
