@@ -25,7 +25,8 @@ trait AjaxRequest extends js.Object {
 }
 
 @js.native
-trait AjaxCreationMethod extends js.Object {
+trait
+AjaxCreationMethod extends js.Object {
   def apply[T](urlOrRequest: String | AjaxRequest): ObservableFacade[T] = js.native
   def get[T](url: String, resultSelector: js.Function1[AjaxResponse, T] = ???, headers: Object = ???): ObservableFacade[T] = js.native
   def post[T](url: String, body: js.Any = ???, headers: Object = ???): ObservableFacade[T] = js.native
