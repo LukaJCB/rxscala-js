@@ -10,7 +10,7 @@ import js.JSConverters._
 /**
   * Created by Luka on 29.04.2016.
   */
-class Observable[T] private(inner: ObservableFacade[T]) {
+class Observable[T] protected(inner: ObservableFacade[T]) {
 
   /**
     * Ignores source values for a duration determined by another Observable, then

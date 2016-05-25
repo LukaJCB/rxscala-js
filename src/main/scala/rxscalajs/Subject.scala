@@ -5,11 +5,12 @@ import scala.scalajs.js
 /**
   * Created by Luka on 19.05.2016.
   */
-class Subject[T] protected(inner: SubjectFacade[T]) extends Observable[T] with Observer[T] with ISubscription {
+class Subject[T] protected(inner: SubjectFacade[T]) extends Observable[T](inner) {
 
     def next(value: T): Unit = inner.next(value)
     def error(err: js.Any): Unit = inner.error(err)
-    def asObservable(): Observable[T] = new Observable[T](inner.asObservable())
+    def asObservable(): Observable[T] = this
+    def unsubscribe(): Unit = inner.unsubscribe()
 
 
 }
