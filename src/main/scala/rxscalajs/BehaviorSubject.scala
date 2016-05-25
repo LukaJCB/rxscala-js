@@ -7,6 +7,5 @@ class BehaviorSubject[T] protected(inner: BehaviorSubjectFacade[T]) extends Subj
 
 
 object BehaviorSubject {
-  def apply[T](): BehaviorSubject[T] = new BehaviorSubject(new BehaviorSubjectFacade())
   def apply[T](defaultValue: T): BehaviorSubject[T] = new BehaviorSubject(new BehaviorSubjectFacade(defaultValue))
 }

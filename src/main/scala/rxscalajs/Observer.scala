@@ -29,4 +29,5 @@ trait Observer[T] extends js.Object {
   var complete: js.Function0[Unit] = js.native
 }
 
+
 }
