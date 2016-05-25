@@ -55,7 +55,10 @@
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
-        </div></div>
+        </div><div class="toggleContainer block">
+            <span class="toggle">Known Subclasses</span>
+            <div class="subClasses hiddenContent"><a href="AsyncSubject.html" class="extype" name="rxscalajs.AsyncSubject">AsyncSubject</a>, <a href="BehaviorSubject.html" class="extype" name="rxscalajs.BehaviorSubject">BehaviorSubject</a>, <a href="ReplaySubject.html" class="extype" name="rxscalajs.ReplaySubject">ReplaySubject</a>, <a href="Subject.html" class="extype" name="rxscalajs.Subject">Subject</a></div>
+          </div></div>
         
 
       <div id="mbrsel">
@@ -89,7 +92,27 @@
 
       <div id="template">
         <div id="allMembers">
-        
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="rxscalajs.Observable#&lt;init&gt;" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&lt;init&gt;(inner:rxscalajs.ObservableFacade[T]):rxscalajs.Observable[T]"></a>
+      <a id="&lt;init&gt;:Observable[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Observable</span><span class="params">(<span name="inner">inner: <a href="ObservableFacade.html" class="extype" name="rxscalajs.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>)</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#rxscalajs.Observable@&lt;init&gt;(inner:rxscalajs.ObservableFacade[T]):rxscalajs.Observable[T]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
+    </li></ol>
+            </div>
 
         
 
@@ -226,7 +249,7 @@ emits the most recent value from the source Observable, then repeats this
 process.</p><div class="fullcomment"><div class="comment cmt"><p>Ignores source values for a duration determined by another Observable, then
 emits the most recent value from the source Observable, then repeats this
 process.</p><p><span class="informal">It's like  auditTime, but the silencing
-duration is determined by a second Observable.</span></p><p><img src="./img/audit.png" width="100%"></p><p><code>audit</code> is similar to <code>throttle</code>, but emits the last value from the silenced
+duration is determined by a second Observable.</span></p><p><img src="http://reactivex.io/rxjs/img/audit.png" width="100%"></p><p><code>audit</code> is similar to <code>throttle</code>, but emits the last value from the silenced
 time window, instead of the first value. <code>audit</code> emits the most recent value
 from the source Observable on the output Observable as soon as its internal
 timer becomes disabled, and ignores source values while the timer is enabled.
@@ -281,7 +304,7 @@ result.subscribe(x =&gt; println(x));</p></li></ol>
 value from the source Observable, then repeats this process.</p><div class="fullcomment"><div class="comment cmt"><p>Ignores source values for <code>duration</code> milliseconds, then emits the most recent
 value from the source Observable, then repeats this process.</p><p><span class="informal">When it sees a source values, it ignores that plus
 the next ones for `duration` milliseconds, and then it emits the most recent
-value from the source.</span></p><p><img src="./img/auditTime.png" width="100%"></p><p><code>auditTime</code> is similar to <code>throttleTime</code>, but emits the last value from the
+value from the source.</span></p><p><img src="http://reactivex.io/rxjs/img/auditTime.png" width="100%"></p><p><code>auditTime</code> is similar to <code>throttleTime</code>, but emits the last value from the
 silenced time window, instead of the first value. <code>auditTime</code> emits the most
 recent value from the source Observable on the output Observable as soon as
 its internal timer becomes disabled, and ignores source values while the
@@ -318,7 +341,7 @@ result.subscribe(x =&gt; console.log(x));</p></li></ol>
       </a>
     </span>
       <p class="shortcomment cmt">Buffers the source Observable values until <code>closingNotifier</code> emits.</p><div class="fullcomment"><div class="comment cmt"><p>Buffers the source Observable values until <code>closingNotifier</code> emits.</p><p><span class="informal">Collects values from the past as an array, and emits
-that array only when another Observable emits.</span></p><p><img src="./img/buffer.png" width="100%"></p><p>Buffers the incoming Observable values until the given <code>closingNotifier</code>
+that array only when another Observable emits.</span></p><p><img src="http://reactivex.io/rxjs/img/buffer.png" width="100%"></p><p>Buffers the incoming Observable values until the given <code>closingNotifier</code>
 Observable emits a value, at which point it emits the buffer on the output
 Observable and starts a new buffer internally, awaiting the next time
 <code>closingNotifier</code> emits.
@@ -367,7 +390,7 @@ buffered.subscribe(x =&gt; console.log(x));</p></li></ol>
       <p class="shortcomment cmt">Buffers the source Observable values until the size hits the maximum
 <code>bufferSize</code> given.</p><div class="fullcomment"><div class="comment cmt"><p>Buffers the source Observable values until the size hits the maximum
 <code>bufferSize</code> given.</p><p><span class="informal">Collects values from the past as an array, and emits
-that array only when its size reaches `bufferSize`.</span></p><p><img src="./img/bufferCount.png" width="100%"></p><p>Buffers a number of values from the source Observable by <code>bufferSize</code> then
+that array only when its size reaches `bufferSize`.</span></p><p><img src="http://reactivex.io/rxjs/img/bufferCount.png" width="100%"></p><p>Buffers a number of values from the source Observable by <code>bufferSize</code> then
 emits the buffer and clears it, and starts a new buffer each
 <code>startBufferEvery</code> values. If <code>startBufferEvery</code> is not provided or is
 <code>null</code>, then new buffers are started immediately at the start of the source
@@ -435,7 +458,7 @@ buffered.subscribe(x =&gt; console.log(x));</p></li></ol>
       </a>
     </span>
       <p class="shortcomment cmt">Buffers the source Observable values for a specific time period.</p><div class="fullcomment"><div class="comment cmt"><p>Buffers the source Observable values for a specific time period.</p><p><span class="informal">Collects values from the past as an array, and emits
-those arrays periodically in time.</span></p><p><img src="./img/bufferTime.png" width="100%"></p><p>Buffers values from the source for a specific time duration <code>bufferTimeSpan</code>.
+those arrays periodically in time.</span></p><p><img src="http://reactivex.io/rxjs/img/bufferTime.png" width="100%"></p><p>Buffers values from the source for a specific time duration <code>bufferTimeSpan</code>.
 Unless the optional argument <code>bufferCreationInterval</code> is given, it emits and
 resets the buffer every <code>bufferTimeSpan</code> milliseconds. If
 <code>bufferCreationInterval</code> is given, this operator opens the buffer every
@@ -472,7 +495,7 @@ buffered.subscribe(x =&gt; console.log(x));</p></li></ol>
 <code>openings</code> and ending when the output of <code>closingSelector</code> emits.</p><div class="fullcomment"><div class="comment cmt"><p>Buffers the source Observable values starting from an emission from
 <code>openings</code> and ending when the output of <code>closingSelector</code> emits.</p><p><span class="informal">Collects values from the past as an array. Starts
 collecting only when `opening` emits, and calls the `closingSelector`
-function to get an Observable that tells when to close the buffer.</span></p><p><img src="./img/bufferToggle.png" width="100%"></p><p>Buffers values from the source by opening the buffer via signals from an
+function to get an Observable that tells when to close the buffer.</span></p><p><img src="http://reactivex.io/rxjs/img/bufferToggle.png" width="100%"></p><p>Buffers values from the source by opening the buffer via signals from an
 Observable provided to <code>openings</code>, and closing and sending the buffers when
 a Subscribable or Promise returned by the <code>closingSelector</code> function emits.
 </p></div><dl class="paramcmts block"><dt class="param">openings</dt><dd class="cmt"><p>A Subscribable or Promise of notifications to start new
@@ -508,7 +531,7 @@ buffered.subscribe(x =&gt; console.log(x));</p></li></ol>
 Observables to determine when to close, emit, and reset the buffer.</p><div class="fullcomment"><div class="comment cmt"><p>Buffers the source Observable values, using a factory function of closing
 Observables to determine when to close, emit, and reset the buffer.</p><p><span class="informal">Collects values from the past as an array. When it
 starts collecting values, it calls a function that returns an Observable that
-tells when to close the buffer and restart collecting.</span></p><p><img src="./img/bufferWhen.png" width="100%"></p><p>Opens a buffer immediately, then closes the buffer when the observable
+tells when to close the buffer and restart collecting.</span></p><p><img src="http://reactivex.io/rxjs/img/bufferWhen.png" width="100%"></p><p>Opens a buffer immediately, then closes the buffer when the observable
 returned by calling <code>closingSelector</code> function emits a value. When it closes
 the buffer, it immediately opens a new buffer and repeats the process.
 </p></div><dl class="paramcmts block"><dt class="param">closingSelector</dt><dd class="cmt"><p>A function that takes no
@@ -1682,7 +1705,7 @@ discard their buffers by applying an operator like <code>take(0)</code> to them.
 and blocking any one group would block the entire parent stream. If you need backpressure on individual groups
 then you should use operators such as <code>nBackpressureDrop</code> or <code>@link #onBackpressureBuffer</code>.</dd>
 ===Scheduler:===
-groupBy` does not operate by default on a particular `Scheduler`.
+`groupBy` does not operate by default on a particular `Scheduler`.
 </p></div><dl class="paramcmts block"><dt class="tparam">K</dt><dd class="cmt"><p>the key type</p></dd><dt class="tparam">R</dt><dd class="cmt"><p>the value type</p></dd><dt class="param">keySelector</dt><dd class="cmt"><p>a function that extracts the key for each item</p></dd><dt class="param">elementSelector</dt><dd class="cmt"><p>a function that extracts the return element for each item</p></dd><dt>returns</dt><dd class="cmt"><p>an <a href="" class="extype" name="rxscalajs.Observable">Observable</a> that emits <code>(key, observable)</code> pairs, each of which corresponds to a
         unique key value and each of which emits those items from the source Observable that share that
         key value</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.groupby.aspx">MSDN: Observable.GroupBy</a></p></span><span class="cmt"><p><a href="https://github.com/ReactiveX/RxJava/wiki/Transforming-Observables#groupby-and-groupbyuntil">RxJava wiki: groupBy</a></p></span></dd></dl></div>
@@ -1888,8 +1911,8 @@ Observable and emits the result.</p><p><img width="640" height="305" src="https:
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Turns all of the notifications from a source Observable into <span class="extype" name="rxscalajs.Observer.onNext">onNext</span> emissions,
-and marks them with their original notification types within <a href="Notification.html" class="extype" name="rxscalajs.Notification">rxscalajs.Notification</a> objects.</p><div class="fullcomment"><div class="comment cmt"><p>Turns all of the notifications from a source Observable into <span class="extype" name="rxscalajs.Observer.onNext">onNext</span> emissions,
+      <p class="shortcomment cmt">Turns all of the notifications from a source Observable into onNext  emissions,
+and marks them with their original notification types within <a href="Notification.html" class="extype" name="rxscalajs.Notification">rxscalajs.Notification</a> objects.</p><div class="fullcomment"><div class="comment cmt"><p>Turns all of the notifications from a source Observable into onNext  emissions,
 and marks them with their original notification types within <a href="Notification.html" class="extype" name="rxscalajs.Notification">rxscalajs.Notification</a> objects.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/materialize.png" alt="" />
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>an Observable whose items are the result of materializing the items and
         notifications of the source Observable</p></dd></dl></div>
@@ -2085,18 +2108,18 @@ Observable by using the <code>merge</code> method.
     </span>
       
     </li><li name="rxscalajs.Observable#multicast" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="multicast(subjectOrSubjectFactory:()=&gt;rxscalajs.Subject[T]):rxscalajs.Observable[T]"></a>
-      <a id="multicast(()⇒Subject[T]):Observable[T]"></a>
+      <a id="multicast(subjectOrSubjectFactory:()=&gt;rxscalajs.SubjectFacade[T]):rxscalajs.Observable[T]"></a>
+      <a id="multicast(()⇒SubjectFacade[T]):Observable[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">multicast</span><span class="params">(<span name="subjectOrSubjectFactory">subjectOrSubjectFactory: () ⇒ <a href="Subject.html" class="extype" name="rxscalajs.Subject">Subject</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
+        <span class="name">multicast</span><span class="params">(<span name="subjectOrSubjectFactory">subjectOrSubjectFactory: () ⇒ <a href="SubjectFacade.html" class="extype" name="rxscalajs.SubjectFacade">SubjectFacade</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Observable@multicast(subjectOrSubjectFactory:()=&gt;rxscalajs.Subject[T]):rxscalajs.Observable[T]" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Observable@multicast(subjectOrSubjectFactory:()=&gt;rxscalajs.SubjectFacade[T]):rxscalajs.Observable[T]" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -2359,7 +2382,7 @@ has an <code>inject</code> method that does a similar operation on lists.
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Retry subscription to origin Observable upto given retry count.</p><div class="fullcomment"><div class="comment cmt"><p>Retry subscription to origin Observable upto given retry count.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/retry.png" alt="" /></p><p>If <span class="extype" name="rxscalajs.Observer.onError">rxscalajs.Observer.onError</span> is invoked the source Observable will be re-subscribed to as many times as defined by retryCount.</p><p>Any <span class="extype" name="rxscalajs.Observer.onNext">rxscalajs.Observer.onNext</span> calls received on each attempt will be emitted and concatenated together.</p><p>For example, if an Observable fails on first time but emits [1, 2] then succeeds the second time and
+      <p class="shortcomment cmt">Retry subscription to origin Observable upto given retry count.</p><div class="fullcomment"><div class="comment cmt"><p>Retry subscription to origin Observable upto given retry count.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/retry.png" alt="" /></p><p>If Observer.onError is invoked the source Observable will be re-subscribed to as many times as defined by retryCount.</p><p>Any Observer.onNext calls received on each attempt will be emitted and concatenated together.</p><p>For example, if an Observable fails on first time but emits [1, 2] then succeeds the second time and
 emits [1, 2, 3, 4, 5] then the complete output would be [1, 2, 1, 2, 3, 4, 5, onCompleted].
 </p></div><dl class="paramcmts block"><dt class="param">count</dt><dd class="cmt"><p>
            Number of retry attempts before failing.</p></dd><dt>returns</dt><dd class="cmt"><p>Observable with retry logic.</p></dd></dl></div>
@@ -2513,7 +2536,7 @@ that seed as its first emitted item.
 </p></div><dl class="paramcmts block"><dt class="param">accumulator</dt><dd class="cmt"><p>
            an accumulator function to be invoked on each item emitted by the source
            Observable, whose result will be emitted to <a href="Observer.html" class="extype" name="rxscalajs.Observer">rxscalajs.Observer</a>s via
-           <span class="extype" name="rxscalajs.Observer.onNext">onNext</span> and used in the next accumulator call.</p></dd><dt class="param">seed</dt><dd class="cmt"><p>
+           onNext and used in the next accumulator call.</p></dd><dt class="param">seed</dt><dd class="cmt"><p>
            the initial (seed) accumulator value</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the results of each call to the accumulator function</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#share" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="share():rxscalajs.Observable[T]"></a>
@@ -2798,8 +2821,8 @@ of these Observables.</p><p><img width="640" height="350" src="https://raw.githu
       <p class="shortcomment cmt">Returns an Observable that emits only the first <code>num</code> items emitted by the source
 Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that emits only the first <code>num</code> items emitted by the source
 Observable.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/take.png" alt="" /></p><p>This method returns an Observable that will invoke a subscribing <a href="Observer.html" class="extype" name="rxscalajs.Observer">rxscalajs.Observer</a>'s
-<span class="extype" name="rxscalajs.Observer.onNext">onNext</span> function a maximum of <code>num</code> times before invoking
-<span class="extype" name="rxscalajs.Observer.onCompleted">onCompleted</span>.
+onNext function a maximum of <code>num</code> times before invoking
+onCompleted.
 </p></div><dl class="paramcmts block"><dt class="param">total</dt><dd class="cmt"><p>
            the number of items to take</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits only the first <code>num</code> items from the source
         Observable, or all of the items from the source Observable if that Observable emits
@@ -3087,7 +3110,7 @@ items and notifications from that point on.</p><p><img width="640" height="305" 
       <p class="shortcomment cmt">Returns an Observable that emits a single item, a list composed of all the items emitted by
 the source Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that emits a single item, a list composed of all the items emitted by
 the source Observable.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/toList.png" alt="" /></p><p>Normally, an Observable that returns multiple items will do so by invoking its <a href="Observer.html" class="extype" name="rxscalajs.Observer">rxscalajs.Observer</a>'s
-<span class="extype" name="rxscalajs.Observer.onNext">onNext</span> method for each such item. You can change
+onNext method for each such item. You can change
 this behavior, instructing the Observable to compose a list of all of these items and then to
 invoke the Observer's <code>onNext</code> function once, passing it the entire list, by
 calling the Observable's <code>toList</code> method prior to calling its <code>Observable.subscribe</code> method.</p><p>Be careful not to use this operator on Observables that emit infinite or very large numbers

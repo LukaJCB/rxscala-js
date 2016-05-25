@@ -66,7 +66,7 @@
           <div class="superTypes hiddenContent"><a href="Subscribable.html" class="extype" name="rxscalajs.Subscribable">Subscribable</a>[<span class="extype" name="rxscalajs.ObservableFacade.T">T</span>], <span class="extype" name="scala.scalajs.js.Object">Object</span>, <span class="extype" name="scala.scalajs.js.Any">Any</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
             <span class="toggle">Known Subclasses</span>
-            <div class="subClasses hiddenContent"><a href="AjaxObservableFacade.html" class="extype" name="rxscalajs.AjaxObservableFacade">AjaxObservableFacade</a>, <a href="AsyncSubject.html" class="extype" name="rxscalajs.AsyncSubject">AsyncSubject</a>, <a href="BehaviorSubject.html" class="extype" name="rxscalajs.BehaviorSubject">BehaviorSubject</a>, <a href="ConnectableObservableFacade.html" class="extype" name="rxscalajs.ConnectableObservableFacade">ConnectableObservableFacade</a>, <a href="ErrorObservableFacade.html" class="extype" name="rxscalajs.ErrorObservableFacade">ErrorObservableFacade</a>, <a href="GroupedObservableFacade.html" class="extype" name="rxscalajs.GroupedObservableFacade">GroupedObservableFacade</a>, <a href="ReplaySubject.html" class="extype" name="rxscalajs.ReplaySubject">ReplaySubject</a>, <a href="Subject.html" class="extype" name="rxscalajs.Subject">Subject</a></div>
+            <div class="subClasses hiddenContent"><a href="AjaxObservableFacade.html" class="extype" name="rxscalajs.AjaxObservableFacade">AjaxObservableFacade</a>, <a href="AsyncSubjectFacade.html" class="extype" name="rxscalajs.AsyncSubjectFacade">AsyncSubjectFacade</a>, <a href="BehaviorSubjectFacade.html" class="extype" name="rxscalajs.BehaviorSubjectFacade">BehaviorSubjectFacade</a>, <a href="ConnectableObservableFacade.html" class="extype" name="rxscalajs.ConnectableObservableFacade">ConnectableObservableFacade</a>, <a href="ErrorObservableFacade.html" class="extype" name="rxscalajs.ErrorObservableFacade">ErrorObservableFacade</a>, <a href="GroupedObservableFacade.html" class="extype" name="rxscalajs.GroupedObservableFacade">GroupedObservableFacade</a>, <a href="ReplaySubjectFacade.html" class="extype" name="rxscalajs.ReplaySubjectFacade">ReplaySubjectFacade</a>, <a href="SubjectFacade.html" class="extype" name="rxscalajs.SubjectFacade">SubjectFacade</a></div>
           </div></div>
         
 
@@ -1110,23 +1110,6 @@
       </a>
     </span>
       
-    </li><li name="rxscalajs.ObservableFacade#lift" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="lift[R](operator:rxscalajs.Operator[T,R]):rxscalajs.ObservableFacade[R]"></a>
-      <a id="lift[R](Operator[T,R]):ObservableFacade[R]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">lift</span><span class="tparams">[<span name="R">R</span>]</span><span class="params">(<span name="operator">operator: <a href="Operator.html" class="extype" name="rxscalajs.Operator">Operator</a>[<span class="extype" name="rxscalajs.ObservableFacade.T">T</span>, <span class="extype" name="rxscalajs.ObservableFacade.lift.R">R</span>]</span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.ObservableFacade.lift.R">R</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.ObservableFacade@lift[R](operator:rxscalajs.Operator[T,R]):rxscalajs.ObservableFacade[R]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
     </li><li name="rxscalajs.ObservableFacade#map" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="map[R](project:scala.scalajs.js.Function1[T,R]):rxscalajs.ObservableFacade[R]"></a>
       <a id="map[R](Function1[T,R]):ObservableFacade[R]"></a>
@@ -1315,18 +1298,18 @@
     </span>
       
     </li><li name="rxscalajs.ObservableFacade#multicast" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="multicast(subjectOrSubjectFactory:scala.scalajs.js.Function0[rxscalajs.Subject[T]]):rxscalajs.ConnectableObservableFacade[T]"></a>
-      <a id="multicast(Function0[Subject[T]]):ConnectableObservableFacade[T]"></a>
+      <a id="multicast(subjectOrSubjectFactory:scala.scalajs.js.Function0[rxscalajs.SubjectFacade[T]]):rxscalajs.ConnectableObservableFacade[T]"></a>
+      <a id="multicast(Function0[SubjectFacade[T]]):ConnectableObservableFacade[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">multicast</span><span class="params">(<span name="subjectOrSubjectFactory">subjectOrSubjectFactory: <span class="extype" name="scala.scalajs.js.Function0">Function0</span>[<a href="Subject.html" class="extype" name="rxscalajs.Subject">Subject</a>[<span class="extype" name="rxscalajs.ObservableFacade.T">T</span>]]</span>)</span><span class="result">: <a href="ConnectableObservableFacade.html" class="extype" name="rxscalajs.ConnectableObservableFacade">ConnectableObservableFacade</a>[<span class="extype" name="rxscalajs.ObservableFacade.T">T</span>]</span>
+        <span class="name">multicast</span><span class="params">(<span name="subjectOrSubjectFactory">subjectOrSubjectFactory: <span class="extype" name="scala.scalajs.js.Function0">Function0</span>[<a href="SubjectFacade.html" class="extype" name="rxscalajs.SubjectFacade">SubjectFacade</a>[<span class="extype" name="rxscalajs.ObservableFacade.T">T</span>]]</span>)</span><span class="result">: <a href="ConnectableObservableFacade.html" class="extype" name="rxscalajs.ConnectableObservableFacade">ConnectableObservableFacade</a>[<span class="extype" name="rxscalajs.ObservableFacade.T">T</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.ObservableFacade@multicast(subjectOrSubjectFactory:scala.scalajs.js.Function0[rxscalajs.Subject[T]]):rxscalajs.ConnectableObservableFacade[T]" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.ObservableFacade@multicast(subjectOrSubjectFactory:scala.scalajs.js.Function0[rxscalajs.SubjectFacade[T]]):rxscalajs.ConnectableObservableFacade[T]" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -1395,23 +1378,6 @@
       </span>
       </h4><span class="permalink">
       <a href="../index.html#rxscalajs.ObservableFacade@observeOn(scheduler:rxscalajs.Scheduler,delay:Int):rxscalajs.ObservableFacade[T]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="rxscalajs.ObservableFacade#operator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="operator:rxscalajs.Operator[scala.scalajs.js.Any,T]"></a>
-      <a id="operator:Operator[Any,T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">var</span>
-      </span>
-      <span class="symbol">
-        <span class="name">operator</span><span class="result">: <a href="Operator.html" class="extype" name="rxscalajs.Operator">Operator</a>[<span class="extype" name="scala.scalajs.js.Any">Any</span>, <span class="extype" name="rxscalajs.ObservableFacade.T">T</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.ObservableFacade@operator:rxscalajs.Operator[scala.scalajs.js.Any,T]" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
