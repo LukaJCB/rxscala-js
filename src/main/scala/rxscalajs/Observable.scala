@@ -20,7 +20,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * <span class="informal">It's like  auditTime, but the silencing
     * duration is determined by a second Observable.</span>
     *
-    * <img src="./img/audit.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/audit.png" width="100%">
     *
     * `audit` is similar to `throttle`, but emits the last value from the silenced
     * time window, instead of the first value. `audit` emits the most recent value
@@ -55,7 +55,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * the next ones for `duration` milliseconds, and then it emits the most recent
     * value from the source.</span>
     *
-    * <img src="./img/auditTime.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/auditTime.png" width="100%">
     *
     * `auditTime` is similar to `throttleTime`, but emits the last value from the
     * silenced time window, instead of the first value. `auditTime` emits the most
@@ -91,7 +91,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * <span class="informal">Collects values from the past as an array, and emits
     * that array only when another Observable emits.</span>
     *
-    * <img src="./img/buffer.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/buffer.png" width="100%">
     *
     * Buffers the incoming Observable values until the given `closingNotifier`
     * Observable emits a value, at which point it emits the buffer on the output
@@ -119,7 +119,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * <span class="informal">Collects values from the past as an array, and emits
     * that array only when its size reaches `bufferSize`.</span>
     *
-    * <img src="./img/bufferCount.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/bufferCount.png" width="100%">
     *
     * Buffers a number of values from the source Observable by `bufferSize` then
     * emits the buffer and clears it, and starts a new buffer each
@@ -153,7 +153,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * <span class="informal">Collects values from the past as an array, and emits
     * those arrays periodically in time.</span>
     *
-    * <img src="./img/bufferTime.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/bufferTime.png" width="100%">
     *
     * Buffers values from the source for a specific time duration `bufferTimeSpan`.
     * Unless the optional argument `bufferCreationInterval` is given, it emits and
@@ -191,7 +191,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * collecting only when `opening` emits, and calls the `closingSelector`
     * function to get an Observable that tells when to close the buffer.</span>
     *
-    * <img src="./img/bufferToggle.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/bufferToggle.png" width="100%">
     *
     * Buffers values from the source by opening the buffer via signals from an
     * Observable provided to `openings`, and closing and sending the buffers when
@@ -223,7 +223,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * starts collecting values, it calls a function that returns an Observable that
     * tells when to close the buffer and restart collecting.</span>
     *
-    * <img src="./img/bufferWhen.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/bufferWhen.png" width="100%">
     *
     * Opens a buffer immediately, then closes the buffer when the observable
     * returned by calling `closingSelector` function emits a value. When it closes
@@ -546,7 +546,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * and blocking any one group would block the entire parent stream. If you need backpressure on individual groups
     * then you should use operators such as `nBackpressureDrop` or `@link #onBackpressureBuffer`.</dd>
     * ===Scheduler:===
-    * groupBy` does not operate by default on a particular `Scheduler`.
+    * `groupBy` does not operate by default on a particular `Scheduler`.
     *
     * @param keySelector a function that extracts the key for each item
     * @param elementSelector a function that extracts the return element for each item
@@ -617,7 +617,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   def mapTo[R](value: R): Observable[R] = new Observable(inner.mapTo(value))
 
   /**
-    * Turns all of the notifications from a source Observable into [[rxscalajs.Observer.onNext onNext]] emissions,
+    * Turns all of the notifications from a source Observable into onNext  emissions,
     * and marks them with their original notification types within [[rxscalajs.Notification]] objects.
     *
     * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/materialize.png" alt="" />
@@ -737,9 +737,9 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     *
     * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/retry.png" alt="" />
     *
-    * If [[rxscalajs.Observer.onError]] is invoked the source Observable will be re-subscribed to as many times as defined by retryCount.
+    * If Observer.onError is invoked the source Observable will be re-subscribed to as many times as defined by retryCount.
     *
-    * Any [[rxscalajs.Observer.onNext]] calls received on each attempt will be emitted and concatenated together.
+    * Any Observer.onNext calls received on each attempt will be emitted and concatenated together.
     *
     * For example, if an Observable fails on first time but emits [1, 2] then succeeds the second time and
     * emits [1, 2, 3, 4, 5] then the complete output would be [1, 2, 1, 2, 3, 4, 5, onCompleted].
@@ -849,7 +849,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
   * @param accumulator
     *            an accumulator function to be invoked on each item emitted by the source
     *            Observable, whose result will be emitted to [[rxscalajs.Observer]]s via
-    *            [[rxscalajs.Observer.onNext onNext]] and used in the next accumulator call.
+    *            onNext and used in the next accumulator call.
     * @return an Observable that emits the results of each call to the accumulator function
   */
   def scan[R](accumulator: (R, T) => R,seed: R): Observable[R] = new Observable(inner.scan(accumulator,seed))
@@ -1016,8 +1016,8 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/take.png" alt="" />
     *
     * This method returns an Observable that will invoke a subscribing [[rxscalajs.Observer]]'s
-    * [[rxscalajs.Observer.onNext onNext]] function a maximum of `num` times before invoking
-    * [[rxscalajs.Observer.onCompleted onCompleted]].
+    * onNext function a maximum of `num` times before invoking
+    * onCompleted.
     *
     * @param total
     *            the number of items to take
@@ -1119,7 +1119,7 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/toList.png" alt="" />
     *
     * Normally, an Observable that returns multiple items will do so by invoking its [[rxscalajs.Observer]]'s
-    * [[rxscalajs.Observer.onNext onNext]] method for each such item. You can change
+    * onNext method for each such item. You can change
     * this behavior, instructing the Observable to compose a list of all of these items and then to
     * invoke the Observer's `onNext` function once, passing it the entire list, by
     * calling the Observable's `toList` method prior to calling its `Observable.subscribe` method.
@@ -1203,7 +1203,6 @@ class Observable[T] private(inner: ObservableFacade[T]) {
     *
     * $noDefaultScheduler
     *
-    * @param subscriber $subscribeSubscriberParamObserver
     * @return $subscribeAllReturn
     * @see <a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a>
     */
