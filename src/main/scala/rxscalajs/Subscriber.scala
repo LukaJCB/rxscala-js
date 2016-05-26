@@ -6,7 +6,7 @@ import js.|
 package rxscalajs {
 
 @js.native
-class Subscriber[T]  () extends Subscription with Observer[T] {
+class Subscriber[T]  () extends Subscription {
   def this(destinationOrNext: Observer[js.Any] | js.Function1[T, Unit] = ???, error: js.Function1[js.Any, Unit] = ???, complete: js.Function0[Unit] = ???) = this()
 
   def next(value: T = ???): Unit = js.native

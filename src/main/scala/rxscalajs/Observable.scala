@@ -20,7 +20,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * <span class="informal">It's like  auditTime, but the silencing
     * duration is determined by a second Observable.</span>
     *
-    * <img src="http://reactivex.io/rxjs/img/audit.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/audit.png"  width="640" height="315">
     *
     * `audit` is similar to `throttle`, but emits the last value from the silenced
     * time window, instead of the first value. `audit` emits the most recent value
@@ -55,7 +55,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * the next ones for `duration` milliseconds, and then it emits the most recent
     * value from the source.</span>
     *
-    * <img src="http://reactivex.io/rxjs/img/auditTime.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/auditTime.png"  width="640" height="315">
     *
     * `auditTime` is similar to `throttleTime`, but emits the last value from the
     * silenced time window, instead of the first value. `auditTime` emits the most
@@ -91,7 +91,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * <span class="informal">Collects values from the past as an array, and emits
     * that array only when another Observable emits.</span>
     *
-    * <img src="http://reactivex.io/rxjs/img/buffer.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/buffer.png"  width="640" height="315">
     *
     * Buffers the incoming Observable values until the given `closingNotifier`
     * Observable emits a value, at which point it emits the buffer on the output
@@ -119,7 +119,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * <span class="informal">Collects values from the past as an array, and emits
     * that array only when its size reaches `bufferSize`.</span>
     *
-    * <img src="http://reactivex.io/rxjs/img/bufferCount.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/bufferCount.png"  width="640" height="315">
     *
     * Buffers a number of values from the source Observable by `bufferSize` then
     * emits the buffer and clears it, and starts a new buffer each
@@ -153,7 +153,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * <span class="informal">Collects values from the past as an array, and emits
     * those arrays periodically in time.</span>
     *
-    * <img src="http://reactivex.io/rxjs/img/bufferTime.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/bufferTime.png"  width="640" height="315">
     *
     * Buffers values from the source for a specific time duration `bufferTimeSpan`.
     * Unless the optional argument `bufferCreationInterval` is given, it emits and
@@ -191,7 +191,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * collecting only when `opening` emits, and calls the `closingSelector`
     * function to get an Observable that tells when to close the buffer.</span>
     *
-    * <img src="http://reactivex.io/rxjs/img/bufferToggle.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/bufferToggle.png"  width="640" height="315">
     *
     * Buffers values from the source by opening the buffer via signals from an
     * Observable provided to `openings`, and closing and sending the buffers when
@@ -223,7 +223,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * starts collecting values, it calls a function that returns an Observable that
     * tells when to close the buffer and restart collecting.</span>
     *
-    * <img src="http://reactivex.io/rxjs/img/bufferWhen.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/bufferWhen.png"  width="640" height="315">
     *
     * Opens a buffer immediately, then closes the buffer when the observable
     * returned by calling `closingSelector` function emits a value. When it closes
