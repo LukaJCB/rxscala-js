@@ -4,9 +4,7 @@ import utest._
 
 import scala.scalajs.js
 
-/**
-  * Created by Luka on 28.04.2016.
-  */
+
 object ObservableTest extends TestSuite {
 
 
@@ -27,7 +25,6 @@ object ObservableTest extends TestSuite {
         intervalObs.bufferTime(1000, 2000).subscribe(unit)
       }
       'CombineAll {
-        //hoObs.combineAll().subscribe(unit)
         val func = (n: js.Array[js.Any]) => "Hello"
         hoObs.combineAll(func).subscribe(unit)
       }
@@ -72,27 +69,17 @@ object ObservableTest extends TestSuite {
       'Dematerialize {
         notiObs.dematerialize().subscribe(unit)
       }
-      /*
+       
     'Distinct{
       obs.distinct().subscribe(unit)
       obs.distinct((n: Int,n2: Int) => n > n2).subscribe(unit)
-      obs.distinct((n: Int,n2: Int) => n > n2,Observable.of("w")).subscribe(unit)
     }
-    'DistinctKey{
-      obs.distinctKey("Hello").subscribe(unit)
-      obs.distinctKey("A",(n: Int,n2: Int) => n > n2).subscribe(unit)
-      obs.distinctKey("A",(n: Int,n2: Int) => n > n2,Observable.of("A")).subscribe(unit)
-    }*/
       'DistinctUntilChanged {
         obs.distinctUntilChanged().subscribe(unit)
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2).subscribe(unit)
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2, (n: Int) => n).subscribe(unit)
         obs.distinctUntilChanged(keySelector = (n: Int) => n).subscribe(unit)
-      } /*
-    'DistinctUntilKeyChanged{
-      obs.distinctUntilKeyChanged("A").subscribe(unit)
-      obs.distinctUntilKeyChanged("A",(n: Int,n2: Int) => n > n2).subscribe(unit)
-    }*/
+      }
       'Do {
         val intToUnit: js.Function1[Int, Unit] = (n: Int) => ()
         obs.`do`(intToUnit).subscribe(unit)
@@ -101,20 +88,17 @@ object ObservableTest extends TestSuite {
         obs.`do`(intToUnit, complete = () => ()).subscribe(unit)
         obs.`do`(error = (n: Any) => (), complete = () => ()).subscribe(unit)
         obs.`do`(intToUnit, error = (n: Any) => (), complete = () => ()).subscribe(unit)
-      } /*
+      }  
     'ElementAt{
       obs.elementAt(2).subscribe(unit)
       obs.elementAt(20,-3).subscribe(unit)
-    }*/
+    }
       'Every {
         obs.every((n: Int, n2: Int, o: ObservableFacade[Int]) => n > n2).subscribe(unit)
-      } /*
-    'Exhaust{
-      hoObs.exhaust().subscribe(unit)
-    }
+      }
     'ExhaustMap{
-      hoObs.exhaustMap((n: Observable[Int], index: Int) => Observable.range(0,index)).subscribe(unit)
-    }*/
+      hoObs.exhaustMap((n: ObservableFacade[Int], index: Int) => ObservableFacade.range(0,index)).subscribe(unit)
+    }
       'Expand {
         intervalObs.expand((n: Int, n2: Int) => ObservableFacade.of(n)).take(1).subscribe(unit)
       }
@@ -142,10 +126,10 @@ object ObservableTest extends TestSuite {
       }
       'IgnoreElements {
         obs.ignoreElements().subscribe(unit)
-      } /*
+      }  
     'IsEmpty{
       obs.isEmpty().subscribe(unit)
-    }*/
+    }  
       'Last {
         obs.last().subscribe(unit)
       }
@@ -344,48 +328,41 @@ object ObservableTest extends TestSuite {
       'Dematerialize {
         notiObs.dematerialize().subscribe(unit)
       }
-      /*
+       
     'Distinct{
       obs.distinct().subscribe(unit)
       obs.distinct((n: Int,n2: Int) => n > n2).subscribe(unit)
       obs.distinct((n: Int,n2: Int) => n > n2,Observable.of("w")).subscribe(unit)
     }
-    'DistinctKey{
-      obs.distinctKey("Hello").subscribe(unit)
-      obs.distinctKey("A",(n: Int,n2: Int) => n > n2).subscribe(unit)
-      obs.distinctKey("A",(n: Int,n2: Int) => n > n2,Observable.of("A")).subscribe(unit)
-    }*/
+//    'DistinctKey{
+//      obs.distinctKey("Hello").subscribe(unit)
+//      obs.distinctKey("A",(n: Int,n2: Int) => n > n2).subscribe(unit)
+//      obs.distinctKey("A",(n: Int,n2: Int) => n > n2,Observable.of("A")).subscribe(unit)
+//    }
       'DistinctUntilChanged {
         obs.distinctUntilChanged().subscribe(unit)
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2).subscribe(unit)
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2, (n: Int) => n).subscribe(unit)
-      } /*
-    'DistinctUntilKeyChanged{
-      obs.distinctUntilKeyChanged("A").subscribe(unit)
-      obs.distinctUntilKeyChanged("A",(n: Int,n2: Int) => n > n2).subscribe(unit)
-    }
+      }  
+//    'DistinctUntilKeyChanged{
+//      obs.distinctUntilKeyChanged("A").subscribe(unit)
+//      obs.distinctUntilKeyChanged("A",(n: Int,n2: Int) => n > n2).subscribe(unit)
+//    }
       'Do {
         val intToUnit: js.Function1[Int, Unit] = (n: Int) => ()
-        obs.`do`(intToUnit).subscribe(unit)
-        obs.`do`(error = (n: Any) => ()).subscribe(unit)
-        obs.`do`(intToUnit, (n: Any) => ()).subscribe(unit)
-        obs.`do`(intToUnit, complete = () => ()).subscribe(unit)
-        obs.`do`(error = (n: Any) => (), complete = () => ()).subscribe(unit)
-        obs.`do`(intToUnit, error = (n: Any) => (), complete = () => ()).subscribe(unit)
       }
     'ElementAt{
-      obs.elementAt(2).subscribe(unit)
       obs.elementAt(20,-3).subscribe(unit)
-    }*/
+    }  
       'Every {
         obs.every((n: Int, n2: Int, o: Observable[Int]) => n > n2).subscribe(unit)
-      } /*
-    'Exhaust{
-      hoObs.exhaust().subscribe(unit)
-    }
+      }  
+//    'Exhaust{
+//      obs.map(o => Observable.interval(1000)).exhaust().subscribe(unit)
+//    }
     'ExhaustMap{
       hoObs.exhaustMap((n: Observable[Int], index: Int) => Observable.range(0,index)).subscribe(unit)
-    }*/
+    }  
       'Expand {
         intervalObs.expand((n: Int, n2: Int) => Observable(n)).take(1).subscribe(unit)
       }
@@ -405,10 +382,10 @@ object ObservableTest extends TestSuite {
       }
       'IgnoreElements {
         obs.ignoreElements().subscribe(unit)
-      } /*
-    'IsEmpty{
-      obs.isEmpty().subscribe(unit)
-    }*/
+      }
+      'IsEmpty{
+        obs.isEmpty().subscribe(unit)
+      }
       'Last {
         obs.last().subscribe(unit)
       }

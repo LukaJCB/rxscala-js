@@ -7,7 +7,7 @@ package rxscalajs {
 
 @js.native
   @JSName("Rx.Subject")
-class SubjectFacade[T] protected() extends ObservableFacade[T] with Observer[T] with ISubscription {
+class SubjectFacade[T] protected() extends ObservableFacade[T] with ISubscription {
   def this(destination: Observer[T] = ???, source: ObservableFacade[T] = ???) = this()
 
   def next(value: T): Unit = js.native

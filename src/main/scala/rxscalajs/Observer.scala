@@ -23,11 +23,8 @@ trait CompletionObserver[T] extends js.Object {
   var complete: js.Function0[Unit] = js.native
 }
 
-@js.native
-trait Observer[T] extends js.Object {
-  var isUnsubscribed: Boolean = js.native
-  var complete: js.Function0[Unit] = js.native
-}
+trait Observer[T]
+
 
 
 }
