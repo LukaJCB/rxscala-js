@@ -357,9 +357,9 @@ object ObservableTest extends TestSuite {
       'Every {
         obs.every((n: Int, n2: Int, o: Observable[Int]) => n > n2).subscribe(unit)
       }  
-//    'Exhaust{
-//      obs.map(o => Observable.interval(1000)).exhaust().subscribe(unit)
-//    }
+    'Exhaust{
+      hoObs.exhaust().subscribe(unit)
+     }
     'ExhaustMap{
       hoObs.exhaustMap((n: Observable[Int], index: Int) => Observable.range(0,index)).subscribe(unit)
     }  
