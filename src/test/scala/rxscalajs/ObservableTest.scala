@@ -484,8 +484,7 @@ object ObservableTest extends TestSuite {
       'Switch {
         val interval = Observable.interval(2000).take(2)
         val higherOrder = interval.map((n: Int, index: Int) => Observable.interval(500).take(10))
-        //higherOrder.switch().subscribe(unit)
-        //hoObs.switch[Observable[Int]]().subscribe(unit)
+        higherOrder.switch().subscribe(unit)
       }
       'SwitchMap {
         val func = (n: Observable[Int], n2: Int) => Observable.of(n2)

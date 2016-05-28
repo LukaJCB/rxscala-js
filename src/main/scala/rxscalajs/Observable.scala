@@ -993,7 +993,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * @usecase def switch[U]: Observable[U]
     *   @inheritdoc
     */
-  def switch[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable[U](inner.switch().asInstanceOf[ObservableFacade[U]])
+  def switch[U]()(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable[U](inner.switch().asInstanceOf[ObservableFacade[U]])
 
   /**
     * Returns a new Observable by applying a function that you supply to each item emitted by the source
