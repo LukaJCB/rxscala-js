@@ -478,7 +478,8 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
 
   def every[T2](predicate: (T,  Int,  Observable[T]) => Boolean): Observable[Boolean] = new Observable(inner.every(toFacadeFunction(predicate)))
 
-  def exhaust(): Observable[T] = new Observable(inner.exhaust())
+  def exhaust[U]()(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] =
+    new Observable[U](inner.asInstanceOf[ObservableFacade[Observable[U]]].map((n: Observable[U]) => n.get).exhaust())
 
   def exhaustMap[I, R](project: (T, Int) => Observable[R], resultSelector: (T, I, Int, Int) => R): Observable[R] = new Observable(inner.exhaustMap(toReturnFacade(project),resultSelector))
   def exhaustMap[I, R](project: (T, Int) => Observable[R]): Observable[R] = new Observable(inner.exhaustMap(toReturnFacade(project)))
