@@ -289,7 +289,7 @@ object ObservableTest extends TestSuite {
       }
       'CombineLatest {
         obs.combineLatest(intervalObs).subscribe(unit)
-        obs.combineLatest[Int, Int](intervalObs, (n: Int, n2: Int) => n + n2).subscribe(unit)
+        obs.combineLatestWith(intervalObs)((n: Int, n2: Int) => n + n2).subscribe(unit)
       }
       'Concat {
         obs.concat(intervalObs).subscribe(unit)
