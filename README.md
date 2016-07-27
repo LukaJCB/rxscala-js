@@ -14,6 +14,9 @@ RxJs:
 
 - [API Documentation](http://reactivex.io/rxjs)
 
+## Master Build Status
+
+[![Build Status](https://travis-ci.org/LukaJCB/rxscala-js.svg?branch=master)](https://travis-ci.org/LukaJCB/rxscala-js)
 
 ## Bugs and Feedback
 
