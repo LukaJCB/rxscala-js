@@ -274,7 +274,20 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
   def combineAll[U,R](project: js.Array[U] => R)(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[R] =
     new Observable(inner.asInstanceOf[ObservableFacade[Observable[U]]].map((n: Observable[U]) => n.get).combineAll(project))
 
-  /**
+ 
+    /**
+    * Combines two observables, emitting a pair of the latest values of each of
+    * the source observables each time an event is received from one of the source observables.
+    *
+    * @param that
+    *            The second source observable.
+    * @param selector
+    *            The function that is used combine the emissions of the two observables.
+    * @return An Observable that combines the source Observables according to the function selector.
+    */
+  def combineLatestWith[U, R](that: Observable[U])(selector: (T, U) => R): Observable[R] = new Observable(inner.combineLatest(that,selector))
+   
+    /**
     * Combines two observables, emitting a pair of the latest values of each of
     * the source observables each time an event is received from one of the source observables.
     *
@@ -282,8 +295,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     *            The second source observable.
     * @return An Observable that combines the source Observables
     */
-  def combineLatest[T2, R](that: Observable[T2], project: (T,T2) => R): Observable[R] = new Observable(inner.combineLatest(that,project))
-  def combineLatest[T2, R](that: Observable[T2]): Observable[R] = new Observable(inner.combineLatest(that))
+  def combineLatest[U, R](that: Observable[U]): Observable[R] = new Observable(inner.combineLatest(that))
 
 
   /**
