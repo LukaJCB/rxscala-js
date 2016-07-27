@@ -114,9 +114,7 @@ object ObservableTest extends TestSuite {
         obs.first((n: Int, n2: Int, src: ObservableFacade[Int]) => true, (n: Int, n2: Int) => n, 4).subscribe(unit)
         obs.first(resultSelector = (n: Int, n2: Int) => n).subscribe(unit)
       }
-      'ForEach {
-        obs.forEach(unit)
-      }
+      
       'GroupBy {
         obs.groupBy((n: Int) => n % 2 == 0).subscribe(unit)
         val func: js.Function1[GroupedObservableFacade[Int, Int], ObservableFacade[Int]] = (grouped: GroupedObservableFacade[Int, Int]) => ObservableFacade.of(-1)
