@@ -115,7 +115,7 @@ object ObservableTest extends TestSuite {
         obs.first(resultSelector = (n: Int, n2: Int) => n).subscribe(unit)
       }
       'ForEach {
-        obs.forEach(unit).toFuture
+        obs.forEach(unit)
       }
       'GroupBy {
         obs.groupBy((n: Int) => n % 2 == 0).subscribe(unit)
