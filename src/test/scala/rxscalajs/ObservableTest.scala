@@ -114,7 +114,7 @@ object ObservableTest extends TestSuite {
         obs.first((n: Int, n2: Int, src: ObservableFacade[Int]) => true, (n: Int, n2: Int) => n, 4).subscribe(unit)
         obs.first(resultSelector = (n: Int, n2: Int) => n).subscribe(unit)
       }
-      
+
       'GroupBy {
         obs.groupBy((n: Int) => n % 2 == 0).subscribe(unit)
         val func: js.Function1[GroupedObservableFacade[Int, Int], ObservableFacade[Int]] = (grouped: GroupedObservableFacade[Int, Int]) => ObservableFacade.of(-1)
@@ -366,15 +366,15 @@ object ObservableTest extends TestSuite {
         obs.filter((n: Int, n2: Int) => n % 2 == 0).subscribe(unit)
       }
       'First {
-        obs.first().subscribe(unit)
+        obs.first.subscribe(unit)
       }
       'FirstOrElse {
         obs.firstOrElse(2342).subscribe(unit)
       }
 
       'GroupBy {
-        obs.groupBy((n: Int) => n % 2 == 0).subscribe(unit)
-        obs.groupBy((n: Int) => n % 2 == 0, (n: Int) => n).subscribe(unit)
+        obs.groupBy(n => n % 2 == 0).subscribe(unit)
+        obs.groupBy(n => n % 2 == 0, n => n+1).subscribe(unit)
       }
       'IgnoreElements {
         obs.ignoreElements().subscribe(unit)
@@ -383,7 +383,7 @@ object ObservableTest extends TestSuite {
         obs.isEmpty.subscribe(unit)
       }
       'Last {
-        obs.last().subscribe(unit)
+        obs.last.subscribe(unit)
       }
       'Let {
         obs.let(n => n.concat(n)).subscribe(unit)

@@ -528,7 +528,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Filtering-Observables#wiki-first">RxJava Wiki: first()</a>
     * @see "MSDN: Observable.firstAsync()"
     */
-  def first(): Observable[T] = new Observable(inner.take(1))
+  def first: Observable[T] = new Observable(inner.take(1))
   /**
     * Returns an Observable that emits only the very first item emitted by the source Observable, or
     * a default value if the source Observable is empty.
@@ -543,39 +543,15 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     */
   def firstOrElse[R >: T](default: => R): Observable[R] = new Observable(inner.first(defaultValue = default))
 
-  /**
-    * Groups the items emitted by an [[Observable]] according to a specified criterion, and emits these
-    * grouped items as `(key, observable)` pairs.
-    *
-    * <img width="640" height="360" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/groupBy.png" alt="" />
-    *
-    * Note: A `(key, observable)` will cache the items it is to emit until such time as it
-    * is subscribed to. For this reason, in order to avoid memory leaks, you should not simply ignore those
-    * `(key, observable)` pairs that do not concern you. Instead, you can signal to them that they may
-    * discard their buffers by applying an operator like `take(0)` to them.
-    *
-    * ===Backpressure Support:===
-    * This operator does not support backpressure as splitting a stream effectively turns it into a "hot observable"
-    * and blocking any one group would block the entire parent stream. If you need backpressure on individual groups
-    * then you should use operators such as `nBackpressureDrop` or `@link #onBackpressureBuffer`.</dd>
-    * ===Scheduler:===
-    * `groupBy` does not operate by default on a particular `Scheduler`.
-    *
-    * @param keySelector a function that extracts the key for each item
-    * @param elementSelector a function that extracts the return element for each item
-    * @tparam K the key type
-    * @tparam R the value type
-    * @return an [[Observable]] that emits `(key, observable)` pairs, each of which corresponds to a
-    *         unique key value and each of which emits those items from the source Observable that share that
-    *         key value
-    * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Transforming-Observables#groupby-and-groupbyuntil">RxJava wiki: groupBy</a>
-    * @see <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.groupby.aspx">MSDN: Observable.GroupBy</a>
-    */
-  def groupBy[K,R,U](keySelector:  T => K, elementSelector: T => R, durationSelector: GroupedObservableFacade[K, R] => Observable[U]): Observable[GroupedObservableFacade[K, R]] =
-    new Observable(inner.groupBy(keySelector,elementSelector,toReturnFacade(durationSelector)))
 
-  def groupBy[K,R](keySelector:  T => K, elementSelector: T => R): Observable[GroupedObservableFacade[K, R]] = new Observable(inner.groupBy(keySelector,elementSelector))
-  def groupBy[K,R](keySelector:  T => K): Observable[GroupedObservableFacade[K, R]] = new Observable(inner.groupBy(keySelector))
+  def groupBy[K,R](keySelector:  T => K, valueSelector: T => R): Observable[(K, Observable[R])] = {
+    val outerFacade: ObservableFacade[GroupedObservableFacade[K,R]] = inner.groupBy(keySelector,valueSelector)
+    new Observable(outerFacade.map((groupFacade: GroupedObservableFacade[K,R]) => (groupFacade.key, new Observable(groupFacade))))
+  }
+  def groupBy[K](keySelector:  T => K): Observable[(K, Observable[T])] = {
+    val outerFacade: ObservableFacade[GroupedObservableFacade[K,T]] = inner.groupBy(keySelector)
+    new Observable(outerFacade.map((groupFacade: GroupedObservableFacade[K,T]) => (groupFacade.key, new Observable(groupFacade))))
+  }
 
   def ignoreElements(): Observable[T] = new Observable(inner.ignoreElements())
 
@@ -597,7 +573,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Filtering-Observable-Operators#wiki-last">RxJava Wiki: last()</a>
     * @see "MSDN: Observable.lastAsync()"
     */
-  def last(): Observable[T] = new Observable(inner.last[T]())
+  def last: Observable[T] = new Observable(inner.last[T]())
   /**
     * Returns an Observable that emits only the last item emitted by the source Observable, or a default item
     * if the source Observable completes without emitting any items.
@@ -665,7 +641,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
   def mergeAll[U](concurrent: Double = Double.PositiveInfinity)(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] =
     new Observable(inner.asInstanceOf[ObservableFacade[Observable[U]]].map((n: Observable[U]) => n.get).mergeAll(concurrent))
 
-  def flatten[U]()(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable(inner.mergeAll())
+  def flatten[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable(inner.mergeAll())
 
   def mergeMap[I, R](project: (T, Int) => Observable[I], resultSelector: (T, I, Int, Int) => R, concurrent: Double = Double.PositiveInfinity): Observable[R] =
     new Observable(inner.mergeMap(toReturnFacade(project),resultSelector,concurrent))
