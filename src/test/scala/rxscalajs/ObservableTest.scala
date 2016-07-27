@@ -326,7 +326,7 @@ object ObservableTest extends TestSuite {
         obs.delayWhen((n: Int) => Observable("asd"), Observable("as")).subscribe(unit)
       }
       'Dematerialize {
-        notiObs.dematerialize().subscribe(unit)
+        notiObs.dematerialize.subscribe(unit)
       }
        
     'Distinct{
@@ -348,9 +348,7 @@ object ObservableTest extends TestSuite {
 //      obs.distinctUntilKeyChanged("A").subscribe(unit)
 //      obs.distinctUntilKeyChanged("A",(n: Int,n2: Int) => n > n2).subscribe(unit)
 //    }
-      'Do {
-        val intToUnit: js.Function1[Int, Unit] = (n: Int) => ()
-      }
+
     'ElementAt{
       obs.elementAt(20,-3).subscribe(unit)
     }  
@@ -384,7 +382,7 @@ object ObservableTest extends TestSuite {
         obs.ignoreElements().subscribe(unit)
       }
       'IsEmpty{
-        obs.isEmpty().subscribe(unit)
+        obs.isEmpty.subscribe(unit)
       }
       'Last {
         obs.last().subscribe(unit)

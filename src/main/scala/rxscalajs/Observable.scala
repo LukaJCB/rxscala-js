@@ -10,7 +10,7 @@ import js.JSConverters._
 /**
   * Created by Luka on 29.04.2016.
   */
-class Observable[T] protected(inner: ObservableFacade[T]) {
+class Observable[T] protected(val inner: ObservableFacade[T]){
 
   /**
     * Ignores source values for a duration determined by another Observable, then
@@ -429,7 +429,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     *   @inheritdoc
     *
     */
-  def dematerialize[T2](): Observable[T2] = new Observable((inner.dematerialize()))
+  def dematerialize[T2]: Observable[T2] = new Observable(inner.dematerialize())
 
   /**
     * Returns an Observable that forwards all items emitted from the source Observable that are distinct according
@@ -571,11 +571,11 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Transforming-Observables#groupby-and-groupbyuntil">RxJava wiki: groupBy</a>
     * @see <a href="http://msdn.microsoft.com/en-us/library/system.reactive.linq.observable.groupby.aspx">MSDN: Observable.GroupBy</a>
     */
-  def groupBy[K,R,T2](keySelector:  T => K, elementSelector: T => R, durationSelector: GroupedObservableFacade[K, R] => Observable[T2]): Observable[GroupedObservableFacade[K, R]] =
+  def groupBy[K,R,U](keySelector:  T => K, elementSelector: T => R, durationSelector: GroupedObservableFacade[K, R] => Observable[U]): Observable[GroupedObservableFacade[K, R]] =
     new Observable(inner.groupBy(keySelector,elementSelector,toReturnFacade(durationSelector)))
 
-  def groupBy[K,R,T2](keySelector:  T => K, elementSelector: T => R): Observable[GroupedObservableFacade[K, R]] = new Observable(inner.groupBy(keySelector,elementSelector))
-  def groupBy[K,R,T2](keySelector:  T => K): Observable[GroupedObservableFacade[K, R]] = new Observable(inner.groupBy(keySelector))
+  def groupBy[K,R](keySelector:  T => K, elementSelector: T => R): Observable[GroupedObservableFacade[K, R]] = new Observable(inner.groupBy(keySelector,elementSelector))
+  def groupBy[K,R](keySelector:  T => K): Observable[GroupedObservableFacade[K, R]] = new Observable(inner.groupBy(keySelector))
 
   def ignoreElements(): Observable[T] = new Observable(inner.ignoreElements())
 
@@ -584,7 +584,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     *  @return        an Observable emitting one single Boolean, which is `true` if this `Observable`
     *                 emits no elements, and `false` otherwise.
     */
-  def isEmpty(): Observable[Boolean] = new Observable(inner.isEmpty())
+  def isEmpty: Observable[Boolean] = new Observable(inner.isEmpty())
 
   /**
     * Returns an Observable that emits the last item emitted by the source Observable or notifies observers of
@@ -816,7 +816,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * @see RxScalaDemo.retryWhenDifferentExceptionsExample for a more intricate example
     * @since 0.20
     */
-  def retryWhen[T2,T3](notifier: Observable[T2] => Observable[T3]): Observable[T] = new Observable(inner.retryWhen(toFacadeFunction(toReturnFacade(notifier))))
+  def retryWhen[U,S](notifier: Observable[U] => Observable[S]): Observable[T] = new Observable(inner.retryWhen(toFacadeFunction(toReturnFacade(notifier))))
   /**
     * Return an Observable that emits the results of sampling the items emitted by the source Observable
     * whenever the specified sampler Observable emits an item or completes.
@@ -920,7 +920,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Filtering-Observables#wiki-skipuntil">RxJava Wiki: skipUntil()</a>
     * @see <a href="http://msdn.microsoft.com/en-us/library/hh229358.aspx">MSDN: Observable.SkipUntil</a>
     */
-  def dropUntil[T2](notifier: Observable[T2]): Observable[T] = skipUntil(notifier)
+  def dropUntil[U](notifier: Observable[U]): Observable[T] = skipUntil(notifier)
 
   /**
     * Returns an Observable that bypasses all items from the source Observable as long as the specified
@@ -958,7 +958,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Filtering-Observables#wiki-skipuntil">RxJava Wiki: skipUntil()</a>
     * @see <a href="http://msdn.microsoft.com/en-us/library/hh229358.aspx">MSDN: Observable.SkipUntil</a>
     */
-  def skipUntil[T2](notifier: Observable[T2]): Observable[T] = new Observable(inner.skipUntil(notifier))
+  def skipUntil[U](notifier: Observable[U]): Observable[T] = new Observable(inner.skipUntil(notifier))
   /**
     * Returns an Observable that bypasses all items from the source Observable as long as the specified
     * condition holds true. Emits all further source items as soon as the condition becomes false.
@@ -1054,7 +1054,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
   def takeLast(total: Int): Observable[T] = new Observable(inner.takeLast(total))
 
 
-  def takeUntil[T2](notifier: Observable[T2]): Observable[T] = new Observable(inner.takeUntil(notifier))
+  def takeUntil[U](notifier: Observable[U]): Observable[T] = new Observable(inner.takeUntil(notifier))
   /**
     * Returns an Observable that emits items emitted by the source Observable so long as a
     * specified condition is true.
@@ -1111,10 +1111,10 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * @return the source Observable modified so that it will switch to the
     *         fallback Observable in case of a timeout
     */
-  def timeout[T2](due: Int, errorToSend: T2, scheduler: Scheduler ): Observable[T] = new Observable(inner.timeout(due,errorToSend,scheduler))
-  def timeout[T2](due: Int, errorToSend: T2): Observable[T] = new Observable(inner.timeout(due,errorToSend))
-  def timeout[T2](due: Int): Observable[T] = new Observable(inner.timeout(due))
-  def timeout[T2](due: Int, scheduler: Scheduler ): Observable[T] = new Observable(inner.timeout(due,scheduler = scheduler))
+  def timeout[U](due: Int, errorToSend: U, scheduler: Scheduler ): Observable[T] = new Observable(inner.timeout(due,errorToSend,scheduler))
+  def timeout[U](due: Int, errorToSend: U): Observable[T] = new Observable(inner.timeout(due,errorToSend))
+  def timeout[U](due: Int): Observable[T] = new Observable(inner.timeout(due))
+  def timeout[U](due: Int, scheduler: Scheduler ): Observable[T] = new Observable(inner.timeout(due,scheduler = scheduler))
 
   def timeoutWith[R](due: Int, withObservable: Observable[R]): Observable[R] = new Observable(inner.timeoutWith(due,withObservable))
   /**
@@ -1143,7 +1143,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * @return an Observable that emits a single item: a List containing all of the items emitted by
     *         the source Observable.
     */
-  def toSeq(): Observable[scala.collection.Seq[T]] = new Observable(inner.toArray().map((arr: js.Array[T], index: Int) => arr.toSeq))
+  def toSeq: Observable[scala.collection.Seq[T]] = new Observable(inner.toArray().map((arr: js.Array[T], index: Int) => arr.toSeq))
 
 
   def window[I](windowBoundaries: Observable[I]): Observable[Observable[T]] = new Observable(inner.window(windowBoundaries).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
@@ -1160,10 +1160,10 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
   def windowTime(windowTimeSpan: Int): Observable[Observable[T]] =
     new Observable(inner.windowTime(windowTimeSpan).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
 
-  def windowToggle[T2,O](openings: Observable[O], closingSelector: O => ObservableFacade[T2]): Observable[Observable[T]] =
-    new Observable(inner.windowToggle(openings,closingSelector).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+  def windowToggle[U,O](openings: Observable[O], closingSelector: O => Observable[U]): Observable[Observable[T]] =
+    new Observable(inner.windowToggle(openings,toReturnFacade(closingSelector)).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
 
-  def windowWhen[T2](closingSelector: () => Observable[T2]): Observable[Observable[T]] =
+  def windowWhen[U](closingSelector: () => Observable[U]): Observable[Observable[T]] =
     new Observable(inner.windowWhen(toReturnFacade(closingSelector)).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
   /**
     * $experimental Merges the specified [[Observable]] into this [[Observable]] sequence by using the `resultSelector`
@@ -1181,8 +1181,8 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * @see <a href="http://reactivex.io/documentation/operators/combinelatest.html">ReactiveX operators documentation: CombineLatest</a>
     * @since (if this graduates from Experimental/Beta to supported, replace this parenthetical with the release number)
     */
-  def withLatestFrom[T2, R](other: Observable[T2], project: (T, T2) =>  R): Observable[R] = new Observable(inner.withLatestFrom(other,project))
-  def withLatestFrom[T2, R](other: Observable[T2]): Observable[R] = new Observable(inner.withLatestFrom(other))
+  def withLatestFrom[U, R](other: Observable[U], project: (T, U) =>  R): Observable[R] = new Observable(inner.withLatestFrom(other,project))
+  def withLatestFrom[U, R](other: Observable[U]): Observable[R] = new Observable(inner.withLatestFrom(other))
 
   /**
     * Returns an Observable that emits items that are the result of applying a specified function to pairs of
@@ -1199,7 +1199,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * @return an Observable that pairs up values from the source Observable and the `other` Iterable
     *         sequence and emits the results of `selector` applied to these pairs
     */
-  def zip[T2, R](that: Observable[T2], project: (T,T2) => R): Observable[R] = new Observable(inner.zip(that,project))
+  def zip[U, R](that: Observable[U], project: (T,U) => R): Observable[R] = new Observable(inner.zip(that,project))
   /**
     * Returns an Observable formed from this Observable and another Observable by combining
     * corresponding elements in pairs.
@@ -1209,7 +1209,7 @@ class Observable[T] protected(inner: ObservableFacade[T]) {
     * @param that the Observable to zip with
     * @return an Observable that pairs up values from `this` and `that` Observables.
     */
-  def zip[T2, R](that: Observable[T2]): Observable[R] = new Observable(inner.zip(that))
+  def zip[U, R](that: Observable[U]): Observable[R] = new Observable(inner.zip(that))
 
   /**
     * $subscribeSubscriberMain
@@ -1257,10 +1257,10 @@ object Observable {
 
   def ajax[T](request: String): Observable[T] = new Observable[T](ObservableFacade.ajax(request))
 
-  def bindCallback[T,T2](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[T2, ObservableFacade[T]] =
+  def bindCallback[T,U](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[U, ObservableFacade[T]] =
     ObservableFacade.bindCallback(callbackFunc,selector,scheduler)
 
-  def bindNodeCallback[T,T2](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[T2, ObservableFacade[T]]  =
+  def bindNodeCallback[T,U](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[U, ObservableFacade[T]]  =
     ObservableFacade.bindNodeCallback(callbackFunc,selector,scheduler)
 
 
@@ -1276,31 +1276,15 @@ object Observable {
     * @return an Observable that emits items that are the result of combining the items emitted by the source
     *         Observables by means of the given aggregation function
     */
-  def combineLatest[T,R] (sources: Seq[ObservableFacade[T]])(combineFunction: Seq[T] => R): Observable[R] = {
+  def combineLatest[T,R] (sources: Seq[Observable[T]])(combineFunction: Seq[T] => R): Observable[R] = {
     val func = combineFunction.asInstanceOf[js.Array[T] => R]
-    _combineLatest(sources.toJSArray,func)
+    _combineLatest(sources.map(_.inner).toJSArray,func)
   }
 
 
   private def _combineLatest[T, R](sources: js.Array[ObservableFacade[T]],combineFunction: js.Array[T] => R): Observable[R] =
     new Observable(ObservableFacade.combineLatest(sources,combineFunction))
 
-  /**
-    * Returns an Observable that emits the items emitted by several Observables, one after the
-    * other.
-    *
-    * This operation is only available if `this` is of type `Observable[Observable[U]]` for some `U`,
-    * otherwise you'll get a compilation error.
-    *
-    * @usecase def concat[U]: Observable[U]
-    */
-  def concat[T, R](observables: Seq[ObservableFacade[T]], scheduler: Scheduler): Observable[R] = _concat(observables.toJSArray,scheduler)
-  def concat[T, R](observables: Seq[ObservableFacade[T]]): Observable[R] = _concat(observables.toJSArray)
-
-  private def _concat[T, R](observables: js.Array[ObservableFacade[T]], scheduler: Scheduler): Observable[R] =
-    new Observable[R](ObservableFacade.concat(observables,scheduler))
-  private def _concat[T, R](observables: js.Array[ObservableFacade[T]]): Observable[R] =
-    new Observable[R](ObservableFacade.concat(observables))
 
   /**
     * Emits `0`, `1`, `2`, `...` with a delay of `duration` between consecutive numbers.
@@ -1345,9 +1329,9 @@ object Observable {
   def range(start: Int = 0, count: Int = 0): Observable[Int] = new Observable(ObservableFacade.range(start,count))
 
 
-  def zip[T,R](observables: Seq[ObservableFacade[T]])(project: js.Array[T] => R): Observable[R] =  {
+  def zip[T,R](observables: Seq[Observable[T]])(project: Seq[T] => R): Observable[R] =  {
     val func = project.asInstanceOf[js.Array[T] => R]
-    new Observable(ObservableFacade.zip(observables.toJSArray,func))
+    new Observable(ObservableFacade.zip(observables.map(_.inner).toJSArray,func))
   }
 
 

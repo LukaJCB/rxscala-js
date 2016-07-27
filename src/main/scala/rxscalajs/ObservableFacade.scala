@@ -14,6 +14,7 @@ package rxscalajs {
   @js.native
   class GroupedObservableFacade[K,T] protected() extends ObservableFacade[T] {
     def this(key: K, groupSubject: SubjectFacade[T], refCountSubscription: Subscription) = this()
+    val key: K = js.native
   }
   @js.native
   class TimeInterval[T] protected() extends js.Object {
