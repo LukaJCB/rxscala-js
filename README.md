@@ -1,4 +1,4 @@
-# RxScala.js
+# RxScala.js  [![Build Status](https://travis-ci.org/LukaJCB/rxscala-js.svg?branch=master)](https://travis-ci.org/LukaJCB/rxscala-js) [![Scala.js](https://www.scala-js.org/assets/badges/scalajs-0.6.6.svg)](https://www.scala-js.org) 
 
 This is a Scala adapter to [RxJs](http://github.com/ReactiveX/RxJs).
 
@@ -13,10 +13,6 @@ RxScala.js:
 RxJs:
 
 - [API Documentation](http://reactivex.io/rxjs)
-
-## Master Build Status
-
-[![Build Status](https://travis-ci.org/LukaJCB/rxscala-js.svg?branch=master)](https://travis-ci.org/LukaJCB/rxscala-js)
 
 ## Bugs and Feedback
 
