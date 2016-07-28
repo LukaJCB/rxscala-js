@@ -297,7 +297,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *            The second source observable.
     * @return An Observable that combines the source Observables
     */
-  def combineLatest[U, R](that: Observable[U]): Observable[R] = new Observable(inner.combineLatest(that))
+  def combineLatest[U](that: Observable[U]): Observable[(T,U)] = combineLatestWith(that)((t,u) => (t,u))
 
 
   /**
