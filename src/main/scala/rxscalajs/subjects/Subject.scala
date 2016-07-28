@@ -1,4 +1,7 @@
-package rxscalajs
+package rxscalajs.subjects
+
+import rxscalajs.facade.SubjectFacade
+import rxscalajs.{Observable, Observer}
 
 import scala.scalajs.js
 

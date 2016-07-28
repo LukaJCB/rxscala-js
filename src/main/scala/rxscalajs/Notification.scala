@@ -5,7 +5,9 @@ import js.|
 
 package rxscalajs {
 
-@js.native
+  import rxscalajs.facade.ObservableFacade
+
+  @js.native
 @JSName("Rx.Notification")
 class Notification[T] protected () extends js.Object {
   def this(kind: String, value: T = ???, exception: js.Any = ???) = this()

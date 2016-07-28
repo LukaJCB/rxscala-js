@@ -1,5 +1,6 @@
 package rxscalajs
 
+import rxscalajs.facade.{GroupedObservableFacade, ObservableFacade, SubjectFacade}
 import utest._
 
 import scala.scalajs.js
@@ -420,13 +421,13 @@ object ObservableTest extends TestSuite {
         obs.partition((n: Int) => n > 4)._1.subscribe(unit)
       }
       'Publish {
-        obs.publish().subscribe(unit)
+        obs.publish.subscribe(unit)
       }
       'PublishBehaviour {
         obs.publishBehavior(3).subscribe(unit)
       }
       'PublishLast {
-        obs.publishLast().subscribe(unit)
+        obs.publishLast.subscribe(unit)
       }
       'PublishReplay {
         obs.publishReplay(5).subscribe(unit)
@@ -460,7 +461,7 @@ object ObservableTest extends TestSuite {
         obs.scan((n: Int, n2: Int) => n + n2, -20).subscribe(unit)
       }
       'Share {
-        obs.share().subscribe(unit)
+        obs.share.subscribe(unit)
       }
       'Single {
         obs.single((n: Int, n2: Int, o: Observable[Int]) => n == 1).subscribe(unit)
@@ -480,7 +481,7 @@ object ObservableTest extends TestSuite {
       'Switch {
         val interval = Observable.interval(2000).take(2)
         val higherOrder = interval.map((n: Int, index: Int) => Observable.interval(500).take(10))
-        higherOrder.switch().subscribe(unit)
+        higherOrder.switch.subscribe(unit)
       }
       'SwitchMap {
         val func = (n: Observable[Int], n2: Int) => Observable.of(n2)
@@ -499,7 +500,7 @@ object ObservableTest extends TestSuite {
         obs.takeWhile((n: Int, n2: Int) => n > 1).subscribe(unit)
       }
       'Throttle {
-        intervalObs.throttle((ev: Int) => ObservableFacade.interval(1000)).subscribe(unit)
+        intervalObs.throttle((ev: Int) => Observable.interval(1000)).subscribe(unit)
       }
       'ThrottleTime {
         intervalObs.throttleTime(200).subscribe(unit)
@@ -520,7 +521,16 @@ object ObservableTest extends TestSuite {
         obs.withLatestFrom(intervalObs).subscribe(unit)
       }
       'Zip {
-        obs.zip(intervalObs).subscribe(unit)
+        val first = Observable(10, 11, 12)
+        val second = Observable(10, 11, 12)
+        first zip second subscribe(unit)
+        obs zip intervalObs subscribe(unit)
+      }
+      'ForComprehensions {
+          for {
+            o <- hoObs
+            n <- o
+          } yield (n > 100)
       }
     }
 

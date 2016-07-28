@@ -1,10 +1,12 @@
+package rxscalajs.facade
+import rxscalajs._
 
 import scala.scalajs.js
-import js._
+import scala.scalajs.js._
 
-package rxscalajs {
 
-  import scala.scalajs.js.annotation.JSName
+
+import scala.scalajs.js.annotation.JSName
 
   @js.native
   trait Subscribable[T] extends js.Object {
@@ -146,6 +148,7 @@ package rxscalajs {
     def subscribeOn(scheduler: Scheduler, delay: Int = ???): ObservableFacade[T] = js.native
     def switch(): T = js.native
     def switchMap[I, R](project: js.Function2[T, Int,ObservableFacade[I]], resultSelector: js.Function4[T, I, Int, Int, R] = ???): ObservableFacade[R] = js.native
+    def switchMap[I, R](project: js.Function1[T,ObservableFacade[I]]): ObservableFacade[R] = js.native
     def switchMapTo[ I, R](innerObservable: ObservableFacade[I], resultSelector: js.Function4[T, I, Int, Int, R] = ???): ObservableFacade[R] = js.native
     def take(total: Int): ObservableFacade[T] = js.native
     def takeLast(total: Int): ObservableFacade[T] = js.native
@@ -216,5 +219,3 @@ package rxscalajs {
 
     var create: js.Function = js.native
   }
-
-}
