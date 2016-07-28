@@ -1,4 +1,6 @@
-package rxscalajs
+package rxscalajs.subjects
+
+import rxscalajs.facade.BehaviorSubjectFacade
 
 /**
   * Created by Luka on 21.05.2016.

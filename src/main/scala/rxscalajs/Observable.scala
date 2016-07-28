@@ -1,5 +1,7 @@
 package rxscalajs
 
+import rxscalajs.facade._
+
 import scala.collection.immutable.Seq
 import scala.scalajs.js
 import js._
@@ -213,7 +215,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * and cleared.
     * @return  An observable of arrays of buffered values.
     */
-  def bufferToggle[T2,O](openings: Subscribable[O], closingSelector:  O => Observable[T2]): Observable[List[T]] =
+  def bufferToggle[T2,O](openings: Observable[O], closingSelector:  O => Observable[T2]): Observable[List[T]] =
     new Observable(inner.bufferToggle(openings,toReturnFacade(closingSelector)).map((n: js.Array[T], index: Int) => n.toList))
   /**
     * Buffers the source Observable values, using a factory function of closing
@@ -656,11 +658,11 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
 
 
   def min(comparer: (T,T) => T): Observable[T] = new Observable(inner.min(comparer))
-  def min(): Observable[T] = new Observable(inner.min())
+  def min: Observable[T] = new Observable(inner.min())
 
   def multicast(subjectOrSubjectFactory: () => SubjectFacade[T]): Observable[T] = new Observable(inner.multicast(subjectOrSubjectFactory))
 
-  def pairwise(): Observable[(T,T)] = new Observable[(T, T)](inner.pairwise().map((arr: js.Array[T], index: Int) => (arr(0), arr(1))))
+  def pairwis: Observable[(T,T)] = new Observable[(T, T)](inner.pairwise().map((arr: js.Array[T], index: Int) => (arr(0), arr(1))))
 
   def partition[T2](predicate: T => Boolean): (Observable[T], Observable[T]) = {
     val partitioned = inner.partition(predicate)
@@ -676,11 +678,11 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * @return an ConnectableObservable
     */
-  def publish(): Observable[T] = new Observable(inner.publish())
+  def publish: Observable[T] = new Observable(inner.publish())
 
   def publishBehavior(value: T): Observable[T] = new Observable(inner.publishBehavior(value))
 
-  def publishLast(): Observable[T] = new Observable(inner.publishLast())
+  def publishLast: Observable[T] = new Observable(inner.publishLast())
   def publishReplay(bufferSize: Double = Double.PositiveInfinity, windowTime: Double = Double.PositiveInfinity): Observable[T] =
     new Observable(inner.publishReplay(bufferSize,windowTime))
 
@@ -856,7 +858,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @return a [[Observable]] that upon connection causes the source Observable to emit items to its [[Subscriber]]s
     * @since 0.19
     */
-  def share(): Observable[T] = new Observable(inner.share())
+  def share: Observable[T] = new Observable(inner.share())
   /**
     * If the source Observable completes after emitting a single item, return an Observable that emits that
     * item. If the source Observable emits more than one item or no items, notify of an `IllegalArgumentException`
@@ -871,7 +873,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @see "MSDN: Observable.singleAsync()"
     */
   def single(predicate: (T, Int, Observable[T]) => Boolean): Observable[T] = new Observable(inner.single(toFacadeFunction(predicate)))
-  def single(): Observable[T] = new Observable(inner.single())
+  def single: Observable[T] = new Observable(inner.single())
   /**
     * Returns an Observable that skips the first `num` items emitted by the source
     * Observable and emits the remainder.
@@ -981,7 +983,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @usecase def switch[U]: Observable[U]
     *   @inheritdoc
     */
-  def switch[U]()(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable[U](inner.switch().asInstanceOf[ObservableFacade[U]])
+  def switch[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable[U](inner.switch().asInstanceOf[ObservableFacade[U]])
 
   /**
     * Returns a new Observable by applying a function that you supply to each item emitted by the source
@@ -995,8 +997,12 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *         the most recently emitted item emitted by the source Observable
     */
   def switchMap[I, R](project: (T, Int) => Observable[I]): Observable[R] = new Observable(inner.switchMap(toReturnFacade(project)))
+  def switchMap[I, R](project: T => Observable[I]): Observable[R] = new Observable(inner.switchMap(toReturnFacade(project)))
 
   def switchMapTo[I, R](innerObservable: Observable[I]): Observable[R] = new Observable(inner.switchMapTo(innerObservable))
+
+  def flatMap[I,R](project: T => Observable[I]): Observable[R] = switchMap(project)
+
 
   /**
     * Returns an Observable that emits only the first `num` items emitted by the source
@@ -1045,7 +1051,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     */
   def takeWhile(predicate: (T, Int) => Boolean): Observable[T] = new Observable(inner.takeWhile(predicate))
 
-  def throttle(durationSelector: T =>  Subscribable[Int]): Observable[T] = new Observable(inner.throttle(durationSelector))
+  def throttle(durationSelector: T => Observable[Int]): Observable[T] = new Observable(inner.throttle(toReturnFacade(durationSelector)))
   /**
     * Debounces by dropping all values that are followed by newer values before the timeout value expires. The timer resets on each `onNext` call.
     *
@@ -1071,7 +1077,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * @return an Observable that emits time interval information items
     */
-  def timeInterval(): Observable[TimeInterval[T]] = new Observable(inner.timeInterval())
+  def timeInterval: Observable[TimeInterval[T]] = new Observable(inner.timeInterval())
   /**
     * Applies a timeout policy for each item emitted by the Observable, using
     * the specified scheduler to run timeout timers. If the next item isn't
@@ -1100,7 +1106,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * @return an Observable that emits timestamped items from the source Observable
     */
-  def timestamp(): Observable[Timestamp[T]] = new Observable(inner.timestamp())
+  def timestamp: Observable[Timestamp[T]] = new Observable(inner.timestamp())
   /**
     * Returns an Observable that emits a single item, a list composed of all the items emitted by
     * the source Observable.
@@ -1185,7 +1191,8 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @param that the Observable to zip with
     * @return an Observable that pairs up values from `this` and `that` Observables.
     */
-  def zip[U, R](that: Observable[U]): Observable[R] = new Observable(inner.zip(that))
+  def zip[U](that: Observable[U]): Observable[(T,U)] = new Observable(inner.zip(that,(a: T, b: U) => (a,b)))
+
 
   /**
     * $subscribeSubscriberMain

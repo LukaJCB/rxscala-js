@@ -1,9 +1,10 @@
+package rxscalajs.facade
+import rxscalajs.{ISubscription, Observer}
 
 import scala.scalajs.js
-import js.annotation._
-import js.|
+import scala.scalajs.js.annotation._
 
-package rxscalajs {
+
 
 @js.native
   @JSName("Rx.Subject")
@@ -19,6 +20,4 @@ class SubjectFacade[T] protected() extends ObservableFacade[T] with ISubscriptio
 @js.native
 object SubjectFacade extends js.Object {
   var create: js.Function = js.native
-}
-
 }

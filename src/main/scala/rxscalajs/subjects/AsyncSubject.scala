@@ -1,4 +1,7 @@
-package rxscalajs
+package rxscalajs.subjects
+
+
+import rxscalajs.facade.AsyncSubjectFacade
 
 /**
   * Created by Luka on 21.05.2016.
