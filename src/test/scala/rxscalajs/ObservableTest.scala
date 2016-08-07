@@ -527,6 +527,10 @@ object ObservableTest extends TestSuite {
         first zip second subscribe(unit)
         obs zip intervalObs subscribe(unit)
       }
+      'ZipWithIndex {
+        obs.zipWithIndex.subscribe(unit)
+      }
+
       'ForComprehensions {
           for {
             o <- hoObs
