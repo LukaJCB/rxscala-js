@@ -2,6 +2,14 @@
 
 This is a Scala adapter to [RxJs](http://github.com/ReactiveX/RxJs).
 
+Example usage:
+
+```scala
+val o = Observable.interval(200).take(5)
+o.subscribe(n => println("n = " + n))
+Observable.just(1, 2, 3, 4).reduce(_ + _)
+```
+
 
 ## Full Documentation
 

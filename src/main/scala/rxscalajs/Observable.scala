@@ -687,6 +687,8 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     new Observable(inner.publishReplay(bufferSize,windowTime))
 
   def race(observables: Observable[T]*): Observable[T] = new Observable(inner.race(observables.map(_.get).toJSArray))
+
+  def foldLeft[R](seed: R)(accumulator: (R,T) => R): Observable[R] = new Observable(inner.reduce(accumulator,seed))
   /**
     * Returns an Observable that applies a function of your choosing to the first item emitted by a
     * source Observable, then feeds the result of that function along with the second item emitted
@@ -706,8 +708,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @return an Observable that emits a single item that is the result of accumulating the
     *         output from the source Observable
     */
-  def reduce[R](accumulator: (R,T) => R,seed: R): Observable[R] = new Observable(inner.reduce(accumulator,seed))
-  def reduce[R](accumulator: (R,T) => R): Observable[R] = new Observable(inner.reduce(accumulator))
+  def reduce[U >: T](accumulator: (U,U) => U): Observable[U] = new Observable(inner.reduce(accumulator))
 
   /**
     * Returns an Observable that repeats the sequence of items emitted by the source Observable at most `count` times.
@@ -843,8 +844,8 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *            onNext and used in the next accumulator call.
     * @return an Observable that emits the results of each call to the accumulator function
   */
-  def scan[R](accumulator: (R, T) => R,seed: R): Observable[R] = new Observable(inner.scan(accumulator,seed))
-  def scan[R](accumulator: (R, T) => R): Observable[R] = new Observable(inner.scan(accumulator))
+  def scan[R](seed: R)(accumulator: (R, T) => R): Observable[R] = new Observable(inner.scan(accumulator,seed))
+  def scan[U >: T](accumulator: (U, U) => U): Observable[U] = new Observable(inner.scan(accumulator))
 
   /**
     * Returns a new [[Observable]] that multicasts (shares) the original [[Observable]]. As long a
@@ -997,11 +998,11 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *         the most recently emitted item emitted by the source Observable
     */
   def switchMap[I, R](project: (T, Int) => Observable[I]): Observable[R] = new Observable(inner.switchMap(toReturnFacade(project)))
-  def switchMap[I, R](project: T => Observable[I]): Observable[R] = new Observable(inner.switchMap(toReturnFacade(project)))
+  def switchMap[R](project: T => Observable[R]): Observable[R] = new Observable(inner.switchMap(toReturnFacade(project)))
 
   def switchMapTo[I, R](innerObservable: Observable[I]): Observable[R] = new Observable(inner.switchMapTo(innerObservable))
 
-  def flatMap[I,R](project: T => Observable[I]): Observable[R] = switchMap(project)
+  def flatMap[R](project: T => Observable[R]): Observable[R] = switchMap(project)
 
 
   /**
@@ -1194,6 +1195,9 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
   def zip[U](that: Observable[U]): Observable[(T,U)] = new Observable(inner.zip(that,(a: T, b: U) => (a,b)))
 
 
+  def zipWithIndex: Observable[(T, Int)] = this.map((e,n) => (e,n))
+
+
   /**
     * $subscribeSubscriberMain
     *
@@ -1237,6 +1241,8 @@ object Observable {
     * @return an Observable that emits each item in the source Array
     */
   def apply[T](values: T*): Observable[T] = new Observable(ObservableFacade.of[T](values: _*))
+
+  def just[T](values: T*): Observable[T] = new Observable(ObservableFacade.of[T](values: _*))
 
   def ajax[T](request: String): Observable[T] = new Observable[T](ObservableFacade.ajax(request))
 

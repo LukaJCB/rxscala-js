@@ -435,8 +435,10 @@ object ObservableTest extends TestSuite {
         intervalObs.race(intervalObs).subscribe(unit)
       }
       'Reduce {
-        obs.reduce((n: Int, n2: Int) => n).subscribe(unit)
-        obs.reduce((n: Int, n2: Int) => n, -20).subscribe(unit)
+        obs.reduce(_ + _).subscribe(unit)
+      }
+      'Fold {
+        obs.foldLeft( -20)((n: Int, n2: Int) => n).subscribe(unit)
       }
       'Repeat {
         intervalObs.repeat().subscribe(unit)
@@ -457,7 +459,7 @@ object ObservableTest extends TestSuite {
       }
       'Scan {
         obs.scan((n: Int, n2: Int) => n + n2).subscribe(unit)
-        obs.scan((n: Int, n2: Int) => n + n2, -20).subscribe(unit)
+        obs.scan(-20)((n: Int, n2: Int) => n + n2).subscribe(unit)
       }
       'Share {
         obs.share.subscribe(unit)
@@ -532,7 +534,6 @@ object ObservableTest extends TestSuite {
           } yield (n > 100)
       }
     }
-
 
 
 
