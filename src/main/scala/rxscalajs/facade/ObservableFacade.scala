@@ -90,6 +90,7 @@ import scala.scalajs.js.annotation.JSName
     def exhaustMap[I, R](project: js.Function2[T, Int, ObservableFacade[R]], resultSelector: js.Function4[T, I, Int, Int, R] = ???): ObservableFacade[R] = js.native
     def expand[R](project: js.Function2[ T, Int, ObservableFacade[R]], concurrent: Double = ???, scheduler: Scheduler = ???): ObservableFacade[R] = js.native
     def filter[T2](predicate: js.Function2[ T,  Int, Boolean], thisArg: T2 = ???): ObservableFacade[T] = js.native
+    def filter[T2](predicate: js.Function1[ T, Boolean]): ObservableFacade[T] = js.native
     def _finally(finallySelector: js.Function0[Unit]): ObservableFacade[T] = js.native
     def find[T2](predicate: js.Function3[T,  Int,  ObservableFacade[T],Boolean], thisArg: T2 = ???): ObservableFacade[T] = js.native
     def findIndex[T2](predicate: js.Function3[T,  Int,  ObservableFacade[T],Boolean], thisArg: T2 = ???): ObservableFacade[Int] = js.native

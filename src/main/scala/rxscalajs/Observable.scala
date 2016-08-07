@@ -512,6 +512,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *         evaluates as `true`
     */
   def filter[T2](predicate: (T,  Int) => Boolean): Observable[T] = new Observable(inner.filter(predicate))
+  def filter[T2](predicate: T => Boolean): Observable[T] = new Observable(inner.filter(predicate))
 
 
   def find[T2](predicate: (T,  Int,  Observable[T]) =>Boolean): Observable[T] = new Observable(inner.find(toFacadeFunction(predicate)))
