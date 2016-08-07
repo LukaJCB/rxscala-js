@@ -467,9 +467,8 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
   * @return an Observable of sequentially distinct items
     */
   def distinctUntilChanged[K](compare: (K,  K) => Boolean, keySelector: T => K): Observable[T] = new Observable(inner.distinctUntilChanged(compare,keySelector))
-  def distinctUntilChanged[K](keySelector: T => K): Observable[T] = new Observable(inner.distinctUntilChanged(keySelector = keySelector))
-  def distinctUntilChanged[K](compare: (K,  K) => Boolean): Observable[T] = new Observable(inner.distinctUntilChanged(compare))
-  def distinctUntilChanged[K](): Observable[T] = new Observable(inner.distinctUntilChanged())
+  def distinctUntilChanged(compare: (T,  T) => Boolean): Observable[T] = new Observable(inner.distinctUntilChanged(compare))
+  def distinctUntilChanged: Observable[T] = new Observable(inner.distinctUntilChanged())
 
   def distinctUntilKeyChanged(key: String, compare: (T,  T) => Boolean): Observable[T] = new Observable(inner.distinctUntilKeyChanged(key,compare))
   def distinctUntilKeyChanged(key: String): Observable[T] = new Observable(inner.distinctUntilKeyChanged(key))

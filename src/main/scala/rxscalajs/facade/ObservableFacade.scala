@@ -80,7 +80,8 @@ import scala.scalajs.js.annotation.JSName
     def dematerialize[T2](): ObservableFacade[T2] = js.native
     def distinct[T2](compare: js.Function2[T,  T, Boolean] = ???, flushes: ObservableFacade[T2] = ???): ObservableFacade[T] = js.native
     def distinctKey[T2](key: String, compare: js.Function2[T,  T,Boolean] = ???, flushes: ObservableFacade[T2] = ???): ObservableFacade[T] = js.native
-    def distinctUntilChanged[K](compare: js.Function2[K,  K,Boolean] = ???, keySelector: js.Function1[T,K] = ???): ObservableFacade[T] = js.native
+    def distinctUntilChanged[K](compare: js.Function2[K,  K,Boolean], keySelector: js.Function1[T,K]): ObservableFacade[T] = js.native
+    def distinctUntilChanged(compare: js.Function2[T,  T,Boolean] = ???): ObservableFacade[T] = js.native
     def distinctUntilKeyChanged(key: String, compare: js.Function2[ T,  T, Boolean] = ???): ObservableFacade[T] = js.native
     def `do`[T2](nextOrObserver: (Observer[T] | js.Function1[T ,Unit]) = ???, error: js.Function1[T2 ,Unit] = ???, complete: js.Function0[Unit] = ???): ObservableFacade[T] = js.native
     def elementAt(index: Int, defaultValue: T = ???): ObservableFacade[T] = js.native

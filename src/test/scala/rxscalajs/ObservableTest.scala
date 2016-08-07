@@ -79,7 +79,6 @@ object ObservableTest extends TestSuite {
         obs.distinctUntilChanged().subscribe(unit)
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2).subscribe(unit)
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2, (n: Int) => n).subscribe(unit)
-        obs.distinctUntilChanged(keySelector = (n: Int) => n).subscribe(unit)
       }
       'Do {
         val intToUnit: js.Function1[Int, Unit] = (n: Int) => ()
@@ -339,7 +338,7 @@ object ObservableTest extends TestSuite {
 //      obs.distinctKey("A",(n: Int,n2: Int) => n > n2,Observable.of("A")).subscribe(unit)
 //    }
       'DistinctUntilChanged {
-        obs.distinctUntilChanged().subscribe(unit)
+        obs.distinctUntilChanged.subscribe(unit)
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2).subscribe(unit)
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2, (n: Int) => n).subscribe(unit)
       }  
