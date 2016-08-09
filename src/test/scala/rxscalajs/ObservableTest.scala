@@ -23,7 +23,7 @@ object ObservableTest extends TestSuite {
       }
       'BufferTime {
         intervalObs.bufferTime(1000).subscribe(unit)
-        intervalObs.bufferTime(1000, 2000).subscribe(unit)
+        intervalObs.bufferTime(1000, 1200).subscribe(unit)
       }
       'CombineAll {
         val func = (n: js.Array[js.Any]) => "Hello"
@@ -37,7 +37,7 @@ object ObservableTest extends TestSuite {
         obs.concat(intervalObs).subscribe(unit)
       }
       'ConcatAll {
-        hoObs.concatAll.subscribe(unit)
+        hoObs.concatAll().subscribe(unit)
       }
       'ConcatMap {
         obs.concatMap((n: Int, index: Int) => ObservableFacade.range(0, n)).subscribe(unit)
@@ -71,10 +71,10 @@ object ObservableTest extends TestSuite {
         notiObs.dematerialize().subscribe(unit)
       }
        
-    'Distinct{
-      obs.distinct().subscribe(unit)
-      obs.distinct((n: Int,n2: Int) => n > n2).subscribe(unit)
-    }
+      'Distinct{
+       obs.distinct().subscribe(unit)
+       obs.distinct((n: Int,n2: Int) => n > n2).subscribe(unit)
+      }
       'DistinctUntilChanged {
         obs.distinctUntilChanged().subscribe(unit)
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2).subscribe(unit)
@@ -89,16 +89,16 @@ object ObservableTest extends TestSuite {
         obs.`do`(error = (n: Any) => (), complete = () => ()).subscribe(unit)
         obs.`do`(intToUnit, error = (n: Any) => (), complete = () => ()).subscribe(unit)
       }  
-    'ElementAt{
+      'ElementAt{
       obs.elementAt(2).subscribe(unit)
       obs.elementAt(20,-3).subscribe(unit)
-    }
+     }
       'Every {
         obs.every((n: Int, n2: Int, o: ObservableFacade[Int]) => n > n2).subscribe(unit)
       }
-    'ExhaustMap{
-      hoObs.exhaustMap((n: ObservableFacade[Int], index: Int) => ObservableFacade.range(0,index)).subscribe(unit)
-    }
+      'ExhaustMap{
+       hoObs.exhaustMap((n: ObservableFacade[Int], index: Int) => ObservableFacade.range(0,index)).subscribe(unit)
+     }
       'Expand {
         intervalObs.expand((n: Int, n2: Int) => ObservableFacade.of(n)).take(1).subscribe(unit)
       }
@@ -182,7 +182,7 @@ object ObservableTest extends TestSuite {
         obs.reduce((n: Int, n2: Int) => n, -20).subscribe(unit)
       }
       'Repeat {
-        intervalObs.repeat().subscribe(unit)
+        obs.repeat().take(3).subscribe(unit)
       }
       'Retry {
         obs.retry().subscribe(unit)
@@ -221,9 +221,7 @@ object ObservableTest extends TestSuite {
         obs.startWith(0).subscribe(unit)
       }
       'Switch {
-        val interval = ObservableFacade.interval(2000).take(2)
-        val higherOrder = interval.map((n: Int, index: Int) => ObservableFacade.interval(500).take(10))
-        higherOrder.switch().subscribe(unit)
+        hoObs.switch().subscribe(unit)
       }
       'SwitchMap {
         val func: js.Function2[ObservableFacade[Int], Int, ObservableFacade[Int]] = (n: ObservableFacade[Int], n2: Int) => ObservableFacade.of(n2)
@@ -242,7 +240,7 @@ object ObservableTest extends TestSuite {
         obs.takeWhile((n: Int, n2: Int) => n > 1).subscribe(unit)
       }
       'Throttle {
-        intervalObs.throttle((ev: Int) => ObservableFacade.interval(1000)).subscribe(unit)
+        intervalObs.throttle((ev: Int) => ObservableFacade.interval(1000).take(2)).subscribe(unit)
       }
       'ThrottleTime {
         intervalObs.throttleTime(200).subscribe(unit)
@@ -254,7 +252,7 @@ object ObservableTest extends TestSuite {
         obs.windowCount(3).subscribe(unit)
       }
       'WindowTime {
-        obs.windowTime(2000).subscribe(unit)
+        obs.windowTime(1200).subscribe(unit)
       }
       'WindowToggle {
         obs.window(intervalObs).subscribe(unit)
@@ -278,7 +276,7 @@ object ObservableTest extends TestSuite {
       }
       'BufferTime {
         intervalObs.bufferTime(1000).subscribe(unit)
-        intervalObs.bufferTime(1000, 2000).subscribe(unit)
+        intervalObs.bufferTime(1000, 1200).subscribe(unit)
       }
       'CombineAll {
         val combined = hoObs.combineAll.take(3)
@@ -440,7 +438,7 @@ object ObservableTest extends TestSuite {
         obs.foldLeft( -20)((n: Int, n2: Int) => n).subscribe(unit)
       }
       'Repeat {
-        intervalObs.repeat().subscribe(unit)
+        intervalObs.repeat().take(5).subscribe(unit)
       }
       'Retry {
         obs.retry().subscribe(unit)
@@ -479,9 +477,9 @@ object ObservableTest extends TestSuite {
         obs.startWith(0).subscribe(unit)
       }
       'Switch {
-        val interval = Observable.interval(2000).take(2)
+        val interval = Observable.interval(1000).take(2)
         val higherOrder = interval.map((n, index) => Observable.interval(500).take(10))
-        higherOrder.switch.subscribe(unit)
+        hoObs.switch.subscribe(unit)
       }
       'SwitchMap {
         val func = (n: Observable[Int], n2: Int) => Observable.of(n2)
@@ -512,7 +510,7 @@ object ObservableTest extends TestSuite {
         obs.windowCount(3).subscribe(unit)
       }
       'WindowTime {
-        obs.windowTime(2000).subscribe(unit)
+        obs.windowTime(1200).subscribe(unit)
       }
       'WindowToggle {
         obs.window(intervalObs).subscribe(unit)
@@ -537,7 +535,6 @@ object ObservableTest extends TestSuite {
           } yield (n > 100)
       }
     }
-
 
 
 
