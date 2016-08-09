@@ -643,7 +643,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
   def mergeAll[U](concurrent: Double = Double.PositiveInfinity)(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] =
     new Observable(inner.asInstanceOf[ObservableFacade[Observable[U]]].map((n: Observable[U]) => n.get).mergeAll(concurrent))
 
-  def flatten[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable(inner.mergeAll())
+  def flatten[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = mergeAll()
 
   def mergeMap[I, R](project: (T, Int) => Observable[I], resultSelector: (T, I, Int, Int) => R, concurrent: Double = Double.PositiveInfinity): Observable[R] =
     new Observable(inner.mergeMap(toReturnFacade(project),resultSelector,concurrent))
@@ -662,7 +662,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
 
   def multicast(subjectOrSubjectFactory: () => SubjectFacade[T]): Observable[T] = new Observable(inner.multicast(subjectOrSubjectFactory))
 
-  def pairwis: Observable[(T,T)] = new Observable[(T, T)](inner.pairwise().map((arr: js.Array[T], index: Int) => (arr(0), arr(1))))
+  def pairwise: Observable[(T,T)] = new Observable[(T, T)](inner.pairwise().map((arr: js.Array[T], index: Int) => (arr(0), arr(1))))
 
   def partition[T2](predicate: T => Boolean): (Observable[T], Observable[T]) = {
     val partitioned = inner.partition(predicate)
@@ -984,7 +984,8 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @usecase def switch[U]: Observable[U]
     *   @inheritdoc
     */
-  def switch[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = new Observable[U](inner.switch().asInstanceOf[ObservableFacade[U]])
+  def switch[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] =
+    new Observable[U](inner.asInstanceOf[ObservableFacade[Observable[U]]].map((n: Observable[U]) => n.get).switch())
 
   /**
     * Returns a new Observable by applying a function that you supply to each item emitted by the source
