@@ -985,7 +985,8 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *   @inheritdoc
     */
   def switch[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] =
-    new Observable[U](inner.asInstanceOf[ObservableFacade[Observable[U]]].map((n: Observable[U]) => n.get).switch())
+    new Observable[U](inner.switch().asInstanceOf[ObservableFacade[U]])
+
 
   /**
     * Returns a new Observable by applying a function that you supply to each item emitted by the source

@@ -224,7 +224,6 @@ object ObservableTest extends TestSuite {
         val interval = ObservableFacade.interval(2000).take(2)
         val higherOrder = interval.map((n: Int, index: Int) => ObservableFacade.interval(500).take(10))
         higherOrder.switch().subscribe(unit)
-        //hoObs.switch[Observable[Int]]().subscribe(unit)
       }
       'SwitchMap {
         val func: js.Function2[ObservableFacade[Int], Int, ObservableFacade[Int]] = (n: ObservableFacade[Int], n2: Int) => ObservableFacade.of(n2)
@@ -481,7 +480,7 @@ object ObservableTest extends TestSuite {
       }
       'Switch {
         val interval = Observable.interval(2000).take(2)
-        val higherOrder = interval.map((n: Int, index: Int) => Observable.interval(500).take(10))
+        val higherOrder = interval.map((n, index) => Observable.interval(500).take(10))
         higherOrder.switch.subscribe(unit)
       }
       'SwitchMap {
