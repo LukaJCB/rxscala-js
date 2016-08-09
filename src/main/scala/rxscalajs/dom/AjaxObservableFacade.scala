@@ -1,6 +1,5 @@
 
 import scala.scalajs.js
-import js.annotation._
 import js.|
 import org.scalajs.dom._
 

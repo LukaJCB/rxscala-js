@@ -4,6 +4,7 @@ import rxscalajs._
 import scala.scalajs.js
 import scala.scalajs.js._
 
+import org.scalajs.dom._
 
 
 import scala.scalajs.js.annotation.JSName
@@ -194,6 +195,7 @@ import scala.scalajs.js.annotation.JSName
     def bindNodeCallback[T,T2](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[T2, ObservableFacade[T]]  = js.native
 
 
+    def fromEvent(element: Element, eventName: String): ObservableFacade[Nothing] = js.native
 
     def combineLatest[T, R](sources: js.Array[ObservableFacade[T]],combineFunction: js.Function1[js.Array[T], R] = ???): ObservableFacade[R] = js.native
 
