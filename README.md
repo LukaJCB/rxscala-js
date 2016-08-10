@@ -20,7 +20,14 @@ Add the following to your sbt build definition:
 
     libraryDependencies += "com.github.lukajcb" %%% "rxscala-js" % "0.0.1-SNAPSHOT"
 
-then enjoy the types available in `rxscalajs`.
+then import the types from the package `rxscalajs`.
+
+### Javascript Dependencies
+
+RxScala.js doesn't actually come bundled with the underlying `rx.js` file, so you'll need to either add them manually or specify them as `jsDependencies`:
+
+    jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-beta.10" / "Rx.umd.js" commonJSName "Rx"
+
 
 ## Full Documentation
 
