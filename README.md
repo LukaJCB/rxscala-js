@@ -10,6 +10,17 @@ o.subscribe(n => println("n = " + n))
 Observable.just(1, 2, 3, 4).reduce(_ + _)
 ```
 
+Getting Started
+-----
+
+Add the following to your sbt build definition:
+
+    resolvers +=
+     "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+
+    libraryDependencies += "com.github.lukajcb" %%% "rxscala-js" % "0.0.1-SNAPSHOT"
+
+then enjoy the types available in `rxscalajs`.
 
 ## Full Documentation
 
