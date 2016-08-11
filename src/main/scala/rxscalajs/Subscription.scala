@@ -27,9 +27,5 @@ object Subscription extends js.Object {
   var EMPTY: Subscription = js.native
 }
 
-@js.native
-class UnsubscriptionError protected () extends Error {
-  def this(errors: js.Array[js.Any]) = this()
-}
 
 }
