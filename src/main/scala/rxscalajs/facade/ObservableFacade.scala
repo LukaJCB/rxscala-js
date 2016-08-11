@@ -130,7 +130,7 @@ import scala.scalajs.js.annotation.JSName
     def race(observables: js.Array[ObservableFacade[T]]): ObservableFacade[T] = js.native
     def reduce[R](project: js.Function2[R,T,R],seed: R = ???): ObservableFacade[R] = js.native
 
-    def repeat(count: Int = ???): ObservableFacade[T] = js.native
+    def repeat(scheduler: Scheduler = ???, count: Int = ???): ObservableFacade[T] = js.native
 
     def retry(count: Int = ???): ObservableFacade[T] = js.native
     def retryWhen[T2,T3](notifier: js.Function1[ObservableFacade[T2], ObservableFacade[T3]]): ObservableFacade[T] = js.native

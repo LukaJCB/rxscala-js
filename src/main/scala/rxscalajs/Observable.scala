@@ -1,5 +1,6 @@
 package rxscalajs
 
+import org.scalajs.dom.Element
 import rxscalajs.facade._
 
 import scala.collection.immutable.Seq
@@ -38,8 +39,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @example <caption>Emit clicks at a rate of at most one click per second</caption>
     * val result = clickStream.audit(ev => Observable.interval(1000));
     * result.subscribe(x => println(x));
-    *
-    *
     * @param durationSelector A function
     * that receives a value from the source Observable, for computing the silencing
     * duration, returned as an Observable or a Promise.
@@ -74,8 +73,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * var clicks = Rx.Observable.fromEvent(document, 'click');
     * var result = clicks.auditTime(1000);
     * result.subscribe(x => console.log(x));
-    *
-    *
     * @param delay Time to wait before emitting the most recent source
     * value, measured in milliseconds or the time unit determined internally
     * by the optional `scheduler`.
@@ -105,8 +102,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * var interval = Rx.Observable.interval(1000);
     * var buffered = interval.buffer(clicks);
     * buffered.subscribe(x => console.log(x));
-    *
-    *
     * @param closingNotifier An Observable that signals the
     * buffer to be emitted on the output Observable.
     * @return An Observable of buffers, which are arrays of
@@ -133,13 +128,10 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * var clicks = Rx.Observable.fromEvent(document, 'click');
     * var buffered = clicks.bufferCount(2);
     * buffered.subscribe(x => console.log(x));
-    *
     * @example <caption>On every click, emit the last two click events as an array</caption>
     * var clicks = Rx.Observable.fromEvent(document, 'click');
     * var buffered = clicks.bufferCount(2, 1);
     * buffered.subscribe(x => console.log(x));
-    *
-    *
     * @param  bufferSize The maximum size of the buffer emitted.
     * @param startBufferEvery Interval at which to start a new buffer.
     * For example if `startBufferEvery` is `2`, then a new buffer will be started
@@ -168,13 +160,10 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * var clicks = Rx.Observable.fromEvent(document, 'click');
     * var buffered = clicks.bufferTime(1000);
     * buffered.subscribe(x => console.log(x));
-    *
     * @example <caption>Every 5 seconds, emit the click events from the next 2 seconds</caption>
     * var clicks = Rx.Observable.fromEvent(document, 'click');
     * var buffered = clicks.bufferTime(2000, 5000);
     * buffered.subscribe(x => console.log(x));
-    *
-    *
     * @param bufferTimeSpan The amount of time to fill each buffer array.
     * @param bufferCreationInterval The interval at which to start new
     * buffers.
@@ -206,7 +195,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *   i % 2 ? Rx.Observable.interval(500) : Rx.Observable.empty()
     * );
     * buffered.subscribe(x => console.log(x));
-    *
     * @param  openings A Subscribable or Promise of notifications to start new
     * buffers.
     * @param closingSelector A function that takes
@@ -237,8 +225,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *   Rx.Observable.interval(1000 + Math.random() * 4000)
     * );
     * buffered.subscribe(x => console.log(x));
-    *
-    *
     * @param  closingSelector A function that takes no
     * arguments and returns an Observable that signals buffer closure.
     * @return  An observable of arrays of buffered values.
@@ -378,7 +364,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * @param timeout
     *            The time each value has to be 'the most recent' of the Observable to ensure that it's not dropped.
-    *
     * @return An Observable which filters out values which are too quickly followed up with newer values.
     * @see `Observable.throttleWithTimeout`
     */
@@ -426,7 +411,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * <img width="640" height="335" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/dematerialize.png" alt="" />
     *
     * @return an Observable that emits the items and notifications embedded in the [[rxscalajs.Notification]] objects emitted by the source Observable
-    *
     * @usecase def dematerialize[U]: Observable[U]
     *   @inheritdoc
     *
@@ -722,7 +706,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Creating-Observables#wiki-repeat">RxJava Wiki: repeat()</a>
     * @see <a href="http://msdn.microsoft.com/en-us/library/hh229428.aspx">MSDN: Observable.Repeat</a>
     */
-  def repeat(count: Int = -1): Observable[T] = new Observable(inner.repeat(count))
+  def repeat(count: Int = -1): Observable[T] = new Observable(inner.repeat(count = count))
 
   /**
     * Retry subscription to origin Observable upto given retry count.
@@ -787,7 +771,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *  <dt><b>Scheduler:</b></dt>
     *  <dd>`retryWhen` operates by default on the `trampoline` [[Scheduler]].</dd>
     * </dl>
-    *
     * @param notifier receives an Observable of a Throwable with which a user can complete or error, aborting the
     *            retry
     * @return the source Observable modified with retry logic
@@ -980,7 +963,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * @return an Observable that emits only the items emitted by the most recently published
     *         Observable
-    *
     * @usecase def switch[U]: Observable[U]
     *   @inheritdoc
     */
@@ -1253,6 +1235,8 @@ object Observable {
   def bindNodeCallback[T,U](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[U, ObservableFacade[T]]  =
     ObservableFacade.bindNodeCallback(callbackFunc,selector,scheduler)
 
+
+  def fromEvent(element: Element, eventName: String) = new Observable[Nothing](ObservableFacade.fromEvent(element,eventName))
 
   /**
     * Combines a list of source Observables by emitting an item that aggregates the latest values of each of

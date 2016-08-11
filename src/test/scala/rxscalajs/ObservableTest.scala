@@ -183,6 +183,7 @@ object ObservableTest extends TestSuite {
       }
       'Repeat {
         obs.repeat().take(3).subscribe(unit)
+        obs.repeat(count = 2).take(7).subscribe(unit)
       }
       'Retry {
         obs.retry().subscribe(unit)
@@ -329,20 +330,11 @@ object ObservableTest extends TestSuite {
       obs.distinct((n: Int,n2: Int) => n > n2).subscribe(unit)
       obs.distinct((n: Int,n2: Int) => n > n2,Observable.of("w")).subscribe(unit)
     }
-//    'DistinctKey{
-//      obs.distinctKey("Hello").subscribe(unit)
-//      obs.distinctKey("A",(n: Int,n2: Int) => n > n2).subscribe(unit)
-//      obs.distinctKey("A",(n: Int,n2: Int) => n > n2,Observable.of("A")).subscribe(unit)
-//    }
       'DistinctUntilChanged {
         obs.distinctUntilChanged.subscribe(unit)
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2).subscribe(unit)
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2, (n: Int) => n).subscribe(unit)
-      }  
-//    'DistinctUntilKeyChanged{
-//      obs.distinctUntilKeyChanged("A").subscribe(unit)
-//      obs.distinctUntilKeyChanged("A",(n: Int,n2: Int) => n > n2).subscribe(unit)
-//    }
+      }
 
     'ElementAt{
       obs.elementAt(20,-3).subscribe(unit)
@@ -439,6 +431,7 @@ object ObservableTest extends TestSuite {
       }
       'Repeat {
         intervalObs.repeat().take(5).subscribe(unit)
+        intervalObs.repeat(2).take(5).subscribe(unit)
       }
       'Retry {
         obs.retry().subscribe(unit)
