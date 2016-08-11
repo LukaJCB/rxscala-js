@@ -3,8 +3,9 @@ import scala.scalajs.js
 import js.|
 import org.scalajs.dom._
 
-package rxscalajs {
+package rxscalajs.dom {
 
+  import rxscalajs.Subscriber
   import rxscalajs.facade.ObservableFacade
 
   @js.native
