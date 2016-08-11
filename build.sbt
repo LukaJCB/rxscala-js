@@ -1,5 +1,5 @@
 lazy val root = project.in(file(".")).
-  enablePlugins(ScalaJSPlugin)
+  enablePlugins(ScalaJSPlugin,SiteScaladocPlugin)
 
 name := "RxScala.js"
 
@@ -23,6 +23,10 @@ jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-beta.10" % "test" / "Rx.um
 
 scalaJSUseRhino := false
 
+ghpages.settings
+
+git.remoteRepo := "git@github.com:LukaJCB/rxscala-js.git"
+
 publishMavenStyle := true
 
 licenses += ("Apache 2", url("https://www.apache.org/licenses/LICENSE-2.0.txt"))
@@ -41,6 +45,7 @@ publishTo := {
   else
     Some("releases" at nexus + "service/local/staging/deploy/maven2")
 }
+
 
 pomExtra := (
   <developers>
