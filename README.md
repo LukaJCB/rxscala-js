@@ -29,7 +29,7 @@ RxScala.js doesn't actually come bundled with the underlying `rx.js` file, so yo
     jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-beta.10" / "Rx.umd.js" commonJSName "Rx"
 
 
-## Full Documentation
+## Documentation
 
 RxScala.js: 
 
@@ -39,6 +39,9 @@ RxScala.js:
 RxJs:
 
 - [API Documentation](http://reactivex.io/rxjs)
+
+
+If you're new to Rx, I suggest starting with [this interactive tutorial.](http://reactivex.io/learnrx/)
 
 ## Bugs and Feedback
 
