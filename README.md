@@ -33,7 +33,7 @@ RxScala.js doesn't actually come bundled with the underlying `rx.js` file, so yo
 
 RxScala.js: 
 
-- The API documentation can be found [here](http://LukaJCB.github.io/rxscala-js). 
+- The API documentation can be found [here](http://lukajcb.github.io/rxscala-js/latest/api/#rxscalajs.Observable).
 
 
 RxJs:
