@@ -1,9 +1,9 @@
-
+package rxscalajs.scheduler
 import scala.scalajs.js
 import js.annotation._
 import js.|
 
-package rxscalajs.scheduler {
+
 
   import rxscalajs.{Scheduler, Subscription}
 
@@ -18,4 +18,4 @@ trait Action[T] extends Subscription {
   var error: js.Any = js.native
 }
 
-}
+

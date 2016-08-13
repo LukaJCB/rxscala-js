@@ -24,7 +24,7 @@ import js.JSConverters._
   *
   * It returns a reference to the [[rxscalajs.Subscription]] interface. This enables Observers to
   * unsubscribe, that is, to stop receiving items and notifications before the Observable stops
-  * sending them, which also invokes the Observer's [[rxscalajs.Observer.onCompleted onCompleted]] method.
+  * sending them, which also invokes the Observer's onCompleted method.
   *
   * An `Observable[T]` instance is responsible for accepting all subscriptions
   * and notifying all Observers. Unless the documentation for a particular

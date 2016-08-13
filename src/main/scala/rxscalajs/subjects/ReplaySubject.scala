@@ -1,6 +1,6 @@
 package rxscalajs.subjects
 
-import rxscalajs.Scheduler
+import rxscalajs.{Subject, Scheduler}
 import rxscalajs.facade.ReplaySubjectFacade
 
 /**

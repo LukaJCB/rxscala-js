@@ -1,5 +1,5 @@
 package rxscalajs.facade
-import rxscalajs.{ISubscription, Observer}
+import rxscalajs.{AnonymousSubscription, Observer}
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation._
@@ -8,7 +8,7 @@ import scala.scalajs.js.annotation._
 
 @js.native
   @JSName("Rx.Subject")
-class SubjectFacade[T] protected() extends ObservableFacade[T] with ISubscription {
+class SubjectFacade[T] protected() extends ObservableFacade[T] with AnonymousSubscription {
   def this(destination: Observer[T] = ???, source: ObservableFacade[T] = ???) = this()
 
   def next(value: T): Unit = js.native
