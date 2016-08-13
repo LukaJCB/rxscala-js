@@ -1,6 +1,7 @@
 package rxscalajs
 
 import org.scalajs.dom.Element
+import org.scalajs.dom.raw.Event
 import rxscalajs.facade._
 
 import scala.collection.immutable.Seq
@@ -1236,7 +1237,7 @@ object Observable {
     ObservableFacade.bindNodeCallback(callbackFunc,selector,scheduler)
 
 
-  def fromEvent(element: Element, eventName: String) = new Observable[Nothing](ObservableFacade.fromEvent(element,eventName))
+  def fromEvent(element: Element, eventName: String) = new Observable[Event](ObservableFacade.fromEvent(element,eventName))
 
   /**
     * Combines a list of source Observables by emitting an item that aggregates the latest values of each of
