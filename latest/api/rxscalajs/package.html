@@ -132,28 +132,6 @@
                 <span class="name">@native</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="rxscalajs.ISubscription" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="ISubscriptionextendsObjectwithAnonymousSubscription"></a>
-      <a id="ISubscription:ISubscription"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="ISubscription.html"><span class="name">ISubscription</span></a><span class="result"> extends <span class="extype" name="scala.scalajs.js.Object">Object</span> with <a href="AnonymousSubscription.html" class="extype" name="rxscalajs.AnonymousSubscription">AnonymousSubscription</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.package@ISubscriptionextendsObjectwithAnonymousSubscription" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@RawJSType</span><span class="args">()</span>
-              
-                <span class="name">@native</span><span class="args">()</span>
-              
-        </dd></dl></div>
     </li><li name="rxscalajs.InnerSubscriber" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="InnerSubscriber[T,R]extendsSubscriber[R]"></a>
       <a id="InnerSubscriber[T,R]:InnerSubscriber[T,R]"></a>
@@ -242,7 +220,7 @@
       </a>
     </span>
       <p class="shortcomment cmt">The Observable interface that implements the Reactive Pattern.</p>
-    </li><li name="rxscalajs.Observer" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+    </li><li name="rxscalajs.Observer" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="Observer[T]extendsAnyRef"></a>
       <a id="Observer[T]:Observer[T]"></a>
       <h4 class="signature">
@@ -258,7 +236,10 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Provides a mechanism for receiving push-based notifications.</p><div class="fullcomment"><div class="comment cmt"><p>Provides a mechanism for receiving push-based notifications.</p><p>After an Observer calls an <a href="Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a>'s <code>subscribe</code> method, the Observable
+calls the Observer's <code>onNext</code> method to provide notifications. A well-behaved Observable will
+call an Observer's <code>onCompleted</code> or <code>onError</code> methods exactly once.
+</p></div></div>
     </li><li name="rxscalajs.OuterSubscriber" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="OuterSubscriber[T,R]extendsSubscriber[T]"></a>
       <a id="OuterSubscriber[T,R]:OuterSubscriber[T,R]"></a>
@@ -303,6 +284,23 @@
                 <span class="name">@native</span><span class="args">()</span>
               
         </dd></dl></div>
+    </li><li name="rxscalajs.Subject" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Subject[T]extendsObservable[T]withObserver[T]"></a>
+      <a id="Subject[T]:Subject[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Subject.html"><span class="name">Subject</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Subject.T">T</span>] with <a href="Observer.html" class="extype" name="rxscalajs.Observer">Observer</a>[<span class="extype" name="rxscalajs.Subject.T">T</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#rxscalajs.package@Subject[T]extendsObservable[T]withObserver[T]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A Subject is an Observable and an Observer at the same time.</p>
     </li><li name="rxscalajs.SubjectSubscription" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="SubjectSubscriptionextendsSubscription"></a>
       <a id="SubjectSubscription:SubjectSubscription"></a>
@@ -348,7 +346,7 @@
               
         </dd></dl></div>
     </li><li name="rxscalajs.Subscription" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="SubscriptionextendsObjectwithISubscription"></a>
+      <a id="SubscriptionextendsObjectwithAnonymousSubscription"></a>
       <a id="Subscription:Subscription"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -356,10 +354,10 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="Subscription.html"><span class="name">Subscription</span></a><span class="result"> extends <span class="extype" name="scala.scalajs.js.Object">Object</span> with <a href="ISubscription.html" class="extype" name="rxscalajs.ISubscription">ISubscription</a></span>
+        <a href="Subscription.html"><span class="name">Subscription</span></a><span class="result"> extends <span class="extype" name="scala.scalajs.js.Object">Object</span> with <a href="AnonymousSubscription.html" class="extype" name="rxscalajs.AnonymousSubscription">AnonymousSubscription</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.package@SubscriptionextendsObjectwithISubscription" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.package@SubscriptionextendsObjectwithAnonymousSubscription" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -418,6 +416,35 @@
       </a>
     </span>
       
+    </li><li name="rxscalajs.Subject" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Subject"></a>
+      <a id="Subject:Subject"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Subject$.html"><span class="name">Subject</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#rxscalajs.package@Subject" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Subject that, once an <code>Observer</code> has subscribed, emits all subsequently observed items to the
+subscriber.</p><div class="fullcomment"><div class="comment cmt"><p>Subject that, once an <code>Observer</code> has subscribed, emits all subsequently observed items to the
+subscriber.</p><p><img width="640" height="405" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/S.PublishSubject.png" alt="" /></p></div><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p></p><pre><span class="kw">val</span> subject = Subject[<span class="std">String</span>]()
+<span class="cmt">// observer1 will receive all onNext and onCompleted events</span>
+subject.subscribe(observer1)
+subject.onNext(<span class="lit">"one"</span>)
+subject.onNext(<span class="lit">"two"</span>)
+<span class="cmt">// observer2 will only receive "three" and onCompleted</span>
+subject.subscribe(observer2)
+subject.onNext(<span class="lit">"three"</span>)
+subject.onCompleted()</pre></li></ol>
+            </div></dl></div>
     </li><li name="rxscalajs.Subscriber" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Subscriber"></a>
       <a id="Subscriber:Subscriber"></a>

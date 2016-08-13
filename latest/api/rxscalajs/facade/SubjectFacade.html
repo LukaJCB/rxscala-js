@@ -47,7 +47,7 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">SubjectFacade</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.facade.SubjectFacade.T">T</span>] with <a href="../ISubscription.html" class="extype" name="rxscalajs.ISubscription">ISubscription</a></span>
+        <span class="name">SubjectFacade</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.facade.SubjectFacade.T">T</span>] with <a href="../AnonymousSubscription.html" class="extype" name="rxscalajs.AnonymousSubscription">AnonymousSubscription</a></span>
       </span>
       </h4>
       
@@ -63,7 +63,7 @@
               
         </dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="../ISubscription.html" class="extype" name="rxscalajs.ISubscription">ISubscription</a>, <a href="../AnonymousSubscription.html" class="extype" name="rxscalajs.AnonymousSubscription">AnonymousSubscription</a>, <a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.facade.SubjectFacade.T">T</span>], <a href="Subscribable.html" class="extype" name="rxscalajs.facade.Subscribable">Subscribable</a>[<span class="extype" name="rxscalajs.facade.SubjectFacade.T">T</span>], <span class="extype" name="scala.scalajs.js.Object">Object</span>, <span class="extype" name="scala.scalajs.js.Any">Any</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="../AnonymousSubscription.html" class="extype" name="rxscalajs.AnonymousSubscription">AnonymousSubscription</a>, <a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.facade.SubjectFacade.T">T</span>], <a href="Subscribable.html" class="extype" name="rxscalajs.facade.Subscribable">Subscribable</a>[<span class="extype" name="rxscalajs.facade.SubjectFacade.T">T</span>], <span class="extype" name="scala.scalajs.js.Object">Object</span>, <span class="extype" name="scala.scalajs.js.Any">Any</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
             <span class="toggle">Known Subclasses</span>
             <div class="subClasses hiddenContent"><a href="AsyncSubjectFacade.html" class="extype" name="rxscalajs.facade.AsyncSubjectFacade">AsyncSubjectFacade</a>, <a href="BehaviorSubjectFacade.html" class="extype" name="rxscalajs.facade.BehaviorSubjectFacade">BehaviorSubjectFacade</a>, <a href="ReplaySubjectFacade.html" class="extype" name="rxscalajs.facade.ReplaySubjectFacade">ReplaySubjectFacade</a></div>
@@ -84,7 +84,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="rxscalajs.facade.SubjectFacade"><span>SubjectFacade</span></li><li class="in" name="rxscalajs.ISubscription"><span>ISubscription</span></li><li class="in" name="rxscalajs.AnonymousSubscription"><span>AnonymousSubscription</span></li><li class="in" name="rxscalajs.facade.ObservableFacade"><span>ObservableFacade</span></li><li class="in" name="rxscalajs.facade.Subscribable"><span>Subscribable</span></li><li class="in" name="scala.scalajs.js.Object"><span>Object</span></li><li class="in" name="scala.scalajs.js.Any"><span>Any</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="rxscalajs.facade.SubjectFacade"><span>SubjectFacade</span></li><li class="in" name="rxscalajs.AnonymousSubscription"><span>AnonymousSubscription</span></li><li class="in" name="rxscalajs.facade.ObservableFacade"><span>ObservableFacade</span></li><li class="in" name="rxscalajs.facade.Subscribable"><span>Subscribable</span></li><li class="in" name="scala.scalajs.js.Object"><span>Object</span></li><li class="in" name="scala.scalajs.js.Any"><span>Any</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -214,23 +214,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a></dd></dl></div>
-    </li><li name="rxscalajs.ISubscription#add" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="add(teardown:rxscalajs.AnonymousSubscription):rxscalajs.Subscription"></a>
-      <a id="add(AnonymousSubscription):Subscription"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">add</span><span class="params">(<span name="teardown">teardown: <a href="../AnonymousSubscription.html" class="extype" name="rxscalajs.AnonymousSubscription">AnonymousSubscription</a></span>)</span><span class="result">: <a href="../Subscription.html" class="extype" name="rxscalajs.Subscription">Subscription</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#rxscalajs.facade.SubjectFacade@add(teardown:rxscalajs.AnonymousSubscription):rxscalajs.Subscription" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../ISubscription.html" class="extype" name="rxscalajs.ISubscription">ISubscription</a></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -1671,23 +1654,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a></dd></dl></div>
-    </li><li name="rxscalajs.ISubscription#remove" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="remove(sub:rxscalajs.Subscription):Unit"></a>
-      <a id="remove(Subscription):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">remove</span><span class="params">(<span name="sub">sub: <a href="../Subscription.html" class="extype" name="rxscalajs.Subscription">Subscription</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#rxscalajs.facade.SubjectFacade@remove(sub:rxscalajs.Subscription):Unit" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../ISubscription.html" class="extype" name="rxscalajs.ISubscription">ISubscription</a></dd></dl></div>
     </li><li name="rxscalajs.facade.ObservableFacade#repeat" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="repeat(scheduler:rxscalajs.Scheduler,count:Int):rxscalajs.facade.ObservableFacade[T]"></a>
       <a id="repeat(Scheduler,Int):ObservableFacade[T]"></a>
@@ -2282,7 +2248,10 @@
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../AnonymousSubscription.html" class="extype" name="rxscalajs.AnonymousSubscription">AnonymousSubscription</a></dd></dl></div>
+      <p class="shortcomment cmt">Call this method to stop receiving notifications on the Observer that was registered when
+this Subscription was received.</p><div class="fullcomment"><div class="comment cmt"><p>Call this method to stop receiving notifications on the Observer that was registered when
+this Subscription was received.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../AnonymousSubscription.html" class="extype" name="rxscalajs.AnonymousSubscription">AnonymousSubscription</a></dd></dl></div>
     </li><li name="scala.scalajs.js.Object#valueOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="valueOf():Any"></a>
       <a id="valueOf():Any"></a>
@@ -2514,9 +2483,7 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="rxscalajs.ISubscription">
-              <h3>Inherited from <a href="../ISubscription.html" class="extype" name="rxscalajs.ISubscription">ISubscription</a></h3>
-            </div><div class="parent" name="rxscalajs.AnonymousSubscription">
+        <div class="parent" name="rxscalajs.AnonymousSubscription">
               <h3>Inherited from <a href="../AnonymousSubscription.html" class="extype" name="rxscalajs.AnonymousSubscription">AnonymousSubscription</a></h3>
             </div><div class="parent" name="rxscalajs.facade.ObservableFacade">
               <h3>Inherited from <a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.facade.SubjectFacade.T">T</span>]</h3>
