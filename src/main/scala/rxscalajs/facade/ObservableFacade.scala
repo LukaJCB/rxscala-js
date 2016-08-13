@@ -109,7 +109,9 @@ import scala.scalajs.js.annotation.JSName
     def merge[R >: T](that: ObservableFacade[R], concurrent: Double = ???, scheduler: Scheduler = ???): ObservableFacade[R] = js.native
 
     def mergeAll[U](concurrent: Double = ???): ObservableFacade[U] = js.native
-    def mergeMap[I, R](project: js.Function2[T, Int,ObservableFacade[I]], resultSelector: js.Function4[T, I, Int, Int, R] = ???, concurrent: Double = ???): ObservableFacade[R] = js.native
+    def mergeMap[R](project: js.Function2[T, Int,ObservableFacade[R]], resultSelector: js.Function4[T, R, Int, Int, R] = ???, concurrent: Double = ???): ObservableFacade[R] = js.native
+
+    def mergeMap[ R](project: js.Function1[T,ObservableFacade[R]]): ObservableFacade[R] = js.native
     def mergeMapTo[I, R](innerObservable: ObservableFacade[I], resultSelector: js.Function4[T, I, Int, Int, R] = ???, concurrent: Double = ???): ObservableFacade[R] = js.native
     def mergeScan[ R](project: js.Function2[R,T,ObservableFacade[R]], seed: R, concurrent: Int = ???): ObservableFacade[R] = js.native
     def min(comparer: js.Function2[T,T,T] = ???): ObservableFacade[T] = js.native

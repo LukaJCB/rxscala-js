@@ -295,14 +295,14 @@ object ObservableTest extends TestSuite {
       }
       'ConcatMap {
         obs.concatMap((n: Int, index: Int) => Observable.range(0, n)).subscribe(unit)
-        obs.concatMap[String, Double]((n: Int, index: Int) => Observable.of("Hello", "world"), (n: Int, n2: String, index1: Int, index2: Int) => 0.4).subscribe(unit)
+        obs.concatMap[String, Double]((n: Int, index: Int) => Observable.of("Hello", "world")).subscribe(unit)
       }
       'ConcatMapTo {
         obs.concatMapTo(Observable('H')).subscribe(unit)
-        obs.concatMapTo[String, Double](Observable("Hello"), (n: Int, n2: String, index1: Int, index2: Int) => 0.4).subscribe(unit)
+        obs.concatMapTo(Observable("Hello")).subscribe(unit)
       }
       'Count {
-        obs.count().subscribe(unit)
+        obs.count.subscribe(unit)
         obs.count((i: Int, n: Int, ob: Observable[Int]) => i % 2 == 1).subscribe(unit)
       }
       'Debounce {
@@ -326,7 +326,7 @@ object ObservableTest extends TestSuite {
       }
        
     'Distinct{
-      obs.distinct().subscribe(unit)
+      obs.distinct.subscribe(unit)
       obs.distinct((n: Int,n2: Int) => n > n2).subscribe(unit)
       obs.distinct((n: Int,n2: Int) => n > n2,Observable.of("w")).subscribe(unit)
     }
@@ -374,9 +374,6 @@ object ObservableTest extends TestSuite {
       'Last {
         obs.last.subscribe(unit)
       }
-      'Let {
-        obs.let(n => n.concat(n)).subscribe(unit)
-      }
       'Map {
         obs.map((n: Int, index: Int) => "n: " + n).subscribe(unit)
         obs.map(_.toString).subscribe(unit)
@@ -385,7 +382,7 @@ object ObservableTest extends TestSuite {
         obs.mapTo("A").subscribe(unit)
       }
       'Materialize {
-        obs.materialize().subscribe(unit)
+        obs.materialize.subscribe(unit)
       }
       'Merge {
         obs.merge(intervalObs).subscribe(unit)
@@ -395,7 +392,7 @@ object ObservableTest extends TestSuite {
       }
       'MergeMap {
         obs.mergeMap((n: Int, index: Int) => Observable(n)).subscribe(unit)
-        obs.mergeMap((n: Int, index: Int) => Observable(n), (out: Int, in: Int, index1: Int, index2: Int) => -1).subscribe(unit)
+        obs.mergeMap(n => Observable.just(n)).subscribe(unit)
       }
       'MergeMapTo {
         obs.mergeMapTo(Observable("34")).subscribe(unit)
