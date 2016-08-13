@@ -13,7 +13,7 @@ Observable.just(1, 2, 3, 4).reduce(_ + _)
 Example usage in Browser:
 
 ```scala
-Observable.fromEvent(document.getElementById("app"),"click")
+Observable.fromEvent(document.getElementById("btn"),"click")
   .mapTo(1)
   .scan(0)(_ + _)
   .subscribe(println)
