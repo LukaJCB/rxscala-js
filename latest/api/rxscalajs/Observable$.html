@@ -180,8 +180,8 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Converts a sequence of values into an Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a sequence of values into an Observable.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" /></p><p>Implementation note: the entire array will be immediately emitted each time an <a href="Observer.html" class="extype" name="rxscalajs.Observer">rxscalajs.Observer</a> subscribes.
-Since this occurs before the <a href="Subscription.html" class="extype" name="rxscalajs.Subscription">rxscalajs.Subscription</a> is returned,
+      <p class="shortcomment cmt">Converts a sequence of values into an Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a sequence of values into an Observable.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" /></p><p>Implementation note: the entire array will be immediately emitted each time an <a href="subscription/Observer.html" class="extype" name="rxscalajs.subscription.Observer">rxscalajs.subscription.Observer</a> subscribes.
+Since this occurs before the <a href="subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">subscription.Subscription</a> is returned,
 it in not possible to unsubscribe from the sequence before it completes.
 </p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>
            the type of items in the Array, and the type of items to be emitted by the

@@ -1,22 +1,22 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>Subscriber - rxscalajs.Subscriber</title>
-          <meta name="description" content="Subscriber - rxscalajs.Subscriber" />
-          <meta name="keywords" content="Subscriber rxscalajs.Subscriber" />
+          <title>OuterSubscriber - rxscalajs.subscription.OuterSubscriber</title>
+          <meta name="description" content="OuterSubscriber - rxscalajs.subscription.OuterSubscriber" />
+          <meta name="keywords" content="OuterSubscriber rxscalajs.subscription.OuterSubscriber" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
-      <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
-      <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="../lib/template.js"></script>
-      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
       
       <script type="text/javascript">
          if(top === self) {
-            var url = '../index.html';
-            var hash = 'rxscalajs.Subscriber';
+            var url = '../../index.html';
+            var hash = 'rxscalajs.subscription.OuterSubscriber';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -28,15 +28,13 @@
         </head>
         <body class="type">
       <div id="definition">
-        <a href="Subscriber$.html" title="See companion object"><img alt="Class/Object" src="../lib/class_to_object_big.png" /></a>
-        <p id="owner"><a href="package.html" class="extype" name="rxscalajs">rxscalajs</a></p>
-        <h1><a href="Subscriber$.html" title="See companion object">Subscriber</a></h1><h3><span class="morelinks"><div>
-            Related Docs:
-            <a href="Subscriber$.html" title="See companion object">object Subscriber</a>
-            | <a href="package.html" class="extype" name="rxscalajs">package rxscalajs</a>
+        <img alt="Class" src="../../lib/class_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="rxscalajs">rxscalajs</a>.<a href="package.html" class="extype" name="rxscalajs.subscription">subscription</a></p>
+        <h1>OuterSubscriber</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="package.html" class="extype" name="rxscalajs.subscription">package subscription</a>
           </div></span></h3><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       </div>
@@ -47,7 +45,7 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">Subscriber</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="Subscription.html" class="extype" name="rxscalajs.Subscription">Subscription</a></span>
+        <span class="name">OuterSubscriber</span><span class="tparams">[<span name="T">T</span>, <span name="R">R</span>]</span><span class="result"> extends <a href="Subscriber.html" class="extype" name="rxscalajs.subscription.Subscriber">Subscriber</a>[<span class="extype" name="rxscalajs.subscription.OuterSubscriber.T">T</span>]</span>
       </span>
       </h4>
       
@@ -58,11 +56,8 @@
               
         </dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="Subscription.html" class="extype" name="rxscalajs.Subscription">Subscription</a>, <a href="AnonymousSubscription.html" class="extype" name="rxscalajs.AnonymousSubscription">AnonymousSubscription</a>, <span class="extype" name="scala.scalajs.js.Object">Object</span>, <span class="extype" name="scala.scalajs.js.Any">Any</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
-        </div><div class="toggleContainer block">
-            <span class="toggle">Known Subclasses</span>
-            <div class="subClasses hiddenContent"><a href="dom/AjaxSubscriber.html" class="extype" name="rxscalajs.dom.AjaxSubscriber">AjaxSubscriber</a>, <a href="InnerSubscriber.html" class="extype" name="rxscalajs.InnerSubscriber">InnerSubscriber</a>, <a href="OuterSubscriber.html" class="extype" name="rxscalajs.OuterSubscriber">OuterSubscriber</a></div>
-          </div></div>
+          <div class="superTypes hiddenContent"><a href="Subscriber.html" class="extype" name="rxscalajs.subscription.Subscriber">Subscriber</a>[<span class="extype" name="rxscalajs.subscription.OuterSubscriber.T">T</span>], <a href="Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">Subscription</a>, <a href="AnonymousSubscription.html" class="extype" name="rxscalajs.subscription.AnonymousSubscription">AnonymousSubscription</a>, <span class="extype" name="scala.scalajs.js.Object">Object</span>, <span class="extype" name="scala.scalajs.js.Any">Any</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
         
 
       <div id="mbrsel">
@@ -79,7 +74,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="rxscalajs.Subscriber"><span>Subscriber</span></li><li class="in" name="rxscalajs.Subscription"><span>Subscription</span></li><li class="in" name="rxscalajs.AnonymousSubscription"><span>AnonymousSubscription</span></li><li class="in" name="scala.scalajs.js.Object"><span>Object</span></li><li class="in" name="scala.scalajs.js.Any"><span>Any</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="rxscalajs.subscription.OuterSubscriber"><span>OuterSubscriber</span></li><li class="in" name="rxscalajs.subscription.Subscriber"><span>Subscriber</span></li><li class="in" name="rxscalajs.subscription.Subscription"><span>Subscription</span></li><li class="in" name="rxscalajs.subscription.AnonymousSubscription"><span>AnonymousSubscription</span></li><li class="in" name="scala.scalajs.js.Object"><span>Object</span></li><li class="in" name="scala.scalajs.js.Any"><span>Any</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -98,37 +93,20 @@
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="rxscalajs.Subscriber#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(destinationOrNext:scala.scalajs.js.|[rxscalajs.Observer[scala.scalajs.js.Any],scala.scalajs.js.Function1[T,Unit]],error:scala.scalajs.js.Function1[scala.scalajs.js.Any,Unit],complete:scala.scalajs.js.Function0[Unit]):rxscalajs.Subscriber[T]"></a>
-      <a id="&lt;init&gt;:Subscriber[T]"></a>
+              <ol><li name="rxscalajs.subscription.OuterSubscriber#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;():rxscalajs.subscription.OuterSubscriber[T,R]"></a>
+      <a id="&lt;init&gt;:OuterSubscriber[T,R]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">Subscriber</span><span class="params">(<span name="destinationOrNext">destinationOrNext: <span class="extype" name="scala.scalajs.js.|">|</span>[<a href="Observer.html" class="extype" name="rxscalajs.Observer">Observer</a>[<span class="extype" name="scala.scalajs.js.Any">Any</span>], <span class="extype" name="scala.scalajs.js.Function1">Function1</span>[<span class="extype" name="rxscalajs.Subscriber.T">T</span>, <span class="extype" name="scala.Unit">Unit</span>]] = <span class="symbol">???</span></span>, <span name="error">error: <span class="extype" name="scala.scalajs.js.Function1">Function1</span>[<span class="extype" name="scala.scalajs.js.Any">Any</span>, <span class="extype" name="scala.Unit">Unit</span>] = <span class="symbol">???</span></span>, <span name="complete">complete: <span class="extype" name="scala.scalajs.js.Function0">Function0</span>[<span class="extype" name="scala.Unit">Unit</span>] = <span class="symbol">???</span></span>)</span>
+        <span class="name">OuterSubscriber</span><span class="params">()</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@&lt;init&gt;(destinationOrNext:scala.scalajs.js.|[rxscalajs.Observer[scala.scalajs.js.Any],scala.scalajs.js.Function1[T,Unit]],error:scala.scalajs.js.Function1[scala.scalajs.js.Any,Unit],complete:scala.scalajs.js.Function0[Unit]):rxscalajs.Subscriber[T]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="rxscalajs.Subscriber#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;():rxscalajs.Subscriber[T]"></a>
-      <a id="&lt;init&gt;:Subscriber[T]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">new</span>
-      </span>
-      <span class="symbol">
-        <span class="name">Subscriber</span><span class="params">()</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@&lt;init&gt;():rxscalajs.Subscriber[T]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@&lt;init&gt;():rxscalajs.subscription.OuterSubscriber[T,R]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       
@@ -153,8 +131,8 @@
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@!=(x$1:Any):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
@@ -170,8 +148,8 @@
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@##():Int" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@##():Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
@@ -187,13 +165,13 @@
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@==(x$1:Any):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@==(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="rxscalajs.Subscription#add" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="add(teardown:rxscalajs.AnonymousSubscription):rxscalajs.Subscription"></a>
+    </li><li name="rxscalajs.subscription.Subscription#add" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="add(teardown:rxscalajs.subscription.AnonymousSubscription):rxscalajs.subscription.Subscription"></a>
       <a id="add(AnonymousSubscription):Subscription"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -201,14 +179,14 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">add</span><span class="params">(<span name="teardown">teardown: <a href="AnonymousSubscription.html" class="extype" name="rxscalajs.AnonymousSubscription">AnonymousSubscription</a></span>)</span><span class="result">: <a href="Subscription.html" class="extype" name="rxscalajs.Subscription">Subscription</a></span>
+        <span class="name">add</span><span class="params">(<span name="teardown">teardown: <a href="AnonymousSubscription.html" class="extype" name="rxscalajs.subscription.AnonymousSubscription">AnonymousSubscription</a></span>)</span><span class="result">: <a href="Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">Subscription</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@add(teardown:rxscalajs.AnonymousSubscription):rxscalajs.Subscription" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@add(teardown:rxscalajs.subscription.AnonymousSubscription):rxscalajs.subscription.Subscription" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Subscription.html" class="extype" name="rxscalajs.Subscription">Subscription</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">Subscription</a></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -221,8 +199,8 @@
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@asInstanceOf[T0]:T0" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
@@ -238,11 +216,11 @@
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@clone():Object" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@clone():Object" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
@@ -261,8 +239,8 @@
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
@@ -278,12 +256,12 @@
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@equals(x$1:Any):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="rxscalajs.Subscriber#error" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="rxscalajs.subscription.Subscriber#error" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="error(err:scala.scalajs.js.Any):Unit"></a>
       <a id="error(Any):Unit"></a>
       <h4 class="signature">
@@ -295,11 +273,11 @@
         <span class="name">error</span><span class="params">(<span name="err">err: <span class="extype" name="scala.scalajs.js.Any">Any</span> = <span class="symbol">???</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@error(err:scala.scalajs.js.Any):Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@error(err:scala.scalajs.js.Any):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Subscriber.html" class="extype" name="rxscalajs.subscription.Subscriber">Subscriber</a></dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -312,11 +290,11 @@
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@finalize():Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@finalize():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="symbol">classOf[java.lang.Throwable]</span>
@@ -335,8 +313,8 @@
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@getClass():Class[_]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@getClass():Class[_]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
@@ -352,8 +330,8 @@
         <span class="name">hasOwnProperty</span><span class="params">(<span name="v">v: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@hasOwnProperty(v:String):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@hasOwnProperty(v:String):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Object</dd></dl></div>
@@ -369,8 +347,8 @@
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@hashCode():Int" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@hashCode():Int" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
@@ -386,8 +364,8 @@
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
@@ -403,8 +381,8 @@
         <span class="name">isPrototypeOf</span><span class="params">(<span name="v">v: <span class="extype" name="scala.scalajs.js.Object">Object</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@isPrototypeOf(v:scala.scalajs.js.Object):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@isPrototypeOf(v:scala.scalajs.js.Object):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Object</dd></dl></div>
@@ -420,12 +398,12 @@
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="rxscalajs.Subscriber#next" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="rxscalajs.subscription.Subscriber#next" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="next(value:T):Unit"></a>
       <a id="next(T):Unit"></a>
       <h4 class="signature">
@@ -434,14 +412,14 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">next</span><span class="params">(<span name="value">value: <span class="extype" name="rxscalajs.Subscriber.T">T</span> = <span class="symbol">???</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">next</span><span class="params">(<span name="value">value: <span class="extype" name="rxscalajs.subscription.OuterSubscriber.T">T</span> = <span class="symbol">???</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@next(value:T):Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@next(value:T):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Subscriber.html" class="extype" name="rxscalajs.subscription.Subscriber">Subscriber</a></dd></dl></div>
     </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
@@ -454,8 +432,8 @@
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@notify():Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@notify():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
@@ -471,11 +449,62 @@
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@notifyAll():Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@notifyAll():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="rxscalajs.subscription.OuterSubscriber#notifyComplete" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="notifyComplete(innerSub:rxscalajs.subscription.InnerSubscriber[T,R]):Unit"></a>
+      <a id="notifyComplete(InnerSubscriber[T,R]):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyComplete</span><span class="params">(<span name="innerSub">innerSub: <a href="InnerSubscriber.html" class="extype" name="rxscalajs.subscription.InnerSubscriber">InnerSubscriber</a>[<span class="extype" name="rxscalajs.subscription.OuterSubscriber.T">T</span>, <span class="extype" name="rxscalajs.subscription.OuterSubscriber.R">R</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@notifyComplete(innerSub:rxscalajs.subscription.InnerSubscriber[T,R]):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="rxscalajs.subscription.OuterSubscriber#notifyError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="notifyError(error:scala.scalajs.js.Any,innerSub:rxscalajs.subscription.InnerSubscriber[T,R]):Unit"></a>
+      <a id="notifyError(Any,InnerSubscriber[T,R]):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyError</span><span class="params">(<span name="error">error: <span class="extype" name="scala.scalajs.js.Any">Any</span></span>, <span name="innerSub">innerSub: <a href="InnerSubscriber.html" class="extype" name="rxscalajs.subscription.InnerSubscriber">InnerSubscriber</a>[<span class="extype" name="rxscalajs.subscription.OuterSubscriber.T">T</span>, <span class="extype" name="rxscalajs.subscription.OuterSubscriber.R">R</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@notifyError(error:scala.scalajs.js.Any,innerSub:rxscalajs.subscription.InnerSubscriber[T,R]):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="rxscalajs.subscription.OuterSubscriber#notifyNext" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="notifyNext(outerValue:T,innerValue:R,outerIndex:Double,innerIndex:Double,innerSub:rxscalajs.subscription.InnerSubscriber[T,R]):Unit"></a>
+      <a id="notifyNext(T,R,Double,Double,InnerSubscriber[T,R]):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyNext</span><span class="params">(<span name="outerValue">outerValue: <span class="extype" name="rxscalajs.subscription.OuterSubscriber.T">T</span></span>, <span name="innerValue">innerValue: <span class="extype" name="rxscalajs.subscription.OuterSubscriber.R">R</span></span>, <span name="outerIndex">outerIndex: <span class="extype" name="scala.Double">Double</span></span>, <span name="innerIndex">innerIndex: <span class="extype" name="scala.Double">Double</span></span>, <span name="innerSub">innerSub: <a href="InnerSubscriber.html" class="extype" name="rxscalajs.subscription.InnerSubscriber">InnerSubscriber</a>[<span class="extype" name="rxscalajs.subscription.OuterSubscriber.T">T</span>, <span class="extype" name="rxscalajs.subscription.OuterSubscriber.R">R</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@notifyNext(outerValue:T,innerValue:R,outerIndex:Double,innerIndex:Double,innerSub:rxscalajs.subscription.InnerSubscriber[T,R]):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="scala.scalajs.js.Object#propertyIsEnumerable" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="propertyIsEnumerable(v:String):Boolean"></a>
       <a id="propertyIsEnumerable(String):Boolean"></a>
@@ -488,13 +517,13 @@
         <span class="name">propertyIsEnumerable</span><span class="params">(<span name="v">v: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@propertyIsEnumerable(v:String):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@propertyIsEnumerable(v:String):Boolean" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Object</dd></dl></div>
-    </li><li name="rxscalajs.Subscription#remove" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="remove(sub:rxscalajs.Subscription):Unit"></a>
+    </li><li name="rxscalajs.subscription.Subscription#remove" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="remove(sub:rxscalajs.subscription.Subscription):Unit"></a>
       <a id="remove(Subscription):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -502,14 +531,14 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">remove</span><span class="params">(<span name="sub">sub: <a href="Subscription.html" class="extype" name="rxscalajs.Subscription">Subscription</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">remove</span><span class="params">(<span name="sub">sub: <a href="Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">Subscription</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@remove(sub:rxscalajs.Subscription):Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@remove(sub:rxscalajs.subscription.Subscription):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Subscription.html" class="extype" name="rxscalajs.Subscription">Subscription</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">Subscription</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -522,8 +551,8 @@
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
@@ -539,8 +568,8 @@
         <span class="name">toLocaleString</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@toLocaleString():String" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@toLocaleString():String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Object</dd></dl></div>
@@ -556,12 +585,12 @@
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@toString():String" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@toString():String" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="rxscalajs.AnonymousSubscription#unsubscribe" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="rxscalajs.subscription.AnonymousSubscription#unsubscribe" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="unsubscribe():Unit"></a>
       <a id="unsubscribe():Unit"></a>
       <h4 class="signature">
@@ -573,14 +602,14 @@
         <span class="name">unsubscribe</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@unsubscribe():Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@unsubscribe():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Call this method to stop receiving notifications on the Observer that was registered when
 this Subscription was received.</p><div class="fullcomment"><div class="comment cmt"><p>Call this method to stop receiving notifications on the Observer that was registered when
 this Subscription was received.
-</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="AnonymousSubscription.html" class="extype" name="rxscalajs.AnonymousSubscription">AnonymousSubscription</a></dd></dl></div>
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="AnonymousSubscription.html" class="extype" name="rxscalajs.subscription.AnonymousSubscription">AnonymousSubscription</a></dd></dl></div>
     </li><li name="scala.scalajs.js.Object#valueOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="valueOf():Any"></a>
       <a id="valueOf():Any"></a>
@@ -593,8 +622,8 @@ this Subscription was received.
         <span class="name">valueOf</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Any">Any</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@valueOf():Any" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@valueOf():Any" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Object</dd></dl></div>
@@ -610,8 +639,8 @@ this Subscription was received.
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@wait():Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@wait():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
@@ -633,8 +662,8 @@ this Subscription was received.
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
@@ -656,8 +685,8 @@ this Subscription was received.
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subscriber@wait(x$1:Long):Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      <a href="../../index.html#rxscalajs.subscription.OuterSubscriber@wait(x$1:Long):Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
@@ -676,10 +705,12 @@ this Subscription was received.
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="rxscalajs.Subscription">
-              <h3>Inherited from <a href="Subscription.html" class="extype" name="rxscalajs.Subscription">Subscription</a></h3>
-            </div><div class="parent" name="rxscalajs.AnonymousSubscription">
-              <h3>Inherited from <a href="AnonymousSubscription.html" class="extype" name="rxscalajs.AnonymousSubscription">AnonymousSubscription</a></h3>
+        <div class="parent" name="rxscalajs.subscription.Subscriber">
+              <h3>Inherited from <a href="Subscriber.html" class="extype" name="rxscalajs.subscription.Subscriber">Subscriber</a>[<span class="extype" name="rxscalajs.subscription.OuterSubscriber.T">T</span>]</h3>
+            </div><div class="parent" name="rxscalajs.subscription.Subscription">
+              <h3>Inherited from <a href="Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">Subscription</a></h3>
+            </div><div class="parent" name="rxscalajs.subscription.AnonymousSubscription">
+              <h3>Inherited from <a href="AnonymousSubscription.html" class="extype" name="rxscalajs.subscription.AnonymousSubscription">AnonymousSubscription</a></h3>
             </div><div class="parent" name="scala.scalajs.js.Object">
               <h3>Inherited from <span class="extype" name="scala.scalajs.js.Object">Object</span></h3>
             </div><div class="parent" name="scala.scalajs.js.Any">
