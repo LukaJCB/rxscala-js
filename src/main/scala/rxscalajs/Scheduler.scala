@@ -1,4 +1,7 @@
 package rxscalajs
+
+import rxscalajs.subscription.Subscription
+
 import scala.scalajs.js
 import js.annotation._
 import js.|

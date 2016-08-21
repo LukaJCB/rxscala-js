@@ -1,4 +1,7 @@
 package rxscalajs
+
+import rxscalajs.subscription.Observer
+
 import scala.scalajs.js
 import js.annotation._
 import js.|
@@ -24,11 +27,11 @@ class Notification[T] protected () extends js.Object {
     * Invokes the function corresponding to the notification.
     *
     * @param onNext
-    *               The function to invoke for an [[rx.lang.scala.Notification.OnNext]] notification.
+    *               The function to invoke for an [[rxscalajs.Notification]] notification.
     * @param onError
-    *               The function to invoke for an [[rx.lang.scala.Notification.OnError]] notification.
+    *               The function to invoke for an [[rxscalajs.Notification]] notification.
     * @param onCompleted
-    *               The function to invoke for an [[rx.lang.scala.Notification.OnCompleted]] notification.
+    *               The function to invoke for an [[rxscalajs.Notification]] notification.
     */
   def accept(onNext: Observer[T] | js.Function1[T, Unit], onError: js.Function1[js.Any, Unit] = ???, onCompleted: js.Function0[Unit] = ???): js.Dynamic = js.native
   def toObservable(): ObservableFacade[T] = js.native

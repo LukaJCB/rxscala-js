@@ -1,5 +1,6 @@
 package rxscalajs.facade
 import rxscalajs._
+import rxscalajs.subscription.{AnonymousSubscription, Subscription, Observer}
 
 import scala.scalajs.js
 import scala.scalajs.js._
@@ -20,14 +21,10 @@ import scala.scalajs.js.annotation.JSName
     val key: K = js.native
   }
   @js.native
-  class TimeInterval[T] protected() extends js.Object {
-    def this(value: T,interval: Int) = this()
-  }
+  trait TimeInterval[T] extends js.Object { def value: T; def interval: Int }
 
   @js.native
-  class Timestamp[T] protected() extends js.Object {
-    def this(value: T,interval: Int) = this()
-  }
+  trait Timestamp[T] extends js.Object { def value: T; def timestamp: Long }
 
   @js.native
   class ErrorObservableFacade protected() extends ObservableFacade[js.Any] {

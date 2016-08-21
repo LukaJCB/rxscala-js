@@ -1,7 +1,7 @@
-package rxscalajs
+package rxscalajs.subscription
+
 import scala.scalajs.js
-import js.annotation._
-import js.|
+import scala.scalajs.js.|
 
 
 
@@ -11,9 +11,9 @@ import js.|
 * (unsubscribe, isUnsubscribed, and `add` methods) and backpressure handling
 * (onStart and request methods).
 *
-* After a [[Subscriber]] calls an [[Observable]]'s `subscribe` method, the
-* [[Observable]] calls the [[Subscriber]]'s onNext method to emit items. A well-behaved
-* [[Observable]] will call a [[Subscriber]]'s onCompleted method exactly once or the [[Subscriber]]'s
+* After a [[Subscriber]] calls an [[rxscalajs.Observable]]'s `subscribe` method, the
+* [[rxscalajs.Observable]] calls the [[Subscriber]]'s onNext method to emit items. A well-behaved
+* [[rxscalajs.Observable]] will call a [[Subscriber]]'s onCompleted method exactly once or the [[Subscriber]]'s
 * onError method exactly once.
 *
 *

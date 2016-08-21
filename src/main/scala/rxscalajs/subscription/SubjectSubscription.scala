@@ -1,8 +1,8 @@
-package rxscalajs
-import scala.scalajs.js
-import js.annotation._
-import js.|
+package rxscalajs.subscription
+
 import rxscalajs.facade.SubjectFacade
+
+import scala.scalajs.js
 
 @js.native
 class SubjectSubscription protected () extends Subscription {

@@ -1,13 +1,13 @@
 package rxscalajs.dom
 
+import rxscalajs.subscription.Subscriber
+
 import scala.scalajs.js
 import js.|
 import org.scalajs.dom._
 
 
-
-  import rxscalajs.Subscriber
-  import rxscalajs.facade.ObservableFacade
+import rxscalajs.facade.ObservableFacade
 
   @js.native
 trait AjaxRequest extends js.Object {

@@ -3,6 +3,7 @@ package rxscalajs
 import org.scalajs.dom.Element
 import org.scalajs.dom.raw.Event
 import rxscalajs.facade._
+import rxscalajs.subscription.{Subscriber, AnonymousSubscription, Subscription, Observer}
 
 import scala.collection.immutable.Seq
 import scala.scalajs.js
@@ -15,14 +16,14 @@ import js.JSConverters._
   * The Observable interface that implements the Reactive Pattern.
   *
   * @define subscribeObserverMain
-  * Call this method to subscribe an [[rxscalajs.Observer]] for receiving
+  * Call this method to subscribe an [[Observer]] for receiving
   * items and notifications from the Observable.
   *
   * A typical implementation of `subscribe` does the following:
   *
   * It stores a reference to the Observer in a collection object, such as a `List[T]` object.
   *
-  * It returns a reference to the [[rxscalajs.Subscription]] interface. This enables Observers to
+  * It returns a reference to the [[Subscription]] interface. This enables Observers to
   * unsubscribe, that is, to stop receiving items and notifications before the Observable stops
   * sending them, which also invokes the Observer's onCompleted method.
   *
@@ -30,51 +31,40 @@ import js.JSConverters._
   * and notifying all Observers. Unless the documentation for a particular
   * `Observable[T]` implementation indicates otherwise, Observers should make no
   * assumptions about the order in which multiple Observers will receive their notifications.
-  *
   * @define subscribeObserverParamObserver
-  *         the observer
+  * the observer
   * @define subscribeObserverParamScheduler
-  *         the [[rxscalajs.Scheduler]] on which Observers subscribe to the Observable
-  *
-
-  *
+  * the [[rxscalajs.Scheduler]] on which Observers subscribe to the Observable
   * @define subscribeSubscriberParamObserver
-  *         the [[Subscriber]]
+  * the [[rxscalajs.subscription.Subscriber]]
   * @define subscribeSubscriberParamScheduler
-  *         the [[rxscalajs.Scheduler]] on which [[Subscriber]]s subscribe to the Observable
-  *
+  * the [[rxscalajs.Scheduler]] on which [[rxscalajs.subscription.Subscriber]]s subscribe to the Observable
   * @define subscribeAllReturn
-  *         a [[rxscalajs.Subscription]] reference whose `unsubscribe` method can be called to  stop receiving items
-  *         before the Observable has finished sending them
-  *
+  * a [[rxscalajs.subscription.Subscription]] reference whose `unsubscribe` method can be called to  stop receiving items
+  * before the Observable has finished sending them
   * @define subscribeCallbacksMainWithNotifications
   * Call this method to receive items and notifications from this observable.
-  *
   * @define subscribeCallbacksMainNoNotifications
   * Call this method to receive items from this observable.
-  *
   * @define subscribeCallbacksParamOnNext
-  *         this function will be called whenever the Observable emits an item
+  * this function will be called whenever the Observable emits an item
   * @define subscribeCallbacksParamOnError
-  *         this function will be called if an error occurs
+  * this function will be called if an error occurs
   * @define subscribeCallbacksParamOnComplete
-  *         this function will be called when this Observable has finished emitting items
+  * this function will be called when this Observable has finished emitting items
   * @define subscribeCallbacksParamScheduler
-  *         the scheduler to use
-  *
+  * the scheduler to use
   * @define noDefaultScheduler
   * ===Scheduler:===
   * This method does not operate by default on a particular [[Scheduler]].
-  *
   * @define supportBackpressure
   * ===Backpressure:===
   * Fully supports backpressure.
-  *
   * @define debounceVsThrottle
   * Information on debounce vs throttle:
-  *  - [[http://drupalmotion.com/article/debounce-and-throttle-visual-explanation]]
-  *  - [[http://unscriptable.com/2009/03/20/debouncing-javascript-methods/]]
-  *  - [[http://www.illyriad.co.uk/blog/index.php/2011/09/javascript-dont-spam-your-server-debounce-and-throttle/]]
+  * - [[http://drupalmotion.com/article/debounce-and-throttle-visual-explanation]]
+  * - [[http://unscriptable.com/2009/03/20/debouncing-javascript-methods/]]
+  * - [[http://www.illyriad.co.uk/blog/index.php/2011/09/javascript-dont-spam-your-server-debounce-and-throttle/]]
   *
   *
   *
@@ -194,7 +184,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * <img src="http://reactivex.io/documentation/operators/images/buffer1.png"  width="640" height="315">
     *
-    *
     * @param closingNotifier
     *           An Observable that signals the buffer to be emitted on the output Observable.
     * @return
@@ -208,7 +197,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * the current window is emitted and the event is propagated.
     *
     * <img src="http://reactivex.io/documentation/operators/images/bufferWithCount4.png"  width="640" height="315">
-    *
     *
     * @param count
     *            The maximum size of each window before it should be emitted.
@@ -363,11 +351,8 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * emit an infinite or very large number of items that will use up memory.
     *
     * @param bufferSize the buffer size that limits the number of items that can be replayed
-    *
     * @param windowTime the duration of the window in which the replayed items must have been emitted
-    *
     * @param scheduler the scheduler that is used as a time source for the window
-    *
     * @return an Observable that when first subscribed to, caches all of its notifications for
     *         the benefit of subsequent subscribers.
     */
@@ -390,9 +375,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * emit an infinite or very large number of items that will use up memory.
     *
     * @param bufferSize the buffer size that limits the number of items that can be replayed
-    *
     * @param windowTime the duration of the window in which the replayed items must have been emitted
-    *
     * @return an Observable that when first subscribed to, caches all of its notifications for
     *         the benefit of subsequent subscribers.
     */
@@ -415,8 +398,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * emit an infinite or very large number of items that will use up memory.
     *
     * @param bufferSize the buffer size that limits the number of items that can be replayed
-    *
-    *
     * @return an Observable that when first subscribed to, caches all of its notifications for
     *         the benefit of subsequent subscribers.
     */
@@ -437,7 +418,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * Note: You sacrifice the ability to unsubscribe from the origin when you use the
     * `cache()` operator so be careful not to use this operator on Observables that
     * emit an infinite or very large number of items that will use up memory.
-    *
     *
     * @return an Observable that when first subscribed to, caches all of its notifications for
     *         the benefit of subsequent subscribers.
@@ -475,8 +455,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * ).take(2);
     * var result = higherOrder.combineAll();
     * result.subscribe(x => console.log(x));
-    *
-    *
     * @return {Observable} An Observable of projected results or arrays of recent
     * values.
     */
@@ -510,8 +488,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * ).take(2);
     * var result = higherOrder.combineAll();
     * result.subscribe(x => console.log(x));
-    *
-    *
     * @param project An optional function to map the most recent
     * values from each inner Observable into a new result. Takes each of the most
     * recent values from each collected inner Observable as arguments, in order.
@@ -529,9 +505,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
       *
       * <img width="640" height="410" src="http://reactivex.io/documentation/operators/images/withLatestFrom.png" alt="" />
       *
-      *
-    *
-    * @param that
+      * @param that
     *            The second source observable.
     * @param selector
     *            The function that is used combine the emissions of the two observables.
@@ -707,8 +681,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @param delayDurationSelector a function that returns an Observable for each item emitted by the source Observable, which is
     *                  then used to delay the emission of that item by the resulting Observable until the Observable
     *                  returned from `itemDelay` emits an item
-    *
-    *
     * @param subscriptionDelay a function that returns an Observable that triggers the subscription to the source Observable
     *                          once it emits any item
     * @return an Observable that delays the emissions of the source Observable via another Observable on a per-item basis
@@ -727,8 +699,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @param delayDurationSelector a function that returns an Observable for each item emitted by the source Observable, which is
     *                  then used to delay the emission of that item by the resulting Observable until the Observable
     *                  returned from `itemDelay` emits an item
-    *
-    *
     * @return an Observable that delays the emissions of the source Observable via another Observable on a per-item basis
     */
   def delayWhen[U,I](delayDurationSelector: T => Observable[U]): Observable[T] = new Observable(inner.delayWhen(toReturnFacade(delayDurationSelector)))
@@ -921,7 +891,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * `(key, observable)` pairs that do not concern you. Instead, you can signal to them that they may
     * discard their buffers by applying an operator like `take(0)` to them.
     *
-    *
     * @param keySelector a function that extracts the key for each item
     * @param valueSelector a function that extracts the return element for each item
     * @tparam K the key type
@@ -946,7 +915,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * is subscribed to. For this reason, in order to avoid memory leaks, you should not simply ignore those
     * `(key, observable)` pairs that do not concern you. Instead, you can signal to them that they may
     * discard their buffers by applying an operator like `take(0)` to them.
-    *
     *
     * @param keySelector a function that extracts the key for each item
     * @tparam K the key type
@@ -1091,7 +1059,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * otherwise you'll get a compilation error.
     *
     * @param concurrent the maximum number of Observables that may be subscribed to concurrently
-    *
     * @return an Observable that emits items that are the result of flattening the items emitted
     *         by the Observables emitted by `this`
     *
@@ -1125,8 +1092,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * subscriptions to these [[Observable]]s.
     *
     * <img width="640" height="380" src="http://reactivex.io/documentation/operators/images/flatMap.c.png" alt="" />
-    *
-    *
     *
     * @param project a function that, when applied to an item emitted by the source [[Observable]], returns an [[Observable]]
     * @return an [[Observable]] that emits the result of applying the transformation function to each item emitted
@@ -1381,11 +1346,11 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
   * that seed as its first emitted item.
   *
   * @param seed
-    *            the initial (seed) accumulator value
+    * the initial (seed) accumulator value
   * @param accumulator
-    *            an accumulator function to be invoked on each item emitted by the source
-    *            Observable, whose result will be emitted to [[rxscalajs.Observer]]s via
-    *            onNext and used in the next accumulator call.
+    * an accumulator function to be invoked on each item emitted by the source
+    * Observable, whose result will be emitted to [[rxscalajs.subscription.Observer]]s via
+    * onNext and used in the next accumulator call.
     * @return an Observable that emits the results of each call to the accumulator function
   */
   def scan[R](seed: R)(accumulator: (R, T) => R): Observable[R] = new Observable(inner.scan(accumulator,seed))
@@ -1403,23 +1368,23 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * that seed as its first emitted item.
     *
     * @param accumulator
-    *            an accumulator function to be invoked on each item emitted by the source
-    *            Observable, whose result will be emitted to [[rxscalajs.Observer]]s via
-    *            onNext and used in the next accumulator call.
+    * an accumulator function to be invoked on each item emitted by the source
+    * Observable, whose result will be emitted to [[rxscalajs.subscription.Observer]]s via
+    * onNext and used in the next accumulator call.
     * @return an Observable that emits the results of each call to the accumulator function
     */
   def scan[U >: T](accumulator: (U, U) => U): Observable[U] = new Observable(inner.scan(accumulator))
 
   /**
     * Returns a new [[Observable]] that multicasts (shares) the original [[Observable]]. As long a
-    * there is more than 1 [[Subscriber]], this [[Observable]] will be subscribed and emitting data.
+    * there is more than 1 [[rxscalajs.subscription.Subscriber]], this [[Observable]] will be subscribed and emitting data.
     * When all subscribers have unsubscribed it will unsubscribe from the source [[Observable]].
     *
     * This is an alias for `publish().refCount()`
     *
     * <img width="640" height="510" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/publishRefCount.png" alt="" />
     *
-    * @return a [[Observable]] that upon connection causes the source Observable to emit items to its [[Subscriber]]s
+    * @return a [[Observable]] that upon connection causes the source Observable to emit items to its [[rxscalajs.subscription.Subscriber]]s
     * @since 0.19
     */
   def share: Observable[T] = new Observable(inner.share())
@@ -1443,7 +1408,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/single.png" alt="" />
     *
     * @return an Observable that emits the single item emitted by the source Observable
-    *
     * @see <a href="https://github.com/ReactiveX/RxJava/wiki/Observable-Utility-Operators#wiki-single-and-singleordefault">RxJava Wiki: single()</a>
     * @see "MSDN: Observable.singleAsync()"
     */
@@ -1540,7 +1504,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @param elem the item to emit
     * @param scheduler
     *            The [[rxscalajs.Scheduler]] to use internally to manage the timers which handle timeout for each event.
-    *
     * @return an Observable that emits the specified item before it begins to emit items emitted by the source Observable
     */
   def startWith[U >: T](elem: U, scheduler: Scheduler): Observable[U] = new Observable[U](inner.startWith(elem,scheduler))
@@ -1605,7 +1568,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/take.png" alt="" />
     *
-    * This method returns an Observable that will invoke a subscribing [[rxscalajs.Observer]]'s
+    * This method returns an Observable that will invoke a subscribing [[rxscalajs.subscription.Observer]]'s
     * onNext function a maximum of `num` times before invoking
     * onCompleted.
     *
@@ -1682,7 +1645,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * @param delay
     *            The time each value has to be 'the most recent' of the [[rxscalajs.Observable]] to ensure that it's not dropped.
-    *
     * @return Observable which performs the throttle operation.
     * @see `Observable.debounce`
     */
@@ -1790,7 +1752,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/toList.png" alt="" />
     *
-    * Normally, an Observable that returns multiple items will do so by invoking its [[rxscalajs.Observer]]'s
+    * Normally, an Observable that returns multiple items will do so by invoking its [[rxscalajs.subscription.Observer]]'s
     * onNext method for each such item. You can change
     * this behavior, instructing the Observable to compose a list of all of these items and then to
     * invoke the Observer's `onNext` function once, passing it the entire list, by
@@ -1874,7 +1836,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @param timespan
     *            The period of time each window is collecting values before it should be emitted, and
     *            replaced with a new window.
-    *
     * @param timeshift the period of time after which a new window will be created
     * @param scheduler
     *            The [[rxscalajs.Scheduler]] to use when determining the end and start of a window.
@@ -1893,7 +1854,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @param timespan
     *            The period of time each window is collecting values before it should be emitted, and
     *            replaced with a new window.
-    *
     * @param timeshift the period of time after which a new window will be created
     * @return
     *         An [[rxscalajs.Observable]] which produces connected non-overlapping windows which are emitted after
@@ -1972,7 +1932,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * <img width="640" height="380" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/withLatestFrom.png" alt="">
     *
-    *
     * @param other the other [[Observable]]
     * @param project the function to call when this [[Observable]] emits an item and the other [[Observable]] has already
     *                       emitted an item, to generate the item to be emitted by the resulting [[Observable]]
@@ -1987,7 +1946,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * function only when the source [[Observable]] (this instance) emits an item.
     *
     * <img width="640" height="380" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/withLatestFrom.png" alt="">
-    *
     *
     * @param other the other [[Observable]]
     * @return an [[Observable]] that merges the specified [[Observable]] into this [[Observable]] by using the
@@ -2064,8 +2022,8 @@ object Observable {
     *
     * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" />
     *
-    * Implementation note: the entire array will be immediately emitted each time an [[rxscalajs.Observer]] subscribes.
-    * Since this occurs before the [[rxscalajs.Subscription]] is returned,
+    * Implementation note: the entire array will be immediately emitted each time an [[rxscalajs.subscription.Observer]] subscribes.
+    * Since this occurs before the [[subscription.Subscription]] is returned,
     * it in not possible to unsubscribe from the sequence before it completes.
     *
     * @param values

@@ -1,5 +1,5 @@
 package rxscalajs.facade
-import rxscalajs.{AnonymousSubscription, Observer}
+import rxscalajs.subscription.{AnonymousSubscription, Observer}
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation._

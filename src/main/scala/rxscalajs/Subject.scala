@@ -1,6 +1,7 @@
 package rxscalajs
 
 import rxscalajs.facade.SubjectFacade
+import rxscalajs.subscription.Observer
 
 import scala.scalajs.js
 
@@ -23,6 +24,7 @@ class Subject[T] protected(inner: SubjectFacade[T]) extends Observable[T](inner)
   * <p>
   * <img width="640" height="405" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/S.PublishSubject.png" alt="" />
   * <p>
+ *
   * @example
 {{{
   val subject = Subject[String]()
