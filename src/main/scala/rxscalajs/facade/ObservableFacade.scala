@@ -24,7 +24,7 @@ import scala.scalajs.js.annotation.JSName
   trait TimeInterval[T] extends js.Object { def value: T; def interval: Int }
 
   @js.native
-  trait Timestamp[T] extends js.Object { def value: T; def timestamp: Int }
+  trait Timestamp[T] extends js.Object { def value: T; def timestamp: Double }
 
   @js.native
   class ErrorObservableFacade protected() extends ObservableFacade[js.Any] {
