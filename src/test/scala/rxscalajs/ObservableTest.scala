@@ -285,7 +285,7 @@ object ObservableTest extends TestSuite {
       }
       'CombineLatest {
         obs.combineLatest(intervalObs).subscribe(unit)
-        obs.combineLatestWith(intervalObs)((n: Int, n2: Int) => n + n2).subscribe(unit)
+        obs.combineLatestWith(intervalObs)((n, n2) => n + n2).subscribe(unit)
       }
       'Concat {
         obs.concat(intervalObs).subscribe(unit)
@@ -492,7 +492,7 @@ object ObservableTest extends TestSuite {
         intervalObs.throttleTime(200).subscribe(unit)
       }
       'Timestamp {
-        intervalObs.timestamp.map(tmp => (tmp.value, tmp.timestamp)).subscribe(println)
+        intervalObs.timestamp.map(tmp => (tmp.value, tmp.timestamp)).subscribe(unit)
       }
       'Window {
         obs.window(intervalObs).subscribe(unit)
