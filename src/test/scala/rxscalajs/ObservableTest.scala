@@ -491,6 +491,9 @@ object ObservableTest extends TestSuite {
       'ThrottleTime {
         intervalObs.throttleTime(200).subscribe(unit)
       }
+      'Timestamp {
+        intervalObs.timestamp.map(tmp => (tmp.value, tmp.timestamp)).subscribe(println)
+      }
       'Window {
         obs.window(intervalObs).subscribe(unit)
       }
