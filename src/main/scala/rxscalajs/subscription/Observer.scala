@@ -25,7 +25,7 @@ trait ErrorObserver[T] extends js.Object {
     *
     * If the [[rxscalajs.Observable]] calls this method, it will not thereafter call `onNext` or `onCompleted`.
     */
-  def error(): Unit = js.native
+  def error(err :js.Any): Unit = js.native
 }
 
 @js.native

@@ -94,8 +94,8 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * repeats for the next source value.
     *
     * @example <caption>Emit clicks at a rate of at most one click per second</caption>
-    * val result = clickStream.audit(ev => Observable.interval(1000));
-    * result.subscribe(x => println(x));
+    * {{{ val result = clickStream.audit(ev => Observable.interval(1000)) 
+    * result.subscribe(x => println(x)) }}}
     * @param durationSelector A function
     * that receives a value from the source Observable, for computing the silencing
     * duration, returned as an Observable or a Promise.
@@ -127,9 +127,9 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * Optionally takes a Scheduler for managing timers.
     *
     * @example <caption>Emit clicks at a rate of at most one click per second</caption>
-    * val clicks = Observable.fromEvent(document, "click");
-    * val result = clicks.auditTime(1000);
-    * result.subscribe(x => println(x));
+    * {{{ val clicks = Observable.fromEvent(document, "click") 
+    * val result = clicks.auditTime(1000) 
+    * result.subscribe(x => println(x))  }}}
     * @param delay Time to wait before emitting the most recent source
     * value, measured in milliseconds or the time unit determined internally
     * by the optional `scheduler`.
@@ -161,9 +161,9 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * Optionally takes a Scheduler for managing timers.
     *
     * @example <caption>Emit clicks at a rate of at most one click per second</caption>
-    * val clicks = Observable.fromEvent(document, "click");
-    * val result = clicks.auditTime(1000);
-    * result.subscribe(x => println(x));
+    * {{{ val clicks = Observable.fromEvent(document, "click") 
+    * val result = clicks.auditTime(1000) 
+    * result.subscribe(x => println(x)) }}}
     * @param delay Time to wait before emitting the most recent source
     * value, measured in milliseconds or the time unit determined internally
     * by the optional `scheduler`.
@@ -290,14 +290,8 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * Observable provided to `openings`, and closing and sending the buffers when
     * a Subscribable or Promise returned by the `closingSelector` function emits.
     *
-    * @example <caption>Every other second, emit the click events from the next 500ms</caption>
-    * val clicks = Observable.fromEvent(document, "click");
-    * val openings = Observable.interval(1000);
-    * val buffered = clicks.bufferToggle(openings, i =>
-    *   i % 2 ? Observable.interval(500) : Observable.empty()
-    * );
-    * buffered.subscribe(x => println(x));
-    * @param  openings A Subscribable or Promise of notifications to start new
+    *
+    * @param  openings An Observable or Promise of notifications to start new
     * buffers.
     * @param closingSelector A function that takes
     * the value emitted by the `openings` observable and returns a Subscribable or Promise,
@@ -305,7 +299,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * and cleared.
     * @return  An observable of arrays of buffered values.
     */
-  def bufferToggle[T2,O](openings: Observable[O])( closingSelector:  O => Observable[T2]): Observable[List[T]] =
+  def bufferToggle[T2,O](openings: Observable[O])(closingSelector:  O => Observable[T2]): Observable[List[T]] =
     new Observable(inner.bufferToggle(openings,toReturnFacade(closingSelector)).map((n: js.Array[T], index: Int) => n.toList))
   /**
     * Buffers the source Observable values, using a factory function of closing
@@ -322,11 +316,11 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * the buffer, it immediately opens a new buffer and repeats the process.
     *
     * @example <caption>Emit an array of the last clicks every [1-5] random seconds</caption>
-    * val clicks = Observable.fromEvent(document, "click");
+    * {{{ val clicks = Observable.fromEvent(document, "click") 
     * val buffered = clicks.bufferWhen(() =>
     *   Observable.interval(1000 + Math.random() * 4000)
-    * );
-    * buffered.subscribe(x => println(x));
+    * ) 
+    * buffered.subscribe(x => println(x)) }}}
     * @param  closingSelector A function that takes no
     * arguments and returns an Observable that signals buffer closure.
     * @return  An observable of arrays of buffered values.
@@ -449,12 +443,12 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *     values is emitted by the output Observable.
     *
     * @example <caption>Map two click events to a finite interval Observable, then apply combineAll</caption>
-    * var clicks = Observale.fromEvent(document, "click");
+    * {{{ var clicks = Observable.fromEvent(document, "click")
     * var higherOrder = clicks.map(ev =>
-    *   Observale.interval(Math.random()*2000).take(3)
-    * ).take(2);
-    * var result = higherOrder.combineAll();
-    * result.subscribe(x => console.log(x));
+    *   Observable.interval(Math.random()*2000).take(3)
+    * ).take(2) 
+    * var result = higherOrder.combineAll
+    * result.subscribe(x =>  println(x)) }}}
     * @return {Observable} An Observable of projected results or arrays of recent
     * values.
     */
@@ -482,12 +476,12 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *     values is emitted by the output Observable.
     *
     * @example <caption>Map two click events to a finite interval Observable, then apply combineAll</caption>
-    * var clicks = Observale.fromEvent(document, "click");
+    * {{{ var clicks = Observable.fromEvent(document, "click")
     * var higherOrder = clicks.map(ev =>
-    *   Observale.interval(Math.random()*2000).take(3)
-    * ).take(2);
-    * var result = higherOrder.combineAll();
-    * result.subscribe(x => console.log(x));
+    *   Observable.interval(Math.random()*2000).take(3)
+    * ).take(2) 
+    * var result = higherOrder.combineAll() 
+    * result.subscribe(x =>  println(x))  }}}
     * @param project An optional function to map the most recent
     * values from each inner Observable into a new result. Takes each of the most
     * recent values from each collected inner Observable as arguments, in order.
@@ -1961,7 +1955,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * <p>
     * <img width="640" height="380" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/zip.i.png" alt="" />
     * <p>
-    * Note that the `other` Iterable is evaluated as items are observed from the source Observable; it is
+    * Note that the `other` Iterable is evaluated as items are observed from the source Observable  it is
     * not pre-consumed. This allows you to zip infinite streams on either side.
     *
     * @param that the Iterable sequence
