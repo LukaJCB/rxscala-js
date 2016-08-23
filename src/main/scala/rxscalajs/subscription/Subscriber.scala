@@ -7,7 +7,7 @@ import scala.scalajs.js.|
 
 @js.native
 /**
-* An extension of the [[Observer]] trait which adds subscription handling
+* An extension of the [[ObserverFacade]] trait which adds subscription handling
 * (unsubscribe, isUnsubscribed, and `add` methods) and backpressure handling
 * (onStart and request methods).
 *
@@ -19,7 +19,7 @@ import scala.scalajs.js.|
 *
 */
 class Subscriber[T]  () extends Subscription {
-  def this(destinationOrNext: Observer[js.Any] | js.Function1[T, Unit] = ???, error: js.Function1[js.Any, Unit] = ???, complete: js.Function0[Unit] = ???) = this()
+  def this(destinationOrNext: ObserverFacade[js.Any] | js.Function1[T, Unit] = ???, error: js.Function1[js.Any, Unit] = ???, complete: js.Function0[Unit] = ???) = this()
 
   def next(value: T = ???): Unit = js.native
   def error(err: js.Any = ???): Unit = js.native

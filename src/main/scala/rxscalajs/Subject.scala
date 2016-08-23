@@ -1,7 +1,7 @@
 package rxscalajs
 
 import rxscalajs.facade.SubjectFacade
-import rxscalajs.subscription.Observer
+import rxscalajs.subscription.{Observer, ObserverFacade}
 
 import scala.scalajs.js
 
@@ -13,6 +13,7 @@ class Subject[T] protected(inner: SubjectFacade[T]) extends Observable[T](inner)
 
     def next(value: T): Unit = inner.next(value)
     def error(err: js.Any): Unit = inner.error(err)
+    def complete(): Unit = inner.complete()
     def asObservable(): Observable[T] = this
     def unsubscribe(): Unit = inner.unsubscribe()
 

@@ -1,6 +1,6 @@
 package rxscalajs.facade
 import rxscalajs._
-import rxscalajs.subscription.{AnonymousSubscription, Subscription, Observer}
+import rxscalajs.subscription.{AnonymousSubscription, Subscription, ObserverFacade}
 
 import scala.scalajs.js
 import scala.scalajs.js._
@@ -13,6 +13,7 @@ import scala.scalajs.js.annotation.JSName
   @js.native
   trait Subscribable[T] extends js.Object {
     def subscribe(onNext: js.Function1[T, Unit], error: js.Function1[js.Any, Unit] = ???, complete: js.Function0[Unit] = ???): AnonymousSubscription = js.native
+    def subscribe(observer: ObserverFacade[T]): Subscription = js.native
   }
 
   @js.native
@@ -81,7 +82,7 @@ import scala.scalajs.js.annotation.JSName
     def distinctUntilChanged[K](compare: js.Function2[K,  K,Boolean], keySelector: js.Function1[T,K]): ObservableFacade[T] = js.native
     def distinctUntilChanged(compare: js.Function2[T,  T,Boolean] = ???): ObservableFacade[T] = js.native
     def distinctUntilKeyChanged(key: String, compare: js.Function2[ T,  T, Boolean] = ???): ObservableFacade[T] = js.native
-    def `do`[T2](nextOrObserver: (Observer[T] | js.Function1[T ,Unit]) = ???, error: js.Function1[T2 ,Unit] = ???, complete: js.Function0[Unit] = ???): ObservableFacade[T] = js.native
+    def `do`[T2](nextOrObserver: (ObserverFacade[T] | js.Function1[T ,Unit]) = ???, error: js.Function1[T2 ,Unit] = ???, complete: js.Function0[Unit] = ???): ObservableFacade[T] = js.native
     def elementAt(index: Int, defaultValue: T = ???): ObservableFacade[T] = js.native
     def every[T2](predicate: js.Function3[T,  Int,  ObservableFacade[T],Boolean], thisArg: T2 = ???): ObservableFacade[Boolean] = js.native
     def exhaust[U](): ObservableFacade[U] = js.native
@@ -198,7 +199,7 @@ import scala.scalajs.js.annotation.JSName
 
     def combineLatest[T, R](sources: js.Array[ObservableFacade[T]],combineFunction: js.Function1[js.Array[T], R] = ???): ObservableFacade[R] = js.native
 
-    def create[T](subscribe: js.Function1[Observer[T],Unit]): ObservableFacade[T] = js.native
+    def create[T](subscribe: js.Function1[ObserverFacade[T],Unit]): ObservableFacade[T] = js.native
 
     def concat[T, R](observables: js.Array[ObservableFacade[T]], scheduler: Scheduler = ???): ObservableFacade[R] = js.native
 

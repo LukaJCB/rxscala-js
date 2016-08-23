@@ -3,7 +3,7 @@ package rxscalajs
 import org.scalajs.dom.Element
 import org.scalajs.dom.raw.Event
 import rxscalajs.facade._
-import rxscalajs.subscription.{Subscriber, AnonymousSubscription, Subscription, Observer}
+import rxscalajs.subscription.{Subscriber, AnonymousSubscription, Subscription, ObserverFacade}
 
 import scala.collection.immutable.Seq
 import scala.scalajs.js
@@ -16,7 +16,7 @@ import js.JSConverters._
   * The Observable interface that implements the Reactive Pattern.
   *
   * @define subscribeObserverMain
-  * Call this method to subscribe an [[Observer]] for receiving
+  * Call this method to subscribe an [[ObserverFacade]] for receiving
   * items and notifications from the Observable.
   *
   * A typical implementation of `subscribe` does the following:
@@ -289,7 +289,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * Buffers values from the source by opening the buffer via signals from an
     * Observable provided to `openings`, and closing and sending the buffers when
     * a Subscribable or Promise returned by the `closingSelector` function emits.
-    *
     *
     * @param  openings An Observable or Promise of notifications to start new
     * buffers.
@@ -1343,7 +1342,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * the initial (seed) accumulator value
   * @param accumulator
     * an accumulator function to be invoked on each item emitted by the source
-    * Observable, whose result will be emitted to [[rxscalajs.subscription.Observer]]s via
+    * Observable, whose result will be emitted to [[rxscalajs.subscription.ObserverFacade]]s via
     * onNext and used in the next accumulator call.
     * @return an Observable that emits the results of each call to the accumulator function
   */
@@ -1363,7 +1362,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * @param accumulator
     * an accumulator function to be invoked on each item emitted by the source
-    * Observable, whose result will be emitted to [[rxscalajs.subscription.Observer]]s via
+    * Observable, whose result will be emitted to [[rxscalajs.subscription.ObserverFacade]]s via
     * onNext and used in the next accumulator call.
     * @return an Observable that emits the results of each call to the accumulator function
     */
@@ -1562,7 +1561,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/take.png" alt="" />
     *
-    * This method returns an Observable that will invoke a subscribing [[rxscalajs.subscription.Observer]]'s
+    * This method returns an Observable that will invoke a subscribing [[rxscalajs.subscription.ObserverFacade]]'s
     * onNext function a maximum of `num` times before invoking
     * onCompleted.
     *
@@ -1746,7 +1745,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/toList.png" alt="" />
     *
-    * Normally, an Observable that returns multiple items will do so by invoking its [[rxscalajs.subscription.Observer]]'s
+    * Normally, an Observable that returns multiple items will do so by invoking its [[rxscalajs.subscription.ObserverFacade]]'s
     * onNext method for each such item. You can change
     * this behavior, instructing the Observable to compose a list of all of these items and then to
     * invoke the Observer's `onNext` function once, passing it the entire list, by
@@ -1995,6 +1994,17 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     */
   def subscribe(onNext: T => Unit, error: js.Function1[js.Any,Unit] = null, complete: js.Function0[Unit] = null): AnonymousSubscription = inner.subscribe(onNext,error,complete)
 
+  /**
+    *
+    *
+    * $noDefaultScheduler
+    *
+    * @return $subscribeAllReturn
+    * @see <a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a>
+    */
+  def subscribe(observer: rxscalajs.subscription.Observer[T]): AnonymousSubscription =
+    inner.subscribe(observer.next _: js.Function1[T,Unit], observer.error _: js.Function1[js.Any,Unit], observer.complete _:js.Function0[Unit])
+
   private def get = inner
 
   implicit def toFacade[A](observable: Observable[A]): ObservableFacade[A] = observable.get
@@ -2016,7 +2026,7 @@ object Observable {
     *
     * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" />
     *
-    * Implementation note: the entire array will be immediately emitted each time an [[rxscalajs.subscription.Observer]] subscribes.
+    * Implementation note: the entire array will be immediately emitted each time an [[rxscalajs.subscription.ObserverFacade]] subscribes.
     * Since this occurs before the [[subscription.Subscription]] is returned,
     * it in not possible to unsubscribe from the sequence before it completes.
     *
@@ -2034,7 +2044,7 @@ object Observable {
     *
     * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" />
     *
-    * Implementation note: the entire array will be immediately emitted each time an [[rxscalajs.subscription.Observer]] subscribes.
+    * Implementation note: the entire array will be immediately emitted each time an [[rxscalajs.subscription.ObserverFacade]] subscribes.
     * Since this occurs before the [[subscription.Subscription]] is returned,
     * it in not possible to unsubscribe from the sequence before it completes.
     *
@@ -2097,7 +2107,7 @@ object Observable {
     *
     * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" />
     *
-    * Implementation note: the entire array will be immediately emitted each time an [[rxscalajs.subscription.Observer]] subscribes.
+    * Implementation note: the entire array will be immediately emitted each time an [[rxscalajs.subscription.ObserverFacade]] subscribes.
     * Since this occurs before the [[subscription.Subscription]] is returned,
     * it in not possible to unsubscribe from the sequence before it completes.
     *
