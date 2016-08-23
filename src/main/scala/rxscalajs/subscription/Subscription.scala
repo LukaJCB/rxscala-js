@@ -11,6 +11,8 @@ trait AnonymousSubscription extends js.Object {
     * this Subscription was received.
     */
   def unsubscribe(): Unit = js.native
+
+  def isUnsubscribed: Boolean = js.native
 }
 
 

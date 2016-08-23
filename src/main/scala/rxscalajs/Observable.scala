@@ -2035,6 +2035,22 @@ object Observable {
     */
   def apply[T](values: T*): Observable[T] = new Observable(ObservableFacade.of[T](values: _*))
 
+  /**
+    * Converts a sequence of values into an Observable.
+    *
+    * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" />
+    *
+    * Implementation note: the entire array will be immediately emitted each time an [[rxscalajs.subscription.Observer]] subscribes.
+    * Since this occurs before the [[subscription.Subscription]] is returned,
+    * it in not possible to unsubscribe from the sequence before it completes.
+    *
+    * @param values
+    *            the source Array
+    * @tparam T
+    *            the type of items in the Array, and the type of items to be emitted by the
+    *            resulting Observable
+    * @return an Observable that emits each item in the source Array
+    */
   def just[T](values: T*): Observable[T] = new Observable(ObservableFacade.of[T](values: _*))
 
   def ajax[T](request: String): Observable[T] = new Observable[T](ObservableFacade.ajax(request))
@@ -2081,23 +2097,26 @@ object Observable {
     */
   def interval(duration: Int = 0): Observable[Int] = new Observable(ObservableFacade.interval(duration))
 
-  /**
-    * Flattens Observables into one Observable, without any transformation.
-    *
-    * <img width="640" height="380" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/merge.png" alt="" />
-    *
-    * You can combine items emitted by two Observables so that they act like a single
-    * Observable by using the `merge` method.
-    *
-    * @param observables
-    *            Observables to be merged
-    * @return an Observable that emits items from `this` and `that` until
-    *            `this` or `that` emits `onError` or both Observables emit `onCompleted`.
-    */
-  def merge[T, R](observables: Seq[ObservableFacade[T]], scheduler: Scheduler): Observable[R] = new Observable(ObservableFacade.merge(observables.toJSArray,scheduler))
-  def merge[T, R](observables: Seq[ObservableFacade[T]]): Observable[R] = new Observable(ObservableFacade.merge(observables.toJSArray))
 
+  /**
+    * Converts a sequence of values into an Observable.
+    *
+    * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" />
+    *
+    * Implementation note: the entire array will be immediately emitted each time an [[rxscalajs.subscription.Observer]] subscribes.
+    * Since this occurs before the [[subscription.Subscription]] is returned,
+    * it in not possible to unsubscribe from the sequence before it completes.
+    *
+    * @param elements
+    *            the source Array
+    * @tparam T
+    *            the type of items in the Array, and the type of items to be emitted by the
+    *            resulting Observable
+    * @return an Observable that emits each item in the source Array
+    */
   def of[T](elements: T*): Observable[T] = apply(elements: _*)
+
+
   def race[T](observables: ObservableFacade[T]*): Observable[T] = new Observable(ObservableFacade.race(observables: _*))
 
   /**
