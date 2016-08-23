@@ -704,9 +704,9 @@ strategy, such that:
 values from each inner Observable into a new result. Takes each of the most
 recent values from each collected inner Observable as arguments, in order.</p></dd><dt>returns</dt><dd class="cmt"><p>{Observable} An Observable of projected results or arrays of recent
 values.</p></dd></dl><dl class="attributes block"> <div class="block">Example:
-               <ol><li class="cmt"><p><caption>Map two click events to a finite interval Observable, then apply combineAll</caption></p><pre> <span class="kw">var</span> clicks = Observale.fromEvent(document, <span class="lit">"click"</span>)
+               <ol><li class="cmt"><p><caption>Map two click events to a finite interval Observable, then apply combineAll</caption></p><pre> <span class="kw">var</span> clicks = Observable.fromEvent(document, <span class="lit">"click"</span>)
 <span class="kw">var</span> higherOrder = clicks.map(ev <span class="kw">=&gt;</span>
-  Observale.interval(Math.random()*<span class="num">2000</span>).take(<span class="num">3</span>)
+  Observable.interval(Math.random()*<span class="num">2000</span>).take(<span class="num">3</span>)
 ).take(<span class="num">2</span>)
 <span class="kw">var</span> result = higherOrder.combineAll()
 result.subscribe(x <span class="kw">=&gt;</span>  println(x))</pre></li></ol>
@@ -739,15 +739,14 @@ strategy, such that:
     from each inner Observable in whatever order they arrived, and the result
     of the <code>project</code> function is what is emitted by the output Observable.</li><li>If there is no <code>project</code> function, an array of all of the most recent
     values is emitted by the output Observable.
-</li></ul></div><dl class="attributes block"> <div class="block">Example:
-               <ol><li class="cmt"><p><caption>Map two click events to a finite interval Observable, then apply combineAll</caption></p><pre> <span class="kw">var</span> clicks = Observale.fromEvent(document, <span class="lit">"click"</span>)
+</li></ul></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>{Observable} An Observable of projected results or arrays of recent
+values.</p></dd></dl><dl class="attributes block"> <div class="block">Example:
+               <ol><li class="cmt"><p><caption>Map two click events to a finite interval Observable, then apply combineAll</caption></p><pre> <span class="kw">var</span> clicks = Observable.fromEvent(document, <span class="lit">"click"</span>)
 <span class="kw">var</span> higherOrder = clicks.map(ev <span class="kw">=&gt;</span>
-  Observale.interval(Math.random()*<span class="num">2000</span>).take(<span class="num">3</span>)
+  Observable.interval(Math.random()*<span class="num">2000</span>).take(<span class="num">3</span>)
 ).take(<span class="num">2</span>)
 <span class="kw">var</span> result = higherOrder.combineAll
-result.subscribe(x <span class="kw">=&gt;</span>  println(x))
-@<span class="kw">return</span> {Observable} An Observable of projected results or arrays of recent
-values.</pre></li></ol>
+result.subscribe(x <span class="kw">=&gt;</span>  println(x))</pre></li></ol>
             </div></dl></div>
     </li><li name="rxscalajs.Observable#combineLatest" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]"></a>
