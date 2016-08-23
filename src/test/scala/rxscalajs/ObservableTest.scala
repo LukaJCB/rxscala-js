@@ -265,7 +265,16 @@ object ObservableTest extends TestSuite {
       'Zip {
         obs.zip(intervalObs).subscribe(unit)
       }
-
+      'Create {
+        val func: js.Function1[ObserverFacade[Double],Unit] = (subscriber: ObserverFacade[Double]) => {
+          subscriber.next(Math.random())
+          subscriber.next(Math.random())
+          subscriber.next(Math.random())
+          subscriber.complete()
+        }
+        val result = ObservableFacade.create(func)
+        result.subscribe(unit)
+      }
     }
     'WrapperTests{
 
@@ -533,7 +542,23 @@ object ObservableTest extends TestSuite {
         sub.unsubscribe()
         assert(sub.isUnsubscribed)
       }
+      'ObserverTests {
+        val o = new Observer[Int] {
+          override def next(n: Int) = unit(n)
+          override def error(a: js.Any) = unit(a)
+          override def complete() = unit()
+        }
 
+        intervalObs.subscribe(o)
+      }
+      'SubjectTest {
+        val s = Subject[Int]()
+        s.scan(0)(_ + _).startWith(0)
+        s.next(10)
+        s.subscribe(unit)
+        s.next(10)
+
+      }
     }
 
 
