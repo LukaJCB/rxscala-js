@@ -52,6 +52,11 @@ RxJs:
 
 If you're new to Rx, I suggest starting with [this interactive tutorial.](http://reactivex.io/learnrx/)
 
+## Samples
+
+ - [Spaceship Reactive](https://lukajcb.github.io/RxScalaJsSamples/) - A port of Spaceship Reactive found in Sergi Mansillas awesome book [Reactive Programming with RxJS](https://pragprog.com/book/smreactjs/reactive-programming-with-rxjs). Code can be found [here](https://github.com/LukaJCB/RxScalaJsSamples). 
+
+
 ## Bugs and Feedback
 
 For bugs, questions and discussions please use the [Github Issues](https://github.com/LukaJCB/rxscala-js/issues).
