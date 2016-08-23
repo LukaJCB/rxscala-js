@@ -277,9 +277,8 @@ repeats for the next source value.
 that receives a value from the source Observable, for computing the silencing
 duration, returned as an Observable or a Promise.</p></dd><dt>returns</dt><dd class="cmt"><p>{Observable[T]} An Observable that performs rate-limiting of
 emissions from the source Observable.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><div class="block">Example:
-               <ol><li class="cmt"><p><caption>Emit clicks at a rate of at most one click per second</caption>
-val result = clickStream.audit(ev =&gt; Observable.interval(1000));
-result.subscribe(x =&gt; println(x));</p></li></ol>
+               <ol><li class="cmt"><p><caption>Emit clicks at a rate of at most one click per second</caption></p><pre> <span class="kw">val</span> result = clickStream.audit(ev <span class="kw">=&gt;</span> Observable.interval(<span class="num">1000</span>))
+result.subscribe(x <span class="kw">=&gt;</span> println(x))</pre></li></ol>
             </div></dl></div>
     </li><li name="rxscalajs.Observable#auditTime" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="auditTime(delay:Int):rxscalajs.Observable[T]"></a>
@@ -315,10 +314,9 @@ Optionally takes a Scheduler for managing timers.
 value, measured in milliseconds or the time unit determined internally
 by the optional <code>scheduler</code>.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable that performs rate-limiting of
 emissions from the source Observable.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><div class="block">Example:
-               <ol><li class="cmt"><p><caption>Emit clicks at a rate of at most one click per second</caption>
-val clicks = Observable.fromEvent(document, &quot;click&quot;);
-val result = clicks.auditTime(1000);
-result.subscribe(x =&gt; println(x));</p></li></ol>
+               <ol><li class="cmt"><p><caption>Emit clicks at a rate of at most one click per second</caption></p><pre> <span class="kw">val</span> clicks = Observable.fromEvent(document, <span class="lit">"click"</span>)
+<span class="kw">val</span> result = clicks.auditTime(<span class="num">1000</span>)
+result.subscribe(x <span class="kw">=&gt;</span> println(x))</pre></li></ol>
             </div></dl></div>
     </li><li name="rxscalajs.Observable#auditTime" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="auditTime(delay:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]"></a>
@@ -355,10 +353,9 @@ value, measured in milliseconds or the time unit determined internally
 by the optional <code>scheduler</code>.</p></dd><dt class="param">scheduler</dt><dd class="cmt"><p>The Scheduler to use for
 managing the timers that handle the rate-limiting behavior.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable that performs rate-limiting of
 emissions from the source Observable.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><div class="block">Example:
-               <ol><li class="cmt"><p><caption>Emit clicks at a rate of at most one click per second</caption>
-val clicks = Observable.fromEvent(document, &quot;click&quot;);
-val result = clicks.auditTime(1000);
-result.subscribe(x =&gt; println(x));</p></li></ol>
+               <ol><li class="cmt"><p><caption>Emit clicks at a rate of at most one click per second</caption></p><pre> <span class="kw">val</span> clicks = Observable.fromEvent(document, <span class="lit">"click"</span>)
+<span class="kw">val</span> result = clicks.auditTime(<span class="num">1000</span>)
+result.subscribe(x <span class="kw">=&gt;</span> println(x))</pre></li></ol>
             </div></dl></div>
     </li><li name="rxscalajs.Observable#buffer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="buffer[T2](closingNotifier:rxscalajs.Observable[T2]):rxscalajs.Observable[List[T]]"></a>
@@ -527,20 +524,11 @@ current buffer is emitted and the event is propagated.
 collecting only when `opening` emits, and calls the `closingSelector`
 function to get an Observable that tells when to close the buffer.</span></p><p><img src="http://reactivex.io/documentation/operators/images/buffer2.png"  width="640" height="315"></p><p>Buffers values from the source by opening the buffer via signals from an
 Observable provided to <code>openings</code>, and closing and sending the buffers when
-a Subscribable or Promise returned by the <code>closingSelector</code> function emits.
-</p></div><dl class="paramcmts block"><dt class="param">openings</dt><dd class="cmt"><p>A Subscribable or Promise of notifications to start new
+a Subscribable or Promise returned by the <code>closingSelector</code> function emits.</p></div><dl class="paramcmts block"><dt class="param">openings</dt><dd class="cmt"><p>An Observable or Promise of notifications to start new
 buffers.</p></dd><dt class="param">closingSelector</dt><dd class="cmt"><p>A function that takes
 the value emitted by the <code>openings</code> observable and returns a Subscribable or Promise,
 which, when it emits, signals that the associated buffer should be emitted
-and cleared.</p></dd><dt>returns</dt><dd class="cmt"><p>An observable of arrays of buffered values.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><div class="block">Example:
-               <ol><li class="cmt"><p><caption>Every other second, emit the click events from the next 500ms</caption>
-val clicks = Observable.fromEvent(document, &quot;click&quot;);
-val openings = Observable.interval(1000);
-val buffered = clicks.bufferToggle(openings, i =&gt;
-  i % 2 ? Observable.interval(500) : Observable.empty()
-);
-buffered.subscribe(x =&gt; println(x));</p></li></ol>
-            </div></dl></div>
+and cleared.</p></dd><dt>returns</dt><dd class="cmt"><p>An observable of arrays of buffered values.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#bufferWhen" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="bufferWhen[T2](closingSelector:()=&gt;rxscalajs.Observable[T2]):rxscalajs.Observable[List[T]]"></a>
       <a id="bufferWhen[T2](()⇒Observable[T2]):Observable[List[T]]"></a>
@@ -566,12 +554,11 @@ returned by calling <code>closingSelector</code> function emits a value. When it
 the buffer, it immediately opens a new buffer and repeats the process.
 </p></div><dl class="paramcmts block"><dt class="param">closingSelector</dt><dd class="cmt"><p>A function that takes no
 arguments and returns an Observable that signals buffer closure.</p></dd><dt>returns</dt><dd class="cmt"><p>An observable of arrays of buffered values.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><div class="block">Example:
-               <ol><li class="cmt"><p><caption>Emit an array of the last clicks every [1-5] random seconds</caption>
-val clicks = Observable.fromEvent(document, &quot;click&quot;);
-val buffered = clicks.bufferWhen(() =&gt;
-  Observable.interval(1000 + Math.random() * 4000)
-);
-buffered.subscribe(x =&gt; println(x));</p></li></ol>
+               <ol><li class="cmt"><p><caption>Emit an array of the last clicks every [1-5] random seconds</caption></p><pre> <span class="kw">val</span> clicks = Observable.fromEvent(document, <span class="lit">"click"</span>)
+<span class="kw">val</span> buffered = clicks.bufferWhen(() <span class="kw">=&gt;</span>
+  Observable.interval(<span class="num">1000</span> + Math.random() * <span class="num">4000</span>)
+)
+buffered.subscribe(x <span class="kw">=&gt;</span> println(x))</pre></li></ol>
             </div></dl></div>
     </li><li name="rxscalajs.Observable#cache" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="cache:rxscalajs.Observable[T]"></a>
@@ -732,13 +719,12 @@ strategy, such that:
 values from each inner Observable into a new result. Takes each of the most
 recent values from each collected inner Observable as arguments, in order.</p></dd><dt>returns</dt><dd class="cmt"><p>{Observable} An Observable of projected results or arrays of recent
 values.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><div class="block">Example:
-               <ol><li class="cmt"><p><caption>Map two click events to a finite interval Observable, then apply combineAll</caption>
-var clicks = Observale.fromEvent(document, &quot;click&quot;);
-var higherOrder = clicks.map(ev =&gt;
-  Observale.interval(Math.random()*2000).take(3)
-).take(2);
-var result = higherOrder.combineAll();
-result.subscribe(x =&gt; console.log(x));</p></li></ol>
+               <ol><li class="cmt"><p><caption>Map two click events to a finite interval Observable, then apply combineAll</caption></p><pre> <span class="kw">var</span> clicks = Observale.fromEvent(document, <span class="lit">"click"</span>)
+<span class="kw">var</span> higherOrder = clicks.map(ev <span class="kw">=&gt;</span>
+  Observale.interval(Math.random()*<span class="num">2000</span>).take(<span class="num">3</span>)
+).take(<span class="num">2</span>)
+<span class="kw">var</span> result = higherOrder.combineAll()
+result.subscribe(x <span class="kw">=&gt;</span>  println(x))</pre></li></ol>
             </div></dl></div>
     </li><li name="rxscalajs.Observable#combineAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="combineAll[U](implicitevidence:&lt;:&lt;[rxscalajs.Observable[T],rxscalajs.Observable[rxscalajs.Observable[U]]]):rxscalajs.Observable[scala.collection.immutable.Seq[U]]"></a>
@@ -768,15 +754,15 @@ strategy, such that:
     from each inner Observable in whatever order they arrived, and the result
     of the <code>project</code> function is what is emitted by the output Observable.</li><li>If there is no <code>project</code> function, an array of all of the most recent
     values is emitted by the output Observable.
-</li></ul></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>{Observable} An Observable of projected results or arrays of recent
-values.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><div class="block">Example:
-               <ol><li class="cmt"><p><caption>Map two click events to a finite interval Observable, then apply combineAll</caption>
-var clicks = Observale.fromEvent(document, &quot;click&quot;);
-var higherOrder = clicks.map(ev =&gt;
-  Observale.interval(Math.random()*2000).take(3)
-).take(2);
-var result = higherOrder.combineAll();
-result.subscribe(x =&gt; console.log(x));</p></li></ol>
+</li></ul></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><div class="block">Example:
+               <ol><li class="cmt"><p><caption>Map two click events to a finite interval Observable, then apply combineAll</caption></p><pre> <span class="kw">var</span> clicks = Observale.fromEvent(document, <span class="lit">"click"</span>)
+<span class="kw">var</span> higherOrder = clicks.map(ev <span class="kw">=&gt;</span>
+  Observale.interval(Math.random()*<span class="num">2000</span>).take(<span class="num">3</span>)
+).take(<span class="num">2</span>)
+<span class="kw">var</span> result = higherOrder.combineAll
+result.subscribe(x <span class="kw">=&gt;</span>  println(x))
+@<span class="kw">return</span> {Observable} An Observable of projected results or arrays of recent
+values.</pre></li></ol>
             </div></dl></div>
     </li><li name="rxscalajs.Observable#combineLatest" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]"></a>
@@ -3756,7 +3742,7 @@ is the minumum of the number of <code>onNext</code> invocations of <code>this</c
     </span>
       <p class="shortcomment cmt">Returns an Observable that emits items that are the result of applying a specified function to pairs of
 values, one each from the source Observable and a specified Iterable sequence.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that emits items that are the result of applying a specified function to pairs of
-values, one each from the source Observable and a specified Iterable sequence.</p><p><img width="640" height="380" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/zip.i.png" alt="" /></p><p>Note that the <code>other</code> Iterable is evaluated as items are observed from the source Observable; it is
+values, one each from the source Observable and a specified Iterable sequence.</p><p><img width="640" height="380" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/zip.i.png" alt="" /></p><p>Note that the <code>other</code> Iterable is evaluated as items are observed from the source Observable  it is
 not pre-consumed. This allows you to zip infinite streams on either side.
 </p></div><dl class="paramcmts block"><dt class="param">that</dt><dd class="cmt"><p>the Iterable sequence</p></dd><dt class="param">project</dt><dd class="cmt"><p>a function that combines the pairs of items from the Observable and the Iterable to generate
                 the items to be emitted by the resulting Observable</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that pairs up values from the source Observable and the <code>other</code> Iterable

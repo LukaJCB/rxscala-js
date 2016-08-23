@@ -428,7 +428,7 @@ aggregation is defined by a specified function.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="rxscalajs.Observable#just" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="rxscalajs.Observable#just" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="just[T](values:T*):rxscalajs.Observable[T]"></a>
       <a id="just[T](T*):Observable[T]"></a>
       <h4 class="signature">
@@ -444,45 +444,13 @@ aggregation is defined by a specified function.
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="rxscalajs.Observable#merge" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="merge[T,R](observables:scala.collection.immutable.Seq[rxscalajs.facade.ObservableFacade[T]]):rxscalajs.Observable[R]"></a>
-      <a id="merge[T,R](Seq[ObservableFacade[T]]):Observable[R]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">merge</span><span class="tparams">[<span name="T">T</span>, <span name="R">R</span>]</span><span class="params">(<span name="observables">observables: <span class="extype" name="scala.collection.immutable.Seq">Seq</span>[<a href="facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.Observable.merge.T">T</span>]]</span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.merge.R">R</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Observable$@merge[T,R](observables:scala.collection.immutable.Seq[rxscalajs.facade.ObservableFacade[T]]):rxscalajs.Observable[R]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="rxscalajs.Observable#merge" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="merge[T,R](observables:scala.collection.immutable.Seq[rxscalajs.facade.ObservableFacade[T]],scheduler:rxscalajs.Scheduler):rxscalajs.Observable[R]"></a>
-      <a id="merge[T,R](Seq[ObservableFacade[T]],Scheduler):Observable[R]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">merge</span><span class="tparams">[<span name="T">T</span>, <span name="R">R</span>]</span><span class="params">(<span name="observables">observables: <span class="extype" name="scala.collection.immutable.Seq">Seq</span>[<a href="facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.Observable.merge.T">T</span>]]</span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.merge.R">R</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Observable$@merge[T,R](observables:scala.collection.immutable.Seq[rxscalajs.facade.ObservableFacade[T]],scheduler:rxscalajs.Scheduler):rxscalajs.Observable[R]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Flattens Observables into one Observable, without any transformation.</p><div class="fullcomment"><div class="comment cmt"><p>Flattens Observables into one Observable, without any transformation.</p><p><img width="640" height="380" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/merge.png" alt="" /></p><p>You can combine items emitted by two Observables so that they act like a single
-Observable by using the <code>merge</code> method.
-</p></div><dl class="paramcmts block"><dt class="param">observables</dt><dd class="cmt"><p>
-           Observables to be merged</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits items from <code>this</code> and <code>that</code> until
-           <code>this</code> or <code>that</code> emits <code>onError</code> or both Observables emit <code>onCompleted</code>.</p></dd></dl></div>
+      <p class="shortcomment cmt">Converts a sequence of values into an Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a sequence of values into an Observable.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" /></p><p>Implementation note: the entire array will be immediately emitted each time an <a href="subscription/Observer.html" class="extype" name="rxscalajs.subscription.Observer">rxscalajs.subscription.Observer</a> subscribes.
+Since this occurs before the <a href="subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">subscription.Subscription</a> is returned,
+it in not possible to unsubscribe from the sequence before it completes.
+</p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>
+           the type of items in the Array, and the type of items to be emitted by the
+           resulting Observable</p></dd><dt class="param">values</dt><dd class="cmt"><p>
+           the source Array</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits each item in the source Array</p></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -534,7 +502,7 @@ Observable by using the <code>merge</code> method.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="rxscalajs.Observable#of" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="rxscalajs.Observable#of" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="of[T](elements:T*):rxscalajs.Observable[T]"></a>
       <a id="of[T](T*):Observable[T]"></a>
       <h4 class="signature">
@@ -550,7 +518,13 @@ Observable by using the <code>merge</code> method.
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Converts a sequence of values into an Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a sequence of values into an Observable.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" /></p><p>Implementation note: the entire array will be immediately emitted each time an <a href="subscription/Observer.html" class="extype" name="rxscalajs.subscription.Observer">rxscalajs.subscription.Observer</a> subscribes.
+Since this occurs before the <a href="subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">subscription.Subscription</a> is returned,
+it in not possible to unsubscribe from the sequence before it completes.
+</p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>
+           the type of items in the Array, and the type of items to be emitted by the
+           resulting Observable</p></dd><dt class="param">elements</dt><dd class="cmt"><p>
+           the source Array</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits each item in the source Array</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#race" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="race[T](observables:rxscalajs.facade.ObservableFacade[T]*):rxscalajs.Observable[T]"></a>
       <a id="race[T](ObservableFacade[T]*):Observable[T]"></a>
