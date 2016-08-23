@@ -14,7 +14,7 @@ trait NextObserver[T] extends js.Object {
     *
     * The [[rxscalajs.Observable]] will not call this method again after it calls either `onCompleted` or `onError`.
     */
-  def next(): Unit = js.native
+  def next(t: T): Unit = js.native
 }
 
 @js.native
@@ -46,5 +46,6 @@ Provides a mechanism for receiving push-based notifications.
   * call an Observer's `onCompleted` or `onError` methods exactly once.
   */
 trait Observer[T]
+
 
 

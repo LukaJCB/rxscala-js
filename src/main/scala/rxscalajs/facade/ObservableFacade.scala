@@ -198,7 +198,7 @@ import scala.scalajs.js.annotation.JSName
 
     def combineLatest[T, R](sources: js.Array[ObservableFacade[T]],combineFunction: js.Function1[js.Array[T], R] = ???): ObservableFacade[R] = js.native
 
-
+    def create[T](subscribe: js.Function1[Observer[T],Unit]): ObservableFacade[T] = js.native
 
     def concat[T, R](observables: js.Array[ObservableFacade[T]], scheduler: Scheduler = ???): ObservableFacade[R] = js.native
 

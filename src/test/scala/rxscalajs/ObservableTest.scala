@@ -1,6 +1,7 @@
 package rxscalajs
 
 import rxscalajs.facade.{GroupedObservableFacade, ObservableFacade, SubjectFacade}
+import rxscalajs.subscription._
 import utest._
 
 import scala.scalajs.js
@@ -92,13 +93,13 @@ object ObservableTest extends TestSuite {
       'ElementAt{
       obs.elementAt(2).subscribe(unit)
       obs.elementAt(20,-3).subscribe(unit)
-     }
+      }
       'Every {
         obs.every((n: Int, n2: Int, o: ObservableFacade[Int]) => n > n2).subscribe(unit)
       }
       'ExhaustMap{
        hoObs.exhaustMap((n: ObservableFacade[Int], index: Int) => ObservableFacade.range(0,index)).subscribe(unit)
-     }
+      }
       'Expand {
         intervalObs.expand((n: Int, n2: Int) => ObservableFacade.of(n)).take(1).subscribe(unit)
       }
@@ -125,9 +126,9 @@ object ObservableTest extends TestSuite {
       'IgnoreElements {
         obs.ignoreElements().subscribe(unit)
       }  
-    'IsEmpty{
-      obs.isEmpty().subscribe(unit)
-    }  
+      'IsEmpty{
+        obs.isEmpty().subscribe(unit)
+      }
       'Last {
         obs.last().subscribe(unit)
       }
@@ -264,6 +265,7 @@ object ObservableTest extends TestSuite {
       'Zip {
         obs.zip(intervalObs).subscribe(unit)
       }
+
     }
     'WrapperTests{
 
@@ -325,29 +327,29 @@ object ObservableTest extends TestSuite {
         notiObs.dematerialize.subscribe(unit)
       }
        
-    'Distinct{
-      obs.distinct.subscribe(unit)
-      obs.distinct((n: Int,n2: Int) => n > n2).subscribe(unit)
-      obs.distinct((n: Int,n2: Int) => n > n2,Observable.of("w")).subscribe(unit)
-    }
+      'Distinct{
+        obs.distinct.subscribe(unit)
+        obs.distinct((n: Int,n2: Int) => n > n2).subscribe(unit)
+        obs.distinct((n: Int,n2: Int) => n > n2,Observable.of("w")).subscribe(unit)
+      }
       'DistinctUntilChanged {
         obs.distinctUntilChanged.subscribe(unit)
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2).subscribe(unit)
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2, (n: Int) => n).subscribe(unit)
       }
 
-    'ElementAt{
-      obs.elementAt(20,-3).subscribe(unit)
-    }  
+      'ElementAt{
+        obs.elementAt(20,-3).subscribe(unit)
+      }
       'Every {
         obs.every((n: Int, n2: Int, o: Observable[Int]) => n > n2).subscribe(unit)
       }  
-    'Exhaust{
-      hoObs.exhaust().subscribe(unit)
-     }
-    'ExhaustMap{
-      hoObs.exhaustMap((n: Observable[Int], index: Int) => Observable.range(0,index)).subscribe(unit)
-    }  
+      'Exhaust{
+        hoObs.exhaust().subscribe(unit)
+       }
+      'ExhaustMap{
+        hoObs.exhaustMap((n: Observable[Int], index: Int) => Observable.range(0,index)).subscribe(unit)
+      }
       'Expand {
         intervalObs.expand((n: Int, n2: Int) => Observable(n)).take(1).subscribe(unit)
       }
@@ -525,7 +527,15 @@ object ObservableTest extends TestSuite {
             n <- o
           } yield (n > 100)
       }
+      'SubscriptionTests {
+        val sub = intervalObs.subscribe(unit)
+        assert(!sub.isUnsubscribed)
+        sub.unsubscribe()
+        assert(sub.isUnsubscribed)
+      }
+
     }
+
 
 
 
