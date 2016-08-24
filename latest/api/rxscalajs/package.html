@@ -110,6 +110,26 @@
       </a>
     </span>
       <p class="shortcomment cmt">The Observable interface that implements the Reactive Pattern.</p>
+    </li><li name="rxscalajs.Observer" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="Observer[T]extendsAnyRef"></a>
+      <a id="Observer[T]:Observer[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Observer.html"><span class="name">Observer</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#rxscalajs.package@Observer[T]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Provides a mechanism for receiving push-based notifications.</p><div class="fullcomment"><div class="comment cmt"><p>Provides a mechanism for receiving push-based notifications.</p><p>After an Observer calls an <a href="Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a>'s <code>subscribe</code> method, the Observable
+calls the Observer's <code>onNext</code> method to provide notifications. A well-behaved Observable will
+call an Observer's <code>onCompleted</code> or <code>onError</code> methods exactly once.
+</p></div></div>
     </li><li name="rxscalajs.Scheduler" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="SchedulerextendsObject"></a>
       <a id="Scheduler:Scheduler"></a>
@@ -141,7 +161,7 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="Subject.html"><span class="name">Subject</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Subject.T">T</span>] with <a href="subscription/Observer.html" class="extype" name="rxscalajs.subscription.Observer">Observer</a>[<span class="extype" name="rxscalajs.Subject.T">T</span>]</span>
+        <a href="Subject.html"><span class="name">Subject</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Subject.T">T</span>] with <a href="Observer.html" class="extype" name="rxscalajs.Observer">Observer</a>[<span class="extype" name="rxscalajs.Subject.T">T</span>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../index.html#rxscalajs.package@Subject[T]extendsObservable[T]withObserver[T]" title="Permalink" target="_top">

@@ -54,7 +54,7 @@
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Created by Luka on 21.05.2016.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="../Subject.html" class="extype" name="rxscalajs.Subject">Subject</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>], <a href="../subscription/Observer.html" class="extype" name="rxscalajs.subscription.Observer">Observer</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>], <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="../Subject.html" class="extype" name="rxscalajs.Subject">Subject</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>], <a href="../Observer.html" class="extype" name="rxscalajs.Observer">Observer</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>], <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -72,7 +72,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="rxscalajs.subjects.AsyncSubject"><span>AsyncSubject</span></li><li class="in" name="rxscalajs.Subject"><span>Subject</span></li><li class="in" name="rxscalajs.subscription.Observer"><span>Observer</span></li><li class="in" name="rxscalajs.Observable"><span>Observable</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="rxscalajs.subjects.AsyncSubject"><span>AsyncSubject</span></li><li class="in" name="rxscalajs.Subject"><span>Subject</span></li><li class="in" name="rxscalajs.Observer"><span>Observer</span></li><li class="in" name="rxscalajs.Observable"><span>Observable</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -524,7 +524,8 @@ current buffer is emitted and the event is propagated.
 collecting only when `opening` emits, and calls the `closingSelector`
 function to get an Observable that tells when to close the buffer.</span></p><p><img src="http://reactivex.io/documentation/operators/images/buffer2.png"  width="640" height="315"></p><p>Buffers values from the source by opening the buffer via signals from an
 Observable provided to <code>openings</code>, and closing and sending the buffers when
-a Subscribable or Promise returned by the <code>closingSelector</code> function emits.</p></div><dl class="paramcmts block"><dt class="param">openings</dt><dd class="cmt"><p>An Observable or Promise of notifications to start new
+a Subscribable or Promise returned by the <code>closingSelector</code> function emits.
+</p></div><dl class="paramcmts block"><dt class="param">openings</dt><dd class="cmt"><p>An Observable or Promise of notifications to start new
 buffers.</p></dd><dt class="param">closingSelector</dt><dd class="cmt"><p>A function that takes
 the value emitted by the <code>openings</code> observable and returns a Subscribable or Promise,
 which, when it emits, signals that the associated buffer should be emitted
@@ -806,6 +807,24 @@ the source observables each time an event is received from one of the source obs
 </p></div><dl class="paramcmts block"><dt class="param">that</dt><dd class="cmt"><p>
            The second source observable.</p></dd><dt class="param">selector</dt><dd class="cmt"><p>
            The function that is used combine the emissions of the two observables.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable that combines the source Observables according to the function selector.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+    </li><li name="rxscalajs.Subject#complete" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="complete():Unit"></a>
+      <a id="complete():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">complete</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@complete():Unit" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Notifies the Observer that the <a href="../Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> has finished sending push-based notifications.</p><div class="fullcomment"><div class="comment cmt"><p>Notifies the Observer that the <a href="../Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> has finished sending push-based notifications.</p><p>The <a href="../Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> will not call this method if it calls <code>error</code>.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Subject.html" class="extype" name="rxscalajs.Subject">Subject</a> → <a href="../Observer.html" class="extype" name="rxscalajs.Observer">Observer</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#concat" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="concat[U](other:rxscalajs.Observable[U]):rxscalajs.Observable[U]"></a>
       <a id="concat[U](Observable[U]):Observable[U]"></a>
@@ -1374,41 +1393,44 @@ source Observbable.</p><p><img width="640" height="310" src="https://raw.githubu
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Subject.html" class="extype" name="rxscalajs.Subject">Subject</a></dd></dl></div>
+      <p class="shortcomment cmt">Notifies the Observer that the <a href="../Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> has experienced an error condition.</p><div class="fullcomment"><div class="comment cmt"><p>Notifies the Observer that the <a href="../Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> has experienced an error condition.</p><p>If the <a href="../Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> calls this method, it will not thereafter call <code>next</code> or <code>completed</code>.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Subject.html" class="extype" name="rxscalajs.Subject">Subject</a> → <a href="../Observer.html" class="extype" name="rxscalajs.Observer">Observer</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#every" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="every[T2](predicate:(T,Int,rxscalajs.Observable[T])=&gt;Boolean):rxscalajs.Observable[Boolean]"></a>
-      <a id="every[T2]((T,Int,Observable[T])⇒Boolean):Observable[Boolean]"></a>
+      <a id="every(predicate:(T,Int)=&gt;Boolean):rxscalajs.Observable[Boolean]"></a>
+      <a id="every((T,Int)⇒Boolean):Observable[Boolean]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">every</span><span class="tparams">[<span name="T2">T2</span>]</span><span class="params">(<span name="predicate">predicate: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>, <span class="extype" name="scala.Int">Int</span>, <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
+        <span class="name">every</span><span class="params">(<span name="predicate">predicate: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@every[T2](predicate:(T,Int,rxscalajs.Observable[T])=&gt;Boolean):rxscalajs.Observable[Boolean]" title="Permalink" target="_top">
+      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@every(predicate:(T,Int)=&gt;Boolean):rxscalajs.Observable[Boolean]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+      <p class="shortcomment cmt">Determines whether all elements of an observable sequence satisfy a condition.</p><div class="fullcomment"><div class="comment cmt"><p>Determines whether all elements of an observable sequence satisfy a condition.</p></div><dl class="paramcmts block"><dt class="param">predicate</dt><dd class="cmt"><p>
+           A function to test each element for a condition.</p></dd><dt>returns</dt><dd class="cmt"><p>An observable sequence containing a single element determining whether all elements in the source sequence pass the test in the specified predicate.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#exhaust" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="exhaust[U]()(implicitevidence:&lt;:&lt;[rxscalajs.Observable[T],rxscalajs.Observable[rxscalajs.Observable[U]]]):rxscalajs.Observable[U]"></a>
-      <a id="exhaust[U]()(&lt;:&lt;[Observable[T],Observable[Observable[U]]]):Observable[U]"></a>
+      <a id="exhaust[U](implicitevidence:&lt;:&lt;[rxscalajs.Observable[T],rxscalajs.Observable[rxscalajs.Observable[U]]]):rxscalajs.Observable[U]"></a>
+      <a id="exhaust[U](&lt;:&lt;[Observable[T],Observable[Observable[U]]]):Observable[U]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">exhaust</span><span class="tparams">[<span name="U">U</span>]</span><span class="params">()</span><span class="params">(<span class="implicit">implicit </span><span name="evidence">evidence: <span class="extype" name="scala.Predef.&lt;:&lt;">&lt;:&lt;</span>[<a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>], <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.exhaust.U">U</span>]]]</span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.exhaust.U">U</span>]</span>
+        <span class="name">exhaust</span><span class="tparams">[<span name="U">U</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="evidence">evidence: <span class="extype" name="scala.Predef.&lt;:&lt;">&lt;:&lt;</span>[<a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>], <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.exhaust.U">U</span>]]]</span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.exhaust.U">U</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@exhaust[U]()(implicitevidence:&lt;:&lt;[rxscalajs.Observable[T],rxscalajs.Observable[rxscalajs.Observable[U]]]):rxscalajs.Observable[U]" title="Permalink" target="_top">
+      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@exhaust[U](implicitevidence:&lt;:&lt;[rxscalajs.Observable[T],rxscalajs.Observable[rxscalajs.Observable[U]]]):rxscalajs.Observable[U]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+      <p class="shortcomment cmt">Projects each source value to an Observable which is merged in the output Observable only if the previous projected Observable has completed.</p><div class="fullcomment"><div class="comment cmt"><p>Projects each source value to an Observable which is merged in the output Observable only if the previous projected Observable has completed.
+Maps each value to an Observable, then flattens all of these inner Observables using exhaust.</p><p><img width="640" height="310" src="http://reactivex.io/rxjs/img/exhaust.png" alt="" /></p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Returns an Observable that takes a source of Observables and propagates the first observable exclusively until it completes before subscribing to the next.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#exhaustMap" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="exhaustMap[I,R](project:(T,Int)=&gt;rxscalajs.Observable[R]):rxscalajs.Observable[R]"></a>
       <a id="exhaustMap[I,R]((T,Int)⇒Observable[R]):Observable[R]"></a>
@@ -1425,7 +1447,10 @@ source Observbable.</p><p><img width="640" height="310" src="https://raw.githubu
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+      <p class="shortcomment cmt">Converts a higher-order Observable into a first-order Observable by dropping inner Observables while the previous inner Observable has not yet completed.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a higher-order Observable into a first-order Observable by dropping inner Observables while the previous inner Observable has not yet completed.
+Flattens an Observable-of-Observables by dropping the next inner Observables while the current inner is still executing.</p><p><img width="640" height="310" src="http://reactivex.io/rxjs/img/exhaustMap.png" alt="" />
+</p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>
+           A function that, when applied to an item emitted by the source Observable, returns an Observable.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable containing projected Observables of each item of the source, ignoring projected Observables that start before their preceding Observable has completed.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#exhaustMap" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="exhaustMap[I,R](project:(T,Int)=&gt;rxscalajs.Observable[R],resultSelector:(T,I,Int,Int)=&gt;R):rxscalajs.Observable[R]"></a>
       <a id="exhaustMap[I,R]((T,Int)⇒Observable[R],(T,I,Int,Int)⇒R):Observable[R]"></a>
@@ -1442,7 +1467,14 @@ source Observbable.</p><p><img width="640" height="310" src="https://raw.githubu
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+      <p class="shortcomment cmt">Converts a higher-order Observable into a first-order Observable by dropping inner Observables while the previous inner Observable has not yet completed.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a higher-order Observable into a first-order Observable by dropping inner Observables while the previous inner Observable has not yet completed.
+Flattens an Observable-of-Observables by dropping the next inner Observables while the current inner is still executing.</p><p><img width="640" height="310" src="http://reactivex.io/rxjs/img/exhaustMap.png" alt="" /></p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>
+           A function that, when applied to an item emitted by the source Observable, returns an Observable.</p></dd><dt class="param">resultSelector</dt><dd class="cmt"><p>
+           A function to produce the value on the output Observable based on the values and the indices of the source (outer) emission and the inner Observable emission. The arguments passed to this function are:
+      outerValue: the value that came from the source
+      innerValue: the value that came from the projected Observable
+      outerIndex: the &quot;index&quot; of the value that came from the source
+      innerIndex: the &quot;index&quot; of the value from the projected Observable</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable containing projected Observables of each item of the source, ignoring projected Observables that start before their preceding Observable has completed.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#expand" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="expand[R](project:(T,Int)=&gt;rxscalajs.Observable[R]):rxscalajs.Observable[R]"></a>
       <a id="expand[R]((T,Int)⇒Observable[R]):Observable[R]"></a>
@@ -1459,24 +1491,30 @@ source Observbable.</p><p><img width="640" height="310" src="https://raw.githubu
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+      <p class="shortcomment cmt">Returns an Observable where for each item in the source Observable, the supplied function is applied to each item, resulting in a new value to then be applied again with the function.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable where for each item in the source Observable, the supplied function is applied to each item, resulting in a new value to then be applied again with the function.
+</p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>
+           the function for projecting the next emitted item of the Observable.</p></dd><dt>returns</dt><dd class="cmt"><p>An observable sequence containing a single element determining whether all elements in the source sequence pass the test in the specified predicate.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#expand" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="expand[R](project:(T,Int)=&gt;rxscalajs.Observable[R],concurrent:Double,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[R]"></a>
-      <a id="expand[R]((T,Int)⇒Observable[R],Double,Scheduler):Observable[R]"></a>
+      <a id="expand[R](project:(T,Int)=&gt;rxscalajs.Observable[R],scheduler:rxscalajs.Scheduler,concurrent:Double):rxscalajs.Observable[R]"></a>
+      <a id="expand[R]((T,Int)⇒Observable[R],Scheduler,Double):Observable[R]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">expand</span><span class="tparams">[<span name="R">R</span>]</span><span class="params">(<span name="project">project: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.expand.R">R</span>]</span>, <span name="concurrent">concurrent: <span class="extype" name="scala.Double">Double</span> = <span class="symbol">Double.PositiveInfinity</span></span>, <span name="scheduler">scheduler: <a href="../Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.expand.R">R</span>]</span>
+        <span class="name">expand</span><span class="tparams">[<span name="R">R</span>]</span><span class="params">(<span name="project">project: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.expand.R">R</span>]</span>, <span name="scheduler">scheduler: <a href="../Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>, <span name="concurrent">concurrent: <span class="extype" name="scala.Double">Double</span> = <span class="symbol">Double.PositiveInfinity</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.expand.R">R</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@expand[R](project:(T,Int)=&gt;rxscalajs.Observable[R],concurrent:Double,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[R]" title="Permalink" target="_top">
+      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@expand[R](project:(T,Int)=&gt;rxscalajs.Observable[R],scheduler:rxscalajs.Scheduler,concurrent:Double):rxscalajs.Observable[R]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+      <p class="shortcomment cmt">Returns an Observable where for each item in the source Observable, the supplied function is applied to each item, resulting in a new value to then be applied again with the function.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable where for each item in the source Observable, the supplied function is applied to each item, resulting in a new value to then be applied again with the function.
+</p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>
+           the function for projecting the next emitted item of the Observable.</p></dd><dt class="param">scheduler</dt><dd class="cmt"><p>
+           The Scheduler to use for managing the expansions.</p></dd><dt class="param">concurrent</dt><dd class="cmt"><p>
+           the max number of observables that can be created concurrently. defaults to infinity.</p></dd><dt>returns</dt><dd class="cmt"><p>An observable sequence containing a single element determining whether all elements in the source sequence pass the test in the specified predicate.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#filter" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="filter[T2](predicate:T=&gt;Boolean):rxscalajs.Observable[T]"></a>
       <a id="filter[T2]((T)⇒Boolean):Observable[T]"></a>
@@ -1541,39 +1579,43 @@ source Observbable.</p><p><img width="640" height="310" src="https://raw.githubu
               
         </dd></dl></div>
     </li><li name="rxscalajs.Observable#find" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="find[T2](predicate:(T,Int,rxscalajs.Observable[T])=&gt;Boolean):rxscalajs.Observable[T]"></a>
-      <a id="find[T2]((T,Int,Observable[T])⇒Boolean):Observable[T]"></a>
+      <a id="find[T2](predicate:(T,Int)=&gt;Boolean):rxscalajs.Observable[T]"></a>
+      <a id="find[T2]((T,Int)⇒Boolean):Observable[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">find</span><span class="tparams">[<span name="T2">T2</span>]</span><span class="params">(<span name="predicate">predicate: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>, <span class="extype" name="scala.Int">Int</span>, <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>]</span>
+        <span class="name">find</span><span class="tparams">[<span name="T2">T2</span>]</span><span class="params">(<span name="predicate">predicate: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@find[T2](predicate:(T,Int,rxscalajs.Observable[T])=&gt;Boolean):rxscalajs.Observable[T]" title="Permalink" target="_top">
+      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@find[T2](predicate:(T,Int)=&gt;Boolean):rxscalajs.Observable[T]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+      <p class="shortcomment cmt">Emits only the first value emitted by the source Observable that meets some condition.</p><div class="fullcomment"><div class="comment cmt"><p>Emits only the first value emitted by the source Observable that meets some condition.</p><p><img width="640" height="310" src="http://reactivex.io/rxjs/img/find.png" alt="" />
+</p></div><dl class="paramcmts block"><dt class="param">predicate</dt><dd class="cmt"><p>
+           A function called with each item to test for condition matching.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable of the first item that matches the condition.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#findIndex" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="findIndex[T2](predicate:(T,Int,rxscalajs.Observable[T])=&gt;Boolean):rxscalajs.Observable[Int]"></a>
-      <a id="findIndex[T2]((T,Int,Observable[T])⇒Boolean):Observable[Int]"></a>
+      <a id="findIndex[T2](predicate:(T,Int)=&gt;Boolean):rxscalajs.Observable[Int]"></a>
+      <a id="findIndex[T2]((T,Int)⇒Boolean):Observable[Int]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">findIndex</span><span class="tparams">[<span name="T2">T2</span>]</span><span class="params">(<span name="predicate">predicate: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>, <span class="extype" name="scala.Int">Int</span>, <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="scala.Int">Int</span>]</span>
+        <span class="name">findIndex</span><span class="tparams">[<span name="T2">T2</span>]</span><span class="params">(<span name="predicate">predicate: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="scala.Int">Int</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@findIndex[T2](predicate:(T,Int,rxscalajs.Observable[T])=&gt;Boolean):rxscalajs.Observable[Int]" title="Permalink" target="_top">
+      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@findIndex[T2](predicate:(T,Int)=&gt;Boolean):rxscalajs.Observable[Int]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+      <p class="shortcomment cmt">Emits only the index of the first value emitted by the source Observable that meets some condition.</p><div class="fullcomment"><div class="comment cmt"><p>Emits only the index of the first value emitted by the source Observable that meets some condition.</p><p><img width="640" height="310" src="http://reactivex.io/rxjs/img/findIndex.png" alt="" />
+</p></div><dl class="paramcmts block"><dt class="param">predicate</dt><dd class="cmt"><p>
+           A function called with each item to test for condition matching.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable of the index of the first item that matches the condition.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#first" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="first:rxscalajs.Observable[T]"></a>
       <a id="first:Observable[T]"></a>
@@ -1690,7 +1732,7 @@ item.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observa
 source Observable, then feeds the result of that function along with the second item emitted
 by an Observable into the same function, and so on until all items have been emitted by the
 source Observable, emitting the final result from the final call to your function as its sole
-item.</p><p><img width="640" height="325" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/reduceSeed.png" alt="" /></p><p>This technique, which is called &quot;reduce&quot; or &quot;aggregate&quot; here, is sometimes called &quot;fold,&quot;
+item.</p><p><img width="640" height="325" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/reduceSeed.png" alt="" /></p><p>This technique, which is called &quot;fold&quot; or &quot;reduce&quot; here, is sometimes called &quot;aggregate,&quot;
 &quot;accumulate,&quot; &quot;compress,&quot; or &quot;inject&quot; in other programming contexts. Groovy, for instance,
 has an <code>inject</code> method that does a similar operation on lists.
 </p></div><dl class="paramcmts block"><dt class="param">seed</dt><dd class="cmt"><p>
@@ -1783,22 +1825,23 @@ discard their buffers by applying an operator like <code>take(0)</code> to them.
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="rxscalajs.Observable#ignoreElements" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="ignoreElements():rxscalajs.Observable[T]"></a>
-      <a id="ignoreElements():Observable[T]"></a>
+      <a id="ignoreElements:rxscalajs.Observable[T]"></a>
+      <a id="ignoreElements:Observable[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">ignoreElements</span><span class="params">()</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>]</span>
+        <span class="name">ignoreElements</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@ignoreElements():rxscalajs.Observable[T]" title="Permalink" target="_top">
+      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@ignoreElements:rxscalajs.Observable[T]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+      <p class="shortcomment cmt">Ignores all items emitted by the source Observable and only passes calls of complete or error.</p><div class="fullcomment"><div class="comment cmt"><p>Ignores all items emitted by the source Observable and only passes calls of complete or error.</p><p><img width="640" height="310" src="http://reactivex.io/rxjs/img/ignoreElements.png" alt="" />
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>an empty Observable that only calls complete or error, based on which one is called by the source Observable.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#inner" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="inner:rxscalajs.facade.ObservableFacade[T]"></a>
       <a id="inner:ObservableFacade[T]"></a>
@@ -2247,7 +2290,8 @@ subscriptions to these <a href="../Observable.html" class="extype" name="rxscala
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Subject.html" class="extype" name="rxscalajs.Subject">Subject</a></dd></dl></div>
+      <p class="shortcomment cmt">Provides the Observer with new data.</p><div class="fullcomment"><div class="comment cmt"><p>Provides the Observer with new data.</p><p>The <a href="../Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> calls this closure 0 or more times.</p><p>The <a href="../Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> will not call this method again after it calls either <code>completed</code> or <code>error</code>.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Subject.html" class="extype" name="rxscalajs.Subject">Subject</a> → <a href="../Observer.html" class="extype" name="rxscalajs.Observer">Observer</a></dd></dl></div>
     </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
@@ -2320,7 +2364,8 @@ if the source Observable is empty.</p><p><img width="640" height="305" src="http
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+      <p class="shortcomment cmt">Groups pairs of consecutive emissions together and emits them as a tuple of two values.</p><div class="fullcomment"><div class="comment cmt"><p>Groups pairs of consecutive emissions together and emits them as a tuple of two values.</p><p><img width="640" height="510" src="http://reactivex.io/rxjs/img/pairwise.png" alt="" />
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>an Observable of pairs (as tuples) of consecutive values from the source Observable.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#partition" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="partition[T2](predicate:T=&gt;Boolean):(rxscalajs.Observable[T],rxscalajs.Observable[T])"></a>
       <a id="partition[T2]((T)⇒Boolean):(Observable[T],Observable[T])"></a>
@@ -2337,7 +2382,11 @@ if the source Observable is empty.</p><p><img width="640" height="305" src="http
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+      <p class="shortcomment cmt">Splits the source Observable into two, one with values that satisfy a predicate, and another with values that don't satisfy the predicate.</p><div class="fullcomment"><div class="comment cmt"><p>Splits the source Observable into two, one with values that satisfy a predicate, and another with values that don't satisfy the predicate.
+It's like filter, but returns two Observables: one like the output of filter, and the other with values that did not pass the condition.</p><p><img width="640" height="325" src="http://reactivex.io/rxjs/img/partition.png" alt="" /></p></div><dl class="paramcmts block"><dt class="param">predicate</dt><dd class="cmt"><p>
+           A function that evaluates each value emitted by the source Observable.
+           If it returns true, the value is emitted on the first Observable in the returned array, if false the value is emitted on the second Observable in the tuple.</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits a single item that is the result of accumulating the output
+        from the items emitted by the source Observable</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#publish" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="publish:rxscalajs.Observable[T]"></a>
       <a id="publish:Observable[T]"></a>
@@ -2427,7 +2476,10 @@ have subscribed to it.</p><p><img width="640" height="510" src="https://raw.gith
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+      <p class="shortcomment cmt">Returns an Observable that mirrors the first source Observable to emit an item from the combination of this Observable and supplied Observables
+</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that mirrors the first source Observable to emit an item from the combination of this Observable and supplied Observables
+</p></div><dl class="paramcmts block"><dt class="param">observables</dt><dd class="cmt"><p>
+               sources used to race for which Observable emits first.</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that mirrors the output of the first Observable to emit an item.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#reduce" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="reduce[U&gt;:T](accumulator:(U,U)=&gt;U):rxscalajs.Observable[U]"></a>
       <a id="reduce[U&gt;:T]((U,U)⇒U):Observable[U]"></a>
@@ -2634,7 +2686,7 @@ source Observable, emitting the result of each of these iterations.</p><p><img w
 that seed as its first emitted item.
 </p></div><dl class="paramcmts block"><dt class="param">accumulator</dt><dd class="cmt"><p>
 an accumulator function to be invoked on each item emitted by the source
-Observable, whose result will be emitted to <a href="../subscription/Observer.html" class="extype" name="rxscalajs.subscription.Observer">rxscalajs.subscription.Observer</a>s via
+Observable, whose result will be emitted to <a href="../subscription/ObserverFacade.html" class="extype" name="rxscalajs.subscription.ObserverFacade">rxscalajs.subscription.ObserverFacade</a>s via
 onNext and used in the next accumulator call.</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the results of each call to the accumulator function</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#scan" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="scan[R](seed:R)(accumulator:(R,T)=&gt;R):rxscalajs.Observable[R]"></a>
@@ -2663,7 +2715,7 @@ that seed as its first emitted item.
 </p></div><dl class="paramcmts block"><dt class="param">seed</dt><dd class="cmt"><p>
 the initial (seed) accumulator value</p></dd><dt class="param">accumulator</dt><dd class="cmt"><p>
 an accumulator function to be invoked on each item emitted by the source
-Observable, whose result will be emitted to <a href="../subscription/Observer.html" class="extype" name="rxscalajs.subscription.Observer">rxscalajs.subscription.Observer</a>s via
+Observable, whose result will be emitted to <a href="../subscription/ObserverFacade.html" class="extype" name="rxscalajs.subscription.ObserverFacade">rxscalajs.subscription.ObserverFacade</a>s via
 onNext and used in the next accumulator call.</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the results of each call to the accumulator function</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#share" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="share:rxscalajs.Observable[T]"></a>
@@ -2854,18 +2906,38 @@ the current window is emitted and the event is propagated.
 </p></div><dl class="paramcmts block"><dt class="param">elem</dt><dd class="cmt"><p>the item to emit</p></dd><dt class="param">scheduler</dt><dd class="cmt"><p>
            The <a href="../Scheduler.html" class="extype" name="rxscalajs.Scheduler">rxscalajs.Scheduler</a> to use internally to manage the timers which handle timeout for each event.</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the specified item before it begins to emit items emitted by the source Observable</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#subscribe" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="subscribe(onNext:T=&gt;Unit,error:scala.scalajs.js.Function1[scala.scalajs.js.Any,Unit],complete:scala.scalajs.js.Function0[Unit]):rxscalajs.subscription.AnonymousSubscription"></a>
-      <a id="subscribe((T)⇒Unit,Function1[Any,Unit],Function0[Unit]):AnonymousSubscription"></a>
+      <a id="subscribe(observer:rxscalajs.Observer[T]):rxscalajs.subscription.AnonymousSubscription"></a>
+      <a id="subscribe(Observer[T]):AnonymousSubscription"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">subscribe</span><span class="params">(<span name="onNext">onNext: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>, <span name="error">error: <span class="extype" name="scala.scalajs.js.Function1">Function1</span>[<span class="extype" name="scala.scalajs.js.Any">Any</span>, <span class="extype" name="scala.Unit">Unit</span>] = <span class="symbol">null</span></span>, <span name="complete">complete: <span class="extype" name="scala.scalajs.js.Function0">Function0</span>[<span class="extype" name="scala.Unit">Unit</span>] = <span class="symbol">null</span></span>)</span><span class="result">: <a href="../subscription/AnonymousSubscription.html" class="extype" name="rxscalajs.subscription.AnonymousSubscription">AnonymousSubscription</a></span>
+        <span class="name">subscribe</span><span class="params">(<span name="observer">observer: <a href="../Observer.html" class="extype" name="rxscalajs.Observer">Observer</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>]</span>)</span><span class="result">: <a href="../subscription/AnonymousSubscription.html" class="extype" name="rxscalajs.subscription.AnonymousSubscription">AnonymousSubscription</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@subscribe(onNext:T=&gt;Unit,error:scala.scalajs.js.Function1[scala.scalajs.js.Any,Unit],complete:scala.scalajs.js.Function0[Unit]):rxscalajs.subscription.AnonymousSubscription" title="Permalink" target="_top">
+      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@subscribe(observer:rxscalajs.Observer[T]):rxscalajs.subscription.AnonymousSubscription" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This method does not operate by default on a particular <a href="../Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a>.</p><div class="fullcomment"><div class="comment cmt"><h5>Scheduler:</h5><p>This method does not operate by default on a particular <a href="../Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a>.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>
+a <a href="../subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">rxscalajs.subscription.Subscription</a> reference whose <code>unsubscribe</code> method can be called to  stop receiving items
+before the Observable has finished sending them</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><dt>See also</dt><dd><span class="cmt"><p><a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a></p></span></dd></dl></div>
+    </li><li name="rxscalajs.Observable#subscribe" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="subscribe(onNext:T=&gt;Unit,error:scala.scalajs.js.Any=&gt;Unit,complete:()=&gt;Unit):rxscalajs.subscription.AnonymousSubscription"></a>
+      <a id="subscribe((T)⇒Unit,(Any)⇒Unit,()⇒Unit):AnonymousSubscription"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">subscribe</span><span class="params">(<span name="onNext">onNext: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>, <span name="error">error: (<span class="extype" name="scala.scalajs.js.Any">Any</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span> = <span class="symbol">e =&gt; ()</span></span>, <span name="complete">complete: () ⇒ <span class="extype" name="scala.Unit">Unit</span> = <span class="symbol">() =&gt; ()</span></span>)</span><span class="result">: <a href="../subscription/AnonymousSubscription.html" class="extype" name="rxscalajs.subscription.AnonymousSubscription">AnonymousSubscription</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#rxscalajs.subjects.AsyncSubject@subscribe(onNext:T=&gt;Unit,error:scala.scalajs.js.Any=&gt;Unit,complete:()=&gt;Unit):rxscalajs.subscription.AnonymousSubscription" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -3003,7 +3075,7 @@ of these Observables.</p><p><img width="640" height="350" src="https://raw.githu
     </span>
       <p class="shortcomment cmt">Returns an Observable that emits only the first <code>num</code> items emitted by the source
 Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that emits only the first <code>num</code> items emitted by the source
-Observable.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/take.png" alt="" /></p><p>This method returns an Observable that will invoke a subscribing <a href="../subscription/Observer.html" class="extype" name="rxscalajs.subscription.Observer">rxscalajs.subscription.Observer</a>'s
+Observable.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/take.png" alt="" /></p><p>This method returns an Observable that will invoke a subscribing <a href="../subscription/ObserverFacade.html" class="extype" name="rxscalajs.subscription.ObserverFacade">rxscalajs.subscription.ObserverFacade</a>'s
 onNext function a maximum of <code>num</code> times before invoking
 onCompleted.
 </p></div><dl class="paramcmts block"><dt class="param">total</dt><dd class="cmt"><p>
@@ -3328,7 +3400,7 @@ notifications from that point on.</p><p><img width="640" height="305" src="https
     </span>
       <p class="shortcomment cmt">Returns an Observable that emits a single item, a list composed of all the items emitted by
 the source Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that emits a single item, a list composed of all the items emitted by
-the source Observable.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/toList.png" alt="" /></p><p>Normally, an Observable that returns multiple items will do so by invoking its <a href="../subscription/Observer.html" class="extype" name="rxscalajs.subscription.Observer">rxscalajs.subscription.Observer</a>'s
+the source Observable.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/toList.png" alt="" /></p><p>Normally, an Observable that returns multiple items will do so by invoking its <a href="../subscription/ObserverFacade.html" class="extype" name="rxscalajs.subscription.ObserverFacade">rxscalajs.subscription.ObserverFacade</a>'s
 onNext method for each such item. You can change
 this behavior, instructing the Observable to compose a list of all of these items and then to
 invoke the Observer's <code>onNext</code> function once, passing it the entire list, by
@@ -3776,8 +3848,8 @@ not pre-consumed. This allows you to zip infinite streams on either side.
         <div id="inheritedMembers">
         <div class="parent" name="rxscalajs.Subject">
               <h3>Inherited from <a href="../Subject.html" class="extype" name="rxscalajs.Subject">Subject</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>]</h3>
-            </div><div class="parent" name="rxscalajs.subscription.Observer">
-              <h3>Inherited from <a href="../subscription/Observer.html" class="extype" name="rxscalajs.subscription.Observer">Observer</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>]</h3>
+            </div><div class="parent" name="rxscalajs.Observer">
+              <h3>Inherited from <a href="../Observer.html" class="extype" name="rxscalajs.Observer">Observer</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>]</h3>
             </div><div class="parent" name="rxscalajs.Observable">
               <h3>Inherited from <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>]</h3>
             </div><div class="parent" name="scala.AnyRef">

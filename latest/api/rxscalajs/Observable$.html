@@ -180,7 +180,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Converts a sequence of values into an Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a sequence of values into an Observable.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" /></p><p>Implementation note: the entire array will be immediately emitted each time an <a href="subscription/Observer.html" class="extype" name="rxscalajs.subscription.Observer">rxscalajs.subscription.Observer</a> subscribes.
+      <p class="shortcomment cmt">Converts a sequence of values into an Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a sequence of values into an Observable.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" /></p><p>Implementation note: the entire array will be immediately emitted each time an <a href="subscription/ObserverFacade.html" class="extype" name="rxscalajs.subscription.ObserverFacade">rxscalajs.subscription.ObserverFacade</a> subscribes.
 Since this occurs before the <a href="subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">subscription.Subscription</a> is returned,
 it in not possible to unsubscribe from the sequence before it completes.
 </p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>
@@ -284,6 +284,23 @@ the source Observables each time an item is received from any of the source Obse
 aggregation is defined by a specified function.
 </p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>the common base type of source values</p></dd><dt class="tparam">R</dt><dd class="cmt"><p>the result type</p></dd><dt class="param">sources</dt><dd class="cmt"><p>the list of source Observables</p></dd><dt class="param">combineFunction</dt><dd class="cmt"><p>the aggregation function used to combine the items emitted by the source Observables</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits items that are the result of combining the items emitted by the source
         Observables by means of the given aggregation function</p></dd></dl></div>
+    </li><li name="rxscalajs.Observable#create" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="create[T](f:rxscalajs.Observer[T]=&gt;Unit):rxscalajs.Observable[T]"></a>
+      <a id="create[T]((Observer[T])⇒Unit):Observable[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">create</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="f">f: (<a href="Observer.html" class="extype" name="rxscalajs.Observer">Observer</a>[<span class="extype" name="rxscalajs.Observable.create.T">T</span>]) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.create.T">T</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#rxscalajs.Observable$@create[T](f:rxscalajs.Observer[T]=&gt;Unit):rxscalajs.Observable[T]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -444,7 +461,7 @@ aggregation is defined by a specified function.
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Converts a sequence of values into an Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a sequence of values into an Observable.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" /></p><p>Implementation note: the entire array will be immediately emitted each time an <a href="subscription/Observer.html" class="extype" name="rxscalajs.subscription.Observer">rxscalajs.subscription.Observer</a> subscribes.
+      <p class="shortcomment cmt">Converts a sequence of values into an Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a sequence of values into an Observable.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" /></p><p>Implementation note: the entire array will be immediately emitted each time an <a href="subscription/ObserverFacade.html" class="extype" name="rxscalajs.subscription.ObserverFacade">rxscalajs.subscription.ObserverFacade</a> subscribes.
 Since this occurs before the <a href="subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">subscription.Subscription</a> is returned,
 it in not possible to unsubscribe from the sequence before it completes.
 </p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>
@@ -518,7 +535,7 @@ it in not possible to unsubscribe from the sequence before it completes.
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Converts a sequence of values into an Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a sequence of values into an Observable.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" /></p><p>Implementation note: the entire array will be immediately emitted each time an <a href="subscription/Observer.html" class="extype" name="rxscalajs.subscription.Observer">rxscalajs.subscription.Observer</a> subscribes.
+      <p class="shortcomment cmt">Converts a sequence of values into an Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a sequence of values into an Observable.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" /></p><p>Implementation note: the entire array will be immediately emitted each time an <a href="subscription/ObserverFacade.html" class="extype" name="rxscalajs.subscription.ObserverFacade">rxscalajs.subscription.ObserverFacade</a> subscribes.
 Since this occurs before the <a href="subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">subscription.Subscription</a> is returned,
 it in not possible to unsubscribe from the sequence before it completes.
 </p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>

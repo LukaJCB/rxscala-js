@@ -176,26 +176,31 @@
                 <span class="name">@native</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="rxscalajs.subscription.Observer" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="Observer[T]extendsAnyRef"></a>
-      <a id="Observer[T]:Observer[T]"></a>
+    </li><li name="rxscalajs.subscription.ObserverFacade" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="ObserverFacade[T]extendsObjectwithNextObserver[T]withErrorObserver[T]withCompletionObserver[T]"></a>
+      <a id="ObserverFacade[T]:ObserverFacade[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="Observer.html"><span class="name">Observer</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="ObserverFacade.html"><span class="name">ObserverFacade</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="scala.scalajs.js.Object">Object</span> with <a href="NextObserver.html" class="extype" name="rxscalajs.subscription.NextObserver">NextObserver</a>[<span class="extype" name="rxscalajs.subscription.ObserverFacade.T">T</span>] with <a href="ErrorObserver.html" class="extype" name="rxscalajs.subscription.ErrorObserver">ErrorObserver</a>[<span class="extype" name="rxscalajs.subscription.ObserverFacade.T">T</span>] with <a href="CompletionObserver.html" class="extype" name="rxscalajs.subscription.CompletionObserver">CompletionObserver</a>[<span class="extype" name="rxscalajs.subscription.ObserverFacade.T">T</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#rxscalajs.subscription.package@Observer[T]extendsAnyRef" title="Permalink" target="_top">
+      <a href="../../index.html#rxscalajs.subscription.package@ObserverFacade[T]extendsObjectwithNextObserver[T]withErrorObserver[T]withCompletionObserver[T]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">Provides a mechanism for receiving push-based notifications.</p><div class="fullcomment"><div class="comment cmt"><p>Provides a mechanism for receiving push-based notifications.</p><p>After an Observer calls an <a href="../Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a>'s <code>subscribe</code> method, the Observable
 calls the Observer's <code>onNext</code> method to provide notifications. A well-behaved Observable will
 call an Observer's <code>onCompleted</code> or <code>onError</code> methods exactly once.
-</p></div></div>
+</p></div><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@RawJSType</span><span class="args">()</span>
+              
+                <span class="name">@native</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="rxscalajs.subscription.OuterSubscriber" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="OuterSubscriber[T,R]extendsSubscriber[T]"></a>
       <a id="OuterSubscriber[T,R]:OuterSubscriber[T,R]"></a>
