@@ -529,6 +529,14 @@ object ObservableTest extends TestSuite {
       'ZipWithIndex {
         obs.zipWithIndex.subscribe(unit)
       }
+      'Create {
+        val o = Observable.create[String](observer => {
+          observer.next("Str")
+          observer.next("Hello")
+          observer.complete()
+        })
+        o.subscribe(unit)
+      }
 
       'ForComprehensions {
           for {
@@ -557,6 +565,8 @@ object ObservableTest extends TestSuite {
         s.next(10)
         s.subscribe(unit)
         s.next(10)
+
+        intervalObs.subscribe(s)
 
       }
     }

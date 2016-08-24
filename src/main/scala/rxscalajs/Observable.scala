@@ -3,7 +3,7 @@ package rxscalajs
 import org.scalajs.dom.Element
 import org.scalajs.dom.raw.Event
 import rxscalajs.facade._
-import rxscalajs.subscription.{Subscriber, AnonymousSubscription, Subscription, ObserverFacade}
+import rxscalajs.subscription._
 
 import scala.collection.immutable.Seq
 import scala.scalajs.js
@@ -2002,7 +2002,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @return $subscribeAllReturn
     * @see <a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a>
     */
-  def subscribe(observer: rxscalajs.subscription.Observer[T]): AnonymousSubscription =
+  def subscribe(observer: Observer[T]): AnonymousSubscription =
     inner.subscribe(observer.next _: js.Function1[T,Unit], observer.error _: js.Function1[js.Any,Unit], observer.complete _:js.Function0[Unit])
 
   private def get = inner
@@ -2056,6 +2056,17 @@ object Observable {
     * @return an Observable that emits each item in the source Array
     */
   def just[T](values: T*): Observable[T] = new Observable(ObservableFacade.of[T](values: _*))
+
+  def create[T](f: Observer[T] => Unit): Observable[T] = {
+    def toObserver(o: ObserverFacade[T]): Observer[T] = new Observer[T]{
+      override def next(t: T) = o.next(t)
+      override def error(a: js.Any) = o.error(a)
+      override def complete() = o.complete()
+    }
+    def toFacadeFunction(func: Observer[T] => Unit): ObserverFacade[T] => Unit = (facade) => func(toObserver(facade))
+    new Observable(ObservableFacade.create(toFacadeFunction(f)))
+  }
+
 
   def ajax[T](request: String): Observable[T] = new Observable[T](ObservableFacade.ajax(request))
 
