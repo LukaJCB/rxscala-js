@@ -1,12 +1,13 @@
+package rxscalajs.dom
+
+import rxscalajs.subscription.Subscriber
 
 import scala.scalajs.js
-import js.annotation._
 import js.|
 import org.scalajs.dom._
 
-package rxscalajs {
 
-  import rxscalajs.facade.ObservableFacade
+import rxscalajs.facade.ObservableFacade
 
   @js.native
 trait AjaxRequest extends js.Object {
@@ -91,4 +92,4 @@ object Rxscalajs extends js.GlobalScope {
   def ajaxGetJSON[T, R](url: String, resultSelector: js.Function1[T, R] = ???, headers: Object = ???): ObservableFacade[R] = js.native
 }
 
-}
+

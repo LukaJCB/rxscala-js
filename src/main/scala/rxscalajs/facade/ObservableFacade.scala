@@ -1,9 +1,11 @@
 package rxscalajs.facade
 import rxscalajs._
+import rxscalajs.subscription.{AnonymousSubscription, Subscription, ObserverFacade}
 
 import scala.scalajs.js
 import scala.scalajs.js._
 
+import org.scalajs.dom._
 
 
 import scala.scalajs.js.annotation.JSName
@@ -11,6 +13,7 @@ import scala.scalajs.js.annotation.JSName
   @js.native
   trait Subscribable[T] extends js.Object {
     def subscribe(onNext: js.Function1[T, Unit], error: js.Function1[js.Any, Unit] = ???, complete: js.Function0[Unit] = ???): AnonymousSubscription = js.native
+    def subscribe(observer: ObserverFacade[T]): Subscription = js.native
   }
 
   @js.native
@@ -19,14 +22,10 @@ import scala.scalajs.js.annotation.JSName
     val key: K = js.native
   }
   @js.native
-  class TimeInterval[T] protected() extends js.Object {
-    def this(value: T,interval: Int) = this()
-  }
+  trait TimeInterval[T] extends js.Object { def value: T; def interval: Int }
 
   @js.native
-  class Timestamp[T] protected() extends js.Object {
-    def this(value: T,interval: Int) = this()
-  }
+  trait Timestamp[T] extends js.Object { def value: T; def timestamp: Double }
 
   @js.native
   class ErrorObservableFacade protected() extends ObservableFacade[js.Any] {
@@ -80,19 +79,21 @@ import scala.scalajs.js.annotation.JSName
     def dematerialize[T2](): ObservableFacade[T2] = js.native
     def distinct[T2](compare: js.Function2[T,  T, Boolean] = ???, flushes: ObservableFacade[T2] = ???): ObservableFacade[T] = js.native
     def distinctKey[T2](key: String, compare: js.Function2[T,  T,Boolean] = ???, flushes: ObservableFacade[T2] = ???): ObservableFacade[T] = js.native
-    def distinctUntilChanged[K](compare: js.Function2[K,  K,Boolean] = ???, keySelector: js.Function1[T,K] = ???): ObservableFacade[T] = js.native
+    def distinctUntilChanged[K](compare: js.Function2[K,  K,Boolean], keySelector: js.Function1[T,K]): ObservableFacade[T] = js.native
+    def distinctUntilChanged(compare: js.Function2[T,  T,Boolean] = ???): ObservableFacade[T] = js.native
     def distinctUntilKeyChanged(key: String, compare: js.Function2[ T,  T, Boolean] = ???): ObservableFacade[T] = js.native
-    def `do`[T2](nextOrObserver: (Observer[T] | js.Function1[T ,Unit]) = ???, error: js.Function1[T2 ,Unit] = ???, complete: js.Function0[Unit] = ???): ObservableFacade[T] = js.native
+    def `do`[T2](nextOrObserver: (ObserverFacade[T] | js.Function1[T ,Unit]) = ???, error: js.Function1[T2 ,Unit] = ???, complete: js.Function0[Unit] = ???): ObservableFacade[T] = js.native
     def elementAt(index: Int, defaultValue: T = ???): ObservableFacade[T] = js.native
-    def every[T2](predicate: js.Function3[T,  Int,  ObservableFacade[T],Boolean], thisArg: T2 = ???): ObservableFacade[Boolean] = js.native
+    def every[T2](predicate: js.Function2[T,  Int,Boolean], thisArg: T2 = ???): ObservableFacade[Boolean] = js.native
     def exhaust[U](): ObservableFacade[U] = js.native
     def exhaustMap[I, R](project: js.Function2[T, Int, ObservableFacade[R]], resultSelector: js.Function4[T, I, Int, Int, R] = ???): ObservableFacade[R] = js.native
     def expand[R](project: js.Function2[ T, Int, ObservableFacade[R]], concurrent: Double = ???, scheduler: Scheduler = ???): ObservableFacade[R] = js.native
     def filter[T2](predicate: js.Function2[ T,  Int, Boolean], thisArg: T2 = ???): ObservableFacade[T] = js.native
+    def filter[T2](predicate: js.Function1[ T, Boolean]): ObservableFacade[T] = js.native
     def _finally(finallySelector: js.Function0[Unit]): ObservableFacade[T] = js.native
-    def find[T2](predicate: js.Function3[T,  Int,  ObservableFacade[T],Boolean], thisArg: T2 = ???): ObservableFacade[T] = js.native
-    def findIndex[T2](predicate: js.Function3[T,  Int,  ObservableFacade[T],Boolean], thisArg: T2 = ???): ObservableFacade[Int] = js.native
-    def first[ R](predicate: js.Function3[T,  Int,  ObservableFacade[T],Boolean] = ???, resultSelector: js.Function2[T,Int,R] = ???, defaultValue: R = ???): ObservableFacade[R] = js.native
+    def find[T2](predicate: js.Function2[T,  Int,Boolean], thisArg: T2 = ???): ObservableFacade[T] = js.native
+    def findIndex[T2](predicate: js.Function2[T,  Int, Boolean], thisArg: T2 = ???): ObservableFacade[Int] = js.native
+    def first[ R](predicate: js.Function2[T,  Int, Boolean] = ???, resultSelector: js.Function2[T,Int,R] = ???, defaultValue: R = ???): ObservableFacade[R] = js.native
     def groupBy[K, R,T2](keySelector: js.Function1[T,K], elementSelector:  js.Function1[T,R]= ???, durationSelector:  js.Function1[GroupedObservableFacade[K, R],ObservableFacade[T2]] = ???): ObservableFacade[GroupedObservableFacade[K, R]] = js.native
     def ignoreElements(): ObservableFacade[T] = js.native
     def isEmpty(): ObservableFacade[Boolean] = js.native
@@ -106,7 +107,9 @@ import scala.scalajs.js.annotation.JSName
     def merge[R >: T](that: ObservableFacade[R], concurrent: Double = ???, scheduler: Scheduler = ???): ObservableFacade[R] = js.native
 
     def mergeAll[U](concurrent: Double = ???): ObservableFacade[U] = js.native
-    def mergeMap[I, R](project: js.Function2[T, Int,ObservableFacade[I]], resultSelector: js.Function4[T, I, Int, Int, R] = ???, concurrent: Double = ???): ObservableFacade[R] = js.native
+    def mergeMap[R](project: js.Function2[T, Int,ObservableFacade[R]], resultSelector: js.Function4[T, R, Int, Int, R] = ???, concurrent: Double = ???): ObservableFacade[R] = js.native
+
+    def mergeMap[ R](project: js.Function1[T,ObservableFacade[R]]): ObservableFacade[R] = js.native
     def mergeMapTo[I, R](innerObservable: ObservableFacade[I], resultSelector: js.Function4[T, I, Int, Int, R] = ???, concurrent: Double = ???): ObservableFacade[R] = js.native
     def mergeScan[ R](project: js.Function2[R,T,ObservableFacade[R]], seed: R, concurrent: Int = ???): ObservableFacade[R] = js.native
     def min(comparer: js.Function2[T,T,T] = ???): ObservableFacade[T] = js.native
@@ -127,7 +130,7 @@ import scala.scalajs.js.annotation.JSName
     def race(observables: js.Array[ObservableFacade[T]]): ObservableFacade[T] = js.native
     def reduce[R](project: js.Function2[R,T,R],seed: R = ???): ObservableFacade[R] = js.native
 
-    def repeat(count: Int = ???): ObservableFacade[T] = js.native
+    def repeat(scheduler: Scheduler = ???, count: Int = ???): ObservableFacade[T] = js.native
 
     def retry(count: Int = ???): ObservableFacade[T] = js.native
     def retryWhen[T2,T3](notifier: js.Function1[ObservableFacade[T2], ObservableFacade[T3]]): ObservableFacade[T] = js.native
@@ -192,10 +195,11 @@ import scala.scalajs.js.annotation.JSName
     def bindNodeCallback[T,T2](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[T2, ObservableFacade[T]]  = js.native
 
 
+    def fromEvent(element: Element, eventName: String): ObservableFacade[Event] = js.native
 
     def combineLatest[T, R](sources: js.Array[ObservableFacade[T]],combineFunction: js.Function1[js.Array[T], R] = ???): ObservableFacade[R] = js.native
 
-
+    def create[T](subscribe: js.Function1[ObserverFacade[T],Unit]): ObservableFacade[T] = js.native
 
     def concat[T, R](observables: js.Array[ObservableFacade[T]], scheduler: Scheduler = ???): ObservableFacade[R] = js.native
 

@@ -1,6 +1,7 @@
 package rxscalajs.subjects
 
 
+import rxscalajs.Subject
 import rxscalajs.facade.AsyncSubjectFacade
 
 /**

@@ -1,5 +1,6 @@
 package rxscalajs.facade
-import rxscalajs.Subscription
+
+import rxscalajs.subscription.Subscription
 
 import scala.scalajs.js
 

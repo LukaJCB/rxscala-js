@@ -1,9 +1,8 @@
+package rxscalajs.subscription
 
 import scala.scalajs.js
-import js.annotation._
-import js.|
 
-package rxscalajs {
+
 
 @js.native
 class OuterSubscriber[T, R] extends Subscriber[T] {
@@ -12,4 +11,4 @@ class OuterSubscriber[T, R] extends Subscriber[T] {
   def notifyComplete(innerSub: InnerSubscriber[T, R]): Unit = js.native
 }
 
-}
+
