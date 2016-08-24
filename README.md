@@ -37,6 +37,28 @@ RxScala.js doesn't actually come bundled with the underlying `rx.js` file, so yo
 
     jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-beta.10" / "Rx.umd.js" commonJSName "Rx"
 
+## Differences from RxJS
+
+Similary to RxScala, this wrapper attempts to expose an API which is as Scala-idiomatic as possible. Some examples:
+
+```scala
+ // instead of concat:
+def ++[U >: T](that: Observable[U]): Observable[U]
+
+// curried in Scala collections, so curry fold also here:
+def foldLeft[R](seed: R)(accumulator: (R, T) => R): Observable[R] 
+
+// called skip in RxJS, but drop in Scala
+def drop(n: Int): Observable[T] 
+
+// like in the collection API
+def zipWithIndex: Observable[(T, Int)] 
+
+// the implicit evidence argument ensures that switch can only be called on Observables of Observables:
+def switch[U](implicit evidence: Observable[T] <:< Observable[Observable[U]]): Observable[U]
+
+```
+
 
 ## Documentation
 
