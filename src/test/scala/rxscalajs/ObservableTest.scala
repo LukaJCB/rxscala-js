@@ -4,6 +4,7 @@ import rxscalajs.facade.{GroupedObservableFacade, ObservableFacade, SubjectFacad
 import rxscalajs.subscription._
 import utest._
 
+import scala.concurrent.{ExecutionContext, Future}
 import scala.scalajs.js
 
 
@@ -535,6 +536,19 @@ object ObservableTest extends TestSuite {
           observer.next("Hello")
           observer.complete()
         })
+        o.subscribe(unit)
+      }
+      'FromIterable {
+        val iterable = List(1,24,3,35,5,34)
+        val o = Observable.just(iterable: _*)
+        o.subscribe(unit)
+      }
+      'FromFuture {
+        import ExecutionContext.Implicits.global
+        val future = Future {
+          "Hello" * 5 * 5 + 123 * 23
+        }
+        val o = Observable.from(future)
         o.subscribe(unit)
       }
 

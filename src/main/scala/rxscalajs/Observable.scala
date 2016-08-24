@@ -6,10 +6,11 @@ import rxscalajs.facade._
 import rxscalajs.subscription._
 
 import scala.collection.immutable.Seq
+import scala.concurrent.{Future, ExecutionContext}
 import scala.scalajs.js
 import js._
 import js.JSConverters._
-
+import scala.util.{Success, Failure}
 
 
 /**
@@ -810,7 +811,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
   /**
     * Determines whether all elements of an observable sequence satisfy a condition.
     *
-    *
     * @param predicate
     *            A function to test each element for a condition.
     * @return An observable sequence containing a single element determining whether all elements in the source sequence pass the test in the specified predicate.
@@ -823,7 +823,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * <img width="640" height="310" src="http://reactivex.io/rxjs/img/exhaust.png" alt="" />
     *
-    *
     * @return Returns an Observable that takes a source of Observables and propagates the first observable exclusively until it completes before subscribing to the next.
     */
   def exhaust[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] =
@@ -834,6 +833,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * Flattens an Observable-of-Observables by dropping the next inner Observables while the current inner is still executing.
     *
     * <img width="640" height="310" src="http://reactivex.io/rxjs/img/exhaustMap.png" alt="" />
+    *
     * @param project
     *            A function that, when applied to an item emitted by the source Observable, returns an Observable.
     * @param resultSelector
@@ -842,7 +842,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *       innerValue: the value that came from the projected Observable
     *       outerIndex: the "index" of the value that came from the source
     *       innerIndex: the "index" of the value from the projected Observable
-    *
     * @return An Observable containing projected Observables of each item of the source, ignoring projected Observables that start before their preceding Observable has completed.
     * */
   def exhaustMap[I, R](project: (T, Int) => Observable[R], resultSelector: (T, I, Int, Int) => R): Observable[R] = new Observable(inner.exhaustMap(toReturnFacade(project),resultSelector))
@@ -854,7 +853,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * @param project
     *            A function that, when applied to an item emitted by the source Observable, returns an Observable.
-    *
     * @return An Observable containing projected Observables of each item of the source, ignoring projected Observables that start before their preceding Observable has completed.
     */
   def exhaustMap[I, R](project: (T, Int) => Observable[R]): Observable[R] = new Observable(inner.exhaustMap(toReturnFacade(project)))
@@ -1237,7 +1235,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * <img width="640" height="325" src="http://reactivex.io/rxjs/img/partition.png" alt="" />
     *
-    *
     * @param predicate
     *            A function that evaluates each value emitted by the source Observable.
     *            If it returns true, the value is emitted on the first Observable in the returned array, if false the value is emitted on the second Observable in the tuple.
@@ -1272,7 +1269,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * @param observables
     *                sources used to race for which Observable emits first.
-    *
     * @return an Observable that mirrors the output of the first Observable to emit an item.
     */
   def race(observables: Observable[T]*): Observable[T] = new Observable(inner.race(observables.map(_.get).toJSArray))
@@ -2198,6 +2194,19 @@ object Observable {
 
 
   def fromEvent(element: Element, eventName: String) = new Observable[Event](ObservableFacade.fromEvent(element,eventName))
+
+
+  def from[T](seq: Seq[T]): Observable[T] = Observable.just(seq: _*)
+
+  def from[T](future: Future[T])(implicit execContext: ExecutionContext): Observable[T] = {
+
+    Observable.create[T](observer => {
+      future onComplete {
+        case Success(value) =>  observer.next(value); observer.complete()
+        case Failure(err) =>  observer.error(err.asInstanceOf[js.Any]); observer.complete()
+      }
+    })
+  }
 
   /**
     * Combines a list of source Observables by emitting an item that aggregates the latest values of each of
