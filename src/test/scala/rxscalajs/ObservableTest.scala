@@ -95,7 +95,7 @@ object ObservableTest extends TestSuite {
       obs.elementAt(20,-3).subscribe(unit)
       }
       'Every {
-        obs.every((n: Int, n2: Int, o: ObservableFacade[Int]) => n > n2).subscribe(unit)
+        obs.every((n: Int, n2: Int) => n > n2).subscribe(unit)
       }
       'ExhaustMap{
        hoObs.exhaustMap((n: ObservableFacade[Int], index: Int) => ObservableFacade.range(0,index)).subscribe(unit)
@@ -110,9 +110,9 @@ object ObservableTest extends TestSuite {
         obs.first().subscribe(unit)
         obs.first(defaultValue = 4).subscribe(unit)
         obs.first(defaultValue = 4, resultSelector = (n: Int, n2: Int) => n).subscribe(unit)
-        obs.first((n: Int, n2: Int, src: ObservableFacade[Int]) => true).subscribe(unit)
-        obs.first((n: Int, n2: Int, src: ObservableFacade[Int]) => true, (n: Int, n2: Int) => n).subscribe(unit)
-        obs.first((n: Int, n2: Int, src: ObservableFacade[Int]) => true, (n: Int, n2: Int) => n, 4).subscribe(unit)
+        obs.first((n: Int, n2: Int) => true).subscribe(unit)
+        obs.first((n: Int, n2: Int) => true, (n: Int, n2: Int) => n).subscribe(unit)
+        obs.first((n: Int, n2: Int) => true, (n: Int, n2: Int) => n, 4).subscribe(unit)
         obs.first(resultSelector = (n: Int, n2: Int) => n).subscribe(unit)
       }
 
@@ -351,10 +351,10 @@ object ObservableTest extends TestSuite {
         obs.elementAt(20,-3).subscribe(unit)
       }
       'Every {
-        obs.every((n: Int, n2: Int, o: Observable[Int]) => n > n2).subscribe(unit)
+        obs.every((n, n2) => n > n2).subscribe(unit)
       }  
       'Exhaust{
-        hoObs.exhaust().subscribe(unit)
+        hoObs.exhaust.subscribe(unit)
        }
       'ExhaustMap{
         hoObs.exhaustMap((n: Observable[Int], index: Int) => Observable.range(0,index)).subscribe(unit)
@@ -377,7 +377,7 @@ object ObservableTest extends TestSuite {
         obs.groupBy(n => n % 2 == 0, n => n+1).subscribe(unit)
       }
       'IgnoreElements {
-        obs.ignoreElements().subscribe(unit)
+        obs.ignoreElements.subscribe(unit)
       }
       'IsEmpty{
         obs.isEmpty.subscribe(unit)

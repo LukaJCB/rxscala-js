@@ -807,17 +807,78 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     */
   def elementAt(index: Int, defaultValue: T): Observable[T] = new Observable(inner.elementAt(index,defaultValue))
 
-  def every[T2](predicate: (T,  Int,  Observable[T]) => Boolean): Observable[Boolean] = new Observable(inner.every(toFacadeFunction(predicate)))
+  /**
+    * Determines whether all elements of an observable sequence satisfy a condition.
+    *
+    *
+    * @param predicate
+    *            A function to test each element for a condition.
+    * @return An observable sequence containing a single element determining whether all elements in the source sequence pass the test in the specified predicate.
+    */
+  def every(predicate: (T,  Int) => Boolean): Observable[Boolean] = new Observable(inner.every(predicate))
 
-  def exhaust[U]()(implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] =
+  /**
+    * Projects each source value to an Observable which is merged in the output Observable only if the previous projected Observable has completed.
+    * Maps each value to an Observable, then flattens all of these inner Observables using exhaust.
+    *
+    * <img width="640" height="310" src="http://reactivex.io/rxjs/img/exhaust.png" alt="" />
+    *
+    *
+    * @return Returns an Observable that takes a source of Observables and propagates the first observable exclusively until it completes before subscribing to the next.
+    */
+  def exhaust[U](implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] =
     new Observable[U](inner.asInstanceOf[ObservableFacade[Observable[U]]].map((n: Observable[U]) => n.get).exhaust())
 
+  /**
+    * Converts a higher-order Observable into a first-order Observable by dropping inner Observables while the previous inner Observable has not yet completed.
+    * Flattens an Observable-of-Observables by dropping the next inner Observables while the current inner is still executing.
+    *
+    * <img width="640" height="310" src="http://reactivex.io/rxjs/img/exhaustMap.png" alt="" />
+    * @param project
+    *            A function that, when applied to an item emitted by the source Observable, returns an Observable.
+    * @param resultSelector
+    *            A function to produce the value on the output Observable based on the values and the indices of the source (outer) emission and the inner Observable emission. The arguments passed to this function are:
+    *       outerValue: the value that came from the source
+    *       innerValue: the value that came from the projected Observable
+    *       outerIndex: the "index" of the value that came from the source
+    *       innerIndex: the "index" of the value from the projected Observable
+    *
+    * @return An Observable containing projected Observables of each item of the source, ignoring projected Observables that start before their preceding Observable has completed.
+    * */
   def exhaustMap[I, R](project: (T, Int) => Observable[R], resultSelector: (T, I, Int, Int) => R): Observable[R] = new Observable(inner.exhaustMap(toReturnFacade(project),resultSelector))
+  /**
+    * Converts a higher-order Observable into a first-order Observable by dropping inner Observables while the previous inner Observable has not yet completed.
+    * Flattens an Observable-of-Observables by dropping the next inner Observables while the current inner is still executing.
+    *
+    * <img width="640" height="310" src="http://reactivex.io/rxjs/img/exhaustMap.png" alt="" />
+    *
+    * @param project
+    *            A function that, when applied to an item emitted by the source Observable, returns an Observable.
+    *
+    * @return An Observable containing projected Observables of each item of the source, ignoring projected Observables that start before their preceding Observable has completed.
+    */
   def exhaustMap[I, R](project: (T, Int) => Observable[R]): Observable[R] = new Observable(inner.exhaustMap(toReturnFacade(project)))
-
-  def expand[R](project: ( T, Int) => Observable[R], concurrent: Double = Double.PositiveInfinity, scheduler: Scheduler): Observable[R] =
+  /**
+    * Returns an Observable where for each item in the source Observable, the supplied function is applied to each item, resulting in a new value to then be applied again with the function.
+    *
+    * @param project
+    *            the function for projecting the next emitted item of the Observable.
+    * @param concurrent
+    *            the max number of observables that can be created concurrently. defaults to infinity.
+    * @param scheduler
+    *            The Scheduler to use for managing the expansions.
+    * @return An observable sequence containing a single element determining whether all elements in the source sequence pass the test in the specified predicate.
+    */
+  def expand[R](project: (T, Int) => Observable[R],scheduler: Scheduler, concurrent: Double = Double.PositiveInfinity): Observable[R] =
     new Observable(inner.expand(toReturnFacade(project),concurrent,scheduler))
-  def expand[R](project: ( T, Int) => Observable[R]): Observable[R] = new Observable(inner.expand(toReturnFacade(project)))
+  /**
+    * Returns an Observable where for each item in the source Observable, the supplied function is applied to each item, resulting in a new value to then be applied again with the function.
+    *
+    * @param project
+    *            the function for projecting the next emitted item of the Observable.
+    * @return An observable sequence containing a single element determining whether all elements in the source sequence pass the test in the specified predicate.
+    */
+  def expand[R](project: (T,Int) => Observable[R]): Observable[R] = new Observable(inner.expand(toReturnFacade(project)))
 
   /**
     * Returns an Observable which only emits those items for which a given predicate holds.
@@ -843,9 +904,27 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
   def filter[T2](predicate: T => Boolean): Observable[T] = new Observable(inner.filter(predicate))
 
 
-  def find[T2](predicate: (T,  Int,  Observable[T]) =>Boolean): Observable[T] = new Observable(inner.find(toFacadeFunction(predicate)))
+  /**
+    * Emits only the first value emitted by the source Observable that meets some condition.
+    *
+    * <img width="640" height="310" src="http://reactivex.io/rxjs/img/find.png" alt="" />
+    *
+    * @param predicate
+    *            A function called with each item to test for condition matching.
+    * @return An Observable of the first item that matches the condition.
+    */
+  def find[T2](predicate: (T,  Int) => Boolean): Observable[T] = new Observable(inner.find(predicate))
 
-  def findIndex[T2](predicate: (T,  Int,  Observable[T]) =>Boolean): Observable[Int] = new Observable(inner.findIndex(toFacadeFunction(predicate)))
+  /**
+    * Emits only the index of the first value emitted by the source Observable that meets some condition.
+    *
+    * <img width="640" height="310" src="http://reactivex.io/rxjs/img/findIndex.png" alt="" />
+    *
+    * @param predicate
+    *            A function called with each item to test for condition matching.
+    * @return An Observable of the index of the first item that matches the condition.
+    */
+  def findIndex[T2](predicate: (T, Int) => Boolean): Observable[Int] = new Observable(inner.findIndex(predicate))
 
   /**
     * Returns an Observable that emits only the very first item emitted by the source Observable, or raises an
@@ -922,7 +1001,14 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     new Observable(outerFacade.map((groupFacade: GroupedObservableFacade[K,T]) => (groupFacade.key, new Observable(groupFacade))))
   }
 
-  def ignoreElements(): Observable[T] = new Observable(inner.ignoreElements())
+  /**
+    * Ignores all items emitted by the source Observable and only passes calls of complete or error.
+    *
+    * <img width="640" height="310" src="http://reactivex.io/rxjs/img/ignoreElements.png" alt="" />
+    *
+    * @return an empty Observable that only calls complete or error, based on which one is called by the source Observable.
+    */
+  def ignoreElements: Observable[T] = new Observable(inner.ignoreElements())
 
   /** Tests whether this `Observable` emits no elements.
     *
@@ -1135,8 +1221,29 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
 
   def multicast(subjectOrSubjectFactory: () => SubjectFacade[T]): Observable[T] = new Observable(inner.multicast(subjectOrSubjectFactory))
 
+  /**
+    * Groups pairs of consecutive emissions together and emits them as a tuple of two values.
+    *
+    * <img width="640" height="510" src="http://reactivex.io/rxjs/img/pairwise.png" alt="" />
+    *
+    * @return an Observable of pairs (as tuples) of consecutive values from the source Observable.
+    */
   def pairwise: Observable[(T,T)] = new Observable[(T, T)](inner.pairwise().map((arr: js.Array[T], index: Int) => (arr(0), arr(1))))
 
+
+  /**
+    * Splits the source Observable into two, one with values that satisfy a predicate, and another with values that don't satisfy the predicate.
+    * It's like filter, but returns two Observables: one like the output of filter, and the other with values that did not pass the condition.
+    *
+    * <img width="640" height="325" src="http://reactivex.io/rxjs/img/partition.png" alt="" />
+    *
+    *
+    * @param predicate
+    *            A function that evaluates each value emitted by the source Observable.
+    *            If it returns true, the value is emitted on the first Observable in the returned array, if false the value is emitted on the second Observable in the tuple.
+    * @return an Observable that emits a single item that is the result of accumulating the output
+    *         from the items emitted by the source Observable
+    */
   def partition[T2](predicate: T => Boolean): (Observable[T], Observable[T]) = {
     val partitioned = inner.partition(predicate)
     (new Observable(partitioned(0)),new Observable(partitioned(1)))
@@ -1153,12 +1260,21 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     */
   def publish: Observable[T] = new Observable(inner.publish())
 
+
   def publishBehavior(value: T): Observable[T] = new Observable(inner.publishBehavior(value))
 
   def publishLast: Observable[T] = new Observable(inner.publishLast())
   def publishReplay(bufferSize: Double = Double.PositiveInfinity, windowTime: Double = Double.PositiveInfinity): Observable[T] =
     new Observable(inner.publishReplay(bufferSize,windowTime))
 
+  /**
+    * Returns an Observable that mirrors the first source Observable to emit an item from the combination of this Observable and supplied Observables
+    *
+    * @param observables
+    *                sources used to race for which Observable emits first.
+    *
+    * @return an Observable that mirrors the output of the first Observable to emit an item.
+    */
   def race(observables: Observable[T]*): Observable[T] = new Observable(inner.race(observables.map(_.get).toJSArray))
 
   /**
@@ -1170,7 +1286,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * <img width="640" height="325" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/reduceSeed.png" alt="" />
     *
-    * This technique, which is called "reduce" or "aggregate" here, is sometimes called "fold,"
+    * This technique, which is called "fold" or "reduce" here, is sometimes called "aggregate,"
     * "accumulate," "compress," or "inject" in other programming contexts. Groovy, for instance,
     * has an `inject` method that does a similar operation on lists.
     *
@@ -1613,7 +1729,8 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     */
   def takeWhile(predicate: (T, Int) => Boolean): Observable[T] = new Observable(inner.takeWhile(predicate))
 
-  def throttle(durationSelector: T => Observable[Int]): Observable[T] = new Observable(inner.throttle(toReturnFacade(durationSelector)))
+  def throttle(durationSelector: T => Observable[Int]): Observable[T] =
+    new Observable(inner.throttle(toReturnFacade(durationSelector)))
   /**
     * Debounces by dropping all values that are followed by newer values before the timeout value expires. The timer resets on each `onNext` call.
     *
@@ -1667,7 +1784,8 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @return the source Observable modified so that it will switch to the
     *         fallback Observable in case of a timeout
     */
-  def timeout[U](due: Int, errorToSend: U, scheduler: Scheduler ): Observable[T] = new Observable(inner.timeout(due,errorToSend,scheduler))
+  def timeout[U](due: Int, errorToSend: U, scheduler: Scheduler ): Observable[T] =
+    new Observable(inner.timeout(due,errorToSend,scheduler))
 
   /**
     * Applies a timeout policy for each item emitted by the Observable, using
@@ -1772,7 +1890,8 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @return An Observable which produces connected non-overlapping windows. The boundary of each window is
     *         determined by the items emitted from a specified boundary-governing Observable.
     */
-  def window[I](windowBoundaries: Observable[I]): Observable[Observable[T]] = new Observable(inner.window(windowBoundaries).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+  def window[I](windowBoundaries: Observable[I]): Observable[Observable[T]] =
+    new Observable(inner.window(windowBoundaries).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
   /**
     * Creates an Observable which produces windows of collected values. This Observable produces connected
     * non-overlapping windows. The boundary of each window is determined by the items emitted from a specified
@@ -1933,7 +2052,8 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @see <a href="http://reactivex.io/documentation/operators/combinelatest.html">ReactiveX operators documentation: CombineLatest</a>
     * @since (if this graduates from Experimental/Beta to supported, replace this parenthetical with the release number)
     */
-  def withLatestFrom[U, R](other: Observable[U], project: (T, U) =>  R): Observable[R] = new Observable(inner.withLatestFrom(other,project))
+  def withLatestFrom[U, R](other: Observable[U], project: (T, U) =>  R): Observable[R] =
+    new Observable(inner.withLatestFrom(other,project))
   /**
     *   Merges the specified [[Observable]] into this [[Observable]] sequence by using the `resultSelector`
     * function only when the source [[Observable]] (this instance) emits an item.
@@ -1992,7 +2112,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @return $subscribeAllReturn
     * @see <a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a>
     */
-  def subscribe(onNext: T => Unit, error: js.Function1[js.Any,Unit] = null, complete: js.Function0[Unit] = null): AnonymousSubscription = inner.subscribe(onNext,error,complete)
+  def subscribe(onNext: T => Unit, error: js.Any => Unit = e => (), complete: () => Unit = () => ()): AnonymousSubscription = inner.subscribe(onNext,error,complete)
 
   /**
     *

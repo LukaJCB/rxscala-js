@@ -1,7 +1,6 @@
 package rxscalajs
 
 import rxscalajs.facade.SubjectFacade
-import rxscalajs.subscription.{Observer, ObserverFacade}
 
 import scala.scalajs.js
 

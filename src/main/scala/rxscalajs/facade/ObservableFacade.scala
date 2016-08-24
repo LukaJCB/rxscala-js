@@ -84,16 +84,16 @@ import scala.scalajs.js.annotation.JSName
     def distinctUntilKeyChanged(key: String, compare: js.Function2[ T,  T, Boolean] = ???): ObservableFacade[T] = js.native
     def `do`[T2](nextOrObserver: (ObserverFacade[T] | js.Function1[T ,Unit]) = ???, error: js.Function1[T2 ,Unit] = ???, complete: js.Function0[Unit] = ???): ObservableFacade[T] = js.native
     def elementAt(index: Int, defaultValue: T = ???): ObservableFacade[T] = js.native
-    def every[T2](predicate: js.Function3[T,  Int,  ObservableFacade[T],Boolean], thisArg: T2 = ???): ObservableFacade[Boolean] = js.native
+    def every[T2](predicate: js.Function2[T,  Int,Boolean], thisArg: T2 = ???): ObservableFacade[Boolean] = js.native
     def exhaust[U](): ObservableFacade[U] = js.native
     def exhaustMap[I, R](project: js.Function2[T, Int, ObservableFacade[R]], resultSelector: js.Function4[T, I, Int, Int, R] = ???): ObservableFacade[R] = js.native
     def expand[R](project: js.Function2[ T, Int, ObservableFacade[R]], concurrent: Double = ???, scheduler: Scheduler = ???): ObservableFacade[R] = js.native
     def filter[T2](predicate: js.Function2[ T,  Int, Boolean], thisArg: T2 = ???): ObservableFacade[T] = js.native
     def filter[T2](predicate: js.Function1[ T, Boolean]): ObservableFacade[T] = js.native
     def _finally(finallySelector: js.Function0[Unit]): ObservableFacade[T] = js.native
-    def find[T2](predicate: js.Function3[T,  Int,  ObservableFacade[T],Boolean], thisArg: T2 = ???): ObservableFacade[T] = js.native
-    def findIndex[T2](predicate: js.Function3[T,  Int,  ObservableFacade[T],Boolean], thisArg: T2 = ???): ObservableFacade[Int] = js.native
-    def first[ R](predicate: js.Function3[T,  Int,  ObservableFacade[T],Boolean] = ???, resultSelector: js.Function2[T,Int,R] = ???, defaultValue: R = ???): ObservableFacade[R] = js.native
+    def find[T2](predicate: js.Function2[T,  Int,Boolean], thisArg: T2 = ???): ObservableFacade[T] = js.native
+    def findIndex[T2](predicate: js.Function2[T,  Int, Boolean], thisArg: T2 = ???): ObservableFacade[Int] = js.native
+    def first[ R](predicate: js.Function2[T,  Int, Boolean] = ???, resultSelector: js.Function2[T,Int,R] = ???, defaultValue: R = ???): ObservableFacade[R] = js.native
     def groupBy[K, R,T2](keySelector: js.Function1[T,K], elementSelector:  js.Function1[T,R]= ???, durationSelector:  js.Function1[GroupedObservableFacade[K, R],ObservableFacade[T2]] = ???): ObservableFacade[GroupedObservableFacade[K, R]] = js.native
     def ignoreElements(): ObservableFacade[T] = js.native
     def isEmpty(): ObservableFacade[Boolean] = js.native
