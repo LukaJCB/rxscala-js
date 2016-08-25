@@ -530,6 +530,11 @@ object ObservableTest extends TestSuite {
       'ZipWithIndex {
         obs.zipWithIndex.subscribe(unit)
       }
+      'Ajax {
+        Observable.ajax("https://api.github.com/orgs/reactivex")
+          .map(_.response.public_repos)
+          .subscribe(unit)
+      }
       'Create {
         val o = Observable.create[String](observer => {
           observer.next("Str")

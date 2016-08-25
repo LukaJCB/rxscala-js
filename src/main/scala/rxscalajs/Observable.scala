@@ -2137,6 +2137,9 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
 }
 
 object Observable {
+
+
+
   /**
     * Converts a sequence of values into an Observable.
     *
@@ -2184,7 +2187,10 @@ object Observable {
   }
 
 
-  def ajax[T](request: String): Observable[T] = new Observable[T](ObservableFacade.ajax(request))
+
+  def ajax(url: String): Observable[js.Dynamic] = new Observable(ObservableFacade.ajax(url))
+
+  def ajax(settings: js.Object): Observable[js.Dynamic] = new Observable(ObservableFacade.ajax(settings))
 
   def bindCallback[T,U](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[U, ObservableFacade[T]] =
     ObservableFacade.bindCallback(callbackFunc,selector,scheduler)
