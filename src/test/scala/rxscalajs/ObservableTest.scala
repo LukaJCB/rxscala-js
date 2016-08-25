@@ -279,10 +279,10 @@ object ObservableTest extends TestSuite {
     }
     'WrapperTests{
 
-      val obs = Observable(1,11,21,1211,111221)
+      val obs = Observable.just(1,11,21,1211,111221)
       val intervalObs = Observable.interval(100).take(5)
-      val hoObs = Observable(obs).take(2)
-      val notiObs = Observable(Notification.createNext(3),Notification.createComplete())
+      val hoObs = Observable.just(obs).take(2)
+      val notiObs = Observable.just(Notification.createNext(3),Notification.createComplete())
       'BufferCount {
         obs.bufferCount(2).subscribe(unit)
         obs.bufferCount(2, 1).subscribe(unit)
@@ -310,8 +310,8 @@ object ObservableTest extends TestSuite {
         obs.concatMap[String, Double]((n: Int, index: Int) => Observable.of("Hello", "world")).subscribe(unit)
       }
       'ConcatMapTo {
-        obs.concatMapTo(Observable('H')).subscribe(unit)
-        obs.concatMapTo(Observable("Hello")).subscribe(unit)
+        obs.concatMapTo(Observable.just('H')).subscribe(unit)
+        obs.concatMapTo(Observable.of("Hello")).subscribe(unit)
       }
       'Count {
         obs.count.subscribe(unit)
@@ -330,8 +330,8 @@ object ObservableTest extends TestSuite {
         obs.delay(50).subscribe(unit)
       }
       'DelayWhen {
-        obs.delayWhen((n: Int) => Observable(34)).subscribe(unit)
-        obs.delayWhen((n: Int) => Observable("asd"), Observable("as")).subscribe(unit)
+        obs.delayWhen((n: Int) => Observable.of(34)).subscribe(unit)
+        obs.delayWhen((n: Int) => Observable.of("asd"), Observable.of("as")).subscribe(unit)
       }
       'Dematerialize {
         notiObs.dematerialize.subscribe(unit)
@@ -361,7 +361,7 @@ object ObservableTest extends TestSuite {
         hoObs.exhaustMap((n: Observable[Int], index: Int) => Observable.range(0,index)).subscribe(unit)
       }
       'Expand {
-        intervalObs.expand((n: Int, n2: Int) => Observable(n)).take(1).subscribe(unit)
+        intervalObs.expand((n: Int, n2: Int) => Observable.just(n)).take(1).subscribe(unit)
       }
       'Filter {
         obs.filter((n: Int, n2: Int) => n % 2 == 0).subscribe(unit)
@@ -403,12 +403,12 @@ object ObservableTest extends TestSuite {
         hoObs.mergeAll(3).subscribe(unit)
       }
       'MergeMap {
-        obs.mergeMap((n: Int, index: Int) => Observable(n)).subscribe(unit)
+        obs.mergeMap((n: Int, index: Int) => Observable.of(n)).subscribe(unit)
         obs.mergeMap(n => Observable.just(n)).subscribe(unit)
       }
       'MergeMapTo {
-        obs.mergeMapTo(Observable("34")).subscribe(unit)
-        obs.mergeMapTo(Observable(34), (out: Int, in: Int, index1: Int, index2: Int) => -1).subscribe(unit)
+        obs.mergeMapTo(Observable.of("34")).subscribe(unit)
+        obs.mergeMapTo(Observable.of(34), (out: Int, in: Int, index1: Int, index2: Int) => -1).subscribe(unit)
       }
       'Multicast {
         val func: js.Function0[SubjectFacade[Int]] = () => new SubjectFacade[Int]()
@@ -522,8 +522,8 @@ object ObservableTest extends TestSuite {
         obs.withLatestFrom(intervalObs).subscribe(unit)
       }
       'Zip {
-        val first = Observable(10, 11, 12)
-        val second = Observable(10, 11, 12)
+        val first = Observable.of(10, 11, 12)
+        val second = Observable.of(10, 11, 12)
         first zip second subscribe(unit)
         obs zip intervalObs subscribe(unit)
       }

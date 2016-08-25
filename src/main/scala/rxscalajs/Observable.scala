@@ -2102,24 +2102,64 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
 
   /**
     *  
+    * Call this method to subscribe an [[Observer]] for receiving
+    * items and notifications from the Observable.
     *
-    * $noDefaultScheduler
+    * A typical implementation of `subscribe` does the following:
     *
-    * @return $subscribeAllReturn
+    * It stores a reference to the Observer in a collection object, such as a `List[T]` object.
+    *
+    * It returns a reference to the [[Subscription]] interface. This enables Observers to
+    * unsubscribe, that is, to stop receiving items and notifications before the Observable stops
+    * sending them, which also invokes the Observer's [[Observer.complete() complete]] method.
+    *
+    * An `Observable[T]` instance is responsible for accepting all subscriptions
+    * and notifying all Observers. Unless the documentation for a particular
+    * `Observable[T]` implementation indicates otherwise, Observers should make no
+    * assumptions about the order in which multiple Observers will receive their notifications.
+    *
+    * @return  a [[Subscription]] reference whose `unsubscribe` method can be called to  stop receiving items
+    *         before the Observable has finished sending them
     * @see <a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a>
     */
   def subscribe(onNext: T => Unit, error: js.Any => Unit = e => (), complete: () => Unit = () => ()): AnonymousSubscription = inner.subscribe(onNext,error,complete)
 
   /**
     *
+    * Call this method to subscribe an [[Observer]] for receiving
+    * items and notifications from the Observable.
     *
-    * $noDefaultScheduler
+    * A typical implementation of `subscribe` does the following:
     *
-    * @return $subscribeAllReturn
+    * It stores a reference to the Observer in a collection object, such as a `List[T]` object.
+    *
+    * It returns a reference to the [[Subscription]] interface. This enables Observers to
+    * unsubscribe, that is, to stop receiving items and notifications before the Observable stops
+    * sending them, which also invokes the Observer's [[Observer.complete() complete]] method.
+    *
+    * An `Observable[T]` instance is responsible for accepting all subscriptions
+    * and notifying all Observers. Unless the documentation for a particular
+    * `Observable[T]` implementation indicates otherwise, Observers should make no
+    * assumptions about the order in which multiple Observers will receive their notifications.
+    *
+    * @return  a [[Subscription]] reference whose `unsubscribe` method can be called to  stop receiving items
+    *         before the Observable has finished sending them
     * @see <a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a>
     */
   def subscribe(observer: Observer[T]): AnonymousSubscription =
     inner.subscribe(observer.next _: js.Function1[T,Unit], observer.error _: js.Function1[js.Any,Unit], observer.complete _:js.Function0[Unit])
+
+  /**
+    * Call this method to receive items from this observable.
+    *
+    *
+    *
+    * @param onNext this function will be called whenever the Observable emits an item
+    * @return  a [[Subscription]] reference whose `unsubscribe` method can be called to  stop receiving items
+    *         before the Observable has finished sending them
+    * @see <a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a>
+    */
+  def apply(onNext: T => Unit) = subscribe(onNext)
 
   private def get = inner
 
@@ -2140,23 +2180,31 @@ object Observable {
 
 
 
+
   /**
-    * Converts a sequence of values into an Observable.
+    * Returns an Observable that will execute the specified function when someone subscribes to it.
     *
-    * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" />
+    * <img width="640" height="200" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/create.png" alt="" />
     *
-    * Implementation note: the entire array will be immediately emitted each time an [[rxscalajs.subscription.ObserverFacade]] subscribes.
-    * Since this occurs before the [[subscription.Subscription]] is returned,
-    * it in not possible to unsubscribe from the sequence before it completes.
+    * Write the function you pass so that it behaves as an Observable: It should invoke the
+    * Subscriber's `next`, `error`, and `completed` methods appropriately.
     *
-    * @param values
-    *            the source Array
+    *
+    * See <a href="http://go.microsoft.com/fwlink/?LinkID=205219">Rx Design Guidelines (PDF)</a> for detailed
+    * information.
+    *
+    * See `<a href="https://github.com/ReactiveX/RxScala/blob/0.x/examples/src/test/scala/examples/RxScalaDemo.scala">RxScalaDemo</a>.createExampleGood`
+    * and `<a href="https://github.com/ReactiveX/RxScala/blob/0.x/examples/src/test/scala/examples/RxScalaDemo.scala">RxScalaDemo</a>.createExampleGood2`.
+    *
     * @tparam T
-    *            the type of items in the Array, and the type of items to be emitted by the
-    *            resulting Observable
-    * @return an Observable that emits each item in the source Array
+    *            the type of the items that this Observable emits
+    * @param f
+    *            a function that accepts a `Observer[T]`, and invokes its `next`,
+    *            `onError`, and `onCompleted` methods as appropriate
+    * @return an Observable that, when someone subscribes to it, will execute the specified
+    *         function
     */
-  def apply[T](values: T*): Observable[T] = new Observable(ObservableFacade.of[T](values: _*))
+  def apply[T](f: Observer[T] => Unit): Observable[T] = Observable.create(f)
 
   /**
     * Converts a sequence of values into an Observable.
@@ -2176,6 +2224,31 @@ object Observable {
     */
   def just[T](values: T*): Observable[T] = new Observable(ObservableFacade.of[T](values: _*))
 
+
+
+  /**
+    * Returns an Observable that will execute the specified function when someone subscribes to it.
+    *
+    * <img width="640" height="200" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/create.png" alt="" />
+    *
+    * Write the function you pass so that it behaves as an Observable: It should invoke the
+    * Subscriber's `next`, `error`, and `completed` methods appropriately.
+    *
+    *
+    * See <a href="http://go.microsoft.com/fwlink/?LinkID=205219">Rx Design Guidelines (PDF)</a> for detailed
+    * information.
+    *
+    * See `<a href="https://github.com/ReactiveX/RxScala/blob/0.x/examples/src/test/scala/examples/RxScalaDemo.scala">RxScalaDemo</a>.createExampleGood`
+    * and `<a href="https://github.com/ReactiveX/RxScala/blob/0.x/examples/src/test/scala/examples/RxScalaDemo.scala">RxScalaDemo</a>.createExampleGood2`.
+    *
+    * @tparam T
+    *            the type of the items that this Observable emits
+    * @param f
+    *            a function that accepts a `Observer[T]`, and invokes its `next`,
+    *            `onError`, and `onCompleted` methods as appropriate
+    * @return an Observable that, when someone subscribes to it, will execute the specified
+    *         function
+    */
   def create[T](f: Observer[T] => Unit): Observable[T] = {
     def toObserver(o: ObserverFacade[T]): Observer[T] = new Observer[T]{
       override def next(t: T) = o.next(t)
@@ -2183,6 +2256,7 @@ object Observable {
       override def complete() = o.complete()
     }
     def toFacadeFunction(func: Observer[T] => Unit): ObserverFacade[T] => Unit = (facade) => func(toObserver(facade))
+
     new Observable(ObservableFacade.create(toFacadeFunction(f)))
   }
 
@@ -2191,19 +2265,100 @@ object Observable {
   def ajax(url: String): Observable[js.Dynamic] = new Observable(ObservableFacade.ajax(url))
 
   def ajax(settings: js.Object): Observable[js.Dynamic] = new Observable(ObservableFacade.ajax(settings))
-
+  /**
+    * Converts a callback API to a function that returns an Observable.
+    *
+    * <span class="informal">Give it a function `f` of type `f(x, callback)` and
+    * it will return a function `g` that when called as `g(x)` will output an
+    * Observable.</span>
+    *
+    * `bindCallback` is not an operator because its input and output are not
+    * Observables. The input is a function `func` with some parameters, but the
+    * last parameter must be a callback function that `func` calls when it is
+    * done. The output of `bindCallback` is a function that takes the same
+    * parameters as `func`, except the last one (the callback). When the output
+    * function is called with arguments, it will return an Observable where the
+    * results will be delivered to.
+    *
+    *
+    * @param callbackFunc Function with a callback as the last parameter.
+    * @param selector A function which takes the arguments from the
+    * callback and maps those a value to emit on the output Observable.
+    * @param scheduler The scheduler on which to schedule the
+    * callbacks.
+    * @return  A function which returns the
+    * Observable that delivers the same values the callback would deliver.
+    *
+    */
   def bindCallback[T,U](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[U, ObservableFacade[T]] =
     ObservableFacade.bindCallback(callbackFunc,selector,scheduler)
 
+
+  /**
+    * Converts a Node.js-style callback API to a function that returns an
+    * Observable.
+    *
+    * <span class="informal">It's just like bindCallback`, but the
+    * callback is expected to be of type `callback(error, result)`.</span>
+    *
+    * `bindNodeCallback` is not an operator because its input and output are not
+    * Observables. The input is a function `func` with some parameters, but the
+    * last parameter must be a callback function that `func` calls when it is
+    * done. The callback function is expected to follow Node.js conventions,
+    * where the first argument to the callback is an error, while remaining
+    * arguments are the callback result. The output of `bindNodeCallback` is a
+    * function that takes the same parameters as `func`, except the last one (the
+    * callback). When the output function is called with arguments, it will
+    * return an Observable where the results will be delivered to.
+    *
+    *
+    * @param callbackFunc Function with a callback as the last parameter.
+    * @param  selector A function which takes the arguments from the
+    * callback and maps those a value to emit on the output Observable.
+    * @param  scheduler The scheduler on which to schedule the
+    * callbacks.
+    * @return  A function which returns the
+    * Observable that delivers the same values the callback would deliver.
+    *
+    */
   def bindNodeCallback[T,U](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[U, ObservableFacade[T]]  =
     ObservableFacade.bindNodeCallback(callbackFunc,selector,scheduler)
 
-
+  /**
+    * Creates an Observable that emits events of a specific type coming from the given event target.
+    *
+    * Creates an Observable by attaching an event listener to an "event target", which may be an object with addEventListener and removeEventListener, a Node.js EventEmitter, a jQuery style EventEmitter, a NodeList from the DOM, or an HTMLCollection from the DOM.
+    * The event handler is attached when the output Observable is subscribed, and removed when the Subscription is unsubscribed.
+    * @param element
+    * @param eventName
+    * @return
+    */
   def fromEvent(element: Element, eventName: String) = new Observable[Event](ObservableFacade.fromEvent(element,eventName))
 
-
+  /**
+    * Converts a `Seq` into an Observable.
+    *
+    * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" />
+    *
+    * Note: the entire iterable sequence is immediately emitted each time an
+    * Observer subscribes. Since this occurs before the
+    * `Subscription` is returned, it is not possible to unsubscribe from
+    * the sequence before it completes.
+    *
+    * @param seq the source `Seq` sequence
+    * @tparam T the type of items in the `Seq` sequence and the
+    *            type of items to be emitted by the resulting Observable
+    * @return an Observable that emits each item in the source `Iterable`
+    *         sequence
+    */
   def from[T](seq: Seq[T]): Observable[T] = Observable.just(seq: _*)
 
+  /** Returns an Observable emitting the value produced by the Future as its single item.
+    * If the future fails, the Observable will fail as well.
+    *
+    * @param future Future whose value ends up in the resulting Observable
+    * @return an Observable completed after producing the value of the future, or with an exception
+    */
   def from[T](future: Future[T])(implicit execContext: ExecutionContext): Observable[T] = {
 
     Observable.create[T](observer => {
@@ -2264,10 +2419,16 @@ object Observable {
     *            resulting Observable
     * @return an Observable that emits each item in the source Array
     */
-  def of[T](elements: T*): Observable[T] = apply(elements: _*)
+  def of[T](elements: T*): Observable[T] = just(elements: _*)
 
+  /**
+    * Returns an Observable that mirrors the first source Observable to emit an item from the combination of this Observable and supplied Observables
+    * @param    observables sources used to race for which Observable emits first.
+    * @return an Observable that mirrors the output of the first Observable to emit an item.
 
-  def race[T](observables: ObservableFacade[T]*): Observable[T] = new Observable(ObservableFacade.race(observables: _*))
+    */
+  def race[T](observables: Observable[T]*): Observable[T] =
+    new Observable(ObservableFacade.race(observables.map(_.inner): _*))
 
   /**
     * Returns an Observable that emits `0L` after a specified delay, and then completes.
@@ -2278,10 +2439,41 @@ object Observable {
     * @return Observable that emits `0L` after a specified delay, and then completes
     */
   def timer(initialDelay: Int = 0, period: Int = -1): Observable[Int] = new Observable(ObservableFacade.timer(initialDelay,period))
-  
+
+  /**
+    * Creates an Observable that emits a sequence of numbers within a specified
+    * range.
+    *
+    * Emits a sequence of numbers in a range.
+    *
+    * <img src="http://reactivex.io/rxjs/img/range.png" width="100%">
+    *
+    * `range` operator emits a range of sequential integers, in order, where you
+    * select the `start` of the range and its `length`. By default, uses no
+    * Scheduler and just delivers the notifications synchronously, but may use
+    * an optional Scheduler to regulate those deliveries.
+    *
+    *
+    *
+    * @param start The value of the first integer in the sequence.
+    * @param count The number of sequential integers to generate.
+    * the emissions of the notifications.
+    * @return An Observable of numbers that emits a finite range of
+    * sequential integers.
+    */
   def range(start: Int = 0, count: Int = 0): Observable[Int] = new Observable(ObservableFacade.range(start,count))
 
-
+  /**
+    * Given a number of observables, returns an observable that emits a combination of each.
+    * The first emitted combination will contain the first element of each source observable,
+    * the second combination the second element of each source observable, and so on.
+    *
+    * @param project
+    *                 a function that combines the items from the Observable and the Iterable to generate
+    *                 the items to be emitted by the resulting Observable
+    *
+    * @return an Observable that emits the zipped Observables
+    */
   def zip[T,R](observables: Seq[Observable[T]])(project: Seq[T] => R): Observable[R] =  {
     val func = project.asInstanceOf[js.Array[T] => R]
     new Observable(ObservableFacade.zip(observables.map(_.inner).toJSArray,func))
