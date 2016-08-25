@@ -148,45 +148,64 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="rxscalajs.Observable#ajax" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ajax[T](request:String):rxscalajs.Observable[T]"></a>
-      <a id="ajax[T](String):Observable[T]"></a>
+      <a id="ajax(settings:scala.scalajs.js.Object):rxscalajs.Observable[scala.scalajs.js.Dynamic]"></a>
+      <a id="ajax(Object):Observable[Dynamic]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">ajax</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="request">request: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.ajax.T">T</span>]</span>
+        <span class="name">ajax</span><span class="params">(<span name="settings">settings: <span class="extype" name="scala.scalajs.js.Object">Object</span></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="scala.scalajs.js.Dynamic">Dynamic</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Observable$@ajax[T](request:String):rxscalajs.Observable[T]" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Observable$@ajax(settings:scala.scalajs.js.Object):rxscalajs.Observable[scala.scalajs.js.Dynamic]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="rxscalajs.Observable#ajax" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ajax(url:String):rxscalajs.Observable[scala.scalajs.js.Dynamic]"></a>
+      <a id="ajax(String):Observable[Dynamic]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ajax</span><span class="params">(<span name="url">url: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="scala.scalajs.js.Dynamic">Dynamic</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#rxscalajs.Observable$@ajax(url:String):rxscalajs.Observable[scala.scalajs.js.Dynamic]" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       
     </li><li name="rxscalajs.Observable#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply[T](values:T*):rxscalajs.Observable[T]"></a>
-      <a id="apply[T](T*):Observable[T]"></a>
+      <a id="apply[T](f:rxscalajs.Observer[T]=&gt;Unit):rxscalajs.Observable[T]"></a>
+      <a id="apply[T]((Observer[T])⇒Unit):Observable[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="values">values: <span class="extype" name="rxscalajs.Observable.apply.T">T</span>*</span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.apply.T">T</span>]</span>
+        <span class="name">apply</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="f">f: (<a href="Observer.html" class="extype" name="rxscalajs.Observer">Observer</a>[<span class="extype" name="rxscalajs.Observable.apply.T">T</span>]) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.apply.T">T</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Observable$@apply[T](values:T*):rxscalajs.Observable[T]" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Observable$@apply[T](f:rxscalajs.Observer[T]=&gt;Unit):rxscalajs.Observable[T]" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Converts a sequence of values into an Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a sequence of values into an Observable.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" /></p><p>Implementation note: the entire array will be immediately emitted each time an <a href="subscription/ObserverFacade.html" class="extype" name="rxscalajs.subscription.ObserverFacade">rxscalajs.subscription.ObserverFacade</a> subscribes.
-Since this occurs before the <a href="subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">subscription.Subscription</a> is returned,
-it in not possible to unsubscribe from the sequence before it completes.
+      <p class="shortcomment cmt">Returns an Observable that will execute the specified function when someone subscribes to it.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that will execute the specified function when someone subscribes to it.</p><p><img width="640" height="200" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/create.png" alt="" /></p><p>Write the function you pass so that it behaves as an Observable: It should invoke the
+Subscriber's <code>next</code>, <code>error</code>, and <code>completed</code> methods appropriately.</p><p>See <a href="http://go.microsoft.com/fwlink/?LinkID=205219">Rx Design Guidelines (PDF)</a> for detailed
+information.</p><p>See <code><a href="https://github.com/ReactiveX/RxScala/blob/0.x/examples/src/test/scala/examples/RxScalaDemo.scala">RxScalaDemo</a>.createExampleGood</code>
+and <code><a href="https://github.com/ReactiveX/RxScala/blob/0.x/examples/src/test/scala/examples/RxScalaDemo.scala">RxScalaDemo</a>.createExampleGood2</code>.
 </p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>
-           the type of items in the Array, and the type of items to be emitted by the
-           resulting Observable</p></dd><dt class="param">values</dt><dd class="cmt"><p>
-           the source Array</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits each item in the source Array</p></dd></dl></div>
+           the type of the items that this Observable emits</p></dd><dt class="param">f</dt><dd class="cmt"><p>
+           a function that accepts a <code>Observer[T]</code>, and invokes its <code>next</code>,
+           <code>onError</code>, and <code>onCompleted</code> methods as appropriate</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that, when someone subscribes to it, will execute the specified
+        function</p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -204,7 +223,7 @@ it in not possible to unsubscribe from the sequence before it completes.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="rxscalajs.Observable#bindCallback" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="rxscalajs.Observable#bindCallback" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="bindCallback[T,U](callbackFunc:scala.scalajs.js.Function,selector:scala.scalajs.js.Function,scheduler:rxscalajs.Scheduler):scala.scalajs.js.Function1[U,rxscalajs.facade.ObservableFacade[T]]"></a>
       <a id="bindCallback[T,U](Function,Function,Scheduler):Function1[U,ObservableFacade[T]]"></a>
       <h4 class="signature">
@@ -220,8 +239,19 @@ it in not possible to unsubscribe from the sequence before it completes.
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="rxscalajs.Observable#bindNodeCallback" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">Converts a callback API to a function that returns an Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a callback API to a function that returns an Observable.</p><p><span class="informal">Give it a function `f` of type `f(x, callback)` and
+it will return a function `g` that when called as `g(x)` will output an
+Observable.</span></p><p><code>bindCallback</code> is not an operator because its input and output are not
+Observables. The input is a function <code>func</code> with some parameters, but the
+last parameter must be a callback function that <code>func</code> calls when it is
+done. The output of <code>bindCallback</code> is a function that takes the same
+parameters as <code>func</code>, except the last one (the callback). When the output
+function is called with arguments, it will return an Observable where the
+results will be delivered to.</p></div><dl class="paramcmts block"><dt class="param">callbackFunc</dt><dd class="cmt"><p>Function with a callback as the last parameter.</p></dd><dt class="param">selector</dt><dd class="cmt"><p>A function which takes the arguments from the
+callback and maps those a value to emit on the output Observable.</p></dd><dt class="param">scheduler</dt><dd class="cmt"><p>The scheduler on which to schedule the
+callbacks.</p></dd><dt>returns</dt><dd class="cmt"><p>A function which returns the
+Observable that delivers the same values the callback would deliver.</p></dd></dl></div>
+    </li><li name="rxscalajs.Observable#bindNodeCallback" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="bindNodeCallback[T,U](callbackFunc:scala.scalajs.js.Function,selector:scala.scalajs.js.Function,scheduler:rxscalajs.Scheduler):scala.scalajs.js.Function1[U,rxscalajs.facade.ObservableFacade[T]]"></a>
       <a id="bindNodeCallback[T,U](Function,Function,Scheduler):Function1[U,ObservableFacade[T]]"></a>
       <h4 class="signature">
@@ -237,7 +267,21 @@ it in not possible to unsubscribe from the sequence before it completes.
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Converts a Node.js-style callback API to a function that returns an
+Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a Node.js-style callback API to a function that returns an
+Observable.</p><p><span class="informal">It's just like bindCallback`, but the
+callback is expected to be of type `callback(error, result)`.</span></p><p><code>bindNodeCallback</code> is not an operator because its input and output are not
+Observables. The input is a function <code>func</code> with some parameters, but the
+last parameter must be a callback function that <code>func</code> calls when it is
+done. The callback function is expected to follow Node.js conventions,
+where the first argument to the callback is an error, while remaining
+arguments are the callback result. The output of <code>bindNodeCallback</code> is a
+function that takes the same parameters as <code>func</code>, except the last one (the
+callback). When the output function is called with arguments, it will
+return an Observable where the results will be delivered to.</p></div><dl class="paramcmts block"><dt class="param">callbackFunc</dt><dd class="cmt"><p>Function with a callback as the last parameter.</p></dd><dt class="param">selector</dt><dd class="cmt"><p>A function which takes the arguments from the
+callback and maps those a value to emit on the output Observable.</p></dd><dt class="param">scheduler</dt><dd class="cmt"><p>The scheduler on which to schedule the
+callbacks.</p></dd><dt>returns</dt><dd class="cmt"><p>A function which returns the
+Observable that delivers the same values the callback would deliver.</p></dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -284,7 +328,7 @@ the source Observables each time an item is received from any of the source Obse
 aggregation is defined by a specified function.
 </p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>the common base type of source values</p></dd><dt class="tparam">R</dt><dd class="cmt"><p>the result type</p></dd><dt class="param">sources</dt><dd class="cmt"><p>the list of source Observables</p></dd><dt class="param">combineFunction</dt><dd class="cmt"><p>the aggregation function used to combine the items emitted by the source Observables</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits items that are the result of combining the items emitted by the source
         Observables by means of the given aggregation function</p></dd></dl></div>
-    </li><li name="rxscalajs.Observable#create" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="rxscalajs.Observable#create" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="create[T](f:rxscalajs.Observer[T]=&gt;Unit):rxscalajs.Observable[T]"></a>
       <a id="create[T]((Observer[T])⇒Unit):Observable[T]"></a>
       <h4 class="signature">
@@ -300,7 +344,15 @@ aggregation is defined by a specified function.
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Returns an Observable that will execute the specified function when someone subscribes to it.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that will execute the specified function when someone subscribes to it.</p><p><img width="640" height="200" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/create.png" alt="" /></p><p>Write the function you pass so that it behaves as an Observable: It should invoke the
+Subscriber's <code>next</code>, <code>error</code>, and <code>completed</code> methods appropriately.</p><p>See <a href="http://go.microsoft.com/fwlink/?LinkID=205219">Rx Design Guidelines (PDF)</a> for detailed
+information.</p><p>See <code><a href="https://github.com/ReactiveX/RxScala/blob/0.x/examples/src/test/scala/examples/RxScalaDemo.scala">RxScalaDemo</a>.createExampleGood</code>
+and <code><a href="https://github.com/ReactiveX/RxScala/blob/0.x/examples/src/test/scala/examples/RxScalaDemo.scala">RxScalaDemo</a>.createExampleGood2</code>.
+</p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>
+           the type of the items that this Observable emits</p></dd><dt class="param">f</dt><dd class="cmt"><p>
+           a function that accepts a <code>Observer[T]</code>, and invokes its <code>next</code>,
+           <code>onError</code>, and <code>onCompleted</code> methods as appropriate</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that, when someone subscribes to it, will execute the specified
+        function</p></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -358,7 +410,49 @@ aggregation is defined by a specified function.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="rxscalajs.Observable#fromEvent" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="rxscalajs.Observable#from" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="from[T](future:scala.concurrent.Future[T])(implicitexecContext:scala.concurrent.ExecutionContext):rxscalajs.Observable[T]"></a>
+      <a id="from[T](Future[T])(ExecutionContext):Observable[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">from</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="future">future: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="rxscalajs.Observable.from.T">T</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="execContext">execContext: <span class="extype" name="scala.concurrent.ExecutionContext">ExecutionContext</span></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.from.T">T</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#rxscalajs.Observable$@from[T](future:scala.concurrent.Future[T])(implicitexecContext:scala.concurrent.ExecutionContext):rxscalajs.Observable[T]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns an Observable emitting the value produced by the Future as its single item.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable emitting the value produced by the Future as its single item.
+If the future fails, the Observable will fail as well.
+</p></div><dl class="paramcmts block"><dt class="param">future</dt><dd class="cmt"><p>Future whose value ends up in the resulting Observable</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable completed after producing the value of the future, or with an exception</p></dd></dl></div>
+    </li><li name="rxscalajs.Observable#from" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="from[T](seq:scala.collection.immutable.Seq[T]):rxscalajs.Observable[T]"></a>
+      <a id="from[T](Seq[T]):Observable[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">from</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="seq">seq: <span class="extype" name="scala.collection.immutable.Seq">Seq</span>[<span class="extype" name="rxscalajs.Observable.from.T">T</span>]</span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.from.T">T</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#rxscalajs.Observable$@from[T](seq:scala.collection.immutable.Seq[T]):rxscalajs.Observable[T]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Converts a <code>Seq</code> into an Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a <code>Seq</code> into an Observable.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/from.png" alt="" /></p><p>Note: the entire iterable sequence is immediately emitted each time an
+Observer subscribes. Since this occurs before the
+<code>Subscription</code> is returned, it is not possible to unsubscribe from
+the sequence before it completes.
+</p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>the type of items in the <code>Seq</code> sequence and the
+           type of items to be emitted by the resulting Observable</p></dd><dt class="param">seq</dt><dd class="cmt"><p>the source <code>Seq</code> sequence</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits each item in the source <code>Iterable</code>
+        sequence</p></dd></dl></div>
+    </li><li name="rxscalajs.Observable#fromEvent" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="fromEvent(element:org.scalajs.dom.Element,eventName:String):rxscalajs.Observable[org.scalajs.dom.raw.Event]"></a>
       <a id="fromEvent(Element,String):Observable[Event]"></a>
       <h4 class="signature">
@@ -374,7 +468,8 @@ aggregation is defined by a specified function.
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Creates an Observable that emits events of a specific type coming from the given event target.</p><div class="fullcomment"><div class="comment cmt"><p>Creates an Observable that emits events of a specific type coming from the given event target.</p><p>Creates an Observable by attaching an event listener to an &quot;event target&quot;, which may be an object with addEventListener and removeEventListener, a Node.js EventEmitter, a jQuery style EventEmitter, a NodeList from the DOM, or an HTMLCollection from the DOM.
+The event handler is attached when the output Observable is subscribed, and removed when the Subscription is unsubscribed.</p></div></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -542,24 +637,24 @@ it in not possible to unsubscribe from the sequence before it completes.
            the type of items in the Array, and the type of items to be emitted by the
            resulting Observable</p></dd><dt class="param">elements</dt><dd class="cmt"><p>
            the source Array</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits each item in the source Array</p></dd></dl></div>
-    </li><li name="rxscalajs.Observable#race" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="race[T](observables:rxscalajs.facade.ObservableFacade[T]*):rxscalajs.Observable[T]"></a>
-      <a id="race[T](ObservableFacade[T]*):Observable[T]"></a>
+    </li><li name="rxscalajs.Observable#race" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="race[T](observables:rxscalajs.Observable[T]*):rxscalajs.Observable[T]"></a>
+      <a id="race[T](Observable[T]*):Observable[T]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">race</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="observables">observables: <a href="facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.Observable.race.T">T</span>]*</span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.race.T">T</span>]</span>
+        <span class="name">race</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="observables">observables: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.race.T">T</span>]*</span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.race.T">T</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Observable$@race[T](observables:rxscalajs.facade.ObservableFacade[T]*):rxscalajs.Observable[T]" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Observable$@race[T](observables:rxscalajs.Observable[T]*):rxscalajs.Observable[T]" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="rxscalajs.Observable#range" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">Returns an Observable that mirrors the first source Observable to emit an item from the combination of this Observable and supplied Observables</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that mirrors the first source Observable to emit an item from the combination of this Observable and supplied Observables</p></div><dl class="paramcmts block"><dt class="param">observables</dt><dd class="cmt"><p>sources used to race for which Observable emits first.</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that mirrors the output of the first Observable to emit an item.</p></dd></dl></div>
+    </li><li name="rxscalajs.Observable#range" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="range(start:Int,count:Int):rxscalajs.Observable[Int]"></a>
       <a id="range(Int,Int):Observable[Int]"></a>
       <h4 class="signature">
@@ -575,7 +670,14 @@ it in not possible to unsubscribe from the sequence before it completes.
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Creates an Observable that emits a sequence of numbers within a specified
+range.</p><div class="fullcomment"><div class="comment cmt"><p>Creates an Observable that emits a sequence of numbers within a specified
+range.</p><p>Emits a sequence of numbers in a range.</p><p><img src="http://reactivex.io/rxjs/img/range.png" width="100%"></p><p><code>range</code> operator emits a range of sequential integers, in order, where you
+select the <code>start</code> of the range and its <code>length</code>. By default, uses no
+Scheduler and just delivers the notifications synchronously, but may use
+an optional Scheduler to regulate those deliveries.</p></div><dl class="paramcmts block"><dt class="param">start</dt><dd class="cmt"><p>The value of the first integer in the sequence.</p></dd><dt class="param">count</dt><dd class="cmt"><p>The number of sequential integers to generate.
+the emissions of the notifications.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable of numbers that emits a finite range of
+sequential integers.</p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -697,7 +799,7 @@ it in not possible to unsubscribe from the sequence before it completes.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="rxscalajs.Observable#zip" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="rxscalajs.Observable#zip" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="zip[T,R](observables:scala.collection.immutable.Seq[rxscalajs.Observable[T]])(project:scala.collection.immutable.Seq[T]=&gt;R):rxscalajs.Observable[R]"></a>
       <a id="zip[T,R](Seq[Observable[T]])((Seq[T])⇒R):Observable[R]"></a>
       <h4 class="signature">
@@ -713,7 +815,12 @@ it in not possible to unsubscribe from the sequence before it completes.
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Given a number of observables, returns an observable that emits a combination of each.</p><div class="fullcomment"><div class="comment cmt"><p>Given a number of observables, returns an observable that emits a combination of each.
+The first emitted combination will contain the first element of each source observable,
+the second combination the second element of each source observable, and so on.
+</p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>
+                a function that combines the items from the Observable and the Iterable to generate
+                the items to be emitted by the resulting Observable</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the zipped Observables</p></dd></dl></div>
     </li></ol>
             </div>
 

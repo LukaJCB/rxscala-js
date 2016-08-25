@@ -210,6 +210,24 @@ by <code>other</code>.</p><p><img width="640" height="380" src="https://raw.gith
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="rxscalajs.Observable#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(onNext:T=&gt;Unit):rxscalajs.subscription.AnonymousSubscription"></a>
+      <a id="apply((T)⇒Unit):AnonymousSubscription"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="onNext">onNext: (<span class="extype" name="rxscalajs.Subject.T">T</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result">: <a href="subscription/AnonymousSubscription.html" class="extype" name="rxscalajs.subscription.AnonymousSubscription">AnonymousSubscription</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#rxscalajs.Subject@apply(onNext:T=&gt;Unit):rxscalajs.subscription.AnonymousSubscription" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Call this method to receive items from this observable.</p><div class="fullcomment"><div class="comment cmt"><p>Call this method to receive items from this observable.</p></div><dl class="paramcmts block"><dt class="param">onNext</dt><dd class="cmt"><p>this function will be called whenever the Observable emits an item</p></dd><dt>returns</dt><dd class="cmt"><p>a <span class="extype" name="Subscription">Subscription</span> reference whose <code>unsubscribe</code> method can be called to  stop receiving items
+        before the Observable has finished sending them</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><dt>See also</dt><dd><span class="cmt"><p><a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a></p></span></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -1413,7 +1431,8 @@ source Observbable.</p><p><img width="640" height="310" src="https://raw.githubu
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Determines whether all elements of an observable sequence satisfy a condition.</p><div class="fullcomment"><div class="comment cmt"><p>Determines whether all elements of an observable sequence satisfy a condition.</p></div><dl class="paramcmts block"><dt class="param">predicate</dt><dd class="cmt"><p>
+      <p class="shortcomment cmt">Determines whether all elements of an observable sequence satisfy a condition.</p><div class="fullcomment"><div class="comment cmt"><p>Determines whether all elements of an observable sequence satisfy a condition.
+</p></div><dl class="paramcmts block"><dt class="param">predicate</dt><dd class="cmt"><p>
            A function to test each element for a condition.</p></dd><dt>returns</dt><dd class="cmt"><p>An observable sequence containing a single element determining whether all elements in the source sequence pass the test in the specified predicate.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#exhaust" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="exhaust[U](implicitevidence:&lt;:&lt;[rxscalajs.Observable[T],rxscalajs.Observable[rxscalajs.Observable[U]]]):rxscalajs.Observable[U]"></a>
@@ -1432,7 +1451,8 @@ source Observbable.</p><p><img width="640" height="310" src="https://raw.githubu
       </a>
     </span>
       <p class="shortcomment cmt">Projects each source value to an Observable which is merged in the output Observable only if the previous projected Observable has completed.</p><div class="fullcomment"><div class="comment cmt"><p>Projects each source value to an Observable which is merged in the output Observable only if the previous projected Observable has completed.
-Maps each value to an Observable, then flattens all of these inner Observables using exhaust.</p><p><img width="640" height="310" src="http://reactivex.io/rxjs/img/exhaust.png" alt="" /></p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Returns an Observable that takes a source of Observables and propagates the first observable exclusively until it completes before subscribing to the next.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+Maps each value to an Observable, then flattens all of these inner Observables using exhaust.</p><p><img width="640" height="310" src="http://reactivex.io/rxjs/img/exhaust.png" alt="" />
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Returns an Observable that takes a source of Observables and propagates the first observable exclusively until it completes before subscribing to the next.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#exhaustMap" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="exhaustMap[I,R](project:(T,Int)=&gt;rxscalajs.Observable[R]):rxscalajs.Observable[R]"></a>
       <a id="exhaustMap[I,R]((T,Int)⇒Observable[R]):Observable[R]"></a>
@@ -1470,7 +1490,8 @@ Flattens an Observable-of-Observables by dropping the next inner Observables whi
       </a>
     </span>
       <p class="shortcomment cmt">Converts a higher-order Observable into a first-order Observable by dropping inner Observables while the previous inner Observable has not yet completed.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a higher-order Observable into a first-order Observable by dropping inner Observables while the previous inner Observable has not yet completed.
-Flattens an Observable-of-Observables by dropping the next inner Observables while the current inner is still executing.</p><p><img width="640" height="310" src="http://reactivex.io/rxjs/img/exhaustMap.png" alt="" /></p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>
+Flattens an Observable-of-Observables by dropping the next inner Observables while the current inner is still executing.</p><p><img width="640" height="310" src="http://reactivex.io/rxjs/img/exhaustMap.png" alt="" />
+</p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>
            A function that, when applied to an item emitted by the source Observable, returns an Observable.</p></dd><dt class="param">resultSelector</dt><dd class="cmt"><p>
            A function to produce the value on the output Observable based on the values and the indices of the source (outer) emission and the inner Observable emission. The arguments passed to this function are:
       outerValue: the value that came from the source
@@ -2385,7 +2406,8 @@ if the source Observable is empty.</p><p><img width="640" height="305" src="http
       </a>
     </span>
       <p class="shortcomment cmt">Splits the source Observable into two, one with values that satisfy a predicate, and another with values that don't satisfy the predicate.</p><div class="fullcomment"><div class="comment cmt"><p>Splits the source Observable into two, one with values that satisfy a predicate, and another with values that don't satisfy the predicate.
-It's like filter, but returns two Observables: one like the output of filter, and the other with values that did not pass the condition.</p><p><img width="640" height="325" src="http://reactivex.io/rxjs/img/partition.png" alt="" /></p></div><dl class="paramcmts block"><dt class="param">predicate</dt><dd class="cmt"><p>
+It's like filter, but returns two Observables: one like the output of filter, and the other with values that did not pass the condition.</p><p><img width="640" height="325" src="http://reactivex.io/rxjs/img/partition.png" alt="" />
+</p></div><dl class="paramcmts block"><dt class="param">predicate</dt><dd class="cmt"><p>
            A function that evaluates each value emitted by the source Observable.
            If it returns true, the value is emitted on the first Observable in the returned array, if false the value is emitted on the second Observable in the tuple.</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits a single item that is the result of accumulating the output
         from the items emitted by the source Observable</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
@@ -2923,10 +2945,16 @@ the current window is emitted and the event is propagated.
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">This method does not operate by default on a particular <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a>.</p><div class="fullcomment"><div class="comment cmt"><h5>Scheduler:</h5><p>This method does not operate by default on a particular <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a>.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>
-a <a href="subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">rxscalajs.subscription.Subscription</a> reference whose <code>unsubscribe</code> method can be called to  stop receiving items
-before the Observable has finished sending them</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><dt>See also</dt><dd><span class="cmt"><p><a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a></p></span></dd></dl></div>
+      <p class="shortcomment cmt">Call this method to subscribe an <a href="Observer.html" class="extype" name="rxscalajs.Observer">Observer</a> for receiving
+items and notifications from the Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Call this method to subscribe an <a href="Observer.html" class="extype" name="rxscalajs.Observer">Observer</a> for receiving
+items and notifications from the Observable.</p><p>A typical implementation of <code>subscribe</code> does the following:</p><p>It stores a reference to the Observer in a collection object, such as a <code>List[T]</code> object.</p><p>It returns a reference to the <span class="extype" name="Subscription">Subscription</span> interface. This enables Observers to
+unsubscribe, that is, to stop receiving items and notifications before the Observable stops
+sending them, which also invokes the Observer's <span class="extype" name="Observer.complete()">complete</span> method.</p><p>An <code>Observable[T]</code> instance is responsible for accepting all subscriptions
+and notifying all Observers. Unless the documentation for a particular
+<code>Observable[T]</code> implementation indicates otherwise, Observers should make no
+assumptions about the order in which multiple Observers will receive their notifications.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a <span class="extype" name="Subscription">Subscription</span> reference whose <code>unsubscribe</code> method can be called to  stop receiving items
+        before the Observable has finished sending them</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><dt>See also</dt><dd><span class="cmt"><p><a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a></p></span></dd></dl></div>
     </li><li name="rxscalajs.Observable#subscribe" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="subscribe(onNext:T=&gt;Unit,error:scala.scalajs.js.Any=&gt;Unit,complete:()=&gt;Unit):rxscalajs.subscription.AnonymousSubscription"></a>
       <a id="subscribe((T)⇒Unit,(Any)⇒Unit,()⇒Unit):AnonymousSubscription"></a>
@@ -2943,10 +2971,16 @@ before the Observable has finished sending them</p></dd></dl><dl class="attribut
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">This method does not operate by default on a particular <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a>.</p><div class="fullcomment"><div class="comment cmt"><h5>Scheduler:</h5><p>This method does not operate by default on a particular <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a>.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>
-a <a href="subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">rxscalajs.subscription.Subscription</a> reference whose <code>unsubscribe</code> method can be called to  stop receiving items
-before the Observable has finished sending them</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><dt>See also</dt><dd><span class="cmt"><p><a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a></p></span></dd></dl></div>
+      <p class="shortcomment cmt">Call this method to subscribe an <a href="Observer.html" class="extype" name="rxscalajs.Observer">Observer</a> for receiving
+items and notifications from the Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Call this method to subscribe an <a href="Observer.html" class="extype" name="rxscalajs.Observer">Observer</a> for receiving
+items and notifications from the Observable.</p><p>A typical implementation of <code>subscribe</code> does the following:</p><p>It stores a reference to the Observer in a collection object, such as a <code>List[T]</code> object.</p><p>It returns a reference to the <span class="extype" name="Subscription">Subscription</span> interface. This enables Observers to
+unsubscribe, that is, to stop receiving items and notifications before the Observable stops
+sending them, which also invokes the Observer's <span class="extype" name="Observer.complete()">complete</span> method.</p><p>An <code>Observable[T]</code> instance is responsible for accepting all subscriptions
+and notifying all Observers. Unless the documentation for a particular
+<code>Observable[T]</code> implementation indicates otherwise, Observers should make no
+assumptions about the order in which multiple Observers will receive their notifications.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a <span class="extype" name="Subscription">Subscription</span> reference whose <code>unsubscribe</code> method can be called to  stop receiving items
+        before the Observable has finished sending them</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><dt>See also</dt><dd><span class="cmt"><p><a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a></p></span></dd></dl></div>
     </li><li name="rxscalajs.Observable#switch" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="switch[U]:rxscalajs.Observable[U]"></a>
       <a id="switch[U]:Observable[U]"></a>
