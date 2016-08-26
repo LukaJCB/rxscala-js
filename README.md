@@ -26,7 +26,7 @@ Add the following to your sbt build definition:
     resolvers +=
      "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 
-    libraryDependencies += "com.github.lukajcb" %%% "rxscala-js" % "0.3.0-SNAPSHOT"
+    libraryDependencies += "com.github.lukajcb" %%% "rxscala-js" % "0.1.8-SNAPSHOT"
 
 then import the types from the package `rxscalajs`.
 
@@ -34,7 +34,7 @@ then import the types from the package `rxscalajs`.
 
 RxScala.js doesn't actually come bundled with the underlying `rx.js` file, so you'll need to either add them manually or specify them as `jsDependencies`:
 
-    jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-beta.10" / "Rx.umd.js" commonJSName "Rx"
+    jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-beta.11" / "Rx.umd.min.js" commonJSName "Rx"
 
 ## Differences from RxJS
 
@@ -76,6 +76,8 @@ If you're new to Rx, I suggest starting with [this interactive tutorial.](http:/
 ## Samples
 
  - [Spaceship Reactive](https://lukajcb.github.io/RxScalaJsSamples/) - A port of Spaceship Reactive found in Sergi Mansillas awesome book [Reactive Programming with RxJS](https://pragprog.com/book/smreactjs/reactive-programming-with-rxjs). Code can be found [here](https://github.com/LukaJCB/RxScalaJsSamples). 
+ - [More Samples](https://github.com/LukaJCB/RxScalaJsSamples/blob/master/src/main/scala/samples/main/Samples.scala) - How to use some of the most important operations in RxScala.js 
+ 
 
 
 ## Bugs and Feedback
