@@ -1,5 +1,4 @@
-# RxScala.js  [![Build Status](https://travis-ci.org/LukaJCB/rxscala-js.svg?branch=master)](https://travis-ci.org/LukaJCB/rxscala-js) [![Scala.js](https://www.scala-js.org/assets/badges/scalajs-0.6.6.svg)](https://www.scala-js.org) 
-
+# RxScala.js  [![Build Status](https://travis-ci.org/LukaJCB/rxscala-js.svg?branch=master)](https://travis-ci.org/LukaJCB/rxscala-js) [![Scala.js](https://www.scala-js.org/assets/badges/scalajs-0.6.6.svg)](https://www.scala-js.org)  [![Gitter](https://badges.gitter.im/rxscala-js/Lobby.svg)](https://gitter.im/rxscala-js/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 This is a Scala adapter to [RxJs](http://github.com/ReactiveX/RxJs).
 
 Example usage:
@@ -16,7 +15,7 @@ Example usage in Browser:
 Observable.fromEvent(document.getElementById("btn"),"click")
   .mapTo(1)
   .scan(0)(_ + _)
-  .subscribe(println)
+  .subscribe(n => println(s"Clicked $n times"))
 ```
 
 Getting Started
@@ -27,13 +26,14 @@ Add the following to your sbt build definition:
 
     libraryDependencies += "com.github.lukajcb" %%% "rxscala-js" % "0.3.0"
 
+
 then import the types from the package `rxscalajs`.
 
 ### Javascript Dependencies
 
 RxScala.js doesn't actually come bundled with the underlying `rx.js` file, so you'll need to either add them manually or specify them as `jsDependencies`:
 
-    jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-beta.10" / "Rx.umd.js" commonJSName "Rx"
+    jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-beta.11" / "Rx.umd.min.js" commonJSName "Rx"
 
 ## Differences from RxJS
 
@@ -75,6 +75,8 @@ If you're new to Rx, I suggest starting with [this interactive tutorial.](http:/
 ## Samples
 
  - [Spaceship Reactive](https://lukajcb.github.io/RxScalaJsSamples/) - A port of Spaceship Reactive found in Sergi Mansillas awesome book [Reactive Programming with RxJS](https://pragprog.com/book/smreactjs/reactive-programming-with-rxjs). Code can be found [here](https://github.com/LukaJCB/RxScalaJsSamples). 
+ - [More Samples](https://github.com/LukaJCB/RxScalaJsSamples/blob/master/src/main/scala/samples/main/Samples.scala) - How to use some of the most important operations in RxScala.js 
+ 
 
 
 ## Bugs and Feedback
