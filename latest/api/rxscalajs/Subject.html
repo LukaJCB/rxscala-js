@@ -3767,26 +3767,26 @@ boundary-governing Observable.</p><p><img width="640" height="475" src="https://
                 so it is only evaluated when someone subscribes to the returned Observable.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable which produces connected non-overlapping windows. The boundary of each window is
         determined by the items emitted from a specified boundary-governing Observable.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#withLatestFrom" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="withLatestFrom[U,R](other:rxscalajs.Observable[U]):rxscalajs.Observable[R]"></a>
-      <a id="withLatestFrom[U,R](Observable[U]):Observable[R]"></a>
+      <a id="withLatestFrom[U](other:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]"></a>
+      <a id="withLatestFrom[U](Observable[U]):Observable[(T,U)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">withLatestFrom</span><span class="tparams">[<span name="U">U</span>, <span name="R">R</span>]</span><span class="params">(<span name="other">other: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.withLatestFrom.U">U</span>]</span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.withLatestFrom.R">R</span>]</span>
+        <span class="name">withLatestFrom</span><span class="tparams">[<span name="U">U</span>]</span><span class="params">(<span name="other">other: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.withLatestFrom.U">U</span>]</span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[(<span class="extype" name="rxscalajs.Subject.T">T</span>, <span class="extype" name="rxscalajs.Observable.withLatestFrom.U">U</span>)]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Subject@withLatestFrom[U,R](other:rxscalajs.Observable[U]):rxscalajs.Observable[R]" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Subject@withLatestFrom[U](other:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <p class="shortcomment cmt">  Merges the specified <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> into this <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> sequence by using the <code>resultSelector</code>
 function only when the source <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> (this instance) emits an item.</p><div class="fullcomment"><div class="comment cmt"><p>  Merges the specified <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> into this <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> sequence by using the <code>resultSelector</code>
 function only when the source <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> (this instance) emits an item.</p><p><img width="640" height="380" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/withLatestFrom.png" alt="">
-</p></div><dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>the other <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></p></dd><dt>returns</dt><dd class="cmt"><p>an <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> that merges the specified <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> into this <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> by using the
-        <code>resultSelector</code> function only when the source <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> sequence (this instance) emits an item</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><dt>Since</dt><dd><p>(if this graduates from Experimental/Beta to supported, replace this parenthetical with the release number)</p></dd><dt>See also</dt><dd><span class="cmt"><p><a href="http://reactivex.io/documentation/operators/combinelatest.html">ReactiveX operators documentation: CombineLatest</a></p></span></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>the other <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></p></dd><dt>returns</dt><dd class="cmt"><p>an <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> that merges the specified <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> into this <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> by combining
+        the elements into a tuple only when the source <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> sequence (this instance) emits an item</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><dt>Since</dt><dd><p>(if this graduates from Experimental/Beta to supported, replace this parenthetical with the release number)</p></dd><dt>See also</dt><dd><span class="cmt"><p><a href="http://reactivex.io/documentation/operators/combinelatest.html">ReactiveX operators documentation: CombineLatest</a></p></span></dd></dl></div>
     </li><li name="rxscalajs.Observable#withLatestFrom" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="withLatestFrom[U,R](other:rxscalajs.Observable[U],project:(T,U)=&gt;R):rxscalajs.Observable[R]"></a>
       <a id="withLatestFrom[U,R](Observable[U],(T,U)⇒R):Observable[R]"></a>
