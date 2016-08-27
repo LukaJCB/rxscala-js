@@ -2111,7 +2111,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * It stores a reference to the Observer in a collection object, such as a `List[T]` object.
     *
-    * It returns a reference to the [[Subscription]] interface. This enables Observers to
+    * It returns a reference to the [[subscription.Subscription]] interface. This enables Observers to
     * unsubscribe, that is, to stop receiving items and notifications before the Observable stops
     * sending them, which also invokes the Observer's [[Observer.complete() complete]] method.
     *
@@ -2120,7 +2120,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * `Observable[T]` implementation indicates otherwise, Observers should make no
     * assumptions about the order in which multiple Observers will receive their notifications.
     *
-    * @return  a [[Subscription]] reference whose `unsubscribe` method can be called to  stop receiving items
+    * @return  a [[subscription.Subscription]] reference whose `unsubscribe` method can be called to  stop receiving items
     *         before the Observable has finished sending them
     * @see <a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a>
     */
@@ -2135,16 +2135,16 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * It stores a reference to the Observer in a collection object, such as a `List[T]` object.
     *
-    * It returns a reference to the [[Subscription]] interface. This enables Observers to
+    * It returns a reference to the [[subscription.Subscription]] interface. This enables Observers to
     * unsubscribe, that is, to stop receiving items and notifications before the Observable stops
-    * sending them, which also invokes the Observer's [[Observer.complete() complete]] method.
+    * sending them, which also invokes the Observer's [[Observer.complete()]] method.
     *
     * An `Observable[T]` instance is responsible for accepting all subscriptions
     * and notifying all Observers. Unless the documentation for a particular
     * `Observable[T]` implementation indicates otherwise, Observers should make no
     * assumptions about the order in which multiple Observers will receive their notifications.
     *
-    * @return  a [[Subscription]] reference whose `unsubscribe` method can be called to  stop receiving items
+    * @return  a [[subscription.Subscription]] reference whose `unsubscribe` method can be called to  stop receiving items
     *         before the Observable has finished sending them
     * @see <a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a>
     */
@@ -2157,7 +2157,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     *
     * @param onNext this function will be called whenever the Observable emits an item
-    * @return  a [[Subscription]] reference whose `unsubscribe` method can be called to  stop receiving items
+    * @return  a [[subscription.Subscription]] reference whose `unsubscribe` method can be called to  stop receiving items
     *         before the Observable has finished sending them
     * @see <a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a>
     */
