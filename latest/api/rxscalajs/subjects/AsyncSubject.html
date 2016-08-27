@@ -224,7 +224,7 @@ by <code>other</code>.</p><p><img width="640" height="380" src="https://raw.gith
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Call this method to receive items from this observable.</p><div class="fullcomment"><div class="comment cmt"><p>Call this method to receive items from this observable.</p></div><dl class="paramcmts block"><dt class="param">onNext</dt><dd class="cmt"><p>this function will be called whenever the Observable emits an item</p></dd><dt>returns</dt><dd class="cmt"><p>a <span class="extype" name="Subscription">Subscription</span> reference whose <code>unsubscribe</code> method can be called to  stop receiving items
+      <p class="shortcomment cmt">Call this method to receive items from this observable.</p><div class="fullcomment"><div class="comment cmt"><p>Call this method to receive items from this observable.</p></div><dl class="paramcmts block"><dt class="param">onNext</dt><dd class="cmt"><p>this function will be called whenever the Observable emits an item</p></dd><dt>returns</dt><dd class="cmt"><p>a <a href="../subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">subscription.Subscription</a> reference whose <code>unsubscribe</code> method can be called to  stop receiving items
         before the Observable has finished sending them</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><dt>See also</dt><dd><span class="cmt"><p><a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a></p></span></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
@@ -2945,13 +2945,13 @@ the current window is emitted and the event is propagated.
     </span>
       <p class="shortcomment cmt">Call this method to subscribe an <a href="../Observer.html" class="extype" name="rxscalajs.Observer">Observer</a> for receiving
 items and notifications from the Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Call this method to subscribe an <a href="../Observer.html" class="extype" name="rxscalajs.Observer">Observer</a> for receiving
-items and notifications from the Observable.</p><p>A typical implementation of <code>subscribe</code> does the following:</p><p>It stores a reference to the Observer in a collection object, such as a <code>List[T]</code> object.</p><p>It returns a reference to the <span class="extype" name="Subscription">Subscription</span> interface. This enables Observers to
+items and notifications from the Observable.</p><p>A typical implementation of <code>subscribe</code> does the following:</p><p>It stores a reference to the Observer in a collection object, such as a <code>List[T]</code> object.</p><p>It returns a reference to the <a href="../subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">subscription.Subscription</a> interface. This enables Observers to
 unsubscribe, that is, to stop receiving items and notifications before the Observable stops
 sending them, which also invokes the Observer's <span class="extype" name="Observer.complete()">complete</span> method.</p><p>An <code>Observable[T]</code> instance is responsible for accepting all subscriptions
 and notifying all Observers. Unless the documentation for a particular
 <code>Observable[T]</code> implementation indicates otherwise, Observers should make no
 assumptions about the order in which multiple Observers will receive their notifications.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a <span class="extype" name="Subscription">Subscription</span> reference whose <code>unsubscribe</code> method can be called to  stop receiving items
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a <a href="../subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">subscription.Subscription</a> reference whose <code>unsubscribe</code> method can be called to  stop receiving items
         before the Observable has finished sending them</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><dt>See also</dt><dd><span class="cmt"><p><a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a></p></span></dd></dl></div>
     </li><li name="rxscalajs.Observable#subscribe" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="subscribe(onNext:T=&gt;Unit,error:scala.scalajs.js.Any=&gt;Unit,complete:()=&gt;Unit):rxscalajs.subscription.AnonymousSubscription"></a>
@@ -2971,13 +2971,13 @@ assumptions about the order in which multiple Observers will receive their notif
     </span>
       <p class="shortcomment cmt">Call this method to subscribe an <a href="../Observer.html" class="extype" name="rxscalajs.Observer">Observer</a> for receiving
 items and notifications from the Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Call this method to subscribe an <a href="../Observer.html" class="extype" name="rxscalajs.Observer">Observer</a> for receiving
-items and notifications from the Observable.</p><p>A typical implementation of <code>subscribe</code> does the following:</p><p>It stores a reference to the Observer in a collection object, such as a <code>List[T]</code> object.</p><p>It returns a reference to the <span class="extype" name="Subscription">Subscription</span> interface. This enables Observers to
+items and notifications from the Observable.</p><p>A typical implementation of <code>subscribe</code> does the following:</p><p>It stores a reference to the Observer in a collection object, such as a <code>List[T]</code> object.</p><p>It returns a reference to the <span class="extype" name="v">v</span> interface. This enables Observers to
 unsubscribe, that is, to stop receiving items and notifications before the Observable stops
 sending them, which also invokes the Observer's <span class="extype" name="Observer.complete()">complete</span> method.</p><p>An <code>Observable[T]</code> instance is responsible for accepting all subscriptions
 and notifying all Observers. Unless the documentation for a particular
 <code>Observable[T]</code> implementation indicates otherwise, Observers should make no
 assumptions about the order in which multiple Observers will receive their notifications.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a <span class="extype" name="Subscription">Subscription</span> reference whose <code>unsubscribe</code> method can be called to  stop receiving items
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a <a href="../subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">subscription.Subscription</a> reference whose <code>unsubscribe</code> method can be called to  stop receiving items
         before the Observable has finished sending them</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><dt>See also</dt><dd><span class="cmt"><p><a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a></p></span></dd></dl></div>
     </li><li name="rxscalajs.Observable#switch" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="switch[U]:rxscalajs.Observable[U]"></a>
