@@ -428,7 +428,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * <span class="informal">Flattens an Observable-of-Observables by applying
     * {@link combineLatest} when the Observable-of-Observables completes.</span>
     *
-    * <img src="http://reactivex.io/rxjs/img/combineAll.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/combineAll.png" width="640" height="195">
     *
     * Takes an Observable of Observables, and collects all Observables from it.
     * Once the outer Observable completes, it subscribes to all collected
@@ -461,7 +461,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * <span class="informal">Flattens an Observable-of-Observables by applying
     * {@link combineLatest} when the Observable-of-Observables completes.</span>
     *
-    * <img src="http://reactivex.io/rxjs/img/combineAll.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/combineAll.png" width="640" height="195">
     *
     * Takes an Observable of Observables, and collects all Observables from it.
     * Once the outer Observable completes, it subscribes to all collected
@@ -1725,6 +1725,31 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     */
   def takeWhile(predicate: (T, Int) => Boolean): Observable[T] = new Observable(inner.takeWhile(predicate))
 
+  /**
+    * Emits a value from the source Observable, then ignores subsequent source
+    * values for a duration determined by another Observable, then repeats this
+    * process.
+    *
+    * <span class="informal">It's like throttleTime, but the silencing
+    * duration is determined by a second Observable.</span>
+    *
+    * <img src="http://reactivex.io/rxjs/img/throttle.png" width="640" height="195">
+    *
+    * `throttle` emits the source Observable values on the output Observable
+    * when its internal timer is disabled, and ignores source values when the timer
+    * is enabled. Initially, the timer is disabled. As soon as the first source
+    * value arrives, it is forwarded to the output Observable, and then the timer
+    * is enabled by calling the `durationSelector` function with the source value,
+    * which returns the "duration" Observable. When the duration Observable emits a
+    * value or completes, the timer is disabled, and this process repeats for the
+    * next source value.
+    *
+    * @param durationSelector A function
+    * that receives a value from the source Observable, for computing the silencing
+    * duration for each source value, returned as an Observable or a Promise.
+    * @return An Observable that performs the throttle operation to
+    * limit the rate of emissions from the source.
+    */
   def throttle(durationSelector: T => Observable[Int]): Observable[T] =
     new Observable(inner.throttle(toReturnFacade(durationSelector)))
   /**
@@ -2448,7 +2473,7 @@ object Observable {
     *
     * Emits a sequence of numbers in a range.
     *
-    * <img src="http://reactivex.io/rxjs/img/range.png" width="100%">
+    * <img src="http://reactivex.io/rxjs/img/range.png" width="640" height="195">
     *
     * `range` operator emits a range of sequential integers, in order, where you
     * select the `start` of the range and its `length`. By default, uses no
