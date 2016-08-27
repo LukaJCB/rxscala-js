@@ -710,7 +710,7 @@ emit an infinite or very large number of items that will use up memory.
       <p class="shortcomment cmt">Converts a higher-order Observable into a first-order Observable by waiting
 for the outer Observable to complete, then applying <code><a href="#combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a higher-order Observable into a first-order Observable by waiting
 for the outer Observable to complete, then applying <code><a href="#combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>.</p><p><span class="informal">Flattens an Observable-of-Observables by applying
-`[[combineLatest]]` when the Observable-of-Observables completes.</span></p><p><img src="http://reactivex.io/rxjs/img/combineAll.png" width="100%"></p><p>Takes an Observable of Observables, and collects all Observables from it.
+`[[combineLatest]]` when the Observable-of-Observables completes.</span></p><p><img src="http://reactivex.io/rxjs/img/combineAll.png" width="640" height="195"></p><p>Takes an Observable of Observables, and collects all Observables from it.
 Once the outer Observable completes, it subscribes to all collected
 Observables and combines their values using the <code><a href="#combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>
 strategy, such that:
@@ -749,7 +749,7 @@ result.subscribe(x <span class="kw">=&gt;</span>  println(x))</pre></li></ol>
       <p class="shortcomment cmt">Converts a higher-order Observable into a first-order Observable by waiting
 for the outer Observable to complete, then applying <code><a href="#combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a higher-order Observable into a first-order Observable by waiting
 for the outer Observable to complete, then applying <code><a href="#combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>.</p><p><span class="informal">Flattens an Observable-of-Observables by applying
-`[[combineLatest]]` when the Observable-of-Observables completes.</span></p><p><img src="http://reactivex.io/rxjs/img/combineAll.png" width="100%"></p><p>Takes an Observable of Observables, and collects all Observables from it.
+`[[combineLatest]]` when the Observable-of-Observables completes.</span></p><p><img src="http://reactivex.io/rxjs/img/combineAll.png" width="640" height="195"></p><p>Takes an Observable of Observables, and collects all Observables from it.
 Once the outer Observable completes, it subscribes to all collected
 Observables and combines their values using the <code><a href="#combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>
 strategy, such that:
@@ -3116,7 +3116,7 @@ specified condition is true.</p><p><img width="640" height="305" src="https://ra
            a function that evaluates an item emitted by the source Observable and returns a
            Boolean</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the items from the source Observable so long as each item
         satisfies the condition defined by <code>predicate</code></p></dd></dl></div>
-    </li><li name="rxscalajs.Observable#throttle" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="rxscalajs.Observable#throttle" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="throttle(durationSelector:T=&gt;rxscalajs.Observable[Int]):rxscalajs.Observable[T]"></a>
       <a id="throttle((T)⇒Observable[Int]):Observable[T]"></a>
       <h4 class="signature">
@@ -3132,7 +3132,23 @@ specified condition is true.</p><p><img width="640" height="305" src="https://ra
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Emits a value from the source Observable, then ignores subsequent source
+values for a duration determined by another Observable, then repeats this
+process.</p><div class="fullcomment"><div class="comment cmt"><p>Emits a value from the source Observable, then ignores subsequent source
+values for a duration determined by another Observable, then repeats this
+process.</p><p><span class="informal">It's like throttleTime, but the silencing
+duration is determined by a second Observable.</span></p><p><img src="http://reactivex.io/rxjs/img/throttle.png" width="640" height="195"></p><p><code>throttle</code> emits the source Observable values on the output Observable
+when its internal timer is disabled, and ignores source values when the timer
+is enabled. Initially, the timer is disabled. As soon as the first source
+value arrives, it is forwarded to the output Observable, and then the timer
+is enabled by calling the <code>durationSelector</code> function with the source value,
+which returns the &quot;duration&quot; Observable. When the duration Observable emits a
+value or completes, the timer is disabled, and this process repeats for the
+next source value.
+</p></div><dl class="paramcmts block"><dt class="param">durationSelector</dt><dd class="cmt"><p>A function
+that receives a value from the source Observable, for computing the silencing
+duration for each source value, returned as an Observable or a Promise.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable that performs the throttle operation to
+limit the rate of emissions from the source.</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#throttleTime" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="throttleTime(delay:Int):rxscalajs.Observable[T]"></a>
       <a id="throttleTime(Int):Observable[T]"></a>
