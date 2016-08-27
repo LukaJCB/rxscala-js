@@ -520,12 +520,15 @@ object ObservableTest extends TestSuite {
       }
       'WithLatestFrom {
         obs.withLatestFrom(intervalObs).subscribe(unit)
+        obs.withLatestFromWith(intervalObs)(_ + _).subscribe(unit)
       }
       'Zip {
         val first = Observable.of(10, 11, 12)
         val second = Observable.of(10, 11, 12)
         first zip second subscribe(unit)
         obs zip intervalObs subscribe(unit)
+
+        first.zipWith(second)(_ + _).subscribe(unit)
       }
       'ZipWithIndex {
         obs.zipWithIndex.subscribe(unit)

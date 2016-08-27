@@ -2048,7 +2048,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @see <a href="http://reactivex.io/documentation/operators/combinelatest.html">ReactiveX operators documentation: CombineLatest</a>
     * @since (if this graduates from Experimental/Beta to supported, replace this parenthetical with the release number)
     */
-  def withLatestFrom[U, R](other: Observable[U], project: (T, U) =>  R): Observable[R] =
+  def withLatestFromWith[U, R](other: Observable[U])(project: (T, U) =>  R): Observable[R] =
     new Observable(inner.withLatestFrom(other,project))
   /**
     *   Merges the specified [[Observable]] into this [[Observable]] sequence by using the `resultSelector`
@@ -2057,12 +2057,13 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * <img width="640" height="380" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/withLatestFrom.png" alt="">
     *
     * @param other the other [[Observable]]
-    * @return an [[Observable]] that merges the specified [[Observable]] into this [[Observable]] by using the
-    *         `resultSelector` function only when the source [[Observable]] sequence (this instance) emits an item
+    * @return an [[Observable]] that merges the specified [[Observable]] into this [[Observable]] by combining
+    *         the elements into a tuple only when the source [[Observable]] sequence (this instance) emits an item
     * @see <a href="http://reactivex.io/documentation/operators/combinelatest.html">ReactiveX operators documentation: CombineLatest</a>
     * @since (if this graduates from Experimental/Beta to supported, replace this parenthetical with the release number)
     */
-  def withLatestFrom[U, R](other: Observable[U]): Observable[R] = new Observable(inner.withLatestFrom(other))
+  def withLatestFrom[U](other: Observable[U]): Observable[(T,U)] =
+    new Observable(inner.withLatestFrom(other,(t: T, u: U) => (t,u)))
 
   /**
     * Returns an Observable that emits items that are the result of applying a specified function to pairs of
@@ -2079,7 +2080,8 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @return an Observable that pairs up values from the source Observable and the `other` Iterable
     *         sequence and emits the results of `selector` applied to these pairs
     */
-  def zip[U, R](that: Observable[U], project: (T,U) => R): Observable[R] = new Observable(inner.zip(that,project))
+  def zipWith[U, R](that: Observable[U])(project: (T,U) => R): Observable[R] = new Observable(inner.zip(that,project))
+
   /**
     * Returns an Observable formed from this Observable and another Observable by combining
     * corresponding elements in pairs.
