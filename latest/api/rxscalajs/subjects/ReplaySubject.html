@@ -3785,19 +3785,19 @@ function only when the source <a href="../Observable.html" class="extype" name="
 function only when the source <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> (this instance) emits an item.</p><p><img width="640" height="380" src="https://raw.github.com/wiki/ReactiveX/RxJava/images/rx-operators/withLatestFrom.png" alt="">
 </p></div><dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>the other <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></p></dd><dt>returns</dt><dd class="cmt"><p>an <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> that merges the specified <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> into this <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> by combining
         the elements into a tuple only when the source <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> sequence (this instance) emits an item</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><dt>Since</dt><dd><p>(if this graduates from Experimental/Beta to supported, replace this parenthetical with the release number)</p></dd><dt>See also</dt><dd><span class="cmt"><p><a href="http://reactivex.io/documentation/operators/combinelatest.html">ReactiveX operators documentation: CombineLatest</a></p></span></dd></dl></div>
-    </li><li name="rxscalajs.Observable#withLatestFrom" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="withLatestFrom[U,R](other:rxscalajs.Observable[U],project:(T,U)=&gt;R):rxscalajs.Observable[R]"></a>
-      <a id="withLatestFrom[U,R](Observable[U],(T,U)⇒R):Observable[R]"></a>
+    </li><li name="rxscalajs.Observable#withLatestFromWith" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withLatestFromWith[U,R](other:rxscalajs.Observable[U])(project:(T,U)=&gt;R):rxscalajs.Observable[R]"></a>
+      <a id="withLatestFromWith[U,R](Observable[U])((T,U)⇒R):Observable[R]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">withLatestFrom</span><span class="tparams">[<span name="U">U</span>, <span name="R">R</span>]</span><span class="params">(<span name="other">other: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.withLatestFrom.U">U</span>]</span>, <span name="project">project: (<span class="extype" name="rxscalajs.subjects.ReplaySubject.T">T</span>, <span class="extype" name="rxscalajs.Observable.withLatestFrom.U">U</span>) ⇒ <span class="extype" name="rxscalajs.Observable.withLatestFrom.R">R</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.withLatestFrom.R">R</span>]</span>
+        <span class="name">withLatestFromWith</span><span class="tparams">[<span name="U">U</span>, <span name="R">R</span>]</span><span class="params">(<span name="other">other: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.withLatestFromWith.U">U</span>]</span>)</span><span class="params">(<span name="project">project: (<span class="extype" name="rxscalajs.subjects.ReplaySubject.T">T</span>, <span class="extype" name="rxscalajs.Observable.withLatestFromWith.U">U</span>) ⇒ <span class="extype" name="rxscalajs.Observable.withLatestFromWith.R">R</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.withLatestFromWith.R">R</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#rxscalajs.subjects.ReplaySubject@withLatestFrom[U,R](other:rxscalajs.Observable[U],project:(T,U)=&gt;R):rxscalajs.Observable[R]" title="Permalink" target="_top">
+      <a href="../../index.html#rxscalajs.subjects.ReplaySubject@withLatestFromWith[U,R](other:rxscalajs.Observable[U])(project:(T,U)=&gt;R):rxscalajs.Observable[R]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -3829,19 +3829,19 @@ corresponding elements in pairs.
 The number of <code>onNext</code> invocations of the resulting <code>Observable[(T, U)]</code>
 is the minumum of the number of <code>onNext</code> invocations of <code>this</code> and <code>that</code>.
 </p></div><dl class="paramcmts block"><dt class="param">that</dt><dd class="cmt"><p>the Observable to zip with</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that pairs up values from <code>this</code> and <code>that</code> Observables.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
-    </li><li name="rxscalajs.Observable#zip" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="zip[U,R](that:rxscalajs.Observable[U],project:(T,U)=&gt;R):rxscalajs.Observable[R]"></a>
-      <a id="zip[U,R](Observable[U],(T,U)⇒R):Observable[R]"></a>
+    </li><li name="rxscalajs.Observable#zipWith" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="zipWith[U,R](that:rxscalajs.Observable[U])(project:(T,U)=&gt;R):rxscalajs.Observable[R]"></a>
+      <a id="zipWith[U,R](Observable[U])((T,U)⇒R):Observable[R]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">zip</span><span class="tparams">[<span name="U">U</span>, <span name="R">R</span>]</span><span class="params">(<span name="that">that: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.zip.U">U</span>]</span>, <span name="project">project: (<span class="extype" name="rxscalajs.subjects.ReplaySubject.T">T</span>, <span class="extype" name="rxscalajs.Observable.zip.U">U</span>) ⇒ <span class="extype" name="rxscalajs.Observable.zip.R">R</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.zip.R">R</span>]</span>
+        <span class="name">zipWith</span><span class="tparams">[<span name="U">U</span>, <span name="R">R</span>]</span><span class="params">(<span name="that">that: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.zipWith.U">U</span>]</span>)</span><span class="params">(<span name="project">project: (<span class="extype" name="rxscalajs.subjects.ReplaySubject.T">T</span>, <span class="extype" name="rxscalajs.Observable.zipWith.U">U</span>) ⇒ <span class="extype" name="rxscalajs.Observable.zipWith.R">R</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.zipWith.R">R</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#rxscalajs.subjects.ReplaySubject@zip[U,R](that:rxscalajs.Observable[U],project:(T,U)=&gt;R):rxscalajs.Observable[R]" title="Permalink" target="_top">
+      <a href="../../index.html#rxscalajs.subjects.ReplaySubject@zipWith[U,R](that:rxscalajs.Observable[U])(project:(T,U)=&gt;R):rxscalajs.Observable[R]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
