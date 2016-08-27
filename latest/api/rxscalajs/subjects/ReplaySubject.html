@@ -2971,7 +2971,7 @@ assumptions about the order in which multiple Observers will receive their notif
     </span>
       <p class="shortcomment cmt">Call this method to subscribe an <a href="../Observer.html" class="extype" name="rxscalajs.Observer">Observer</a> for receiving
 items and notifications from the Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Call this method to subscribe an <a href="../Observer.html" class="extype" name="rxscalajs.Observer">Observer</a> for receiving
-items and notifications from the Observable.</p><p>A typical implementation of <code>subscribe</code> does the following:</p><p>It stores a reference to the Observer in a collection object, such as a <code>List[T]</code> object.</p><p>It returns a reference to the <span class="extype" name="v">v</span> interface. This enables Observers to
+items and notifications from the Observable.</p><p>A typical implementation of <code>subscribe</code> does the following:</p><p>It stores a reference to the Observer in a collection object, such as a <code>List[T]</code> object.</p><p>It returns a reference to the <a href="../subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">subscription.Subscription</a> interface. This enables Observers to
 unsubscribe, that is, to stop receiving items and notifications before the Observable stops
 sending them, which also invokes the Observer's <span class="extype" name="Observer.complete()">complete</span> method.</p><p>An <code>Observable[T]</code> instance is responsible for accepting all subscriptions
 and notifying all Observers. Unless the documentation for a particular
