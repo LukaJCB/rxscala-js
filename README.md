@@ -76,7 +76,7 @@ If you're new to Rx, I suggest starting with [this interactive tutorial.](http:/
 
  - [The basics](https://github.com/LukaJCB/RxScalaJsSamples/blob/master/src/main/scala/samples/main/Samples.scala) - How to use some of the most important operations in RxScala.js 
  - [Spaceship Reactive](https://lukajcb.github.io/RxScalaJsSamples/) - A port of Spaceship Reactive found in Sergi Mansillas awesome book [Reactive Programming with RxJS](https://pragprog.com/book/smreactjs/reactive-programming-with-rxjs). Code can be found [here](https://github.com/LukaJCB/RxScalaJsSamples). 
- - [RxScala.js as a state store](https://github.com/LukaJCB/RxScalaJsSamples/blob/master/src/main/scala/samples/main/StateStore.scala) - A basic example on how to write a simple state store with RxScala.js.
+ - [RxScala.js as a state store](https://github.com/LukaJCB/RxScalaJsSamples/blob/master/src/main/scala/samples/main/StateStore.scala) - A basic example on how to write a simple state store with RxScala.js. (Find the working example [here](https://lukajcb.github.io/RxScalaJsSamples/assets/state-store.html))
 
  
 
