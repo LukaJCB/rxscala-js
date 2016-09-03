@@ -16,7 +16,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../index.html';
-            var hash = 'rxscalajs.Scheduler';
+            var hash = 'rxscalajs.Scheduler$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -26,16 +26,16 @@
    	  </script>
     
         </head>
-        <body class="type">
+        <body class="value">
       <div id="definition">
-        <a href="Scheduler$.html" title="See companion object"><img alt="Trait/Object" src="../lib/trait_to_object_big.png" /></a>
+        <a href="Scheduler.html" title="See companion trait"><img alt="Object/Trait" src="../lib/object_to_trait_big.png" /></a>
         <p id="owner"><a href="package.html" class="extype" name="rxscalajs">rxscalajs</a></p>
-        <h1><a href="Scheduler$.html" title="See companion object">Scheduler</a></h1><h3><span class="morelinks"><div>
+        <h1><a href="Scheduler.html" title="See companion trait">Scheduler</a></h1><h3><span class="morelinks"><div>
             Related Docs:
-            <a href="Scheduler$.html" title="See companion object">object Scheduler</a>
+            <a href="Scheduler.html" title="See companion trait">trait Scheduler</a>
             | <a href="package.html" class="extype" name="rxscalajs">package rxscalajs</a>
           </div></span></h3><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -44,7 +44,7 @@
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">trait</span>
+        <span class="kind">object</span>
       </span>
       <span class="symbol">
         <span class="name">Scheduler</span><span class="result"> extends <span class="extype" name="scala.scalajs.js.Object">Object</span></span>
@@ -52,9 +52,12 @@
       </h4>
       
           <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@RawJSType</span><span class="args">()</span>
-              
                 <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@JSName</span><span class="args">(<span>
+      
+      <span class="symbol">&quot;Rx.Scheduler&quot;</span>
+    </span>)</span>
               
         </dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
@@ -113,7 +116,7 @@
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@!=(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -130,7 +133,7 @@
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@##():Int" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@##():Int" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -147,7 +150,7 @@
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@==(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@==(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -164,11 +167,50 @@
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@asInstanceOf[T0]:T0" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="rxscalajs.Scheduler#asap" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asap:rxscalajs.Scheduler"></a>
+      <a id="asap:Scheduler"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asap</span><span class="result">: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#rxscalajs.Scheduler$@asap:rxscalajs.Scheduler" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Schedules on the micro task queue, which uses the fastest transport mechanism available,
+either Node.js'<code>process.nextTick()</code> or Web Worker MessageChannel or setTimeout or others.</p><div class="fullcomment"><div class="comment cmt"><p>Schedules on the micro task queue, which uses the fastest transport mechanism available,
+either Node.js'<code>process.nextTick()</code> or Web Worker MessageChannel or setTimeout or others.
+Use this for asynchronous conversions.
+</p></div></div>
+    </li><li name="rxscalajs.Scheduler#async" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="async:rxscalajs.Scheduler"></a>
+      <a id="async:Scheduler"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">async</span><span class="result">: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#rxscalajs.Scheduler$@async:rxscalajs.Scheduler" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Schedules work with <code>setInterval</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Schedules work with <code>setInterval</code>. Use this for time-based operations.
+</p></div></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -181,7 +223,7 @@
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@clone():Object" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@clone():Object" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -204,7 +246,7 @@
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -221,7 +263,7 @@
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@equals(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -238,7 +280,7 @@
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@finalize():Unit" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@finalize():Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -249,23 +291,6 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="rxscalajs.Scheduler#flush" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="flush():Unit"></a>
-      <a id="flush():Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">flush</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@flush():Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -278,7 +303,7 @@
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@getClass():Class[_]" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@getClass():Class[_]" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -295,7 +320,7 @@
         <span class="name">hasOwnProperty</span><span class="params">(<span name="v">v: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@hasOwnProperty(v:String):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@hasOwnProperty(v:String):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -312,7 +337,7 @@
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@hashCode():Int" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@hashCode():Int" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -329,7 +354,7 @@
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -346,7 +371,7 @@
         <span class="name">isPrototypeOf</span><span class="params">(<span name="v">v: <span class="extype" name="scala.scalajs.js.Object">Object</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@isPrototypeOf(v:scala.scalajs.js.Object):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@isPrototypeOf(v:scala.scalajs.js.Object):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -363,7 +388,7 @@
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -380,7 +405,7 @@
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@notify():Unit" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@notify():Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -397,28 +422,11 @@
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@notifyAll():Unit" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@notifyAll():Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="rxscalajs.Scheduler#now" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="now():Double"></a>
-      <a id="now():Double"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">now</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Double">Double</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@now():Double" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>the scheduler's notion of current absolute time in milliseconds.</p></dd></dl></div>
     </li><li name="scala.scalajs.js.Object#propertyIsEnumerable" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="propertyIsEnumerable(v:String):Boolean"></a>
       <a id="propertyIsEnumerable(String):Boolean"></a>
@@ -431,29 +439,30 @@
         <span class="name">propertyIsEnumerable</span><span class="params">(<span name="v">v: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@propertyIsEnumerable(v:String):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@propertyIsEnumerable(v:String):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Object</dd></dl></div>
-    </li><li name="rxscalajs.Scheduler#schedule" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="schedule[T](work:scala.scalajs.js.Function1[T,scala.scalajs.js.|[rxscalajs.subscription.Subscription,Unit]],delay:Double,state:T):rxscalajs.subscription.Subscription"></a>
-      <a id="schedule[T](Function1[T,|[Subscription,Unit]],Double,T):Subscription"></a>
+    </li><li name="rxscalajs.Scheduler#queue" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="queue:rxscalajs.Scheduler"></a>
+      <a id="queue:Scheduler"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">def</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">schedule</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="work">work: <span class="extype" name="scala.scalajs.js.Function1">Function1</span>[<span class="extype" name="rxscalajs.Scheduler.schedule.T">T</span>, <span class="extype" name="scala.scalajs.js.|">|</span>[<a href="subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">Subscription</a>, <span class="extype" name="scala.Unit">Unit</span>]]</span>, <span name="delay">delay: <span class="extype" name="scala.Double">Double</span> = <span class="symbol">???</span></span>, <span name="state">state: <span class="extype" name="rxscalajs.Scheduler.schedule.T">T</span> = <span class="symbol">???</span></span>)</span><span class="result">: <a href="subscription/Subscription.html" class="extype" name="rxscalajs.subscription.Subscription">Subscription</a></span>
+        <span class="name">queue</span><span class="result">: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@schedule[T](work:scala.scalajs.js.Function1[T,scala.scalajs.js.|[rxscalajs.subscription.Subscription,Unit]],delay:Double,state:T):rxscalajs.subscription.Subscription" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@queue:rxscalajs.Scheduler" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Schedules an Action for execution.</p><div class="fullcomment"><div class="comment cmt"><p>Schedules an Action for execution.
-</p></div><dl class="paramcmts block"><dt class="param">work</dt><dd class="cmt"><p>the Action to schedule</p></dd><dt>returns</dt><dd class="cmt"><p>a subscription to be able to unsubscribe the action (unschedule it if not executed)</p></dd></dl></div>
+      <p class="shortcomment cmt">Schedules on a queue in the current event frame (trampoline scheduler).</p><div class="fullcomment"><div class="comment cmt"><p>Schedules on a queue in the current event frame (trampoline scheduler).
+Use this for iteration operations.
+</p></div></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -466,7 +475,7 @@
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -483,7 +492,7 @@
         <span class="name">toLocaleString</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@toLocaleString():String" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@toLocaleString():String" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -500,7 +509,7 @@
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@toString():String" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@toString():String" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -517,7 +526,7 @@
         <span class="name">valueOf</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Any">Any</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@valueOf():Any" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@valueOf():Any" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -534,7 +543,7 @@
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@wait():Unit" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@wait():Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -557,7 +566,7 @@
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -580,7 +589,7 @@
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#rxscalajs.Scheduler@wait(x$1:Long):Unit" title="Permalink" target="_top">
+      <a href="../index.html#rxscalajs.Scheduler$@wait(x$1:Long):Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
