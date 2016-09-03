@@ -27,4 +27,27 @@ trait Scheduler extends js.Object {
   def flush(): Unit = js.native
 }
 
+@js.native
+@JSName("Rx.Scheduler")
+/**
+  * Represents an object that schedules units of work.
+  */
+object Scheduler extends js.Object{
+  /**
+    * Schedules on a queue in the current event frame (trampoline scheduler).
+    * Use this for iteration operations.
+    */
+  val queue: Scheduler = js.native
+  /**
+    * Schedules on the micro task queue, which uses the fastest transport mechanism available,
+    * either Node.js'`process.nextTick()` or Web Worker MessageChannel or setTimeout or others.
+    * Use this for asynchronous conversions.
+    */
+  val asap: Scheduler = js.native
+  /**
+    * Schedules work with `setInterval`. Use this for time-based operations.
+    */
+  val async: Scheduler = js.native
+}
+
 

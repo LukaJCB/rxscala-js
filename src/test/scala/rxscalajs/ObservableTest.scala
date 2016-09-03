@@ -290,6 +290,9 @@ object ObservableTest extends TestSuite {
       'BufferTime {
         intervalObs.bufferTime(1000).subscribe(unit)
         intervalObs.bufferTime(1000, 1200).subscribe(unit)
+        intervalObs.bufferTime(1000, 1200,Scheduler.queue).subscribe(unit)
+        intervalObs.bufferTime(1000, 1200,Scheduler.async).subscribe(unit)
+        intervalObs.bufferTime(1000, 1200,Scheduler.asap).subscribe(unit)
       }
       'CombineAll {
         val combined = hoObs.combineAll.take(3)
