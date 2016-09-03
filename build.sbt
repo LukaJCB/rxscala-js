@@ -19,7 +19,7 @@ libraryDependencies ++= Seq(
 
 testFrameworks += new TestFramework("utest.runner.Framework")
 
-jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-beta.10" % "test" / "Rx.umd.js" commonJSName "Rx"
+jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-beta.10" % "test" / "Rx.umd.min.js" commonJSName "Rx"
 
 scalaJSUseRhino := false
 
