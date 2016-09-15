@@ -197,6 +197,8 @@ import scala.scalajs.js.annotation.JSName
 
     def fromEvent(element: Element, eventName: String): ObservableFacade[Event] = js.native
 
+    def forkJoin[T](sources: ObservableFacade[T]*): ObservableFacade[js.Array[T]] = js.native
+
     def combineLatest[T, R](sources: js.Array[ObservableFacade[T]],combineFunction: js.Function1[js.Array[T], R] = ???): ObservableFacade[R] = js.native
 
     def create[T](subscribe: js.Function1[ObserverFacade[T],Unit]): ObservableFacade[T] = js.native

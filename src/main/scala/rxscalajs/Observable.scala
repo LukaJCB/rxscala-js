@@ -2352,6 +2352,18 @@ object Observable {
     ObservableFacade.bindNodeCallback(callbackFunc,selector,scheduler)
 
   /**
+    *
+    * @param sources
+    * @tparam T
+    * @return
+    */
+  def forkJoin[T](sources: Observable[T]*): Observable[scala.collection.Seq[T]] = {
+    val facade = ObservableFacade.forkJoin(sources.map(_.inner): _*)
+    val func: js.Function1[js.Array[T],scala.collection.Seq[T]] = (n: js.Array[T]) => n.toSeq
+    new Observable(facade.map(func))
+  }
+
+  /**
     * Creates an Observable that emits events of a specific type coming from the given event target.
     *
     * Creates an Observable by attaching an event listener to an "event target", which may be an object with addEventListener and removeEventListener, a Node.js EventEmitter, a jQuery style EventEmitter, a NodeList from the DOM, or an HTMLCollection from the DOM.

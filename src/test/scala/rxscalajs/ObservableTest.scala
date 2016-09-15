@@ -562,6 +562,12 @@ object ObservableTest extends TestSuite {
         val o = Observable.from(future)
         o.subscribe(unit)
       }
+      'ForkJoin {
+        val o = Observable.interval(300).take(2)
+        val o2 = Observable.interval(400).take(1)
+
+        Observable.forkJoin(o,o2).subscribe(unit)
+      }
 
       'ForComprehensions {
           for {
