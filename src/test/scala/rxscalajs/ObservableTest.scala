@@ -82,19 +82,7 @@ object ObservableTest extends TestSuite {
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2).subscribe(unit)
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2, (n: Int) => n).subscribe(unit)
       }
-      'Do {
-        val intToUnit: js.Function1[Int, Unit] = (n: Int) => ()
-        obs.`do`(intToUnit).subscribe(unit)
-        obs.`do`(error = (n: Any) => ()).subscribe(unit)
-        obs.`do`(intToUnit, (n: Any) => ()).subscribe(unit)
-        obs.`do`(intToUnit, complete = () => ()).subscribe(unit)
-        obs.`do`(error = (n: Any) => (), complete = () => ()).subscribe(unit)
-        obs.`do`(intToUnit, error = (n: Any) => (), complete = () => ()).subscribe(unit)
-      }  
-      'ElementAt{
-      obs.elementAt(2).subscribe(unit)
-      obs.elementAt(20,-3).subscribe(unit)
-      }
+
       'Every {
         obs.every((n: Int, n2: Int) => n > n2).subscribe(unit)
       }
@@ -156,10 +144,6 @@ object ObservableTest extends TestSuite {
       'MergeMapTo {
         obs.mergeMapTo(ObservableFacade.of("34")).subscribe(unit)
         obs.mergeMapTo(ObservableFacade.of(34), (out: Int, in: Int, index1: Int, index2: Int) => -1).subscribe(unit)
-      }
-      'Multicast {
-        val func: js.Function0[SubjectFacade[Int]] = () => new SubjectFacade[Int]()
-        obs.multicast(func).subscribe(unit)
       }
       'Partition {
         obs.partition((n: Int) => n > 4)(0).subscribe(unit)
@@ -351,9 +335,6 @@ object ObservableTest extends TestSuite {
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2, (n: Int) => n).subscribe(unit)
       }
 
-      'ElementAt{
-        obs.elementAt(20,-3).subscribe(unit)
-      }
       'Every {
         obs.every((n, n2) => n > n2).subscribe(unit)
       }  
@@ -413,18 +394,11 @@ object ObservableTest extends TestSuite {
         obs.mergeMapTo(Observable.of("34")).subscribe(unit)
         obs.mergeMapTo(Observable.of(34), (out: Int, in: Int, index1: Int, index2: Int) => -1).subscribe(unit)
       }
-      'Multicast {
-        val func: js.Function0[SubjectFacade[Int]] = () => new SubjectFacade[Int]()
-        obs.multicast(func).subscribe(unit)
-      }
       'Partition {
         obs.partition((n: Int) => n > 4)._1.subscribe(unit)
       }
       'Publish {
         obs.publish.subscribe(unit)
-      }
-      'PublishBehaviour {
-        obs.publishBehavior(3).subscribe(unit)
       }
       'PublishLast {
         obs.publishLast.subscribe(unit)

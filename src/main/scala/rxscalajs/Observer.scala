@@ -9,7 +9,7 @@ import scala.scalajs.js
   * calls the Observer's `onNext` method to provide notifications. A well-behaved Observable will
   * call an Observer's `onCompleted` or `onError` methods exactly once.
   */
-trait Observer[T] {
+trait Observer[-T] {
   /**
     * Provides the Observer with new data.
     *

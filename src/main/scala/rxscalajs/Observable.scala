@@ -71,7 +71,7 @@ import scala.util.{Success, Failure}
   *
   */
 
-class Observable[T] protected(val inner: ObservableFacade[T]){
+class Observable[+T] protected(val inner: ObservableFacade[T]){
 
   /**
     * Ignores source values for a duration determined by another Observable, then
@@ -190,7 +190,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @return
     *         An Observable of buffers, which are arrays of values.
     * */
-  def buffer[T2](closingNotifier: Observable[T2]): Observable[List[T]] = new Observable(inner.buffer(closingNotifier).map((n: js.Array[T], index: Int) => n.toList))
+  def buffer[T2](closingNotifier: Observable[T2]): Observable[List[T]] = new Observable(inner.buffer(closingNotifier).map((n: js.Array[_ <: T], index: Int) => n.toList))
 
   /**
     * Creates an Observable which produces windows of collected values. This Observable produces windows every
@@ -209,7 +209,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *         `bufferSize` produced values.
     */
 
-  def bufferCount(count: Int, skip: Int): Observable[List[T]] = new Observable(inner.bufferCount(count,skip).map((n: js.Array[T], index: Int) => n.toList))
+  def bufferCount(count: Int, skip: Int): Observable[List[T]] = new Observable(inner.bufferCount(count,skip).map((n: js.Array[_ <: T], index: Int) => n.toList))
 
   /**
     * Creates an Observable which produces buffers of collected values.
@@ -227,7 +227,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *         An [[rxscalajs.Observable]] which produces connected non-overlapping buffers containing at most
     *         `count` produced values.
     */
-   def bufferCount(count: Int): Observable[List[T]] = new Observable(inner.bufferCount(count).map((n: js.Array[T], index: Int) => n.toList))
+   def bufferCount(count: Int): Observable[List[T]] = new Observable(inner.bufferCount(count).map((n: js.Array[_ <: T], index: Int) => n.toList))
 
   /**
     * Creates an Observable which produces buffers of collected values. This Observable starts a new buffer
@@ -245,7 +245,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *         An [[rxscalajs.Observable]] which produces new buffers periodically, and these are emitted after
     *         a fixed timespan has elapsed.
     */
-  def bufferTime(bufferTimeSpan: Int, bufferCreationInterval: Int, scheduler: Scheduler): Observable[List[T]] = new Observable(inner.bufferTime(bufferTimeSpan,bufferCreationInterval,scheduler).map((n: js.Array[T], index: Int) => n.toList))
+  def bufferTime(bufferTimeSpan: Int, bufferCreationInterval: Int, scheduler: Scheduler): Observable[List[T]] = new Observable(inner.bufferTime(bufferTimeSpan,bufferCreationInterval,scheduler).map((n: js.Array[_ <: T], index: Int) => n.toList))
 
   /**
     * Creates an Observable which produces buffers of collected values. This Observable starts a new buffer
@@ -261,7 +261,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *         An [[rxscalajs.Observable]] which produces new buffers periodically, and these are emitted after
     *         a fixed timespan has elapsed.
     */
-  def bufferTime(bufferTimeSpan: Int, bufferCreationInterval: Int): Observable[List[T]] = new Observable(inner.bufferTime(bufferTimeSpan,bufferCreationInterval).map((n: js.Array[T], index: Int) => n.toList))
+  def bufferTime(bufferTimeSpan: Int, bufferCreationInterval: Int): Observable[List[T]] = new Observable(inner.bufferTime(bufferTimeSpan,bufferCreationInterval).map((n: js.Array[_ <: T], index: Int) => n.toList))
 
   /**
     * Creates an Observable which produces buffers of collected values.
@@ -276,7 +276,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @return
     *         An [[rxscalajs.Observable]] which produces connected non-overlapping buffers with a fixed duration.
     */
-  def bufferTime(bufferTimeSpan: Int): Observable[List[T]] = new Observable(inner.bufferTime(bufferTimeSpan).map((n: js.Array[T], index: Int) => n.toList))
+  def bufferTime(bufferTimeSpan: Int): Observable[List[T]] = new Observable(inner.bufferTime(bufferTimeSpan).map((n: js.Array[_ <: T], index: Int) => n.toList))
   /**
     * Buffers the source Observable values starting from an emission from
     * `openings` and ending when the output of `closingSelector` emits.
@@ -300,7 +300,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @return  An observable of arrays of buffered values.
     */
   def bufferToggle[T2,O](openings: Observable[O])(closingSelector:  O => Observable[T2]): Observable[List[T]] =
-    new Observable(inner.bufferToggle(openings,toReturnFacade(closingSelector)).map((n: js.Array[T], index: Int) => n.toList))
+    new Observable(inner.bufferToggle(openings,toReturnFacade(closingSelector)).map((n: js.Array[_ <: T], index: Int) => n.toList))
   /**
     * Buffers the source Observable values, using a factory function of closing
     * Observables to determine when to close, emit, and reset the buffer.
@@ -325,7 +325,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * arguments and returns an Observable that signals buffer closure.
     * @return  An observable of arrays of buffered values.
     */
-  def bufferWhen[T2](closingSelector: () => Observable[T2]): Observable[List[T]] = new Observable(inner.bufferWhen(toReturnFacade(closingSelector)).map((n: js.Array[T], index: Int) => n.toList))
+  def bufferWhen[T2](closingSelector: () => Observable[T2]): Observable[List[T]] = new Observable(inner.bufferWhen(toReturnFacade(closingSelector)).map((n: js.Array[_ <: T], index: Int) => n.toList))
 
   /**
     * This method has similar behavior to `Observable.replay` except that this auto-subscribes to
@@ -795,18 +795,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     */
   def distinctUntilChanged: Observable[T] = new Observable(inner.distinctUntilChanged())
 
-  /**
-    * Returns an Observable that emits the single item at a specified index in a sequence of emissions from a
-    * source Observbable.
-    *
-    * <img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/elementAt.png" alt="" />
-    *
-    * @param index
-    *            the zero-based index of the item to retrieve
-    * @return an Observable that emits a single item: the item at the specified position in the sequence of
-    *         those emitted by the source Observable
-    */
-  def elementAt(index: Int, defaultValue: T): Observable[T] = new Observable(inner.elementAt(index,defaultValue))
 
   /**
     * Determines whether all elements of an observable sequence satisfy a condition.
@@ -1085,11 +1073,8 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @return an Observable whose items are the result of materializing the items and
     *         notifications of the source Observable
     */
-  def materialize: Observable[Notification[T]] = new Observable(inner.materialize())
+  def materialize: Observable[Notification[_ <: T]] = new Observable(inner.materialize())
 
-
-  def max(comparer: (T,T) => T): Observable[T] = new Observable(inner.max(comparer))
-  def max: Observable[T] = new Observable(inner.max())
 
   /**
     * Flattens two Observables into one Observable, without any transformation.
@@ -1214,10 +1199,9 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     new Observable(inner.mergeMapTo(innerObservable))
 
 
-  def min(comparer: (T,T) => T): Observable[T] = new Observable(inner.min(comparer))
-  def min: Observable[T] = new Observable(inner.min())
 
-  def multicast(subjectOrSubjectFactory: () => SubjectFacade[T]): Observable[T] = new Observable(inner.multicast(subjectOrSubjectFactory))
+  def multicast(subjectOrSubjectFactory: SubjectFacade[_ >: T]): Observable[T] =
+    new Observable(inner.multicast(subjectOrSubjectFactory))
 
   /**
     * Groups pairs of consecutive emissions together and emits them as a tuple of two values.
@@ -1226,7 +1210,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *
     * @return an Observable of pairs (as tuples) of consecutive values from the source Observable.
     */
-  def pairwise: Observable[(T,T)] = new Observable[(T, T)](inner.pairwise().map((arr: js.Array[T], index: Int) => (arr(0), arr(1))))
+  def pairwise: Observable[(T,T)] = new Observable[(T, T)](inner.pairwise().map((arr: js.Array[_ <: T], index: Int) => (arr(0), arr(1))))
 
 
   /**
@@ -1257,9 +1241,6 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     */
   def publish: Observable[T] = new Observable(inner.publish())
 
-
-  def publishBehavior(value: T): Observable[T] = new Observable(inner.publishBehavior(value))
-
   def publishLast: Observable[T] = new Observable(inner.publishLast())
   def publishReplay(bufferSize: Double = Double.PositiveInfinity, windowTime: Double = Double.PositiveInfinity): Observable[T] =
     new Observable(inner.publishReplay(bufferSize,windowTime))
@@ -1271,7 +1252,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     *                sources used to race for which Observable emits first.
     * @return an Observable that mirrors the output of the first Observable to emit an item.
     */
-  def race(observables: Observable[T]*): Observable[T] = new Observable(inner.race(observables.map(_.get).toJSArray))
+  def race(observables: Observable[_ >: T]*): Observable[T] = new Observable(inner.race(observables.map(_.get).toJSArray))
 
   /**
     * Returns an Observable that applies a function of your choosing to the first item emitted by a
@@ -1896,7 +1877,7 @@ class Observable[T] protected(val inner: ObservableFacade[T]){
     * @return an Observable that emits a single item: a List containing all of the items emitted by
     *         the source Observable.
     */
-  def toSeq: Observable[scala.collection.Seq[T]] = new Observable(inner.toArray().map((arr: js.Array[T], index: Int) => arr.toSeq))
+  def toSeq: Observable[scala.collection.Seq[T]] = new Observable(inner.toArray().map((arr: js.Array[_ <: T], index: Int) => arr.toSeq))
 
 
   /**
@@ -2359,7 +2340,7 @@ object Observable {
     */
   def forkJoin[T](sources: Observable[T]*): Observable[scala.collection.Seq[T]] = {
     val facade = ObservableFacade.forkJoin(sources.map(_.inner): _*)
-    val func: js.Function1[js.Array[T],scala.collection.Seq[T]] = (n: js.Array[T]) => n.toSeq
+    val func: js.Function1[js.Array[_ <: T],scala.collection.Seq[T]] = (n: js.Array[_ <: T]) => n.toSeq
     new Observable(facade.map(func))
   }
 
@@ -2421,12 +2402,12 @@ object Observable {
     *         Observables by means of the given aggregation function
     */
   def combineLatest[T,R] (sources: Seq[Observable[T]])(combineFunction: Seq[T] => R): Observable[R] = {
-    val func = combineFunction.asInstanceOf[js.Array[T] => R]
+    val func = combineFunction.asInstanceOf[js.Array[_ <: T] => R]
     _combineLatest(sources.map(_.inner).toJSArray,func)
   }
 
 
-  private def _combineLatest[T, R](sources: js.Array[ObservableFacade[T]],combineFunction: js.Array[T] => R): Observable[R] =
+  private def _combineLatest[T, R](sources: js.Array[ObservableFacade[T]],combineFunction: js.Array[_ <: T] => R): Observable[R] =
     new Observable(ObservableFacade.combineLatest(sources,combineFunction))
 
 
@@ -2514,7 +2495,7 @@ object Observable {
     * @return an Observable that emits the zipped Observables
     */
   def zip[T,R](observables: Seq[Observable[T]])(project: Seq[T] => R): Observable[R] =  {
-    val func = project.asInstanceOf[js.Array[T] => R]
+    val func = project.asInstanceOf[js.Array[_ <: T] => R]
     new Observable(ObservableFacade.zip(observables.map(_.inner).toJSArray,func))
   }
 
