@@ -1,6 +1,7 @@
 package rxscalajs
 
 import rxscalajs.facade.{GroupedObservableFacade, ObservableFacade, SubjectFacade}
+import rxscalajs.subjects.{AsyncSubject, BehaviorSubject, ReplaySubject}
 import rxscalajs.subscription._
 import utest._
 
@@ -510,6 +511,28 @@ object ObservableTest extends TestSuite {
       'ZipWithIndex {
         obs.zipWithIndex.subscribe(unit)
       }
+      'CatchError {
+        val errorObs = Observable.create[Int](observer => {
+          observer.next(0)
+          observer.error("Error!")
+        })
+        errorObs.catchError(s => Observable.of(s.toString)).subscribe(unit)
+      }
+      'OnErrorResumeNext {
+        val errorObs = Observable.create[Int](observer => {
+          observer.next(0)
+          observer.error("Error!")
+        })
+        errorObs.onErrorResumeNext(s => Observable.of(s.toString)).subscribe(unit)
+      }
+      'OnErrorReturn {
+        val errorObs = Observable.create[Int](observer => {
+          observer.next(0)
+          observer.error("Error!")
+        })
+        errorObs.onErrorReturn(_.toString).subscribe(unit)
+      }
+
       'Ajax {
         Observable.ajax("https://api.github.com/orgs/reactivex")
           .map(_.response.public_repos)
@@ -573,6 +596,33 @@ object ObservableTest extends TestSuite {
 
         intervalObs.subscribe(s)
 
+      }
+      'BehaviorSubjectTest {
+        val s = BehaviorSubject[Int](12)
+        s.scan(0)(_ + _).startWith(0)
+        s.next(10)
+        s.subscribe(unit)
+        s.next(10)
+
+        intervalObs.subscribe(s)
+      }
+      'AsyncSubjectTest {
+        val s = AsyncSubject[Int]()
+        s.scan(0)(_ + _).startWith(0)
+        s.next(10)
+        s.subscribe(unit)
+        s.next(10)
+
+        intervalObs.subscribe(s)
+      }
+      'ReplaySubjectTest {
+        val s = ReplaySubject.withSize[Int](5)
+        s.scan(0)(_ + _).startWith(0)
+        s.next(10)
+        s.subscribe(unit)
+        s.next(10)
+
+        intervalObs.subscribe(s)
       }
     }
 
