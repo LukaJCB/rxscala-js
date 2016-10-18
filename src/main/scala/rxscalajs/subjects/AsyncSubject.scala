@@ -4,9 +4,7 @@ package rxscalajs.subjects
 import rxscalajs.Subject
 import rxscalajs.facade.AsyncSubjectFacade
 
-/**
-  * Created by Luka on 21.05.2016.
-  */
+
 class AsyncSubject[T] protected(inner: AsyncSubjectFacade[T]) extends Subject[T](inner)
 
 object AsyncSubject {

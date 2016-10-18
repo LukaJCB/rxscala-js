@@ -2,10 +2,11 @@ package rxscalajs.facade
 import rxscalajs.subscription.{Subscriber, AnonymousSubscription}
 
 import scala.scalajs.js
-
+import scala.scalajs.js.annotation.JSName
 
 
 @js.native
+@JSName("Rx.AsyncSubject")
 class AsyncSubjectFacade[T] extends SubjectFacade[T] {
   var value: T = js.native
   var hasNext: Boolean = js.native

@@ -3,9 +3,6 @@ package rxscalajs.subjects
 import rxscalajs.{Subject, Scheduler}
 import rxscalajs.facade.ReplaySubjectFacade
 
-/**
-  * Created by Luka on 21.05.2016.
-  */
 
 class ReplaySubject[T] protected(inner: ReplaySubjectFacade[T]) extends Subject[T](inner)
 

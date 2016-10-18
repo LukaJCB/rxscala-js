@@ -7,7 +7,7 @@ import scala.scalajs.js.annotation._
 
 
 @js.native
-  @JSName("Rx.Subject")
+@JSName("Rx.Subject")
 class SubjectFacade[T] protected() extends ObservableFacade[T] with AnonymousSubscription with ObserverFacade[T] {
   def this(destination: ObserverFacade[T] = ???, source: ObservableFacade[T] = ???) = this()
 
