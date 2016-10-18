@@ -419,8 +419,75 @@ class Observable[+T] protected(val inner: ObservableFacade[T]){
   def cache: Observable[T] = new Observable( inner.cache())
 
 
+  /**
+    * Continues an observable sequence that is terminated by an exception with the next observable sequence.
+    *
+    * <img width="640" height="310" src="http://reactivex.io/documentation/operators/images/catch.js.png" alt="" />
+    *
+    * @param resumeFunction
+    *                   Exception handler function that returns an observable sequence given the error that occurred in the first sequence
+    * @return An observable sequence containing the first sequence's elements, followed by the elements of the handler sequence in case an exception occurred.
+    */
+  def catchError[U >: T](resumeFunction: (js.Any) => Observable[U]): Observable[U] =
+    new Observable(inner.`catch`(toReturnFacade(resumeFunction)))
+
+  /**
+    * Instruct an Observable to pass control to another Observable rather than invoking `onError` if it encounters an error.
+    *
+    * <img width="640" height="310" src="http://reactivex.io/documentation/operators/images/onErrorResumeNext.png" alt="" />
+    *
+    * By default, when an Observable encounters an error that prevents it from emitting the
+    * expected item to its Observer, the Observable invokes its Observer's
+    * `onError` method, and then quits without invoking any more of its Observer's
+    * methods. The `onErrorResumeNext` method changes this behavior. If you pass a
+    * function that returns an Observable (`resumeFunction`) to
+    * `onErrorResumeNext`, if the original Observable encounters an error, instead of
+    * invoking its Observer's `onError` method, it will instead relinquish control to
+    * the Observable returned from `resumeFunction`, which will invoke the Observer's
+    * `onNext` method if it is able to do so. In such a case, because no
+    * Observable necessarily invokes `onError`, the Observer may never know that an
+    * error happened.
+    *
+    * You can use this to prevent errors from propagating or to supply fallback data should errors
+    * be encountered.
+    *
+    * @param resumeFunction
+    *            a function that returns an Observable that will take over if the source Observable
+    *            encounters an error
+    * @return the original Observable, with appropriately modified behavior
+    */
+  def onErrorResumeNext[U >: T](resumeFunction: (js.Any) => Observable[U]): Observable[U] =
+    new Observable(inner.onErrorResumeNext(toReturnFacade(resumeFunction)))
 
 
+
+  /**
+    * Instruct an Observable to emit an item (returned by a specified function) rather than
+    * invoking `onError` if it encounters an error.
+    *
+    * <img width="640" height="310" src="http://reactivex.io/documentation/operators/images/onErrorReturn.png" alt="" />
+    *
+    * By default, when an Observable encounters an error that prevents it from emitting the
+    * expected item to its `Observer`, the Observable invokes its Observer's
+    * `onError` method, and then quits without invoking any more of its Observer's
+    * methods. The `onErrorReturn` method changes this behavior. If you pass a function
+    * (`resumeFunction`) to an Observable's `onErrorReturn` method, if the
+    * original Observable encounters an error, instead of invoking its Observer's
+    * `onError` method, it will instead pass the return value of
+    * `resumeFunction` to the Observer's `onNext` method.
+    *
+    * You can use this to prevent errors from propagating or to supply fallback data should errors
+    * be encountered.
+    *
+    * @param resumeFunction
+    *            a function that returns an item that the new Observable will emit if the source
+    *            Observable encounters an error
+    * @return the original Observable with appropriately modified behavior
+    */
+  def onErrorReturn[U >: T](resumeFunction: (js.Any) => U): Observable[U] = {
+    val toFacade = (any: js.Any) => ObservableFacade.of(resumeFunction(any))
+    new Observable(inner.onErrorResumeNext(toFacade))
+  }
   /**
     * Converts a higher-order Observable into a first-order Observable by waiting
     * for the outer Observable to complete, then applying {@link combineLatest}.
@@ -2160,8 +2227,6 @@ class Observable[+T] protected(val inner: ObservableFacade[T]){
   /**
     * Call this method to receive items from this observable.
     *
-    *
-    *
     * @param onNext this function will be called whenever the Observable emits an item
     * @return  a [[subscription.Subscription]] reference whose `unsubscribe` method can be called to  stop receiving items
     *         before the Observable has finished sending them
@@ -2288,7 +2353,6 @@ object Observable {
     * function is called with arguments, it will return an Observable where the
     * results will be delivered to.
     *
-    *
     * @param callbackFunc Function with a callback as the last parameter.
     * @param selector A function which takes the arguments from the
     * callback and maps those a value to emit on the output Observable.
@@ -2306,7 +2370,7 @@ object Observable {
     * Converts a Node.js-style callback API to a function that returns an
     * Observable.
     *
-    * <span class="informal">It's just like bindCallback`, but the
+    * <span class="informal">It's just like `bindCallback`, but the
     * callback is expected to be of type `callback(error, result)`.</span>
     *
     * `bindNodeCallback` is not an operator because its input and output are not
@@ -2349,6 +2413,7 @@ object Observable {
     *
     * Creates an Observable by attaching an event listener to an "event target", which may be an object with addEventListener and removeEventListener, a Node.js EventEmitter, a jQuery style EventEmitter, a NodeList from the DOM, or an HTMLCollection from the DOM.
     * The event handler is attached when the output Observable is subscribed, and removed when the Subscription is unsubscribed.
+    *
     * @param element
     * @param eventName
     * @return
@@ -2443,6 +2508,7 @@ object Observable {
 
   /**
     * Returns an Observable that mirrors the first source Observable to emit an item from the combination of this Observable and supplied Observables
+    *
     * @param    observables sources used to race for which Observable emits first.
     * @return an Observable that mirrors the output of the first Observable to emit an item.
 
@@ -2473,8 +2539,6 @@ object Observable {
     * Scheduler and just delivers the notifications synchronously, but may use
     * an optional Scheduler to regulate those deliveries.
     *
-    *
-    *
     * @param start The value of the first integer in the sequence.
     * @param count The number of sequential integers to generate.
     * the emissions of the notifications.
@@ -2491,7 +2555,6 @@ object Observable {
     * @param project
     *                 a function that combines the items from the Observable and the Iterable to generate
     *                 the items to be emitted by the resulting Observable
-    *
     * @return an Observable that emits the zipped Observables
     */
   def zip[T,R](observables: Seq[Observable[T]])(project: Seq[T] => R): Observable[R] =  {
