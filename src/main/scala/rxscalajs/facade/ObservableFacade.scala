@@ -1,12 +1,10 @@
 package rxscalajs.facade
 import rxscalajs._
-import rxscalajs.subscription.{AnonymousSubscription, Subscription, ObserverFacade}
+import rxscalajs.subscription.{AnonymousSubscription, ObserverFacade, Subscription}
 
 import scala.scalajs.js
 import scala.scalajs.js._
-
 import org.scalajs.dom._
-
 
 import scala.scalajs.js.annotation.JSName
 
@@ -187,6 +185,8 @@ import scala.scalajs.js.annotation.JSName
   @js.native
   @JSName("Rx.Observable")
   object ObservableFacade extends js.Object {
+    type Creator = Unit | (() => Unit)
+
     def ajax[T2](request: String | js.Object): ObservableFacade[T2]  = js.native
 
     def bindCallback[T,T2](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[T2, ObservableFacade[T]]  = js.native
@@ -200,7 +200,7 @@ import scala.scalajs.js.annotation.JSName
 
     def combineLatest[T, R](sources: js.Array[ObservableFacade[T]],combineFunction: js.Function1[js.Array[_ <: T], R] = ???): ObservableFacade[R] = js.native
 
-    def create[T](subscribe: js.Function1[ObserverFacade[T],Unit]): ObservableFacade[T] = js.native
+    def create[T](subscribe: js.Function1[ObserverFacade[T],Creator]): ObservableFacade[T] = js.native
 
     def concat[T, R](observables: js.Array[ObservableFacade[T]], scheduler: Scheduler = ???): ObservableFacade[R] = js.native
 

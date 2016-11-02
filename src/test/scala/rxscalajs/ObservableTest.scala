@@ -7,11 +7,12 @@ import utest._
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.scalajs.js
+import scala.scalajs.js.|
 
 
 object ObservableTest extends TestSuite {
 
-
+  type Creator = Unit | (() => Unit)
 
   def tests = TestSuite {
     val unit = (n: Any) => ()
@@ -252,11 +253,11 @@ object ObservableTest extends TestSuite {
         obs.zip(intervalObs).subscribe(unit)
       }
       'Create {
-        val func: js.Function1[ObserverFacade[Double],Unit] = (subscriber: ObserverFacade[Double]) => {
+        val func: js.Function1[ObserverFacade[Double],Creator] = (subscriber: ObserverFacade[Double]) => {
           subscriber.next(Math.random())
           subscriber.next(Math.random())
           subscriber.next(Math.random())
-          subscriber.complete()
+          subscriber.complete(): Creator
         }
         val result = ObservableFacade.create(func)
         result.subscribe(unit)
