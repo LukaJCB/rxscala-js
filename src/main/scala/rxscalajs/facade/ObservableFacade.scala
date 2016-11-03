@@ -185,7 +185,7 @@ import scala.scalajs.js.annotation.JSName
   @js.native
   @JSName("Rx.Observable")
   object ObservableFacade extends js.Object {
-    type Creator = Unit | (() => Unit)
+    type Creator = Unit | js.Function0[Unit]
 
     def ajax[T2](request: String | js.Object): ObservableFacade[T2]  = js.native
 
