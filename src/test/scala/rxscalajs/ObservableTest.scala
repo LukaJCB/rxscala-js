@@ -253,14 +253,30 @@ object ObservableTest extends TestSuite {
         obs.zip(intervalObs).subscribe(unit)
       }
       'Create {
-        val func: js.Function1[ObserverFacade[Double],Creator] = (subscriber: ObserverFacade[Double]) => {
+        val func: js.Function1[ObserverFacade[Double],ObservableFacade.Creator] = (subscriber: ObserverFacade[Double]) => {
           subscriber.next(Math.random())
           subscriber.next(Math.random())
           subscriber.next(Math.random())
-          subscriber.complete(): Creator
+          subscriber.complete(): ObservableFacade.Creator
         }
         val result = ObservableFacade.create(func)
         result.subscribe(unit)
+      }
+      'CreateDisposeFunction {
+        var x = false
+        val func: js.Function1[ObserverFacade[Double],ObservableFacade.Creator] = (subscriber: ObserverFacade[Double]) => {
+          subscriber.next(Math.random())
+          subscriber.next(Math.random())
+          subscriber.next(Math.random())
+          subscriber.complete()
+          val disposer = () => {
+            x = true
+          }
+          (disposer: js.Function0[Unit]): ObservableFacade.Creator
+        }
+        val result = ObservableFacade.create(func)
+        result.subscribe(unit)
+        assert(x)
       }
     }
     'WrapperTests{
