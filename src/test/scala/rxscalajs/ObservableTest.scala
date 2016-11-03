@@ -7,11 +7,12 @@ import utest._
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.scalajs.js
+import scala.scalajs.js.|
 
 
 object ObservableTest extends TestSuite {
 
-
+  type Creator = Unit | js.Function0[Unit]
 
   def tests = TestSuite {
     val unit = (n: Any) => ()
@@ -73,7 +74,7 @@ object ObservableTest extends TestSuite {
       'Dematerialize {
         notiObs.dematerialize().subscribe(unit)
       }
-       
+
       'Distinct{
        obs.distinct().subscribe(unit)
        obs.distinct((n: Int,n2: Int) => n > n2).subscribe(unit)
@@ -115,7 +116,7 @@ object ObservableTest extends TestSuite {
       }
       'IgnoreElements {
         obs.ignoreElements().subscribe(unit)
-      }  
+      }
       'IsEmpty{
         obs.isEmpty().subscribe(unit)
       }
@@ -252,14 +253,30 @@ object ObservableTest extends TestSuite {
         obs.zip(intervalObs).subscribe(unit)
       }
       'Create {
-        val func: js.Function1[ObserverFacade[Double],Unit] = (subscriber: ObserverFacade[Double]) => {
+        val func: js.Function1[ObserverFacade[Double],ObservableFacade.Creator] = (subscriber: ObserverFacade[Double]) => {
+          subscriber.next(Math.random())
+          subscriber.next(Math.random())
+          subscriber.next(Math.random())
+          subscriber.complete(): ObservableFacade.Creator
+        }
+        val result = ObservableFacade.create(func)
+        result.subscribe(unit)
+      }
+      'CreateDisposeFunction {
+        var x = false
+        val func: js.Function1[ObserverFacade[Double],ObservableFacade.Creator] = (subscriber: ObserverFacade[Double]) => {
           subscriber.next(Math.random())
           subscriber.next(Math.random())
           subscriber.next(Math.random())
           subscriber.complete()
+          val disposer = () => {
+            x = true
+          }
+          (disposer: js.Function0[Unit]): ObservableFacade.Creator
         }
         val result = ObservableFacade.create(func)
         result.subscribe(unit)
+        assert(x)
       }
     }
     'WrapperTests{
@@ -324,7 +341,7 @@ object ObservableTest extends TestSuite {
       'Dematerialize {
         notiObs.dematerialize.subscribe(unit)
       }
-       
+
       'Distinct{
         obs.distinct.subscribe(unit)
         obs.distinct((n: Int,n2: Int) => n > n2).subscribe(unit)
@@ -338,7 +355,7 @@ object ObservableTest extends TestSuite {
 
       'Every {
         obs.every((n, n2) => n > n2).subscribe(unit)
-      }  
+      }
       'Exhaust{
         hoObs.exhaust.subscribe(unit)
        }
@@ -545,6 +562,20 @@ object ObservableTest extends TestSuite {
           observer.complete()
         })
         o.subscribe(unit)
+      }
+      'CreateDisposeFunction {
+        var x = false
+        val o = Observable.create[String](observer => {
+          observer.next("Str")
+          observer.next("Hello")
+          observer.complete()
+          val disposer = () => {
+            x = true
+          }
+          disposer
+        })
+        o.subscribe(unit)
+        assert(x)
       }
       'FromIterable {
         val iterable = List(1,24,3,35,5,34)
