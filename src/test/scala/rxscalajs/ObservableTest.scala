@@ -253,18 +253,18 @@ object ObservableTest extends TestSuite {
         obs.zip(intervalObs).subscribe(unit)
       }
       'Create {
-        val func: js.Function1[ObserverFacade[Double],ObservableFacade.Creator] = (subscriber: ObserverFacade[Double]) => {
+        val func: js.Function1[ObserverFacade[Double],ObservableFacade.CreatorFacade] = (subscriber: ObserverFacade[Double]) => {
           subscriber.next(Math.random())
           subscriber.next(Math.random())
           subscriber.next(Math.random())
-          subscriber.complete(): ObservableFacade.Creator
+          subscriber.complete(): ObservableFacade.CreatorFacade
         }
         val result = ObservableFacade.create(func)
         result.subscribe(unit)
       }
       'CreateDisposeFunction {
         var x = false
-        val func: js.Function1[ObserverFacade[Double],ObservableFacade.Creator] = (subscriber: ObserverFacade[Double]) => {
+        val func: js.Function1[ObserverFacade[Double],ObservableFacade.CreatorFacade] = (subscriber: ObserverFacade[Double]) => {
           subscriber.next(Math.random())
           subscriber.next(Math.random())
           subscriber.next(Math.random())
@@ -272,7 +272,7 @@ object ObservableTest extends TestSuite {
           val disposer = () => {
             x = true
           }
-          (disposer: js.Function0[Unit]): ObservableFacade.Creator
+          (disposer: js.Function0[Unit]): ObservableFacade.CreatorFacade
         }
         val result = ObservableFacade.create(func)
         result.subscribe(unit)

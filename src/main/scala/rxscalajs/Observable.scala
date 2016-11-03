@@ -2679,7 +2679,6 @@ class Observable[+T] protected(val inner: ObservableFacade[T]) {
 object Observable {
 
   type Creator = Unit | (() => Unit)
-  type CreatorJs = Unit | js.Function0[Unit]
 
   /**
     * Returns an Observable that will execute the specified function when someone subscribes to it.
@@ -2701,7 +2700,6 @@ object Observable {
     * @param f
     * a function that accepts a `Observer[T]`, and invokes its `next`,
     * `onError`, and `onCompleted` methods as appropriate
-    *
     * @return an Observable that, when someone subscribes to it, will execute the specified
     *         function
     */
@@ -2723,7 +2721,6 @@ object Observable {
     * @tparam T
     * the type of items in the Array, and the type of items to be emitted by the
     * resulting Observable
-    *
     * @return an Observable that emits each item in the source Array
     */
   def just[T](values: T*): Observable[T] = {
@@ -2749,12 +2746,14 @@ object Observable {
     * the type of the items that this Observable emits
     * @param f
     * a function that accepts a `Observer[T]`, and invokes its `next`,
-    * `onError`, and `onCompleted` methods as appropriate
-    *
+    * `onError`, and `onCompleted` methods as appropriate.
+    * It can also return a Teardown function that will be called once the Observable is disposed.
     * @return an Observable that, when someone subscribes to it, will execute the specified
     *         function
     */
   def create[T](f: Observer[T] => Creator): Observable[T] = {
+    import ObservableFacade.CreatorFacade
+
     def toObserver(o: ObserverFacade[T]): Observer[T] = {
       new Observer[T] {
         override def next(t: T) = o.next(t)
@@ -2762,16 +2761,16 @@ object Observable {
         override def complete() = o.complete()
       }
     }
-    def unitOrFn(in: Creator): CreatorJs = {
+    def unitOrFn(in: Creator): CreatorFacade = {
       in match {
         case b: (() => Unit) => b: js.Function0[Unit]
-        case _: Creator => (): Unit
+        case _ => (): Unit
       }
     }
-    def toFacadeFunction(func: Observer[T] => Creator): ObserverFacade[T] => CreatorJs = {
+    def toFacadeFunction(func: Observer[T] => Creator): ObserverFacade[T] => CreatorFacade = {
       (facade) => {
         val observer = toObserver(facade)
-        func.andThen[CreatorJs](unitOrFn).apply(observer)
+        func.andThen[CreatorFacade](unitOrFn).apply(observer)
       }
     }
 

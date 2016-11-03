@@ -185,7 +185,7 @@ import scala.scalajs.js.annotation.JSName
   @js.native
   @JSName("Rx.Observable")
   object ObservableFacade extends js.Object {
-    type Creator = Unit | js.Function0[Unit]
+    type CreatorFacade = Unit | js.Function0[Unit]
 
     def ajax[T2](request: String | js.Object): ObservableFacade[T2]  = js.native
 
@@ -200,7 +200,7 @@ import scala.scalajs.js.annotation.JSName
 
     def combineLatest[T, R](sources: js.Array[ObservableFacade[T]],combineFunction: js.Function1[js.Array[_ <: T], R] = ???): ObservableFacade[R] = js.native
 
-    def create[T](subscribe: js.Function1[ObserverFacade[T],Creator]): ObservableFacade[T] = js.native
+    def create[T](subscribe: js.Function1[ObserverFacade[T],CreatorFacade]): ObservableFacade[T] = js.native
 
     def concat[T, R](observables: js.Array[ObservableFacade[T]], scheduler: Scheduler = ???): ObservableFacade[R] = js.native
 
