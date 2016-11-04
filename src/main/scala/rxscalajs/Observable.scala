@@ -515,9 +515,9 @@ class Observable[+T] protected(val inner: ObservableFacade[T]) {
     *
     * @return the original Observable, with appropriately modified behavior
     */
-  def onErrorResumeNext[U >: T](resumeFunction: (js.Any) => Observable[U]): Observable[U] = {
-    new Observable(inner.onErrorResumeNext(toReturnFacade(resumeFunction)))
-  }
+  def onErrorResumeNext[U >: T](resumeFunction: (js.Any) => Observable[U]): Observable[U] =
+    this.catchError(resumeFunction)
+
 
   /**
     * Instruct an Observable to emit an item (returned by a specified function) rather than
