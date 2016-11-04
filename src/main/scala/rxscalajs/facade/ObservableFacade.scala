@@ -10,7 +10,7 @@ import scala.scalajs.js.annotation.JSName
 
   @js.native
   trait Subscribable[+T] extends js.Object {
-    def subscribe(onNext: js.Function1[T, Unit], error: js.Function1[js.Any, Unit] = ???, complete: js.Function0[Unit] = ???): AnonymousSubscription = js.native
+    def subscribe(onNext: js.Function1[T, Unit], error: js.Function1[js.Any, Unit] = ???, complete: js.Function0[Unit] = ???): Subscription = js.native
     def subscribe(observer: ObserverFacade[_ >: T]): Subscription = js.native
   }
 

@@ -5,7 +5,7 @@ name := "RxScala.js"
 
 normalizedName := "rxscala-js"
 
-version := "0.6.0"
+version := "0.7.0"
 
 organization := "com.github.lukajcb"
 
@@ -13,13 +13,13 @@ scalaVersion := "2.11.8"
 
 
 libraryDependencies ++= Seq(
-  "org.scala-js" %%% "scalajs-dom" % "0.9.0",
-  "com.lihaoyi" %%% "utest" % "0.4.0" % "test"
+  "org.scala-js" %%% "scalajs-dom" % "0.9.1",
+  "com.lihaoyi" %%% "utest" % "0.4.3" % "test"
 )
 
 testFrameworks += new TestFramework("utest.runner.Framework")
 
-jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-beta.10" % "test" / "Rx.umd.min.js" commonJSName "Rx"
+jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-rc.1" % "test" / "bundles/Rx.min.js" commonJSName "Rx"
 
 scalaJSUseRhino := false
 

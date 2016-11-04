@@ -2597,7 +2597,7 @@ class Observable[+T] protected(val inner: ObservableFacade[T]) {
     onNext: T => Unit,
     error: js.Any => Unit = e => (),
     complete: () => Unit = () => ()
-  ): AnonymousSubscription = {
+  ): Subscription = {
     inner.subscribe(onNext, error, complete)
   }
 
