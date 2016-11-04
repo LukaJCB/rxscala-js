@@ -2624,10 +2624,11 @@ class Observable[+T] protected(val inner: ObservableFacade[T]) {
     * @see <a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a>
     */
   def subscribe(observer: Observer[T]): AnonymousSubscription = {
+    val complete: () => Unit = observer.complete _
     inner
       .subscribe(observer.next _: js.Function1[T, Unit],
         observer.error _: js.Function1[js.Any, Unit],
-        observer.complete _: js.Function0[Unit])
+        complete)
   }
 
   /**

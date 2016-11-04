@@ -9,12 +9,12 @@ version := "0.7.0"
 
 organization := "com.github.lukajcb"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.0"
 
 
 libraryDependencies ++= Seq(
   "org.scala-js" %%% "scalajs-dom" % "0.9.1",
-  "com.lihaoyi" %%% "utest" % "0.4.3" % "test"
+  "com.lihaoyi" %%% "utest" % "0.4.4" % "test"
 )
 
 testFrameworks += new TestFramework("utest.runner.Framework")
