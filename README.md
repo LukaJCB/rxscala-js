@@ -62,7 +62,7 @@ def switch[U](implicit evidence: Observable[T] <:< Observable[Observable[U]]): O
 
 RxScala.js: 
 
-- The API documentation can be found [here](http://lukajcb.github.io/rxscala-js/latest/api/#rxscalajs.Observable).
+- The API documentation can be found [here](http://lukajcb.github.io/rxscala-js/latest/api/rxscalajs/Observable.html).
 
 
 RxJs:
