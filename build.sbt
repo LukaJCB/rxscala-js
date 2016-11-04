@@ -21,8 +21,6 @@ testFrameworks += new TestFramework("utest.runner.Framework")
 
 jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-rc.1" % "test" / "bundles/Rx.min.js" commonJSName "Rx"
 
-scalaJSUseRhino := false
-
 ghpages.settings
 
 git.remoteRepo := "git@github.com:LukaJCB/rxscala-js.git"
