@@ -77,7 +77,6 @@ object ObservableTest extends TestSuite {
 
       'Distinct{
        obs.distinct().subscribe(unit)
-       obs.distinct((n: Int,n2: Int) => n > n2).subscribe(unit)
       }
       'DistinctUntilChanged {
         obs.distinctUntilChanged().subscribe(unit)
@@ -344,8 +343,6 @@ object ObservableTest extends TestSuite {
 
       'Distinct{
         obs.distinct.subscribe(unit)
-        obs.distinct((n: Int,n2: Int) => n > n2).subscribe(unit)
-        obs.distinct((n: Int,n2: Int) => n > n2,Observable.of("w")).subscribe(unit)
       }
       'DistinctUntilChanged {
         obs.distinctUntilChanged.subscribe(unit)

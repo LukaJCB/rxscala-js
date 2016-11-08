@@ -33,7 +33,7 @@ then import the types from the package `rxscalajs`.
 
 RxScala.js doesn't actually come bundled with the underlying `rx.js` file, so you'll need to either add them manually or specify them as `jsDependencies`:
 
-    jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-rc.1" / "bundles/Rx.min.js" commonJSName "Rx"
+    jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-rc.2" / "bundles/Rx.min.js" commonJSName "Rx"
 
 ## Differences from RxJS
 

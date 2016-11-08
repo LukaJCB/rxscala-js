@@ -76,8 +76,7 @@ import scala.scalajs.js.annotation.JSName
     def delay(delay: Int | Date, scheduler: Scheduler = ???): ObservableFacade[T] = js.native
     def delayWhen[U,I](delayDurationSelector:  js.Function1[T, ObservableFacade[U]], subscriptionDelay: ObservableFacade[I] = ???): ObservableFacade[T] = js.native
     def dematerialize[T2](): ObservableFacade[T2] = js.native
-    def distinct[T2](compare: js.Function2[T,  T, Boolean] = ???, flushes: ObservableFacade[T2] = ???): ObservableFacade[T] = js.native
-    def distinctKey[T2](key: String, compare: js.Function2[T,  T,Boolean] = ???, flushes: ObservableFacade[T2] = ???): ObservableFacade[T] = js.native
+    def distinct[K,T2](keySelector: js.Function1[T, K] = ???, flushes: ObservableFacade[T2] = ???): ObservableFacade[T] = js.native
     def distinctUntilChanged[K](compare: js.Function2[K,  K,Boolean], keySelector: js.Function1[T,K]): ObservableFacade[T] = js.native
     def distinctUntilChanged(compare: js.Function2[T,  T,Boolean] = ???): ObservableFacade[T] = js.native
     def distinctUntilKeyChanged(key: String, compare: js.Function2[ T,  T, Boolean] = ???): ObservableFacade[T] = js.native

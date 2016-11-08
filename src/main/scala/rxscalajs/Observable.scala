@@ -906,15 +906,15 @@ class Observable[+T] protected(val inner: ObservableFacade[T]) {
     * <img width="640" height="310" src="http://reactivex.io/documentation/operators/images/distinct.png" alt="" />
     *
     * @param compare
-    * a function that compares the two items
+    * function to select which value you want to check as distinct.
     * @param flushes
     * Observable for flushing the internal HashSet of the operator.
     *
     * @return an Observable of distinct items
     */
-  def distinct[T2](compare: (T, T) => Boolean, flushes: Observable[T2]): Observable[T] = {
+  def distinct[K,T2](keySelector: T => K, flushes: Observable[T2]): Observable[T] = {
     new Observable(inner
-      .distinct(compare, flushes))
+      .distinct(keySelector, flushes))
   }
   /**
     * Returns an Observable that forwards all items emitted from the source Observable that are distinct according
@@ -937,12 +937,12 @@ class Observable[+T] protected(val inner: ObservableFacade[T]) {
     * <img width="640" height="310" src="http://reactivex.io/documentation/operators/images/distinct.png" alt="" />
     *
     * @param compare
-    * a function that compares the two items
+    * function to select which value you want to check as distinct.
     *
     * @return an Observable of distinct items
     */
-  def distinct[T2](compare: (T, T) => Boolean): Observable[T] = {
-    new Observable(inner.distinct(compare))
+  def distinct[K](keySelector: T => K): Observable[T] = {
+    new Observable(inner.distinct(keySelector))
   }
   /**
     * Returns an Observable that forwards all items emitted from the source Observable that are distinct according
