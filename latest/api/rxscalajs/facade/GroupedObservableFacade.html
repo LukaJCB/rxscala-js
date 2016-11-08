@@ -753,9 +753,9 @@
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a></dd></dl></div>
     </li><li name="rxscalajs.facade.ObservableFacade#distinct" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="distinct[T2](compare:scala.scalajs.js.Function2[T,T,Boolean],flushes:rxscalajs.facade.ObservableFacade[T2]):rxscalajs.facade.ObservableFacade[T]"></a><a id="distinct[T2](Function2[T,T,Boolean],ObservableFacade[T2]):ObservableFacade[T]"></a>
+      <a id="distinct[K,T2](keySelector:scala.scalajs.js.Function1[T,K],flushes:rxscalajs.facade.ObservableFacade[T2]):rxscalajs.facade.ObservableFacade[T]"></a><a id="distinct[K,T2](Function1[T,K],ObservableFacade[T2]):ObservableFacade[T]"></a>
       <span class="permalink">
-      <a href="../../rxscalajs/facade/GroupedObservableFacade.html#distinct[T2](compare:scala.scalajs.js.Function2[T,T,Boolean],flushes:rxscalajs.facade.ObservableFacade[T2]):rxscalajs.facade.ObservableFacade[T]" title="Permalink">
+      <a href="../../rxscalajs/facade/GroupedObservableFacade.html#distinct[K,T2](keySelector:scala.scalajs.js.Function1[T,K],flushes:rxscalajs.facade.ObservableFacade[T2]):rxscalajs.facade.ObservableFacade[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -764,23 +764,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">distinct</span><span class="tparams">[<span name="T2">T2</span>]</span><span class="params">(<span name="compare">compare: <span class="extype" name="scala.scalajs.js.Function2">Function2</span>[<span class="extype" name="rxscalajs.facade.GroupedObservableFacade.T">T</span>, <span class="extype" name="rxscalajs.facade.GroupedObservableFacade.T">T</span>, <span class="extype" name="scala.Boolean">Boolean</span>] = <span class="symbol">???</span></span>, <span name="flushes">flushes: <a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.facade.ObservableFacade.distinct.T2">T2</span>] = <span class="symbol">???</span></span>)</span><span class="result">: <a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.facade.GroupedObservableFacade.T">T</span>]</span>
-      </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a></dd></dl></div>
-    </li><li name="rxscalajs.facade.ObservableFacade#distinctKey" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="distinctKey[T2](key:String,compare:scala.scalajs.js.Function2[T,T,Boolean],flushes:rxscalajs.facade.ObservableFacade[T2]):rxscalajs.facade.ObservableFacade[T]"></a><a id="distinctKey[T2](String,Function2[T,T,Boolean],ObservableFacade[T2]):ObservableFacade[T]"></a>
-      <span class="permalink">
-      <a href="../../rxscalajs/facade/GroupedObservableFacade.html#distinctKey[T2](key:String,compare:scala.scalajs.js.Function2[T,T,Boolean],flushes:rxscalajs.facade.ObservableFacade[T2]):rxscalajs.facade.ObservableFacade[T]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">distinctKey</span><span class="tparams">[<span name="T2">T2</span>]</span><span class="params">(<span name="key">key: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="compare">compare: <span class="extype" name="scala.scalajs.js.Function2">Function2</span>[<span class="extype" name="rxscalajs.facade.GroupedObservableFacade.T">T</span>, <span class="extype" name="rxscalajs.facade.GroupedObservableFacade.T">T</span>, <span class="extype" name="scala.Boolean">Boolean</span>] = <span class="symbol">???</span></span>, <span name="flushes">flushes: <a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.facade.ObservableFacade.distinctKey.T2">T2</span>] = <span class="symbol">???</span></span>)</span><span class="result">: <a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.facade.GroupedObservableFacade.T">T</span>]</span>
+        <span class="name">distinct</span><span class="tparams">[<span name="K">K</span>, <span name="T2">T2</span>]</span><span class="params">(<span name="keySelector">keySelector: <span class="extype" name="scala.scalajs.js.Function1">Function1</span>[<span class="extype" name="rxscalajs.facade.GroupedObservableFacade.T">T</span>, <span class="extype" name="rxscalajs.facade.ObservableFacade.distinct.K">K</span>] = <span class="symbol">???</span></span>, <span name="flushes">flushes: <a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.facade.ObservableFacade.distinct.T2">T2</span>] = <span class="symbol">???</span></span>)</span><span class="result">: <a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.facade.GroupedObservableFacade.T">T</span>]</span>
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a></dd></dl></div>

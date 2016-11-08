@@ -1331,9 +1331,9 @@ to a key selector function.</p><div class="fullcomment"><div class="comment cmt"
 to a key selector function.</p><p><img width="640" height="310" src="http://reactivex.io/documentation/operators/images/distinct.png" alt="" />
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>an Observable of distinct items</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#distinct" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="distinct[T2](compare:(T,T)=&gt;Boolean):rxscalajs.Observable[T]"></a><a id="distinct[T2]((T,T)⇒Boolean):Observable[T]"></a>
+      <a id="distinct[K](keySelector:T=&gt;K):rxscalajs.Observable[T]"></a><a id="distinct[K]((T)⇒K):Observable[T]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Subject.html#distinct[T2](compare:(T,T)=&gt;Boolean):rxscalajs.Observable[T]" title="Permalink">
+      <a href="../rxscalajs/Subject.html#distinct[K](keySelector:T=&gt;K):rxscalajs.Observable[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -1342,14 +1342,13 @@ to a key selector function.</p><p><img width="640" height="310" src="http://reac
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">distinct</span><span class="tparams">[<span name="T2">T2</span>]</span><span class="params">(<span name="compare">compare: (<span class="extype" name="rxscalajs.Subject.T">T</span>, <span class="extype" name="rxscalajs.Subject.T">T</span>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Subject.T">T</span>]</span>
+        <span class="name">distinct</span><span class="tparams">[<span name="K">K</span>]</span><span class="params">(<span name="keySelector">keySelector: (<span class="extype" name="rxscalajs.Subject.T">T</span>) ⇒ <span class="extype" name="rxscalajs.Observable.distinct.K">K</span></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Subject.T">T</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Returns an Observable that forwards all items emitted from the source Observable that are distinct according
 to a key selector function.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that forwards all items emitted from the source Observable that are distinct according
 to a key selector function.</p><p><img width="640" height="310" src="http://reactivex.io/documentation/operators/images/distinct.png" alt="" />
-</p></div><dl class="paramcmts block"><dt class="param">compare</dt><dd class="cmt"><p>
-a function that compares the two items</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable of distinct items</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>an Observable of distinct items</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#distinct" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="distinct[T2](flushes:rxscalajs.Observable[T2]):rxscalajs.Observable[T]"></a><a id="distinct[T2](Observable[T2]):Observable[T]"></a>
       <span class="permalink">
@@ -1371,9 +1370,9 @@ to a key selector function.</p><p><img width="640" height="310" src="http://reac
 </p></div><dl class="paramcmts block"><dt class="param">flushes</dt><dd class="cmt"><p>
 Observable for flushing the internal HashSet of the operator.</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable of distinct items</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#distinct" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="distinct[T2](compare:(T,T)=&gt;Boolean,flushes:rxscalajs.Observable[T2]):rxscalajs.Observable[T]"></a><a id="distinct[T2]((T,T)⇒Boolean,Observable[T2]):Observable[T]"></a>
+      <a id="distinct[K,T2](keySelector:T=&gt;K,flushes:rxscalajs.Observable[T2]):rxscalajs.Observable[T]"></a><a id="distinct[K,T2]((T)⇒K,Observable[T2]):Observable[T]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Subject.html#distinct[T2](compare:(T,T)=&gt;Boolean,flushes:rxscalajs.Observable[T2]):rxscalajs.Observable[T]" title="Permalink">
+      <a href="../rxscalajs/Subject.html#distinct[K,T2](keySelector:T=&gt;K,flushes:rxscalajs.Observable[T2]):rxscalajs.Observable[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -1382,14 +1381,13 @@ Observable for flushing the internal HashSet of the operator.</p></dd><dt>return
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">distinct</span><span class="tparams">[<span name="T2">T2</span>]</span><span class="params">(<span name="compare">compare: (<span class="extype" name="rxscalajs.Subject.T">T</span>, <span class="extype" name="rxscalajs.Subject.T">T</span>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="flushes">flushes: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.distinct.T2">T2</span>]</span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Subject.T">T</span>]</span>
+        <span class="name">distinct</span><span class="tparams">[<span name="K">K</span>, <span name="T2">T2</span>]</span><span class="params">(<span name="keySelector">keySelector: (<span class="extype" name="rxscalajs.Subject.T">T</span>) ⇒ <span class="extype" name="rxscalajs.Observable.distinct.K">K</span></span>, <span name="flushes">flushes: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.distinct.T2">T2</span>]</span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Subject.T">T</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Returns an Observable that forwards all items emitted from the source Observable that are distinct according
 to a key selector function.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that forwards all items emitted from the source Observable that are distinct according
 to a key selector function.</p><p><img width="640" height="310" src="http://reactivex.io/documentation/operators/images/distinct.png" alt="" />
-</p></div><dl class="paramcmts block"><dt class="param">compare</dt><dd class="cmt"><p>
-a function that compares the two items</p></dd><dt class="param">flushes</dt><dd class="cmt"><p>
+</p></div><dl class="paramcmts block"><dt class="param">flushes</dt><dd class="cmt"><p>
 Observable for flushing the internal HashSet of the operator.</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable of distinct items</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#distinctUntilChanged" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="distinctUntilChanged:rxscalajs.Observable[T]"></a><a id="distinctUntilChanged:Observable[T]"></a>
