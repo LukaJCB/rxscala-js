@@ -123,7 +123,7 @@ import scala.scalajs.js.annotation.JSName
     def publishBehavior(value: Any): ConnectableObservableFacade[T] = js.native
 
     def publishLast(): ConnectableObservableFacade[T] = js.native
-    def publishReplay(bufferSize: Double = ???, windowTime: Double = ???, scheduler: Scheduler = ???): ConnectableObservableFacade[T] = js.native
+    def publishReplay(bufferSize: Int = ???, windowTime: Double = ???, scheduler: Scheduler = ???): ConnectableObservableFacade[T] = js.native
 
     def race(observables: js.Array[_ >: ObservableFacade[T]]): ObservableFacade[T] = js.native
     def reduce[R](project: js.Function2[R,T,R],seed: R = ???): ObservableFacade[R] = js.native
