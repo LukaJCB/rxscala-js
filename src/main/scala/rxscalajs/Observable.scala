@@ -6,6 +6,7 @@ import rxscalajs.facade._
 import rxscalajs.subscription._
 
 import scala.collection.immutable.Seq
+import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
 import scala.scalajs.js
 import scala.scalajs.js.JSConverters._
@@ -270,11 +271,11 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * a fixed timespan has elapsed.
     */
   def bufferTime(
-    bufferTimeSpan: Int,
-    bufferCreationInterval: Int,
+    bufferTimeSpan: FiniteDuration,
+    bufferCreationInterval: FiniteDuration,
     scheduler: Scheduler
   ): Observable[List[T]] = {
-    new Observable(inner.bufferTime(bufferTimeSpan, bufferCreationInterval, scheduler)
+    new Observable(inner.bufferTime(bufferTimeSpan.toMillis.toInt, bufferCreationInterval.toMillis.toInt, scheduler)
       .map((n: js.Array[_ <: T]) => n.toList))
   }
 
@@ -293,9 +294,9 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * An [[rxscalajs.Observable]] which produces new buffers periodically, and these are emitted after
     * a fixed timespan has elapsed.
     */
-  def bufferTime(bufferTimeSpan: Int, bufferCreationInterval: Int): Observable[List[T]] = {
+  def bufferTime(bufferTimeSpan: FiniteDuration, bufferCreationInterval: FiniteDuration): Observable[List[T]] = {
     new Observable(inner
-      .bufferTime(bufferTimeSpan, bufferCreationInterval).map((n: js.Array[_ <: T]) => n.toList))
+      .bufferTime(bufferTimeSpan.toMillis.toInt, bufferCreationInterval.toMillis.toInt).map((n: js.Array[_ <: T]) => n.toList))
   }
 
   /**
@@ -312,8 +313,8 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return
     * An [[rxscalajs.Observable]] which produces connected non-overlapping buffers with a fixed duration.
     */
-  def bufferTime(bufferTimeSpan: Int): Observable[List[T]] = {
-    new Observable(inner.bufferTime(bufferTimeSpan)
+  def bufferTime(bufferTimeSpan: FiniteDuration): Observable[List[T]] = {
+    new Observable(inner.bufferTime(bufferTimeSpan.toMillis.toInt)
       .map((n: js.Array[_ <: T]) => n.toList))
   }
   /**
@@ -398,9 +399,9 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return an Observable that when first subscribed to, caches all of its notifications for
     *         the benefit of subsequent subscribers.
     */
-  def cache(bufferSize: Int, windowTime: Int, scheduler: Scheduler): Observable[T] = {
+  def cache(bufferSize: Int, windowTime: FiniteDuration, scheduler: Scheduler): Observable[T] = {
     new Observable(inner
-      .cache(bufferSize, windowTime, scheduler))
+      .cache(bufferSize, windowTime.toMillis.toInt, scheduler))
   }
   /**
     * This method has similar behavior to `Observable.replay` except that this auto-subscribes to
@@ -425,8 +426,8 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return an Observable that when first subscribed to, caches all of its notifications for
     *         the benefit of subsequent subscribers.
     */
-  def cache(bufferSize: Int, windowTime: Int): Observable[T] = {
-    new Observable(inner.cache(bufferSize, windowTime))
+  def cache(bufferSize: Int, windowTime: FiniteDuration): Observable[T] = {
+    new Observable(inner.cache(bufferSize, windowTime.toMillis.toInt))
   }
   /**
     * This method has similar behavior to `Observable.replay` except that this auto-subscribes to
@@ -788,8 +789,8 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return An Observable which filters out values which are too quickly followed up with newer values.
     * @see `Observable.throttleWithTimeout`
     */
-  def debounceTime(timeout: Int): Observable[T] = {
-    new Observable(inner.debounceTime(timeout))
+  def debounceTime(timeout: FiniteDuration): Observable[T] = {
+    new Observable(inner.debounceTime(timeout.toMillis.toInt))
   }
 
   /**
@@ -834,8 +835,8 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     *
     * @return the source Observable shifted in time by the specified delay
     */
-  def delay(delay: Int): Observable[T] = {
-    new Observable(inner.delay(delay))
+  def delay(delay: FiniteDuration): Observable[T] = {
+    new Observable(inner.delay(delay.toMillis.toInt))
   }
 
   /**
@@ -1543,9 +1544,9 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
   def publishLast: ConnectableObservable[T] = new ConnectableObservable[T](inner.publishLast())
   def publishReplay(
     bufferSize: Int = Int.MaxValue,
-    windowTime: Double = Double.PositiveInfinity
+    windowTime: FiniteDuration = Int.MaxValue.millis
   ): ConnectableObservable[T] = {
-    new ConnectableObservable(inner.publishReplay(bufferSize, windowTime))
+    new ConnectableObservable(inner.publishReplay(bufferSize, windowTime.toMillis.toInt))
   }
 
   /**
@@ -1733,8 +1734,8 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return an Observable that emits the results of sampling the items emitted by the source
     *         Observable at the specified time interval
     */
-  def sampleTime(delay: Int, scheduler: Scheduler): Observable[T] = {
-    new Observable(inner.sampleTime(delay, scheduler))
+  def sampleTime(delay: FiniteDuration, scheduler: Scheduler): Observable[T] = {
+    new Observable(inner.sampleTime(delay.toMillis.toInt, scheduler))
   }
   /**
     * Returns an Observable that emits the results of sampling the items emitted by the source
@@ -1747,8 +1748,8 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return an Observable that emits the results of sampling the items emitted by the source
     *         Observable at the specified time interval
     */
-  def sampleTime(delay: Int): Observable[T] = {
-    new Observable(inner.sampleTime(delay))
+  def sampleTime(delay: FiniteDuration): Observable[T] = {
+    new Observable(inner.sampleTime(delay.toMillis.toInt))
   }
 
   /**
@@ -2146,9 +2147,9 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return Observable which performs the throttle operation.
     * @see `Observable.debounce`
     */
-  def throttleTime(delay: Int, scheduler: Scheduler): Observable[T] = {
+  def throttleTime(delay: FiniteDuration, scheduler: Scheduler): Observable[T] = {
     new Observable(inner
-      .throttleTime(delay, scheduler))
+      .throttleTime(delay.toMillis.toInt, scheduler))
   }
   /**
     * Debounces by dropping all values that are followed by newer values before the timeout value expires. The timer resets on each `onNext` call.
@@ -2163,8 +2164,8 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return Observable which performs the throttle operation.
     * @see `Observable.debounce`
     */
-  def throttleTime(delay: Int): Observable[T] = {
-    new Observable(inner.throttleTime(delay))
+  def throttleTime(delay: FiniteDuration): Observable[T] = {
+    new Observable(inner.throttleTime(delay.toMillis.toInt))
   }
 
   /**
@@ -2396,8 +2397,8 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * An [[rxscalajs.Observable]] which produces connected non-overlapping windows which are emitted after
     * a fixed duration or when the window has reached maximum capacity (which ever occurs first).
     */
-  def windowTime(timespan: Int, timeshift: Int, scheduler: Scheduler): Observable[Observable[T]] = {
-    new Observable(inner.windowTime(timespan, timeshift, scheduler)
+  def windowTime(timespan: FiniteDuration, timeshift: FiniteDuration, scheduler: Scheduler): Observable[Observable[T]] = {
+    new Observable(inner.windowTime(timespan.toMillis.toInt, timeshift.toMillis.toInt, scheduler)
       .map((o: ObservableFacade[T]) => new Observable(o)))
   }
   /**
@@ -2415,8 +2416,8 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * An [[rxscalajs.Observable]] which produces connected non-overlapping windows which are emitted after
     * a fixed duration or when the window has reached maximum capacity (which ever occurs first).
     */
-  def windowTime(timespan: Int, timeshift: Int): Observable[Observable[T]] = {
-    new Observable(inner.windowTime(timespan, timeshift).map((o: ObservableFacade[T]) => new Observable(o)))
+  def windowTime(timespan: FiniteDuration, timeshift: FiniteDuration): Observable[Observable[T]] = {
+    new Observable(inner.windowTime(timespan.toMillis.toInt, timeshift.toMillis.toInt).map((o: ObservableFacade[T]) => new Observable(o)))
   }
   /**
     * Creates an Observable which produces windows of collected values. This Observable produces connected
@@ -2434,8 +2435,8 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * An [[rxscalajs.Observable]] which produces connected non-overlapping windows which are emitted after
     * a fixed duration or when the window has reached maximum capacity (which ever occurs first).
     */
-  def windowTime(timespan: Int, scheduler: Scheduler): Observable[Observable[T]] = {
-    new Observable(inner.windowTime(timespan, scheduler = scheduler)
+  def windowTime(timespan: FiniteDuration, scheduler: Scheduler): Observable[Observable[T]] = {
+    new Observable(inner.windowTime(timespan.toMillis.toInt, scheduler = scheduler)
       .map((o: ObservableFacade[T]) => new Observable(o)))
   }
   /**
@@ -2452,8 +2453,8 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * An [[rxscalajs.Observable]] which produces connected non-overlapping windows which are emitted after
     * a fixed duration or when the window has reached maximum capacity (which ever occurs first).
     */
-  def windowTime(timespan: Int): Observable[Observable[T]] = {
-    new Observable(inner.windowTime(timespan).map((o: ObservableFacade[T]) => new Observable(o)))
+  def windowTime(timespan: FiniteDuration): Observable[Observable[T]] = {
+    new Observable(inner.windowTime(timespan.toMillis.toInt).map((o: ObservableFacade[T]) => new Observable(o)))
   }
 
   /**
@@ -2953,8 +2954,8 @@ object Observable {
     *
     * @return An Observable that emits a number each time interval.
     */
-  def interval(duration: Int = 0): Observable[Int] = {
-    new Observable(ObservableFacade.interval(duration))
+  def interval(duration: Duration = Duration.Zero): Observable[Int] = {
+    new Observable(ObservableFacade.interval(duration.toMillis.toInt))
   }
 
   /**

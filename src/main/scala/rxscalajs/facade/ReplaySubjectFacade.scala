@@ -8,5 +8,5 @@ import scala.scalajs.js.annotation.JSName
 @js.native
 @JSName("Rx.ReplaySubject")
 class ReplaySubjectFacade[T] protected() extends SubjectFacade[T] {
-  def this(bufferSize: Int = ???, windowTime: Double = ???, scheduler: Scheduler = ???) = this()
+  def this(bufferSize: Int = ???, windowTime: Int = ???, scheduler: Scheduler = ???) = this()
 }
