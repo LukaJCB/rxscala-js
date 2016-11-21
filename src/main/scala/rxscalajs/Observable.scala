@@ -204,7 +204,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     **/
   def buffer[T2](closingNotifier: Observable[T2]): Observable[List[T]] = {
     new Observable(inner.buffer(closingNotifier)
-      .map((n: js.Array[_ <: T], index: Int) => n.toList))
+      .map((n: js.Array[_ <: T]) => n.toList))
   }
 
   /**
@@ -227,7 +227,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
 
   def bufferCount(count: Int, skip: Int): Observable[List[T]] = {
     new Observable(inner.bufferCount(count, skip)
-      .map((n: js.Array[_ <: T], index: Int) => n.toList))
+      .map((n: js.Array[_ <: T]) => n.toList))
   }
 
   /**
@@ -249,7 +249,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     */
   def bufferCount(count: Int): Observable[List[T]] = {
     new Observable(inner.bufferCount(count)
-      .map((n: js.Array[_ <: T], index: Int) => n.toList))
+      .map((n: js.Array[_ <: T]) => n.toList))
   }
 
   /**
@@ -275,7 +275,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     scheduler: Scheduler
   ): Observable[List[T]] = {
     new Observable(inner.bufferTime(bufferTimeSpan, bufferCreationInterval, scheduler)
-      .map((n: js.Array[_ <: T], index: Int) => n.toList))
+      .map((n: js.Array[_ <: T]) => n.toList))
   }
 
   /**
@@ -295,7 +295,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     */
   def bufferTime(bufferTimeSpan: Int, bufferCreationInterval: Int): Observable[List[T]] = {
     new Observable(inner
-      .bufferTime(bufferTimeSpan, bufferCreationInterval).map((n: js.Array[_ <: T], index: Int) => n.toList))
+      .bufferTime(bufferTimeSpan, bufferCreationInterval).map((n: js.Array[_ <: T]) => n.toList))
   }
 
   /**
@@ -314,7 +314,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     */
   def bufferTime(bufferTimeSpan: Int): Observable[List[T]] = {
     new Observable(inner.bufferTime(bufferTimeSpan)
-      .map((n: js.Array[_ <: T], index: Int) => n.toList))
+      .map((n: js.Array[_ <: T]) => n.toList))
   }
   /**
     * Buffers the source Observable values starting from an emission from
@@ -341,7 +341,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     */
   def bufferToggle[T2, O](openings: Observable[O])(closingSelector: O => Observable[T2]): Observable[List[T]] = {
     new Observable(inner.bufferToggle(openings, toReturnFacade(closingSelector))
-      .map((n: js.Array[_ <: T], index: Int) => n.toList))
+      .map((n: js.Array[_ <: T]) => n.toList))
   }
   /**
     * Buffers the source Observable values, using a factory function of closing
@@ -371,7 +371,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     */
   def bufferWhen[T2](closingSelector: () => Observable[T2]): Observable[List[T]] = {
     new Observable(inner
-      .bufferWhen(toReturnFacade(closingSelector)).map((n: js.Array[_ <: T], index: Int) => n.toList))
+      .bufferWhen(toReturnFacade(closingSelector)).map((n: js.Array[_ <: T]) => n.toList))
   }
 
   /**
@@ -907,7 +907,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     *
     * <img width="640" height="310" src="http://reactivex.io/documentation/operators/images/distinct.png" alt="" />
     *
-    * @param compare
+    * @param keySelector
     * function to select which value you want to check as distinct.
     * @param flushes
     * Observable for flushing the internal HashSet of the operator.
@@ -938,7 +938,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     *
     * <img width="640" height="310" src="http://reactivex.io/documentation/operators/images/distinct.png" alt="" />
     *
-    * @param compare
+    * @param keySelectior
     * function to select which value you want to check as distinct.
     *
     * @return an Observable of distinct items
@@ -1300,8 +1300,8 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return an Observable that emits the items from the source Observable, transformed by the
     *         given function
     */
-  def map[R](project: (T, Int) => R): Observable[R] = {
-    new Observable[R](inner.map(project))
+  def mapWithIndex[R](project: (T, Int) => R): Observable[R] = {
+    new Observable[R](inner.mapWithIndex(project))
   }
   /**
     * Returns an Observable that applies the given function to each item emitted by an
@@ -1506,7 +1506,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     */
   def pairwise: Observable[(T, T)] = {
     new Observable[(T, T)](inner.pairwise()
-      .map((arr: js.Array[_ <: T], index: Int) => (arr(0), arr(1))))
+      .map((arr: js.Array[_ <: T]) => (arr(0), arr(1))))
   }
 
   /**
@@ -2304,7 +2304,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     */
   def toSeq: Observable[scala.collection.Seq[T]] = {
     new Observable(inner.toArray()
-      .map((arr: js.Array[_ <: T], index: Int) => arr.toSeq))
+      .map((arr: js.Array[_ <: T]) => arr.toSeq))
   }
 
   /**
@@ -2321,7 +2321,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     *         determined by the items emitted from a specified boundary-governing Observable.
     */
   def window[I](windowBoundaries: Observable[I]): Observable[Observable[T]] = {
-    new Observable(inner.window(windowBoundaries).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+    new Observable(inner.window(windowBoundaries).map((o: ObservableFacade[T]) => new Observable(o)))
   }
   /**
     * Creates an Observable which produces windows of collected values. This Observable produces connected
@@ -2357,7 +2357,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     */
   def windowCount(windowSize: Int, startWindowEvery: Int = 0): Observable[Observable[T]] = {
     new Observable(inner.windowCount(windowSize, startWindowEvery)
-      .map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+      .map((o: ObservableFacade[T]) => new Observable(o)))
   }
 
   /**
@@ -2398,7 +2398,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     */
   def windowTime(timespan: Int, timeshift: Int, scheduler: Scheduler): Observable[Observable[T]] = {
     new Observable(inner.windowTime(timespan, timeshift, scheduler)
-      .map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+      .map((o: ObservableFacade[T]) => new Observable(o)))
   }
   /**
     * Creates an Observable which produces windows of collected values. This Observable produces connected
@@ -2416,7 +2416,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * a fixed duration or when the window has reached maximum capacity (which ever occurs first).
     */
   def windowTime(timespan: Int, timeshift: Int): Observable[Observable[T]] = {
-    new Observable(inner.windowTime(timespan, timeshift).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+    new Observable(inner.windowTime(timespan, timeshift).map((o: ObservableFacade[T]) => new Observable(o)))
   }
   /**
     * Creates an Observable which produces windows of collected values. This Observable produces connected
@@ -2436,7 +2436,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     */
   def windowTime(timespan: Int, scheduler: Scheduler): Observable[Observable[T]] = {
     new Observable(inner.windowTime(timespan, scheduler = scheduler)
-      .map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+      .map((o: ObservableFacade[T]) => new Observable(o)))
   }
   /**
     * Creates an Observable which produces windows of collected values. This Observable produces connected
@@ -2453,7 +2453,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * a fixed duration or when the window has reached maximum capacity (which ever occurs first).
     */
   def windowTime(timespan: Int): Observable[Observable[T]] = {
-    new Observable(inner.windowTime(timespan).map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+    new Observable(inner.windowTime(timespan).map((o: ObservableFacade[T]) => new Observable(o)))
   }
 
   /**
@@ -2474,7 +2474,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     */
   def windowToggle[U, O](openings: Observable[O])(closingSelector: O => Observable[U]): Observable[Observable[T]] = {
     new Observable(inner.windowToggle(openings, toReturnFacade(closingSelector))
-      .map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+      .map((o: ObservableFacade[T]) => new Observable(o)))
   }
 
   /**
@@ -2492,7 +2492,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     */
   def windowWhen[U](closingSelector: () => Observable[U]): Observable[Observable[T]] = {
     new Observable(inner.windowWhen(toReturnFacade(closingSelector))
-      .map((o: ObservableFacade[T], n: Int) => new Observable(o)))
+      .map((o: ObservableFacade[T]) => new Observable(o)))
   }
   /**
     * Merges the specified [[Observable]] into this [[Observable]] sequence by using the `resultSelector`
@@ -2570,7 +2570,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     *         their index. Indices start at 0.
     */
   def zipWithIndex: Observable[(T, Int)] = {
-    this.map((e, n) => (e, n))
+    this.mapWithIndex((e, n) => (e, n))
   }
 
   /**

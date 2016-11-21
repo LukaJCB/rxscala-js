@@ -123,7 +123,10 @@ object ObservableTest extends TestSuite {
         obs.last().subscribe(unit)
       }
       'Map {
-        obs.map((n: Int, index: Int) => "n: " + n).subscribe(unit)
+        obs.map((n: Int) => "n: " + n).subscribe(unit)
+      }
+      'MapWithIndex {
+        obs.mapWithIndex((n: Int, index: Int) => "n: " + n).subscribe(unit)
       }
       'MapTo {
         obs.mapTo("A").subscribe(unit)
@@ -386,8 +389,10 @@ object ObservableTest extends TestSuite {
         obs.last.subscribe(unit)
       }
       'Map {
-        obs.map((n: Int, index: Int) => "n: " + n).subscribe(unit)
         obs.map(_.toString).subscribe(unit)
+      }
+      'MapWithIndex {
+        obs.mapWithIndex((n: Int, index: Int) => "n: " + n).subscribe(unit)
       }
       'MapTo {
         obs.mapTo("A").subscribe(unit)

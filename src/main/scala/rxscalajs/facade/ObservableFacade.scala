@@ -96,7 +96,9 @@ import scala.scalajs.js.annotation.JSName
     def isEmpty(): ObservableFacade[Boolean] = js.native
     def last[R](predicate:  js.Function3[T,  Int,  ObservableFacade[T],Boolean] = ???, resultSelector: js.Function2[T,Int,R] = ???, defaultValue: R = ???): ObservableFacade[R] = js.native
     def let[ R](func:  js.Function1[ObservableFacade[T],ObservableFacade[R]]): ObservableFacade[R] = js.native
-    def map[R](project: js.Function2[T,Int,R]): ObservableFacade[R] = js.native
+
+    @JSName("map")
+    def mapWithIndex[R](project: js.Function2[T,Int,R]): ObservableFacade[R] = js.native
     def map[R](project: js.Function1[T,R]): ObservableFacade[R] = js.native
     def mapTo[ R](value: R): ObservableFacade[R] = js.native
     def materialize(): ObservableFacade[Notification[_ <: T]] = js.native
