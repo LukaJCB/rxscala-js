@@ -413,13 +413,13 @@ object ObservableTest extends TestSuite {
         obs.partition((n: Int) => n > 4)._1.subscribe(unit)
       }
       'Publish {
-        obs.publish.subscribe(unit)
+        obs.publish.refCount.subscribe(unit)
       }
       'PublishLast {
-        obs.publishLast.subscribe(unit)
+        obs.publishLast.refCount.subscribe(unit)
       }
       'PublishReplay {
-        obs.publishReplay(5).subscribe(unit)
+        obs.publishReplay(5).refCount.subscribe(unit)
       }
       'Race {
         intervalObs.race(intervalObs).subscribe(unit)
