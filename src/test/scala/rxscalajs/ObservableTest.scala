@@ -6,6 +6,7 @@ import rxscalajs.subscription._
 import utest._
 
 import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.duration._
 import scala.scalajs.js
 import scala.scalajs.js.|
 
@@ -284,7 +285,7 @@ object ObservableTest extends TestSuite {
     'WrapperTests{
 
       val obs = Observable.just(1,11,21,1211,111221)
-      val intervalObs = Observable.interval(100).take(5)
+      val intervalObs = Observable.interval(100.millis).take(5)
       val hoObs = Observable.just(obs).take(2)
       val notiObs = Observable.just(Notification.createNext(3),Notification.createComplete())
       'BufferCount {
@@ -292,11 +293,11 @@ object ObservableTest extends TestSuite {
         obs.bufferCount(2, 1).subscribe(unit)
       }
       'BufferTime {
-        intervalObs.bufferTime(1000).subscribe(unit)
-        intervalObs.bufferTime(1000, 1200).subscribe(unit)
-        intervalObs.bufferTime(1000, 1200,Scheduler.queue).subscribe(unit)
-        intervalObs.bufferTime(1000, 1200,Scheduler.async).subscribe(unit)
-        intervalObs.bufferTime(1000, 1200,Scheduler.asap).subscribe(unit)
+        intervalObs.bufferTime(1000.millis).subscribe(unit)
+        intervalObs.bufferTime(1000.millis, 1200.millis).subscribe(unit)
+        intervalObs.bufferTime(1000.millis, 1200.millis,Scheduler.queue).subscribe(unit)
+        intervalObs.bufferTime(1000.millis, 1200.millis,Scheduler.async).subscribe(unit)
+        intervalObs.bufferTime(1000.millis, 1200.millis,Scheduler.asap).subscribe(unit)
       }
       'CombineAll {
         val combined = hoObs.combineAll.take(3)
@@ -325,16 +326,16 @@ object ObservableTest extends TestSuite {
         obs.count((i: Int, n: Int, ob: Observable[Int]) => i % 2 == 1).subscribe(unit)
       }
       'Debounce {
-        obs.debounce((n: Int) => Observable.interval(100).take(6)).subscribe(unit)
+        obs.debounce((n: Int) => Observable.interval(100.millis).take(6)).subscribe(unit)
       }
       'DebounceTime {
-        obs.debounceTime(500).subscribe(unit)
+        obs.debounceTime(500.millis).subscribe(unit)
       }
       'DefaultIfEmpty {
         ObservableFacade.of().defaultIfEmpty(5).subscribe(unit)
       }
       'Delay {
-        obs.delay(50).subscribe(unit)
+        obs.delay(50.millis).subscribe(unit)
       }
       'DelayWhen {
         obs.delayWhen((n: Int) => Observable.of(34)).subscribe(unit)
@@ -451,7 +452,7 @@ object ObservableTest extends TestSuite {
         obs.sample(intervalObs).subscribe(unit)
       }
       'SampleTime {
-        intervalObs.sampleTime(500).subscribe(unit)
+        intervalObs.sampleTime(500.millis).subscribe(unit)
       }
       'Scan {
         obs.scan((n: Int, n2: Int) => n + n2).subscribe(unit)
@@ -495,10 +496,10 @@ object ObservableTest extends TestSuite {
         obs.takeWhile((n: Int, n2: Int) => n > 1).subscribe(unit)
       }
       'Throttle {
-        intervalObs.throttle((ev: Int) => Observable.interval(1000)).subscribe(unit)
+        intervalObs.throttle((ev: Int) => Observable.interval(1000.millis)).subscribe(unit)
       }
       'ThrottleTime {
-        intervalObs.throttleTime(200).subscribe(unit)
+        intervalObs.throttleTime(200.millis).subscribe(unit)
       }
       'Timestamp {
         intervalObs.timestamp.map(tmp => (tmp.value, tmp.timestamp)).subscribe(unit)
@@ -510,7 +511,7 @@ object ObservableTest extends TestSuite {
         obs.windowCount(3).subscribe(unit)
       }
       'WindowTime {
-        obs.windowTime(1200).subscribe(unit)
+        obs.windowTime(1200.millis).subscribe(unit)
       }
       'WindowToggle {
         obs.window(intervalObs).subscribe(unit)
@@ -593,8 +594,8 @@ object ObservableTest extends TestSuite {
         o.subscribe(unit)
       }
       'ForkJoin {
-        val o = Observable.interval(300).take(2)
-        val o2 = Observable.interval(400).take(1)
+        val o = Observable.interval(300.millis).take(2)
+        val o2 = Observable.interval(400.millis).take(1)
 
         Observable.forkJoin(o,o2).subscribe(unit)
       }
