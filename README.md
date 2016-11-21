@@ -1,4 +1,4 @@
-# RxScala.js  [![Build Status](https://travis-ci.org/LukaJCB/rxscala-js.svg?branch=master)](https://travis-ci.org/LukaJCB/rxscala-js) [![Scala.js](https://www.scala-js.org/assets/badges/scalajs-0.6.6.svg)](https://www.scala-js.org)  [![Gitter](https://badges.gitter.im/rxscala-js/Lobby.svg)](https://gitter.im/rxscala-js/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# RxScala.js  [![Build Status](https://travis-ci.org/LukaJCB/rxscala-js.svg?branch=master)](https://travis-ci.org/LukaJCB/rxscala-js) [![Scala.js](https://www.scala-js.org/assets/badges/scalajs-0.6.6.svg)](https://www.scala-js.org)  [![Gitter](https://badges.gitter.im/rxscala-js/Lobby.svg)](https://gitter.im/rxscala-js/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Maven Central](https://img.shields.io/maven-central/v/com.github.lukajcb/rxscala-js_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.lukajcb/rxscala-js_sjs0.6_2.12)
 This is a Scala adapter to [RxJs](http://github.com/ReactiveX/RxJs).
 
 Example usage:
