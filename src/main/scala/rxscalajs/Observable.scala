@@ -1081,7 +1081,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
   def expand[R](
     project: (T, Int) => Observable[R],
     scheduler: Scheduler,
-    concurrent: Double = Double.PositiveInfinity
+    concurrent: Int = Int.MaxValue
   ): Observable[R] = {
     new Observable(inner.expand(toReturnFacade(project), concurrent, scheduler))
   }
@@ -1364,7 +1364,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     */
   def merge[R >: T](
     that: Observable[R],
-    concurrent: Double = Double.PositiveInfinity,
+    concurrent: Int = Int.MaxValue,
     scheduler: Scheduler
   ): Observable[R] = {
     new Observable(inner.merge(that, concurrent, scheduler))
@@ -1405,7 +1405,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     *         by the Observables emitted by `this`
     *
     */
-  def mergeAll[U](concurrent: Double = Double.PositiveInfinity)
+  def mergeAll[U](concurrent: Int = Int.MaxValue)
     (implicit evidence: <:<[Observable[T], Observable[Observable[U]]]): Observable[U] = {
     new Observable(inner.asInstanceOf[ObservableFacade[Observable[U]]].map((n: Observable[U]) => n.get)
       .mergeAll(concurrent))
@@ -1486,7 +1486,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
   def mergeMapTo[I, R](
     innerObservable: Observable[I],
     resultSelector: (T, I, Int, Int) => R,
-    concurrent: Double = Double.PositiveInfinity
+    concurrent: Int = Int.MaxValue
   ): Observable[R] = {
     new Observable(inner.mergeMapTo(innerObservable, resultSelector, concurrent))
   }
