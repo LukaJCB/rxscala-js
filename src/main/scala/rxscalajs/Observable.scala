@@ -12,6 +12,8 @@ import scala.scalajs.js.JSConverters._
 import scala.scalajs.js._
 import scala.util.{Failure, Success}
 
+
+
 /**
   * The Observable interface that implements the Reactive Pattern.
   *
@@ -70,7 +72,7 @@ import scala.util.{Failure, Success}
   *
   */
 
-class Observable[+T] protected(val inner: ObservableFacade[T]) {
+class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
 
   /**
     * Ignores source values for a duration determined by another Observable, then
@@ -1491,8 +1493,8 @@ class Observable[+T] protected(val inner: ObservableFacade[T]) {
     new Observable(inner.mergeMapTo(innerObservable))
   }
 
-  def multicast(subjectOrSubjectFactory: SubjectFacade[_ >: T]): Observable[T] = {
-    new Observable(inner.multicast(subjectOrSubjectFactory))
+  def multicast(subjectOrSubjectFactory: SubjectFacade[_ >: T]): ConnectableObservable[T] = {
+    new ConnectableObservable(inner.multicast(subjectOrSubjectFactory))
   }
 
   /**
@@ -1534,16 +1536,16 @@ class Observable[+T] protected(val inner: ObservableFacade[T]) {
     *
     * @return an ConnectableObservable
     */
-  def publish: Observable[T] = {
-    new Observable(inner.publish())
+  def publish: ConnectableObservable[T] = {
+    new ConnectableObservable[T](inner.publish())
   }
 
-  def publishLast: Observable[T] = new Observable(inner.publishLast())
+  def publishLast: ConnectableObservable[T] = new ConnectableObservable[T](inner.publishLast())
   def publishReplay(
     bufferSize: Double = Double.PositiveInfinity,
     windowTime: Double = Double.PositiveInfinity
-  ): Observable[T] = {
-    new Observable(inner.publishReplay(bufferSize, windowTime))
+  ): ConnectableObservable[T] = {
+    new ConnectableObservable(inner.publishReplay(bufferSize, windowTime))
   }
 
   /**
