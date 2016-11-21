@@ -1542,7 +1542,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
 
   def publishLast: ConnectableObservable[T] = new ConnectableObservable[T](inner.publishLast())
   def publishReplay(
-    bufferSize: Double = Double.PositiveInfinity,
+    bufferSize: Int = Int.MaxValue,
     windowTime: Double = Double.PositiveInfinity
   ): ConnectableObservable[T] = {
     new ConnectableObservable(inner.publishReplay(bufferSize, windowTime))
