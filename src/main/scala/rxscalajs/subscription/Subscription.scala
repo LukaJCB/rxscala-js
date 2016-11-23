@@ -32,6 +32,7 @@ class Subscription protected () extends AnonymousSubscription {
 }
 
 @js.native
+@JSName("Rx.Subscription")
 object Subscription extends js.Object {
   var EMPTY: Subscription = js.native
 }
