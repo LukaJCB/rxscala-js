@@ -180,6 +180,12 @@
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="index.html" class="extype" name="rxscalajs">rxscalajs</a></dd></dl></div>
     </li><li class="current-entities indented1">
+                        <span class="separator"></span>
+                        <a class="class" href="ConnectableObservable.html" title=""></a>
+                        <a href="ConnectableObservable.html" title="">
+                          ConnectableObservable
+                        </a>
+                      </li><li class="current-entities indented1">
                         <a class="object" href="Notification$.html" title=""></a>
                         <a class="class" href="Notification.html" title=""></a>
                         <a href="Notification.html" title="">
@@ -310,7 +316,7 @@ subscriber."></a>
         <span class="name">Observable</span><span class="params">(<span name="inner">inner: <a href="facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>)</span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="index.html" class="extype" name="rxscalajs">rxscalajs</a>] </dd></dl></div>
     </li></ol>
             </div>
 
@@ -622,9 +628,9 @@ How many produced values need to be skipped before starting a new window. Note t
 An <a href="" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> which produces windows every <code>skip</code> values containing at most
 <code>bufferSize</code> produced values.</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#bufferTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="bufferTime(bufferTimeSpan:Int):rxscalajs.Observable[List[T]]"></a><a id="bufferTime(Int):Observable[List[T]]"></a>
+      <a id="bufferTime(bufferTimeSpan:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[List[T]]"></a><a id="bufferTime(FiniteDuration):Observable[List[T]]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#bufferTime(bufferTimeSpan:Int):rxscalajs.Observable[List[T]]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#bufferTime(bufferTimeSpan:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[List[T]]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -633,7 +639,7 @@ An <a href="" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">bufferTime</span><span class="params">(<span name="bufferTimeSpan">bufferTimeSpan: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="rxscalajs.Observable.T">T</span>]]</span>
+        <span class="name">bufferTime</span><span class="params">(<span name="bufferTimeSpan">bufferTimeSpan: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="rxscalajs.Observable.T">T</span>]]</span>
       </span>
       
       <p class="shortcomment cmt">Creates an Observable which produces buffers of collected values.</p><div class="fullcomment"><div class="comment cmt"><p>Creates an Observable which produces buffers of collected values.</p><p>This Observable produces connected non-overlapping buffers, each of a fixed duration
@@ -644,9 +650,9 @@ The period of time each buffer is collecting values before it should be emitted,
 replaced with a new buffer.</p></dd><dt>returns</dt><dd class="cmt"><p>
 An <a href="" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> which produces connected non-overlapping buffers with a fixed duration.</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#bufferTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="bufferTime(bufferTimeSpan:Int,bufferCreationInterval:Int):rxscalajs.Observable[List[T]]"></a><a id="bufferTime(Int,Int):Observable[List[T]]"></a>
+      <a id="bufferTime(bufferTimeSpan:scala.concurrent.duration.FiniteDuration,bufferCreationInterval:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[List[T]]"></a><a id="bufferTime(FiniteDuration,FiniteDuration):Observable[List[T]]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#bufferTime(bufferTimeSpan:Int,bufferCreationInterval:Int):rxscalajs.Observable[List[T]]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#bufferTime(bufferTimeSpan:scala.concurrent.duration.FiniteDuration,bufferCreationInterval:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[List[T]]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -655,7 +661,7 @@ An <a href="" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">bufferTime</span><span class="params">(<span name="bufferTimeSpan">bufferTimeSpan: <span class="extype" name="scala.Int">Int</span></span>, <span name="bufferCreationInterval">bufferCreationInterval: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="rxscalajs.Observable.T">T</span>]]</span>
+        <span class="name">bufferTime</span><span class="params">(<span name="bufferTimeSpan">bufferTimeSpan: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>, <span name="bufferCreationInterval">bufferCreationInterval: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="rxscalajs.Observable.T">T</span>]]</span>
       </span>
       
       <p class="shortcomment cmt">Creates an Observable which produces buffers of collected values.</p><div class="fullcomment"><div class="comment cmt"><p>Creates an Observable which produces buffers of collected values. This Observable starts a new buffer
@@ -668,9 +674,9 @@ The period of time after which a new buffer will be created.</p></dd><dt>returns
 An <a href="" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> which produces new buffers periodically, and these are emitted after
 a fixed timespan has elapsed.</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#bufferTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="bufferTime(bufferTimeSpan:Int,bufferCreationInterval:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[List[T]]"></a><a id="bufferTime(Int,Int,Scheduler):Observable[List[T]]"></a>
+      <a id="bufferTime(bufferTimeSpan:scala.concurrent.duration.FiniteDuration,bufferCreationInterval:scala.concurrent.duration.FiniteDuration,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[List[T]]"></a><a id="bufferTime(FiniteDuration,FiniteDuration,Scheduler):Observable[List[T]]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#bufferTime(bufferTimeSpan:Int,bufferCreationInterval:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[List[T]]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#bufferTime(bufferTimeSpan:scala.concurrent.duration.FiniteDuration,bufferCreationInterval:scala.concurrent.duration.FiniteDuration,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[List[T]]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -679,7 +685,7 @@ a fixed timespan has elapsed.</p></dd></dl></div>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">bufferTime</span><span class="params">(<span name="bufferTimeSpan">bufferTimeSpan: <span class="extype" name="scala.Int">Int</span></span>, <span name="bufferCreationInterval">bufferCreationInterval: <span class="extype" name="scala.Int">Int</span></span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="rxscalajs.Observable.T">T</span>]]</span>
+        <span class="name">bufferTime</span><span class="params">(<span name="bufferTimeSpan">bufferTimeSpan: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>, <span name="bufferCreationInterval">bufferCreationInterval: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="rxscalajs.Observable.T">T</span>]]</span>
       </span>
       
       <p class="shortcomment cmt">Creates an Observable which produces buffers of collected values.</p><div class="fullcomment"><div class="comment cmt"><p>Creates an Observable which produces buffers of collected values. This Observable starts a new buffer
@@ -800,9 +806,9 @@ emit an infinite or very large number of items that will use up memory.
 </p></div><dl class="paramcmts block"><dt class="param">bufferSize</dt><dd class="cmt"><p>the buffer size that limits the number of items that can be replayed</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that when first subscribed to, caches all of its notifications for
         the benefit of subsequent subscribers.</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#cache" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="cache(bufferSize:Int,windowTime:Int):rxscalajs.Observable[T]"></a><a id="cache(Int,Int):Observable[T]"></a>
+      <a id="cache(bufferSize:Int,windowTime:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]"></a><a id="cache(Int,FiniteDuration):Observable[T]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#cache(bufferSize:Int,windowTime:Int):rxscalajs.Observable[T]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#cache(bufferSize:Int,windowTime:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -811,7 +817,7 @@ emit an infinite or very large number of items that will use up memory.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">cache</span><span class="params">(<span name="bufferSize">bufferSize: <span class="extype" name="scala.Int">Int</span></span>, <span name="windowTime">windowTime: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
+        <span class="name">cache</span><span class="params">(<span name="bufferSize">bufferSize: <span class="extype" name="scala.Int">Int</span></span>, <span name="windowTime">windowTime: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
       </span>
       
       <p class="shortcomment cmt">This method has similar behavior to <code>Observable.replay</code> except that this auto-subscribes to
@@ -825,9 +831,9 @@ emit an infinite or very large number of items that will use up memory.
 </p></div><dl class="paramcmts block"><dt class="param">bufferSize</dt><dd class="cmt"><p>the buffer size that limits the number of items that can be replayed</p></dd><dt class="param">windowTime</dt><dd class="cmt"><p>the duration of the window in which the replayed items must have been emitted</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that when first subscribed to, caches all of its notifications for
         the benefit of subsequent subscribers.</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#cache" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="cache(bufferSize:Int,windowTime:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]"></a><a id="cache(Int,Int,Scheduler):Observable[T]"></a>
+      <a id="cache(bufferSize:Int,windowTime:scala.concurrent.duration.FiniteDuration,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]"></a><a id="cache(Int,FiniteDuration,Scheduler):Observable[T]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#cache(bufferSize:Int,windowTime:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#cache(bufferSize:Int,windowTime:scala.concurrent.duration.FiniteDuration,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -836,7 +842,7 @@ emit an infinite or very large number of items that will use up memory.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">cache</span><span class="params">(<span name="bufferSize">bufferSize: <span class="extype" name="scala.Int">Int</span></span>, <span name="windowTime">windowTime: <span class="extype" name="scala.Int">Int</span></span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
+        <span class="name">cache</span><span class="params">(<span name="bufferSize">bufferSize: <span class="extype" name="scala.Int">Int</span></span>, <span name="windowTime">windowTime: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
       </span>
       
       <p class="shortcomment cmt">This method has similar behavior to <code>Observable.replay</code> except that this auto-subscribes to
@@ -1139,9 +1145,9 @@ Observable that are followed by another item within a computed debounce duration
 </p></div><dl class="paramcmts block"><dt class="param">debounceSelector</dt><dd class="cmt"><p>function to retrieve a sequence that indicates the throttle duration for each item</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that omits items emitted by the source Observable that are followed by another item
         within a computed debounce duration</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#debounceTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="debounceTime(timeout:Int):rxscalajs.Observable[T]"></a><a id="debounceTime(Int):Observable[T]"></a>
+      <a id="debounceTime(timeout:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]"></a><a id="debounceTime(FiniteDuration):Observable[T]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#debounceTime(timeout:Int):rxscalajs.Observable[T]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#debounceTime(timeout:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -1150,7 +1156,7 @@ Observable that are followed by another item within a computed debounce duration
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">debounceTime</span><span class="params">(<span name="timeout">timeout: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
+        <span class="name">debounceTime</span><span class="params">(<span name="timeout">timeout: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Debounces by dropping all values that are followed by newer values before the timeout value expires.</p><div class="fullcomment"><div class="comment cmt"><p>Debounces by dropping all values that are followed by newer values before the timeout value expires. The timer resets on each <code>onNext</code> call.</p><p>NOTE: If events keep firing faster than the timeout then no data will be emitted.</p><p><img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/debounce.png" alt="" /></p><p>Information on debounce vs throttle:
@@ -1180,9 +1186,9 @@ if the source Observable is empty.</p><p><img width="640" height="305" src="http
 only evaluated if the source Observable doesn't emit anything.</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits either the specified default item if the source Observable emits no
         items, or the items emitted by the source Observable</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#delay" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="delay(delay:Int):rxscalajs.Observable[T]"></a><a id="delay(Int):Observable[T]"></a>
+      <a id="delay(delay:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]"></a><a id="delay(FiniteDuration):Observable[T]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#delay(delay:Int):rxscalajs.Observable[T]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#delay(delay:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -1191,7 +1197,7 @@ only evaluated if the source Observable doesn't emit anything.</p></dd><dt>retur
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">delay</span><span class="params">(<span name="delay">delay: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
+        <span class="name">delay</span><span class="params">(<span name="delay">delay: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Returns an Observable that emits the items emitted by the source Observable shifted forward in time by a
@@ -1354,7 +1360,8 @@ Observable for flushing the internal HashSet of the operator.</p></dd><dt>return
       <p class="shortcomment cmt">Returns an Observable that forwards all items emitted from the source Observable that are distinct according
 to a key selector function.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that forwards all items emitted from the source Observable that are distinct according
 to a key selector function.</p><p><img width="640" height="310" src="http://reactivex.io/documentation/operators/images/distinct.png" alt="" />
-</p></div><dl class="paramcmts block"><dt class="param">flushes</dt><dd class="cmt"><p>
+</p></div><dl class="paramcmts block"><dt class="param">keySelector</dt><dd class="cmt"><p>
+function to select which value you want to check as distinct.</p></dd><dt class="param">flushes</dt><dd class="cmt"><p>
 Observable for flushing the internal HashSet of the operator.</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable of distinct items</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#distinctUntilChanged" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="distinctUntilChanged:rxscalajs.Observable[T]"></a><a id="distinctUntilChanged:Observable[T]"></a>
@@ -1608,9 +1615,9 @@ innerIndex: the &quot;index&quot; of the value from the projected Observable</p>
 </p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>
 the function for projecting the next emitted item of the Observable.</p></dd><dt>returns</dt><dd class="cmt"><p>An observable sequence containing a single element determining whether all elements in the source sequence pass the test in the specified predicate.</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#expand" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="expand[R](project:(T,Int)=&gt;rxscalajs.Observable[R],scheduler:rxscalajs.Scheduler,concurrent:Double):rxscalajs.Observable[R]"></a><a id="expand[R]((T,Int)⇒Observable[R],Scheduler,Double):Observable[R]"></a>
+      <a id="expand[R](project:(T,Int)=&gt;rxscalajs.Observable[R],scheduler:rxscalajs.Scheduler,concurrent:Int):rxscalajs.Observable[R]"></a><a id="expand[R]((T,Int)⇒Observable[R],Scheduler,Int):Observable[R]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#expand[R](project:(T,Int)=&gt;rxscalajs.Observable[R],scheduler:rxscalajs.Scheduler,concurrent:Double):rxscalajs.Observable[R]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#expand[R](project:(T,Int)=&gt;rxscalajs.Observable[R],scheduler:rxscalajs.Scheduler,concurrent:Int):rxscalajs.Observable[R]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -1619,7 +1626,7 @@ the function for projecting the next emitted item of the Observable.</p></dd><dt
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">expand</span><span class="tparams">[<span name="R">R</span>]</span><span class="params">(<span name="project">project: (<span class="extype" name="rxscalajs.Observable.T">T</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.expand.R">R</span>]</span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>, <span name="concurrent">concurrent: <span class="extype" name="scala.Double">Double</span> = <span class="symbol">Double.PositiveInfinity</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.expand.R">R</span>]</span>
+        <span class="name">expand</span><span class="tparams">[<span name="R">R</span>]</span><span class="params">(<span name="project">project: (<span class="extype" name="rxscalajs.Observable.T">T</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.expand.R">R</span>]</span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>, <span name="concurrent">concurrent: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">Int.MaxValue</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.expand.R">R</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Returns an Observable where for each item in the source Observable, the supplied function is applied to each item, resulting in a new value to then be applied again with the function.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable where for each item in the source Observable, the supplied function is applied to each item, resulting in a new value to then be applied again with the function.
@@ -2051,27 +2058,6 @@ Observable and emits the result.</p><p><img width="640" height="305" src="https:
 </p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>
 a function to apply to each item emitted by the Observable</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the items from the source Observable, transformed by the
         given function</p></dd></dl></div>
-    </li><li name="rxscalajs.Observable#map" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="map[R](project:(T,Int)=&gt;R):rxscalajs.Observable[R]"></a><a id="map[R]((T,Int)⇒R):Observable[R]"></a>
-      <span class="permalink">
-      <a href="../rxscalajs/Observable.html#map[R](project:(T,Int)=&gt;R):rxscalajs.Observable[R]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">map</span><span class="tparams">[<span name="R">R</span>]</span><span class="params">(<span name="project">project: (<span class="extype" name="rxscalajs.Observable.T">T</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="rxscalajs.Observable.map.R">R</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.map.R">R</span>]</span>
-      </span>
-      
-      <p class="shortcomment cmt">Returns an Observable that applies the given function to each item emitted by an
-Observable and emits the result.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that applies the given function to each item emitted by an
-Observable and emits the result.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/map.png" alt="" />
-</p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>
-a function to apply to each item emitted by the Observable</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the items from the source Observable, transformed by the
-        given function</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#mapTo" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="mapTo[R](value:R):rxscalajs.Observable[R]"></a><a id="mapTo[R](R):Observable[R]"></a>
       <span class="permalink">
@@ -2090,6 +2076,27 @@ a function to apply to each item emitted by the Observable</p></dd><dt>returns</
       <p class="shortcomment cmt">Returns an Observable that maps each element to a specific value.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that maps each element to a specific value.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/map.png" alt="" />
 </p></div><dl class="paramcmts block"><dt class="param">value</dt><dd class="cmt"><p>
 the value to map to.</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the items from the source Observable, transformed by the
+        given function</p></dd></dl></div>
+    </li><li name="rxscalajs.Observable#mapWithIndex" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mapWithIndex[R](project:(T,Int)=&gt;R):rxscalajs.Observable[R]"></a><a id="mapWithIndex[R]((T,Int)⇒R):Observable[R]"></a>
+      <span class="permalink">
+      <a href="../rxscalajs/Observable.html#mapWithIndex[R](project:(T,Int)=&gt;R):rxscalajs.Observable[R]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">mapWithIndex</span><span class="tparams">[<span name="R">R</span>]</span><span class="params">(<span name="project">project: (<span class="extype" name="rxscalajs.Observable.T">T</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="rxscalajs.Observable.mapWithIndex.R">R</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.mapWithIndex.R">R</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Returns an Observable that applies the given function to each item emitted by an
+Observable and emits the result.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that applies the given function to each item emitted by an
+Observable and emits the result.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/map.png" alt="" />
+</p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>
+a function to apply to each item emitted by the Observable</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the items from the source Observable, transformed by the
         given function</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#materialize" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="materialize:rxscalajs.Observable[rxscalajs.Notification[_&lt;:T]]"></a><a id="materialize:Observable[Notification[_&lt;:T]]"></a>
@@ -2132,9 +2139,9 @@ Observable by using the <code>merge</code> method.
 an Observable to be merged</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits items from <code>this</code> and <code>that</code> until
         <code>this</code> or <code>that</code> emits <code>onError</code> or both Observables emit <code>onCompleted</code>.</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#merge" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="merge[R&gt;:T](that:rxscalajs.Observable[R],concurrent:Double,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[R]"></a><a id="merge[R&gt;:T](Observable[R],Double,Scheduler):Observable[R]"></a>
+      <a id="merge[R&gt;:T](that:rxscalajs.Observable[R],concurrent:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[R]"></a><a id="merge[R&gt;:T](Observable[R],Int,Scheduler):Observable[R]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#merge[R&gt;:T](that:rxscalajs.Observable[R],concurrent:Double,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[R]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#merge[R&gt;:T](that:rxscalajs.Observable[R],concurrent:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[R]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -2143,7 +2150,7 @@ an Observable to be merged</p></dd><dt>returns</dt><dd class="cmt"><p>an Observa
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">merge</span><span class="tparams">[<span name="R">R &gt;: <span class="extype" name="rxscalajs.Observable.T">T</span></span>]</span><span class="params">(<span name="that">that: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.merge.R">R</span>]</span>, <span name="concurrent">concurrent: <span class="extype" name="scala.Double">Double</span> = <span class="symbol">Double.PositiveInfinity</span></span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.merge.R">R</span>]</span>
+        <span class="name">merge</span><span class="tparams">[<span name="R">R &gt;: <span class="extype" name="rxscalajs.Observable.T">T</span></span>]</span><span class="params">(<span name="that">that: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.merge.R">R</span>]</span>, <span name="concurrent">concurrent: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">Int.MaxValue</span></span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.merge.R">R</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Flattens two Observables into one Observable, without any transformation.</p><div class="fullcomment"><div class="comment cmt"><p>Flattens two Observables into one Observable, without any transformation.</p><p><img width="640" height="380" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/merge.png" alt="" /></p><p>You can combine items emitted by two Observables so that they act like a single
@@ -2152,9 +2159,9 @@ Observable by using the <code>merge</code> method.
 an Observable to be merged</p></dd><dt class="param">concurrent</dt><dd class="cmt"><p>the maximum number of Observables that may be subscribed to concurrently</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits items from <code>this</code> and <code>that</code> until
         <code>this</code> or <code>that</code> emits <code>onError</code> or both Observables emit <code>onCompleted</code>.</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#mergeAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="mergeAll[U](concurrent:Double)(implicitevidence:&lt;:&lt;[rxscalajs.Observable[T],rxscalajs.Observable[rxscalajs.Observable[U]]]):rxscalajs.Observable[U]"></a><a id="mergeAll[U](Double)(&lt;:&lt;[Observable[T],Observable[Observable[U]]]):Observable[U]"></a>
+      <a id="mergeAll[U](concurrent:Int)(implicitevidence:&lt;:&lt;[rxscalajs.Observable[T],rxscalajs.Observable[rxscalajs.Observable[U]]]):rxscalajs.Observable[U]"></a><a id="mergeAll[U](Int)(&lt;:&lt;[Observable[T],Observable[Observable[U]]]):Observable[U]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#mergeAll[U](concurrent:Double)(implicitevidence:&lt;:&lt;[rxscalajs.Observable[T],rxscalajs.Observable[rxscalajs.Observable[U]]]):rxscalajs.Observable[U]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#mergeAll[U](concurrent:Int)(implicitevidence:&lt;:&lt;[rxscalajs.Observable[T],rxscalajs.Observable[rxscalajs.Observable[U]]]):rxscalajs.Observable[U]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -2163,7 +2170,7 @@ an Observable to be merged</p></dd><dt class="param">concurrent</dt><dd class="c
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">mergeAll</span><span class="tparams">[<span name="U">U</span>]</span><span class="params">(<span name="concurrent">concurrent: <span class="extype" name="scala.Double">Double</span> = <span class="symbol">Double.PositiveInfinity</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="evidence">evidence: <span class="extype" name="scala.Predef.&lt;:&lt;">&lt;:&lt;</span>[<a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>], <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.mergeAll.U">U</span>]]]</span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.mergeAll.U">U</span>]</span>
+        <span class="name">mergeAll</span><span class="tparams">[<span name="U">U</span>]</span><span class="params">(<span name="concurrent">concurrent: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">Int.MaxValue</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="evidence">evidence: <span class="extype" name="scala.Predef.&lt;:&lt;">&lt;:&lt;</span>[<a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>], <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.mergeAll.U">U</span>]]]</span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.mergeAll.U">U</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Flattens the sequence of Observables emitted by <code>this</code> into one Observable, without any
@@ -2238,9 +2245,9 @@ subscriptions to these <a href="" class="extype" name="rxscalajs.Observable">Obs
       
       
     </li><li name="rxscalajs.Observable#mergeMapTo" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="mergeMapTo[I,R](innerObservable:rxscalajs.Observable[I],resultSelector:(T,I,Int,Int)=&gt;R,concurrent:Double):rxscalajs.Observable[R]"></a><a id="mergeMapTo[I,R](Observable[I],(T,I,Int,Int)⇒R,Double):Observable[R]"></a>
+      <a id="mergeMapTo[I,R](innerObservable:rxscalajs.Observable[I],resultSelector:(T,I,Int,Int)=&gt;R,concurrent:Int):rxscalajs.Observable[R]"></a><a id="mergeMapTo[I,R](Observable[I],(T,I,Int,Int)⇒R,Int):Observable[R]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#mergeMapTo[I,R](innerObservable:rxscalajs.Observable[I],resultSelector:(T,I,Int,Int)=&gt;R,concurrent:Double):rxscalajs.Observable[R]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#mergeMapTo[I,R](innerObservable:rxscalajs.Observable[I],resultSelector:(T,I,Int,Int)=&gt;R,concurrent:Int):rxscalajs.Observable[R]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -2249,14 +2256,14 @@ subscriptions to these <a href="" class="extype" name="rxscalajs.Observable">Obs
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">mergeMapTo</span><span class="tparams">[<span name="I">I</span>, <span name="R">R</span>]</span><span class="params">(<span name="innerObservable">innerObservable: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.mergeMapTo.I">I</span>]</span>, <span name="resultSelector">resultSelector: (<span class="extype" name="rxscalajs.Observable.T">T</span>, <span class="extype" name="rxscalajs.Observable.mergeMapTo.I">I</span>, <span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="rxscalajs.Observable.mergeMapTo.R">R</span></span>, <span name="concurrent">concurrent: <span class="extype" name="scala.Double">Double</span> = <span class="symbol">Double.PositiveInfinity</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.mergeMapTo.R">R</span>]</span>
+        <span class="name">mergeMapTo</span><span class="tparams">[<span name="I">I</span>, <span name="R">R</span>]</span><span class="params">(<span name="innerObservable">innerObservable: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.mergeMapTo.I">I</span>]</span>, <span name="resultSelector">resultSelector: (<span class="extype" name="rxscalajs.Observable.T">T</span>, <span class="extype" name="rxscalajs.Observable.mergeMapTo.I">I</span>, <span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="rxscalajs.Observable.mergeMapTo.R">R</span></span>, <span name="concurrent">concurrent: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">Int.MaxValue</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.mergeMapTo.R">R</span>]</span>
       </span>
       
       
     </li><li name="rxscalajs.Observable#multicast" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="multicast(subjectOrSubjectFactory:rxscalajs.facade.SubjectFacade[_&gt;:T]):rxscalajs.Observable[T]"></a><a id="multicast(SubjectFacade[_&gt;:T]):Observable[T]"></a>
+      <a id="multicast(subjectOrSubjectFactory:rxscalajs.facade.SubjectFacade[_&gt;:T]):rxscalajs.ConnectableObservable[T]"></a><a id="multicast(SubjectFacade[_&gt;:T]):ConnectableObservable[T]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#multicast(subjectOrSubjectFactory:rxscalajs.facade.SubjectFacade[_&gt;:T]):rxscalajs.Observable[T]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#multicast(subjectOrSubjectFactory:rxscalajs.facade.SubjectFacade[_&gt;:T]):rxscalajs.ConnectableObservable[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -2265,7 +2272,7 @@ subscriptions to these <a href="" class="extype" name="rxscalajs.Observable">Obs
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">multicast</span><span class="params">(<span name="subjectOrSubjectFactory">subjectOrSubjectFactory: <a href="facade/SubjectFacade.html" class="extype" name="rxscalajs.facade.SubjectFacade">SubjectFacade</a>[_ &gt;: <span class="extype" name="rxscalajs.Observable.T">T</span>]</span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
+        <span class="name">multicast</span><span class="params">(<span name="subjectOrSubjectFactory">subjectOrSubjectFactory: <a href="facade/SubjectFacade.html" class="extype" name="rxscalajs.facade.SubjectFacade">SubjectFacade</a>[_ &gt;: <span class="extype" name="rxscalajs.Observable.T">T</span>]</span>)</span><span class="result">: <a href="ConnectableObservable.html" class="extype" name="rxscalajs.ConnectableObservable">ConnectableObservable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
       </span>
       
       
@@ -2436,9 +2443,9 @@ A function that evaluates each value emitted by the source Observable.
 If it returns true, the value is emitted on the first Observable in the returned array, if false the value is emitted on the second Observable in the tuple.</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits a single item that is the result of accumulating the output
         from the items emitted by the source Observable</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#publish" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="publish:rxscalajs.Observable[T]"></a><a id="publish:Observable[T]"></a>
+      <a id="publish:rxscalajs.ConnectableObservable[T]"></a><a id="publish:ConnectableObservable[T]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#publish:rxscalajs.Observable[T]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#publish:rxscalajs.ConnectableObservable[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -2447,7 +2454,7 @@ If it returns true, the value is emitted on the first Observable in the returned
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">publish</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
+        <span class="name">publish</span><span class="result">: <a href="ConnectableObservable.html" class="extype" name="rxscalajs.ConnectableObservable">ConnectableObservable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Returns a ConnectableObservable, which waits until the <code>connect</code> function is called
@@ -2457,9 +2464,9 @@ before it begins emitting items from <code>this</code> [Observable to those Obse
 have subscribed to it.</p><p><img width="640" height="510" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/publishConnect.png" alt="" />
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>an ConnectableObservable</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#publishLast" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="publishLast:rxscalajs.Observable[T]"></a><a id="publishLast:Observable[T]"></a>
+      <a id="publishLast:rxscalajs.ConnectableObservable[T]"></a><a id="publishLast:ConnectableObservable[T]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#publishLast:rxscalajs.Observable[T]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#publishLast:rxscalajs.ConnectableObservable[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -2468,14 +2475,14 @@ have subscribed to it.</p><p><img width="640" height="510" src="https://raw.gith
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">publishLast</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
+        <span class="name">publishLast</span><span class="result">: <a href="ConnectableObservable.html" class="extype" name="rxscalajs.ConnectableObservable">ConnectableObservable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
       </span>
       
       
     </li><li name="rxscalajs.Observable#publishReplay" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="publishReplay(bufferSize:Double,windowTime:Double):rxscalajs.Observable[T]"></a><a id="publishReplay(Double,Double):Observable[T]"></a>
+      <a id="publishReplay(bufferSize:Int,windowTime:scala.concurrent.duration.FiniteDuration):rxscalajs.ConnectableObservable[T]"></a><a id="publishReplay(Int,FiniteDuration):ConnectableObservable[T]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#publishReplay(bufferSize:Double,windowTime:Double):rxscalajs.Observable[T]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#publishReplay(bufferSize:Int,windowTime:scala.concurrent.duration.FiniteDuration):rxscalajs.ConnectableObservable[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -2484,7 +2491,7 @@ have subscribed to it.</p><p><img width="640" height="510" src="https://raw.gith
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">publishReplay</span><span class="params">(<span name="bufferSize">bufferSize: <span class="extype" name="scala.Double">Double</span> = <span class="symbol">Double.PositiveInfinity</span></span>, <span name="windowTime">windowTime: <span class="extype" name="scala.Double">Double</span> = <span class="symbol">Double.PositiveInfinity</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
+        <span class="name">publishReplay</span><span class="params">(<span name="bufferSize">bufferSize: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">Int.MaxValue</span></span>, <span name="windowTime">windowTime: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span> = <span class="symbol">Int.MaxValue.millis</span></span>)</span><span class="result">: <a href="ConnectableObservable.html" class="extype" name="rxscalajs.ConnectableObservable">ConnectableObservable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
       </span>
       
       
@@ -2640,9 +2647,9 @@ whenever the specified sampler Observable emits an item or completes.</p><p><img
 the Observable to use for sampling the source Observable</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the results of sampling the items emitted by this Observable whenever
         the sampler Observable emits an item or completes</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#sampleTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="sampleTime(delay:Int):rxscalajs.Observable[T]"></a><a id="sampleTime(Int):Observable[T]"></a>
+      <a id="sampleTime(delay:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]"></a><a id="sampleTime(FiniteDuration):Observable[T]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#sampleTime(delay:Int):rxscalajs.Observable[T]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#sampleTime(delay:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -2651,7 +2658,7 @@ the Observable to use for sampling the source Observable</p></dd><dt>returns</dt
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">sampleTime</span><span class="params">(<span name="delay">delay: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
+        <span class="name">sampleTime</span><span class="params">(<span name="delay">delay: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Returns an Observable that emits the results of sampling the items emitted by the source
@@ -2660,9 +2667,9 @@ Observable at a specified time interval.</p><p><img width="640" height="305" src
 </p></div><dl class="paramcmts block"><dt class="param">delay</dt><dd class="cmt"><p>the sampling rate</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the results of sampling the items emitted by the source
         Observable at the specified time interval</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#sampleTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="sampleTime(delay:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]"></a><a id="sampleTime(Int,Scheduler):Observable[T]"></a>
+      <a id="sampleTime(delay:scala.concurrent.duration.FiniteDuration,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]"></a><a id="sampleTime(FiniteDuration,Scheduler):Observable[T]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#sampleTime(delay:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#sampleTime(delay:scala.concurrent.duration.FiniteDuration,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -2671,7 +2678,7 @@ Observable at a specified time interval.</p><p><img width="640" height="305" src
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">sampleTime</span><span class="params">(<span name="delay">delay: <span class="extype" name="scala.Int">Int</span></span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
+        <span class="name">sampleTime</span><span class="params">(<span name="delay">delay: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Returns an Observable that emits the results of sampling the items emitted by the source
@@ -3197,9 +3204,9 @@ that receives a value from the source Observable, for computing the silencing
 duration for each source value, returned as an Observable or a Promise.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable that performs the throttle operation to
         limit the rate of emissions from the source.</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#throttleTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="throttleTime(delay:Int):rxscalajs.Observable[T]"></a><a id="throttleTime(Int):Observable[T]"></a>
+      <a id="throttleTime(delay:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]"></a><a id="throttleTime(FiniteDuration):Observable[T]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#throttleTime(delay:Int):rxscalajs.Observable[T]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#throttleTime(delay:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -3208,16 +3215,16 @@ duration for each source value, returned as an Observable or a Promise.</p></dd>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">throttleTime</span><span class="params">(<span name="delay">delay: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
+        <span class="name">throttleTime</span><span class="params">(<span name="delay">delay: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Debounces by dropping all values that are followed by newer values before the timeout value expires.</p><div class="fullcomment"><div class="comment cmt"><p>Debounces by dropping all values that are followed by newer values before the timeout value expires. The timer resets on each <code>onNext</code> call.</p><p>NOTE: If events keep firing faster than the timeout then no data will be emitted.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/throttleWithTimeout.png" alt="" />
 </p></div><dl class="paramcmts block"><dt class="param">delay</dt><dd class="cmt"><p>
 The time each value has to be 'the most recent' of the <a href="" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> to ensure that it's not dropped.</p></dd><dt>returns</dt><dd class="cmt"><p>Observable which performs the throttle operation.</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><code>Observable.debounce</code></p></span></dd></dl></div>
     </li><li name="rxscalajs.Observable#throttleTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="throttleTime(delay:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]"></a><a id="throttleTime(Int,Scheduler):Observable[T]"></a>
+      <a id="throttleTime(delay:scala.concurrent.duration.FiniteDuration,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]"></a><a id="throttleTime(FiniteDuration,Scheduler):Observable[T]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#throttleTime(delay:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#throttleTime(delay:scala.concurrent.duration.FiniteDuration,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -3226,7 +3233,7 @@ The time each value has to be 'the most recent' of the <a href="" class="extype"
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">throttleTime</span><span class="params">(<span name="delay">delay: <span class="extype" name="scala.Int">Int</span></span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
+        <span class="name">throttleTime</span><span class="params">(<span name="delay">delay: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Debounces by dropping all values that are followed by newer values before the timeout value expires.</p><div class="fullcomment"><div class="comment cmt"><p>Debounces by dropping all values that are followed by newer values before the timeout value expires. The timer resets on each <code>onNext</code> call.</p><p>NOTE: If events keep firing faster than the timeout then no data will be emitted.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/throttleWithTimeout.png" alt="" />
@@ -3574,9 +3581,9 @@ How many produced values need to be skipped before starting a new window. Note t
 An <a href="" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> which produces windows every <code>skip</code> values containing at most
 <code>count</code> produced values.</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#windowTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="windowTime(timespan:Int):rxscalajs.Observable[rxscalajs.Observable[T]]"></a><a id="windowTime(Int):Observable[Observable[T]]"></a>
+      <a id="windowTime(timespan:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[rxscalajs.Observable[T]]"></a><a id="windowTime(FiniteDuration):Observable[Observable[T]]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#windowTime(timespan:Int):rxscalajs.Observable[rxscalajs.Observable[T]]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#windowTime(timespan:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[rxscalajs.Observable[T]]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -3585,7 +3592,7 @@ An <a href="" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">windowTime</span><span class="params">(<span name="timespan">timespan: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]]</span>
+        <span class="name">windowTime</span><span class="params">(<span name="timespan">timespan: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]]</span>
       </span>
       
       <p class="shortcomment cmt">Creates an Observable which produces windows of collected values.</p><div class="fullcomment"><div class="comment cmt"><p>Creates an Observable which produces windows of collected values. This Observable produces connected
@@ -3598,9 +3605,9 @@ replaced with a new window.</p></dd><dt>returns</dt><dd class="cmt"><p>
 An <a href="" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> which produces connected non-overlapping windows which are emitted after
 a fixed duration or when the window has reached maximum capacity (which ever occurs first).</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#windowTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="windowTime(timespan:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[rxscalajs.Observable[T]]"></a><a id="windowTime(Int,Scheduler):Observable[Observable[T]]"></a>
+      <a id="windowTime(timespan:scala.concurrent.duration.FiniteDuration,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[rxscalajs.Observable[T]]"></a><a id="windowTime(FiniteDuration,Scheduler):Observable[Observable[T]]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#windowTime(timespan:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[rxscalajs.Observable[T]]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#windowTime(timespan:scala.concurrent.duration.FiniteDuration,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[rxscalajs.Observable[T]]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -3609,7 +3616,7 @@ a fixed duration or when the window has reached maximum capacity (which ever occ
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">windowTime</span><span class="params">(<span name="timespan">timespan: <span class="extype" name="scala.Int">Int</span></span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]]</span>
+        <span class="name">windowTime</span><span class="params">(<span name="timespan">timespan: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]]</span>
       </span>
       
       <p class="shortcomment cmt">Creates an Observable which produces windows of collected values.</p><div class="fullcomment"><div class="comment cmt"><p>Creates an Observable which produces windows of collected values. This Observable produces connected
@@ -3623,9 +3630,9 @@ The <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">rxscalajs
 An <a href="" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> which produces connected non-overlapping windows which are emitted after
 a fixed duration or when the window has reached maximum capacity (which ever occurs first).</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#windowTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="windowTime(timespan:Int,timeshift:Int):rxscalajs.Observable[rxscalajs.Observable[T]]"></a><a id="windowTime(Int,Int):Observable[Observable[T]]"></a>
+      <a id="windowTime(timespan:scala.concurrent.duration.FiniteDuration,timeshift:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[rxscalajs.Observable[T]]"></a><a id="windowTime(FiniteDuration,FiniteDuration):Observable[Observable[T]]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#windowTime(timespan:Int,timeshift:Int):rxscalajs.Observable[rxscalajs.Observable[T]]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#windowTime(timespan:scala.concurrent.duration.FiniteDuration,timeshift:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[rxscalajs.Observable[T]]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -3634,7 +3641,7 @@ a fixed duration or when the window has reached maximum capacity (which ever occ
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">windowTime</span><span class="params">(<span name="timespan">timespan: <span class="extype" name="scala.Int">Int</span></span>, <span name="timeshift">timeshift: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]]</span>
+        <span class="name">windowTime</span><span class="params">(<span name="timespan">timespan: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>, <span name="timeshift">timeshift: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]]</span>
       </span>
       
       <p class="shortcomment cmt">Creates an Observable which produces windows of collected values.</p><div class="fullcomment"><div class="comment cmt"><p>Creates an Observable which produces windows of collected values. This Observable produces connected
@@ -3647,9 +3654,9 @@ replaced with a new window.</p></dd><dt class="param">timeshift</dt><dd class="c
 An <a href="" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> which produces connected non-overlapping windows which are emitted after
 a fixed duration or when the window has reached maximum capacity (which ever occurs first).</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#windowTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="windowTime(timespan:Int,timeshift:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[rxscalajs.Observable[T]]"></a><a id="windowTime(Int,Int,Scheduler):Observable[Observable[T]]"></a>
+      <a id="windowTime(timespan:scala.concurrent.duration.FiniteDuration,timeshift:scala.concurrent.duration.FiniteDuration,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[rxscalajs.Observable[T]]"></a><a id="windowTime(FiniteDuration,FiniteDuration,Scheduler):Observable[Observable[T]]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable.html#windowTime(timespan:Int,timeshift:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[rxscalajs.Observable[T]]" title="Permalink">
+      <a href="../rxscalajs/Observable.html#windowTime(timespan:scala.concurrent.duration.FiniteDuration,timeshift:scala.concurrent.duration.FiniteDuration,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[rxscalajs.Observable[T]]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -3658,7 +3665,7 @@ a fixed duration or when the window has reached maximum capacity (which ever occ
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">windowTime</span><span class="params">(<span name="timespan">timespan: <span class="extype" name="scala.Int">Int</span></span>, <span name="timeshift">timeshift: <span class="extype" name="scala.Int">Int</span></span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]]</span>
+        <span class="name">windowTime</span><span class="params">(<span name="timespan">timespan: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>, <span name="timeshift">timeshift: <span class="extype" name="scala.concurrent.duration.FiniteDuration">FiniteDuration</span></span>, <span name="scheduler">scheduler: <a href="Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.T">T</span>]]</span>
       </span>
       
       <p class="shortcomment cmt">Creates an Observable which produces windows of collected values.</p><div class="fullcomment"><div class="comment cmt"><p>Creates an Observable which produces windows of collected values. This Observable produces connected
