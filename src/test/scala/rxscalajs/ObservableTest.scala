@@ -325,6 +325,9 @@ object ObservableTest extends TestSuite {
         obs.count.subscribe(unit)
         obs.count((i: Int, n: Int, ob: Observable[Int]) => i % 2 == 1).subscribe(unit)
       }
+      'Collect {
+        obs.collect { case i if i > 50 => i * i }.subscribe(unit)
+      }
       'Debounce {
         obs.debounce((n: Int) => Observable.interval(100.millis).take(6)).subscribe(unit)
       }
