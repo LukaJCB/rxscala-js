@@ -895,6 +895,27 @@ Exception handler function that returns an observable sequence given the error t
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="rxscalajs.Observable#collect" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="collect[B](partialProject:PartialFunction[T,B]):rxscalajs.Observable[B]"></a><a id="collect[B](PartialFunction[T,B]):Observable[B]"></a>
+      <span class="permalink">
+      <a href="../rxscalajs/Observable.html#collect[B](partialProject:PartialFunction[T,B]):rxscalajs.Observable[B]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">collect</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="partialProject">partialProject: <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="rxscalajs.Observable.T">T</span>, <span class="extype" name="rxscalajs.Observable.collect.B">B</span>]</span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.collect.B">B</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Scala API
+Same as map, but with PartialFunction, where observable emits elements only for defined values
+</p><div class="fullcomment"><div class="comment cmt"><p>Scala API
+Same as map, but with PartialFunction, where observable emits elements only for defined values
+</p></div><dl class="paramcmts block"><dt class="param">partialProject</dt><dd class="cmt"><p>
+Partial function that will be applied to elements for which it is defined</p></dd><dt>returns</dt><dd class="cmt"><p>An observable sequence containing the first sequence elements projected by <code>partialProject</code> for which it was defined.</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#combineAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="combineAll[U,R](project:scala.scalajs.js.Array[U]=&gt;R)(implicitevidence:&lt;:&lt;[rxscalajs.Observable[T],rxscalajs.Observable[rxscalajs.Observable[U]]]):rxscalajs.Observable[R]"></a><a id="combineAll[U,R]((Array[U])⇒R)(&lt;:&lt;[Observable[T],Observable[Observable[U]]]):Observable[R]"></a>
       <span class="permalink">
@@ -911,11 +932,11 @@ Exception handler function that returns an observable sequence given the error t
       </span>
       
       <p class="shortcomment cmt">Converts a higher-order Observable into a first-order Observable by waiting
-for the outer Observable to complete, then applying <code><a href="#combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a higher-order Observable into a first-order Observable by waiting
-for the outer Observable to complete, then applying <code><a href="#combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>.</p><p><span class="informal">Flattens an Observable-of-Observables by applying
+for the outer Observable to complete, then applying <code><a href="#combineLatest[U,V,W](first:rxscalajs.Observable[U],second:rxscalajs.Observable[V],third:rxscalajs.Observable[W]):rxscalajs.Observable[(T,U,V,W)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a higher-order Observable into a first-order Observable by waiting
+for the outer Observable to complete, then applying <code><a href="#combineLatest[U,V,W](first:rxscalajs.Observable[U],second:rxscalajs.Observable[V],third:rxscalajs.Observable[W]):rxscalajs.Observable[(T,U,V,W)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>.</p><p><span class="informal">Flattens an Observable-of-Observables by applying
 `[[combineLatest]]` when the Observable-of-Observables completes.</span></p><p><img src="http://reactivex.io/rxjs/img/combineAll.png" width="640" height="195"></p><p>Takes an Observable of Observables, and collects all Observables from it.
 Once the outer Observable completes, it subscribes to all collected
-Observables and combines their values using the <code><a href="#combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>
+Observables and combines their values using the <code><a href="#combineLatest[U,V,W](first:rxscalajs.Observable[U],second:rxscalajs.Observable[V],third:rxscalajs.Observable[W]):rxscalajs.Observable[(T,U,V,W)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>
 strategy, such that:
 - Every time an inner Observable emits, the output Observable emits.
 - When the returned observable emits, it emits all of the latest values by:</p><ul><li>If a <code>project</code> function is provided, it is called with each recent value
@@ -949,11 +970,11 @@ recent values from each collected inner Observable as arguments, in order.</p></
       </span>
       
       <p class="shortcomment cmt">Converts a higher-order Observable into a first-order Observable by waiting
-for the outer Observable to complete, then applying <code><a href="#combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a higher-order Observable into a first-order Observable by waiting
-for the outer Observable to complete, then applying <code><a href="#combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>.</p><p><span class="informal">Flattens an Observable-of-Observables by applying
+for the outer Observable to complete, then applying <code><a href="#combineLatest[U,V,W](first:rxscalajs.Observable[U],second:rxscalajs.Observable[V],third:rxscalajs.Observable[W]):rxscalajs.Observable[(T,U,V,W)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a higher-order Observable into a first-order Observable by waiting
+for the outer Observable to complete, then applying <code><a href="#combineLatest[U,V,W](first:rxscalajs.Observable[U],second:rxscalajs.Observable[V],third:rxscalajs.Observable[W]):rxscalajs.Observable[(T,U,V,W)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>.</p><p><span class="informal">Flattens an Observable-of-Observables by applying
 `[[combineLatest]]` when the Observable-of-Observables completes.</span></p><p><img src="http://reactivex.io/rxjs/img/combineAll.png" width="640" height="195"></p><p>Takes an Observable of Observables, and collects all Observables from it.
 Once the outer Observable completes, it subscribes to all collected
-Observables and combines their values using the <code><a href="#combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>
+Observables and combines their values using the <code><a href="#combineLatest[U,V,W](first:rxscalajs.Observable[U],second:rxscalajs.Observable[V],third:rxscalajs.Observable[W]):rxscalajs.Observable[(T,U,V,W)]" class="extmbr" name="rxscalajs.Observable#combineLatest">combineLatest</a></code>
 strategy, such that:
 - Every time an inner Observable emits, the output Observable emits.
 - When the returned observable emits, it emits all of the latest values by:</p><ul><li>If a <code>project</code> function is provided, it is called with each recent value
@@ -970,6 +991,49 @@ values is emitted by the output Observable.
                    result.subscribe(x <span class="kw">=&gt;</span>  println(x))</pre></li></ol>
             </div></dl></div>
     </li><li name="rxscalajs.Observable#combineLatest" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="combineLatest[U,V,W](first:rxscalajs.Observable[U],second:rxscalajs.Observable[V],third:rxscalajs.Observable[W]):rxscalajs.Observable[(T,U,V,W)]"></a><a id="combineLatest[U,V,W](Observable[U],Observable[V],Observable[W]):Observable[(T,U,V,W)]"></a>
+      <span class="permalink">
+      <a href="../rxscalajs/Observable.html#combineLatest[U,V,W](first:rxscalajs.Observable[U],second:rxscalajs.Observable[V],third:rxscalajs.Observable[W]):rxscalajs.Observable[(T,U,V,W)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">combineLatest</span><span class="tparams">[<span name="U">U</span>, <span name="V">V</span>, <span name="W">W</span>]</span><span class="params">(<span name="first">first: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatest.U">U</span>]</span>, <span name="second">second: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatest.V">V</span>]</span>, <span name="third">third: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatest.W">W</span>]</span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[(<span class="extype" name="rxscalajs.Observable.T">T</span>, <span class="extype" name="rxscalajs.Observable.combineLatest.U">U</span>, <span class="extype" name="rxscalajs.Observable.combineLatest.V">V</span>, <span class="extype" name="rxscalajs.Observable.combineLatest.W">W</span>)]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Combines four observables, emitting a tuple of the latest values of each of
+the source observables each time an event is received from one of the source observables.</p><div class="fullcomment"><div class="comment cmt"><p>Combines four observables, emitting a tuple of the latest values of each of
+the source observables each time an event is received from one of the source observables.</p><p><img width="640" height="410" src="http://reactivex.io/documentation/operators/images/combineLatest.png" alt="" />
+</p></div><dl class="paramcmts block"><dt class="param">first</dt><dd class="cmt"><p>
+an Observable to be combined</p></dd><dt class="param">second</dt><dd class="cmt"><p>
+an Observable to be combined</p></dd><dt class="param">third</dt><dd class="cmt"><p>
+an Observable to be combined</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable that combines the source Observables</p></dd></dl></div>
+    </li><li name="rxscalajs.Observable#combineLatest" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="combineLatest[U,V](first:rxscalajs.Observable[U],second:rxscalajs.Observable[V]):rxscalajs.Observable[(T,U,V)]"></a><a id="combineLatest[U,V](Observable[U],Observable[V]):Observable[(T,U,V)]"></a>
+      <span class="permalink">
+      <a href="../rxscalajs/Observable.html#combineLatest[U,V](first:rxscalajs.Observable[U],second:rxscalajs.Observable[V]):rxscalajs.Observable[(T,U,V)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">combineLatest</span><span class="tparams">[<span name="U">U</span>, <span name="V">V</span>]</span><span class="params">(<span name="first">first: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatest.U">U</span>]</span>, <span name="second">second: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatest.V">V</span>]</span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[(<span class="extype" name="rxscalajs.Observable.T">T</span>, <span class="extype" name="rxscalajs.Observable.combineLatest.U">U</span>, <span class="extype" name="rxscalajs.Observable.combineLatest.V">V</span>)]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Combines four observables, emitting a tuple of the latest values of each of
+the source observables each time an event is received from one of the source observables.</p><div class="fullcomment"><div class="comment cmt"><p>Combines four observables, emitting a tuple of the latest values of each of
+the source observables each time an event is received from one of the source observables.</p><p><img width="640" height="410" src="http://reactivex.io/documentation/operators/images/combineLatest.png" alt="" />
+</p></div><dl class="paramcmts block"><dt class="param">first</dt><dd class="cmt"><p>
+an Observable to be combined</p></dd><dt class="param">second</dt><dd class="cmt"><p>
+an Observable to be combined</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable that combines the source Observables</p></dd></dl></div>
+    </li><li name="rxscalajs.Observable#combineLatest" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]"></a><a id="combineLatest[U](Observable[U]):Observable[(T,U)]"></a>
       <span class="permalink">
       <a href="../rxscalajs/Observable.html#combineLatest[U](that:rxscalajs.Observable[U]):rxscalajs.Observable[(T,U)]" title="Permalink">
@@ -984,11 +1048,60 @@ values is emitted by the output Observable.
         <span class="name">combineLatest</span><span class="tparams">[<span name="U">U</span>]</span><span class="params">(<span name="that">that: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatest.U">U</span>]</span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[(<span class="extype" name="rxscalajs.Observable.T">T</span>, <span class="extype" name="rxscalajs.Observable.combineLatest.U">U</span>)]</span>
       </span>
       
-      <p class="shortcomment cmt">Combines two observables, emitting a pair of the latest values of each of
-the source observables each time an event is received from one of the source observables.</p><div class="fullcomment"><div class="comment cmt"><p>Combines two observables, emitting a pair of the latest values of each of
+      <p class="shortcomment cmt">Combines two observables, emitting a combination of the latest values of each of
+the source observables each time an event is received from one of the source observables.</p><div class="fullcomment"><div class="comment cmt"><p>Combines two observables, emitting a combination of the latest values of each of
 the source observables each time an event is received from one of the source observables.</p><p><img width="640" height="410" src="http://reactivex.io/documentation/operators/images/combineLatest.png" alt="" />
 </p></div><dl class="paramcmts block"><dt class="param">that</dt><dd class="cmt"><p>
 The second source observable.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable that combines the source Observables</p></dd></dl></div>
+    </li><li name="rxscalajs.Observable#combineLatestWith" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="combineLatestWith[U,V,W,R](first:rxscalajs.Observable[U],second:rxscalajs.Observable[V],third:rxscalajs.Observable[W])(selector:(T,U,V,W)=&gt;R):rxscalajs.Observable[R]"></a><a id="combineLatestWith[U,V,W,R](Observable[U],Observable[V],Observable[W])((T,U,V,W)⇒R):Observable[R]"></a>
+      <span class="permalink">
+      <a href="../rxscalajs/Observable.html#combineLatestWith[U,V,W,R](first:rxscalajs.Observable[U],second:rxscalajs.Observable[V],third:rxscalajs.Observable[W])(selector:(T,U,V,W)=&gt;R):rxscalajs.Observable[R]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">combineLatestWith</span><span class="tparams">[<span name="U">U</span>, <span name="V">V</span>, <span name="W">W</span>, <span name="R">R</span>]</span><span class="params">(<span name="first">first: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatestWith.U">U</span>]</span>, <span name="second">second: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatestWith.V">V</span>]</span>, <span name="third">third: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatestWith.W">W</span>]</span>)</span><span class="params">(<span name="selector">selector: (<span class="extype" name="rxscalajs.Observable.T">T</span>, <span class="extype" name="rxscalajs.Observable.combineLatestWith.U">U</span>, <span class="extype" name="rxscalajs.Observable.combineLatestWith.V">V</span>, <span class="extype" name="rxscalajs.Observable.combineLatestWith.W">W</span>) ⇒ <span class="extype" name="rxscalajs.Observable.combineLatestWith.R">R</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatestWith.R">R</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Combines four observables, emitting some type <code>R</code> specified in the function <code>selector</code>,
+each time an event is received from one of the source observables, where the aggregation
+is defined by the given function.</p><div class="fullcomment"><div class="comment cmt"><p>Combines four observables, emitting some type <code>R</code> specified in the function <code>selector</code>,
+each time an event is received from one of the source observables, where the aggregation
+is defined by the given function.</p><p><img width="640" height="410" src="http://reactivex.io/documentation/operators/images/withLatestFrom.png" alt="" />
+</p></div><dl class="paramcmts block"><dt class="param">first</dt><dd class="cmt"><p>
+an Observable to be combined</p></dd><dt class="param">second</dt><dd class="cmt"><p>
+an Observable to be combined</p></dd><dt class="param">third</dt><dd class="cmt"><p>
+an Observable to be combined</p></dd><dt class="param">selector</dt><dd class="cmt"><p>
+The function that is used combine the emissions of the four observables.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable that combines the source Observables according to the function selector.</p></dd></dl></div>
+    </li><li name="rxscalajs.Observable#combineLatestWith" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="combineLatestWith[U,V,R](first:rxscalajs.Observable[U],second:rxscalajs.Observable[V])(selector:(T,U,V)=&gt;R):rxscalajs.Observable[R]"></a><a id="combineLatestWith[U,V,R](Observable[U],Observable[V])((T,U,V)⇒R):Observable[R]"></a>
+      <span class="permalink">
+      <a href="../rxscalajs/Observable.html#combineLatestWith[U,V,R](first:rxscalajs.Observable[U],second:rxscalajs.Observable[V])(selector:(T,U,V)=&gt;R):rxscalajs.Observable[R]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">combineLatestWith</span><span class="tparams">[<span name="U">U</span>, <span name="V">V</span>, <span name="R">R</span>]</span><span class="params">(<span name="first">first: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatestWith.U">U</span>]</span>, <span name="second">second: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatestWith.V">V</span>]</span>)</span><span class="params">(<span name="selector">selector: (<span class="extype" name="rxscalajs.Observable.T">T</span>, <span class="extype" name="rxscalajs.Observable.combineLatestWith.U">U</span>, <span class="extype" name="rxscalajs.Observable.combineLatestWith.V">V</span>) ⇒ <span class="extype" name="rxscalajs.Observable.combineLatestWith.R">R</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatestWith.R">R</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Combines three observables, emitting some type <code>R</code> specified in the function <code>selector</code>,
+each time an event is received from one of the source observables, where the aggregation
+is defined by the given function.</p><div class="fullcomment"><div class="comment cmt"><p>Combines three observables, emitting some type <code>R</code> specified in the function <code>selector</code>,
+each time an event is received from one of the source observables, where the aggregation
+is defined by the given function.</p><p><img width="640" height="410" src="http://reactivex.io/documentation/operators/images/withLatestFrom.png" alt="" />
+</p></div><dl class="paramcmts block"><dt class="param">first</dt><dd class="cmt"><p>
+an Observable to be combined</p></dd><dt class="param">second</dt><dd class="cmt"><p>
+an Observable to be combined</p></dd><dt class="param">selector</dt><dd class="cmt"><p>
+The function that is used combine the emissions of the three observables.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable that combines the source Observables according to the function selector.</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#combineLatestWith" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="combineLatestWith[U,R](that:rxscalajs.Observable[U])(selector:(T,U)=&gt;R):rxscalajs.Observable[R]"></a><a id="combineLatestWith[U,R](Observable[U])((T,U)⇒R):Observable[R]"></a>
       <span class="permalink">
@@ -1004,9 +1117,11 @@ The second source observable.</p></dd><dt>returns</dt><dd class="cmt"><p>An Obse
         <span class="name">combineLatestWith</span><span class="tparams">[<span name="U">U</span>, <span name="R">R</span>]</span><span class="params">(<span name="that">that: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatestWith.U">U</span>]</span>)</span><span class="params">(<span name="selector">selector: (<span class="extype" name="rxscalajs.Observable.T">T</span>, <span class="extype" name="rxscalajs.Observable.combineLatestWith.U">U</span>) ⇒ <span class="extype" name="rxscalajs.Observable.combineLatestWith.R">R</span></span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatestWith.R">R</span>]</span>
       </span>
       
-      <p class="shortcomment cmt">Combines two observables, emitting a pair of the latest values of each of
-the source observables each time an event is received from one of the source observables.</p><div class="fullcomment"><div class="comment cmt"><p>Combines two observables, emitting a pair of the latest values of each of
-the source observables each time an event is received from one of the source observables.</p><p><img width="640" height="410" src="http://reactivex.io/documentation/operators/images/withLatestFrom.png" alt="" />
+      <p class="shortcomment cmt">Combines two observables, emitting some type <code>R</code> specified in the function <code>selector</code>,
+each time an event is received from one of the source observables, where the aggregation
+is defined by the given function.</p><div class="fullcomment"><div class="comment cmt"><p>Combines two observables, emitting some type <code>R</code> specified in the function <code>selector</code>,
+each time an event is received from one of the source observables, where the aggregation
+is defined by the given function.</p><p><img width="640" height="410" src="http://reactivex.io/documentation/operators/images/withLatestFrom.png" alt="" />
 </p></div><dl class="paramcmts block"><dt class="param">that</dt><dd class="cmt"><p>
 The second source observable.</p></dd><dt class="param">selector</dt><dd class="cmt"><p>
 The function that is used combine the emissions of the two observables.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable that combines the source Observables according to the function selector.</p></dd></dl></div>
@@ -2118,6 +2233,49 @@ and marks them with their original notification types within <a href="Notificati
 and marks them with their original notification types within <a href="Notification.html" class="extype" name="rxscalajs.Notification">rxscalajs.Notification</a> objects.</p><p><img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/materialize.png" alt="" />
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>an Observable whose items are the result of materializing the items and
         notifications of the source Observable</p></dd></dl></div>
+    </li><li name="rxscalajs.Observable#merge" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="merge[R&gt;:T](first:rxscalajs.Observable[R],second:rxscalajs.Observable[R],third:rxscalajs.Observable[R]):rxscalajs.Observable[R]"></a><a id="merge[R&gt;:T](Observable[R],Observable[R],Observable[R]):Observable[R]"></a>
+      <span class="permalink">
+      <a href="../rxscalajs/Observable.html#merge[R&gt;:T](first:rxscalajs.Observable[R],second:rxscalajs.Observable[R],third:rxscalajs.Observable[R]):rxscalajs.Observable[R]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">merge</span><span class="tparams">[<span name="R">R &gt;: <span class="extype" name="rxscalajs.Observable.T">T</span></span>]</span><span class="params">(<span name="first">first: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.merge.R">R</span>]</span>, <span name="second">second: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.merge.R">R</span>]</span>, <span name="third">third: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.merge.R">R</span>]</span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.merge.R">R</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Flattens four Observables into one Observable, without any transformation.</p><div class="fullcomment"><div class="comment cmt"><p>Flattens four Observables into one Observable, without any transformation.</p><p><img width="640" height="380" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/merge.png" alt="" /></p><p>You can combine items emitted by four Observables so that they act like a single
+Observable by using the <code>merge</code> method.
+</p></div><dl class="paramcmts block"><dt class="param">first</dt><dd class="cmt"><p>
+an Observable to be merged</p></dd><dt class="param">second</dt><dd class="cmt"><p>
+an Observable to be merged</p></dd><dt class="param">third</dt><dd class="cmt"><p>
+an Observable to be merged</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits items from all Observables until
+        one emits <code>onError</code> or all Observables emit <code>onCompleted</code>.</p></dd></dl></div>
+    </li><li name="rxscalajs.Observable#merge" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="merge[R&gt;:T](first:rxscalajs.Observable[R],second:rxscalajs.Observable[R]):rxscalajs.Observable[R]"></a><a id="merge[R&gt;:T](Observable[R],Observable[R]):Observable[R]"></a>
+      <span class="permalink">
+      <a href="../rxscalajs/Observable.html#merge[R&gt;:T](first:rxscalajs.Observable[R],second:rxscalajs.Observable[R]):rxscalajs.Observable[R]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">merge</span><span class="tparams">[<span name="R">R &gt;: <span class="extype" name="rxscalajs.Observable.T">T</span></span>]</span><span class="params">(<span name="first">first: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.merge.R">R</span>]</span>, <span name="second">second: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.merge.R">R</span>]</span>)</span><span class="result">: <a href="" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.merge.R">R</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Flattens three Observables into one Observable, without any transformation.</p><div class="fullcomment"><div class="comment cmt"><p>Flattens three Observables into one Observable, without any transformation.</p><p><img width="640" height="380" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/merge.png" alt="" /></p><p>You can combine items emitted by three Observables so that they act like a single
+Observable by using the <code>merge</code> method.
+</p></div><dl class="paramcmts block"><dt class="param">first</dt><dd class="cmt"><p>
+an Observable to be merged</p></dd><dt class="param">second</dt><dd class="cmt"><p>
+an Observable to be merged</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits items from all Observables until
+        one emits <code>onError</code> or all Observables emit <code>onCompleted</code>.</p></dd></dl></div>
     </li><li name="rxscalajs.Observable#merge" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="merge[R&gt;:T](that:rxscalajs.Observable[R]):rxscalajs.Observable[R]"></a><a id="merge[R&gt;:T](Observable[R]):Observable[R]"></a>
       <span class="permalink">
