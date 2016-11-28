@@ -737,8 +737,6 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * an Observable to be combined
     * @param second
     * an Observable to be combined
-    * @param third
-    * an Observable to be combined
     *
     * @return An Observable that combines the source Observables
     */
