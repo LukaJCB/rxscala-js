@@ -493,6 +493,22 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
   }
 
   /**
+    * Scala API
+    * Same as map, but with PartialFunction, where observable emits elements only for defined values
+    *
+    * @param partialProject
+    * Partial function that will be applied to elements for which it is defined
+    *
+    * @return An observable sequence containing the first sequence elements projected by `partialProject` for which it was defined.
+    */
+  def collect[B](partialProject: PartialFunction[T, B]): Observable[B] = Observable.create[B] { obs =>
+    val internal = subscribe((x: T) => if (partialProject.isDefinedAt(x)) obs.next(partialProject(x)) else (),
+      e => obs.error(e),
+      () => obs.complete)
+    () => internal.unsubscribe()
+  }
+
+  /**
     * Instruct an Observable to pass control to another Observable rather than invoking `onError` if it encounters an error.
     *
     * <img width="640" height="310" src="http://reactivex.io/documentation/operators/images/onErrorResumeNext.png" alt="" />
