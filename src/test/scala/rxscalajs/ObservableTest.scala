@@ -307,6 +307,12 @@ object ObservableTest extends TestSuite {
         obs.combineLatest(intervalObs).subscribe(unit)
         obs.combineLatestWith(intervalObs)((n, n2) => n + n2).subscribe(unit)
       }
+      'CombineLatestMultiple {
+        obs.combineLatest(intervalObs, hoObs).subscribe(unit)
+        obs.combineLatestWith(intervalObs, hoObs)((n, n2, n3) => n + n2).subscribe(unit)
+        obs.combineLatest(intervalObs, hoObs, notiObs).subscribe(unit)
+        obs.combineLatestWith(intervalObs, hoObs, notiObs)((n, n2, n3, n4) => n + n2).subscribe(unit)
+      }
       'Concat {
         obs.concat(intervalObs).subscribe(unit)
       }
