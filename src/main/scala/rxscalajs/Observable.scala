@@ -823,9 +823,24 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return an Observable that emits the result of applying the transformation function to each item emitted
     *         by the source Observable and concatinating the Observables obtained from this transformation
     */
-  def concatMap[I, R](project: (T, Int) => Observable[I]): Observable[R] = {
-    new Observable(inner.concatMap[I, R](
-      toReturnFacade(project)))
+  def concatMap[R](project: (T, Int) => Observable[R]): Observable[R] = {
+    new Observable(inner.concatMap(toReturnFacade(project)))
+  }
+
+  /**
+    * Returns a new Observable that emits items resulting from applying a function that you supply to each item
+    * emitted by the source Observable, where that function returns an Observable, and then emitting the items
+    * that result from concatinating those resulting Observables.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/concatMap.png" alt="" />
+    *
+    * @param project a function that, when applied to an item emitted by the source Observable, returns an Observable
+    *
+    * @return an Observable that emits the result of applying the transformation function to each item emitted
+    *         by the source Observable and concatinating the Observables obtained from this transformation
+    */
+  def concatMap[R](project: T => Observable[R]): Observable[R] = {
+    new Observable(inner.concatMap(toReturnFacade(project)))
   }
 
   /**
@@ -838,9 +853,8 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return an Observable that emits the result of applying the transformation function to each item emitted
     *         by the source Observable and concatinating the Observables obtained from this transformation
     */
-  def concatMapTo[I, R](innerObservable: Observable[I]): Observable[R] = {
-    new Observable(inner.concatMapTo[I, R](
-      innerObservable))
+  def concatMapTo[R](innerObservable: Observable[R]): Observable[R] = {
+    new Observable(inner.concatMapTo[R, Nothing](innerObservable))
   }
 
   /**
@@ -851,8 +865,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return an [[Observable]] which emits the number of elements in the source [[Observable]] which satisfy a predicate.
     */
   def count(predicate: (T, Int, Observable[T]) => Boolean): Observable[Int] = {
-    new Observable(inner
-      .count(toFacadeFunction(predicate)))
+    new Observable(inner.count(toFacadeFunction(predicate)))
   }
 
   /**
@@ -1167,9 +1180,8 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     *
     * @return An Observable containing projected Observables of each item of the source, ignoring projected Observables that start before their preceding Observable has completed.
     */
-  def exhaustMap[I, R](project: (T, Int) => Observable[R]): Observable[R] = {
-    new Observable(inner
-      .exhaustMap(toReturnFacade(project)))
+  def exhaustMap[R](project: (T, Int) => Observable[R]): Observable[R] = {
+    new Observable(inner.exhaustMap(toReturnFacade(project)))
   }
   /**
     * Returns an Observable where for each item in the source Observable, the supplied function is applied to each item, resulting in a new value to then be applied again with the function.
@@ -1608,7 +1620,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return an [[Observable]] that emits the result of applying the transformation function to each item emitted
     *         by the source [[Observable]] and merging the results of the [[Observable]]s obtained from this transformation
     */
-  def mergeMap[R](project: (T) => Observable[R]): Observable[R] = {
+  def mergeMap[R](project: T => Observable[R]): Observable[R] = {
     new Observable(inner.mergeMap[R](toReturnFacade(project)))
   }
 
@@ -1626,7 +1638,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return an [[Observable]] that emits the result of applying the transformation function to each item emitted
     *         by the source [[Observable]] and merging the results of the [[Observable]]s obtained from this transformation
     */
-  def flatMap[R](project: (T) => Observable[R]): Observable[R] = {
+  def flatMap[R](project: T => Observable[R]): Observable[R] = {
     new Observable(inner.mergeMap[R](toReturnFacade(project)))
   }
 
@@ -1637,7 +1649,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
   ): Observable[R] = {
     new Observable(inner.mergeMapTo(innerObservable, resultSelector, concurrent))
   }
-  def mergeMapTo[I, R](innerObservable: Observable[I]): Observable[R] = {
+  def mergeMapTo[R](innerObservable: Observable[R]): Observable[R] = {
     new Observable(inner.mergeMapTo(innerObservable))
   }
 
@@ -2154,9 +2166,8 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return an Observable that emits the items emitted by the Observable returned from applying a function to
     *         the most recently emitted item emitted by the source Observable
     */
-  def switchMap[I, R](project: (T, Int) => Observable[I]): Observable[R] = {
-    new Observable(inner
-      .switchMap(toReturnFacade(project)))
+  def switchMap[R](project: (T, Int) => Observable[R]): Observable[R] = {
+    new Observable(inner.switchMap(toReturnFacade(project)))
   }
   /**
     * Returns a new Observable by applying a function that you supply to each item emitted by the source
@@ -2171,13 +2182,11 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     *         the most recently emitted item emitted by the source Observable
     */
   def switchMap[R](project: T => Observable[R]): Observable[R] = {
-    new Observable(inner
-      .switchMap(toReturnFacade(project)))
+    new Observable(inner.switchMap(toReturnFacade(project)))
   }
 
-  def switchMapTo[I, R](innerObservable: Observable[I]): Observable[R] = {
-    new Observable(inner
-      .switchMapTo(innerObservable))
+  def switchMapTo[R](innerObservable: Observable[R]): Observable[R] = {
+    new Observable(inner.switchMapTo(innerObservable))
   }
 
   /**

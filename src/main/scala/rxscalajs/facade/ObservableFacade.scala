@@ -60,7 +60,9 @@ import scala.scalajs.js.annotation.JSName
 
     def concatAll[U](): ObservableFacade[U] = js.native
 
-    def concatMap[I, R](project: js.Function2[T,Int,ObservableFacade[I]], resultSelector: js.Function4[T, I, Int, Int, R] = ???): ObservableFacade[R] = js.native
+    def concatMap[I, R](project: js.Function2[T,Int,ObservableFacade[I]], resultSelector: js.Function4[T, I, Int, Int, R]): ObservableFacade[R] = js.native
+    def concatMap[R](project: js.Function2[T,Int,ObservableFacade[R]]): ObservableFacade[R] = js.native
+    def concatMap[R](project: js.Function1[T,ObservableFacade[R]]): ObservableFacade[R] = js.native
 
 
     def concatMapTo[I, R](innerObservable: ObservableFacade[I], resultSelector: js.Function4[T, I, Int, Int, R] = ???): ObservableFacade[R] = js.native
@@ -149,7 +151,7 @@ import scala.scalajs.js.annotation.JSName
     def subscribeOn(scheduler: Scheduler, delay: Int = ???): ObservableFacade[T] = js.native
     def switch(): T = js.native
     def switchMap[I, R](project: js.Function2[T, Int,ObservableFacade[I]], resultSelector: js.Function4[T, I, Int, Int, R] = ???): ObservableFacade[R] = js.native
-    def switchMap[I, R](project: js.Function1[T,ObservableFacade[I]]): ObservableFacade[R] = js.native
+    def switchMap[R](project: js.Function1[T,ObservableFacade[R]]): ObservableFacade[R] = js.native
     def switchMapTo[ I, R](innerObservable: ObservableFacade[I], resultSelector: js.Function4[T, I, Int, Int, R] = ???): ObservableFacade[R] = js.native
     def take(total: Int): ObservableFacade[T] = js.native
     def takeLast(total: Int): ObservableFacade[T] = js.native

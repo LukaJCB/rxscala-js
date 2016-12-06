@@ -321,7 +321,7 @@ object ObservableTest extends TestSuite {
       }
       'ConcatMap {
         obs.concatMap((n: Int, index: Int) => Observable.range(0, n)).subscribe(unit)
-        obs.concatMap[String, Double]((n: Int, index: Int) => Observable.of("Hello", "world")).subscribe(unit)
+        obs.concatMap[String]((n: Int, index: Int) => Observable.of("Hello", "world")).subscribe(unit)
       }
       'ConcatMapTo {
         obs.concatMapTo(Observable.just('H')).subscribe(unit)
@@ -672,11 +672,6 @@ object ObservableTest extends TestSuite {
         intervalObs.subscribe(s)
       }
     }
-
-
-
-
-
 
 
   }
