@@ -5,13 +5,13 @@ name := "RxScala.js"
 
 normalizedName := "rxscala-js"
 
-version := "0.10.0"
+version := "0.11.0"
 
 organization := "com.github.lukajcb"
 
-scalaVersion := "2.12.0"
+scalaVersion := "2.12.1"
 
-crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0")
+crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.1")
 
 
 libraryDependencies ++= Seq(
