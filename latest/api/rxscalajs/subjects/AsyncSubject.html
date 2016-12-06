@@ -1103,9 +1103,9 @@ other.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observ
 other.</p><p><img width="640" height="380" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/concat.png" alt="" /></p><p>This operation is only available if <code>this</code> is of type <code>Observable[Observable[U]]</code> for some <code>U</code>,
 otherwise you'll get a compilation error.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#concatMap" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="concatMap[I,R](project:(T,Int)=&gt;rxscalajs.Observable[I]):rxscalajs.Observable[R]"></a><a id="concatMap[I,R]((T,Int)⇒Observable[I]):Observable[R]"></a>
+      <a id="concatMap[R](project:T=&gt;rxscalajs.Observable[R]):rxscalajs.Observable[R]"></a><a id="concatMap[R]((T)⇒Observable[R]):Observable[R]"></a>
       <span class="permalink">
-      <a href="../../rxscalajs/subjects/AsyncSubject.html#concatMap[I,R](project:(T,Int)=&gt;rxscalajs.Observable[I]):rxscalajs.Observable[R]" title="Permalink">
+      <a href="../../rxscalajs/subjects/AsyncSubject.html#concatMap[R](project:T=&gt;rxscalajs.Observable[R]):rxscalajs.Observable[R]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -1114,7 +1114,29 @@ otherwise you'll get a compilation error.</p></div><dl class="attributes block">
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">concatMap</span><span class="tparams">[<span name="I">I</span>, <span name="R">R</span>]</span><span class="params">(<span name="project">project: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.concatMap.I">I</span>]</span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.concatMap.R">R</span>]</span>
+        <span class="name">concatMap</span><span class="tparams">[<span name="R">R</span>]</span><span class="params">(<span name="project">project: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>) ⇒ <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.concatMap.R">R</span>]</span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.concatMap.R">R</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Returns a new Observable that emits items resulting from applying a function that you supply to each item
+emitted by the source Observable, where that function returns an Observable, and then emitting the items
+that result from concatinating those resulting Observables.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a new Observable that emits items resulting from applying a function that you supply to each item
+emitted by the source Observable, where that function returns an Observable, and then emitting the items
+that result from concatinating those resulting Observables.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/concatMap.png" alt="" />
+</p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>a function that, when applied to an item emitted by the source Observable, returns an Observable</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the result of applying the transformation function to each item emitted
+        by the source Observable and concatinating the Observables obtained from this transformation</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+    </li><li name="rxscalajs.Observable#concatMap" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="concatMap[R](project:(T,Int)=&gt;rxscalajs.Observable[R]):rxscalajs.Observable[R]"></a><a id="concatMap[R]((T,Int)⇒Observable[R]):Observable[R]"></a>
+      <span class="permalink">
+      <a href="../../rxscalajs/subjects/AsyncSubject.html#concatMap[R](project:(T,Int)=&gt;rxscalajs.Observable[R]):rxscalajs.Observable[R]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">concatMap</span><span class="tparams">[<span name="R">R</span>]</span><span class="params">(<span name="project">project: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.concatMap.R">R</span>]</span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.concatMap.R">R</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Returns a new Observable that emits items resulting from applying a function that you supply to each item
@@ -1125,9 +1147,9 @@ that result from concatinating those resulting Observables.</p><p><img width="64
 </p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>a function that, when applied to an item emitted by the source Observable, returns an Observable</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the result of applying the transformation function to each item emitted
         by the source Observable and concatinating the Observables obtained from this transformation</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#concatMapTo" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="concatMapTo[I,R](innerObservable:rxscalajs.Observable[I]):rxscalajs.Observable[R]"></a><a id="concatMapTo[I,R](Observable[I]):Observable[R]"></a>
+      <a id="concatMapTo[R](innerObservable:rxscalajs.Observable[R]):rxscalajs.Observable[R]"></a><a id="concatMapTo[R](Observable[R]):Observable[R]"></a>
       <span class="permalink">
-      <a href="../../rxscalajs/subjects/AsyncSubject.html#concatMapTo[I,R](innerObservable:rxscalajs.Observable[I]):rxscalajs.Observable[R]" title="Permalink">
+      <a href="../../rxscalajs/subjects/AsyncSubject.html#concatMapTo[R](innerObservable:rxscalajs.Observable[R]):rxscalajs.Observable[R]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -1136,7 +1158,7 @@ that result from concatinating those resulting Observables.</p><p><img width="64
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">concatMapTo</span><span class="tparams">[<span name="I">I</span>, <span name="R">R</span>]</span><span class="params">(<span name="innerObservable">innerObservable: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.concatMapTo.I">I</span>]</span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.concatMapTo.R">R</span>]</span>
+        <span class="name">concatMapTo</span><span class="tparams">[<span name="R">R</span>]</span><span class="params">(<span name="innerObservable">innerObservable: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.concatMapTo.R">R</span>]</span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.concatMapTo.R">R</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Projects each source value to the same Observable which is merged multiple times in a serialized fashion on the output Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Projects each source value to the same Observable which is merged multiple times in a serialized fashion on the output Observable.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/concatMap.png" alt="" />
@@ -1623,9 +1645,9 @@ A function to test each element for a condition.</p></dd><dt>returns</dt><dd cla
 Maps each value to an Observable, then flattens all of these inner Observables using exhaust.</p><p><img width="640" height="310" src="http://reactivex.io/rxjs/img/exhaust.png" alt="" />
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Returns an Observable that takes a source of Observables and propagates the first observable exclusively until it completes before subscribing to the next.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#exhaustMap" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="exhaustMap[I,R](project:(T,Int)=&gt;rxscalajs.Observable[R]):rxscalajs.Observable[R]"></a><a id="exhaustMap[I,R]((T,Int)⇒Observable[R]):Observable[R]"></a>
+      <a id="exhaustMap[R](project:(T,Int)=&gt;rxscalajs.Observable[R]):rxscalajs.Observable[R]"></a><a id="exhaustMap[R]((T,Int)⇒Observable[R]):Observable[R]"></a>
       <span class="permalink">
-      <a href="../../rxscalajs/subjects/AsyncSubject.html#exhaustMap[I,R](project:(T,Int)=&gt;rxscalajs.Observable[R]):rxscalajs.Observable[R]" title="Permalink">
+      <a href="../../rxscalajs/subjects/AsyncSubject.html#exhaustMap[R](project:(T,Int)=&gt;rxscalajs.Observable[R]):rxscalajs.Observable[R]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -1634,7 +1656,7 @@ Maps each value to an Observable, then flattens all of these inner Observables u
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">exhaustMap</span><span class="tparams">[<span name="I">I</span>, <span name="R">R</span>]</span><span class="params">(<span name="project">project: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.exhaustMap.R">R</span>]</span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.exhaustMap.R">R</span>]</span>
+        <span class="name">exhaustMap</span><span class="tparams">[<span name="R">R</span>]</span><span class="params">(<span name="project">project: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.exhaustMap.R">R</span>]</span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.exhaustMap.R">R</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Converts a higher-order Observable into a first-order Observable by dropping inner Observables while the previous inner Observable has not yet completed.</p><div class="fullcomment"><div class="comment cmt"><p>Converts a higher-order Observable into a first-order Observable by dropping inner Observables while the previous inner Observable has not yet completed.
@@ -2341,9 +2363,9 @@ subscriptions to these <a href="../Observable.html" class="extype" name="rxscala
 </p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>a function that, when applied to an item emitted by the source <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>, returns an <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></p></dd><dt>returns</dt><dd class="cmt"><p>an <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> that emits the result of applying the transformation function to each item emitted
         by the source <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a> and merging the results of the <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>s obtained from this transformation</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#mergeMapTo" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="mergeMapTo[I,R](innerObservable:rxscalajs.Observable[I]):rxscalajs.Observable[R]"></a><a id="mergeMapTo[I,R](Observable[I]):Observable[R]"></a>
+      <a id="mergeMapTo[R](innerObservable:rxscalajs.Observable[R]):rxscalajs.Observable[R]"></a><a id="mergeMapTo[R](Observable[R]):Observable[R]"></a>
       <span class="permalink">
-      <a href="../../rxscalajs/subjects/AsyncSubject.html#mergeMapTo[I,R](innerObservable:rxscalajs.Observable[I]):rxscalajs.Observable[R]" title="Permalink">
+      <a href="../../rxscalajs/subjects/AsyncSubject.html#mergeMapTo[R](innerObservable:rxscalajs.Observable[R]):rxscalajs.Observable[R]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -2352,7 +2374,7 @@ subscriptions to these <a href="../Observable.html" class="extype" name="rxscala
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">mergeMapTo</span><span class="tparams">[<span name="I">I</span>, <span name="R">R</span>]</span><span class="params">(<span name="innerObservable">innerObservable: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.mergeMapTo.I">I</span>]</span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.mergeMapTo.R">R</span>]</span>
+        <span class="name">mergeMapTo</span><span class="tparams">[<span name="R">R</span>]</span><span class="params">(<span name="innerObservable">innerObservable: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.mergeMapTo.R">R</span>]</span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.mergeMapTo.R">R</span>]</span>
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
@@ -3157,9 +3179,9 @@ of these Observables.</p><p><img width="640" height="350" src="https://raw.githu
 </p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>a function that, when applied to an item emitted by the source Observable, returns an Observable</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the items emitted by the Observable returned from applying a function to
         the most recently emitted item emitted by the source Observable</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#switchMap" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="switchMap[I,R](project:(T,Int)=&gt;rxscalajs.Observable[I]):rxscalajs.Observable[R]"></a><a id="switchMap[I,R]((T,Int)⇒Observable[I]):Observable[R]"></a>
+      <a id="switchMap[R](project:(T,Int)=&gt;rxscalajs.Observable[R]):rxscalajs.Observable[R]"></a><a id="switchMap[R]((T,Int)⇒Observable[R]):Observable[R]"></a>
       <span class="permalink">
-      <a href="../../rxscalajs/subjects/AsyncSubject.html#switchMap[I,R](project:(T,Int)=&gt;rxscalajs.Observable[I]):rxscalajs.Observable[R]" title="Permalink">
+      <a href="../../rxscalajs/subjects/AsyncSubject.html#switchMap[R](project:(T,Int)=&gt;rxscalajs.Observable[R]):rxscalajs.Observable[R]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -3168,7 +3190,7 @@ of these Observables.</p><p><img width="640" height="350" src="https://raw.githu
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">switchMap</span><span class="tparams">[<span name="I">I</span>, <span name="R">R</span>]</span><span class="params">(<span name="project">project: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.switchMap.I">I</span>]</span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.switchMap.R">R</span>]</span>
+        <span class="name">switchMap</span><span class="tparams">[<span name="R">R</span>]</span><span class="params">(<span name="project">project: (<span class="extype" name="rxscalajs.subjects.AsyncSubject.T">T</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.switchMap.R">R</span>]</span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.switchMap.R">R</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Returns a new Observable by applying a function that you supply to each item emitted by the source
@@ -3179,9 +3201,9 @@ of these Observables.</p><p><img width="640" height="350" src="https://raw.githu
 </p></div><dl class="paramcmts block"><dt class="param">project</dt><dd class="cmt"><p>a function that, when applied to an item emitted by the source Observable, returns an Observable</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the items emitted by the Observable returned from applying a function to
         the most recently emitted item emitted by the source Observable</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#switchMapTo" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="switchMapTo[I,R](innerObservable:rxscalajs.Observable[I]):rxscalajs.Observable[R]"></a><a id="switchMapTo[I,R](Observable[I]):Observable[R]"></a>
+      <a id="switchMapTo[R](innerObservable:rxscalajs.Observable[R]):rxscalajs.Observable[R]"></a><a id="switchMapTo[R](Observable[R]):Observable[R]"></a>
       <span class="permalink">
-      <a href="../../rxscalajs/subjects/AsyncSubject.html#switchMapTo[I,R](innerObservable:rxscalajs.Observable[I]):rxscalajs.Observable[R]" title="Permalink">
+      <a href="../../rxscalajs/subjects/AsyncSubject.html#switchMapTo[R](innerObservable:rxscalajs.Observable[R]):rxscalajs.Observable[R]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -3190,7 +3212,7 @@ of these Observables.</p><p><img width="640" height="350" src="https://raw.githu
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">switchMapTo</span><span class="tparams">[<span name="I">I</span>, <span name="R">R</span>]</span><span class="params">(<span name="innerObservable">innerObservable: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.switchMapTo.I">I</span>]</span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.switchMapTo.R">R</span>]</span>
+        <span class="name">switchMapTo</span><span class="tparams">[<span name="R">R</span>]</span><span class="params">(<span name="innerObservable">innerObservable: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.switchMapTo.R">R</span>]</span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.switchMapTo.R">R</span>]</span>
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
