@@ -3411,6 +3411,29 @@ source Observable.</p><div class="fullcomment"><div class="comment cmt"><p>Retur
 source Observable.</p><p><img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/timeInterval.png" alt="" />
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>an Observable that emits time interval information items</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#timeout" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="timeout(due:Int):rxscalajs.Observable[T]"></a><a id="timeout(Int):Observable[T]"></a>
+      <span class="permalink">
+      <a href="../../rxscalajs/subjects/BehaviorSubject.html#timeout(due:Int):rxscalajs.Observable[T]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">timeout</span><span class="params">(<span name="due">due: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.BehaviorSubject.T">T</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Applies a timeout policy for each item emitted by the Observable, using
+the specified scheduler to run timeout timers.</p><div class="fullcomment"><div class="comment cmt"><p>Applies a timeout policy for each item emitted by the Observable, using
+the specified scheduler to run timeout timers. If the next item isn't
+observed within the specified timeout duration starting from its
+predecessor, a specified fallback Observable sequence produces future
+items and notifications from that point on.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/timeout.2s.png" alt="" />
+</p></div><dl class="paramcmts block"><dt class="param">due</dt><dd class="cmt"><p>maximum duration between items before a timeout occurs</p></dd><dt>returns</dt><dd class="cmt"><p>the source Observable modified so that it will switch to the
+        fallback Observable in case of a timeout</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+    </li><li name="rxscalajs.Observable#timeout" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="timeout[U](due:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]"></a><a id="timeout[U](Int,Scheduler):Observable[T]"></a>
       <span class="permalink">
       <a href="../../rxscalajs/subjects/BehaviorSubject.html#timeout[U](due:Int,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]" title="Permalink">
@@ -3432,75 +3455,6 @@ observed within the specified timeout duration starting from its
 predecessor, a specified fallback Observable sequence produces future
 items and notifications from that point on.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/timeout.2s.png" alt="" />
 </p></div><dl class="paramcmts block"><dt class="param">due</dt><dd class="cmt"><p>maximum duration between items before a timeout occurs</p></dd><dt class="param">scheduler</dt><dd class="cmt"><p>Scheduler to run the timeout timers on</p></dd><dt>returns</dt><dd class="cmt"><p>the source Observable modified so that it will switch to the
-        fallback Observable in case of a timeout</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
-    </li><li name="rxscalajs.Observable#timeout" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="timeout[U](due:Int):rxscalajs.Observable[T]"></a><a id="timeout[U](Int):Observable[T]"></a>
-      <span class="permalink">
-      <a href="../../rxscalajs/subjects/BehaviorSubject.html#timeout[U](due:Int):rxscalajs.Observable[T]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">timeout</span><span class="tparams">[<span name="U">U</span>]</span><span class="params">(<span name="due">due: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.BehaviorSubject.T">T</span>]</span>
-      </span>
-      
-      <p class="shortcomment cmt">Applies a timeout policy for each item emitted by the Observable, using
-the specified scheduler to run timeout timers.</p><div class="fullcomment"><div class="comment cmt"><p>Applies a timeout policy for each item emitted by the Observable, using
-the specified scheduler to run timeout timers. If the next item isn't
-observed within the specified timeout duration starting from its
-predecessor, a specified fallback Observable sequence produces future
-items and notifications from that point on.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/timeout.2s.png" alt="" />
-</p></div><dl class="paramcmts block"><dt class="param">due</dt><dd class="cmt"><p>maximum duration between items before a timeout occurs</p></dd><dt>returns</dt><dd class="cmt"><p>the source Observable modified so that it will switch to the
-        fallback Observable in case of a timeout</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
-    </li><li name="rxscalajs.Observable#timeout" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="timeout[U](due:Int,errorToSend:U):rxscalajs.Observable[T]"></a><a id="timeout[U](Int,U):Observable[T]"></a>
-      <span class="permalink">
-      <a href="../../rxscalajs/subjects/BehaviorSubject.html#timeout[U](due:Int,errorToSend:U):rxscalajs.Observable[T]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">timeout</span><span class="tparams">[<span name="U">U</span>]</span><span class="params">(<span name="due">due: <span class="extype" name="scala.Int">Int</span></span>, <span name="errorToSend">errorToSend: <span class="extype" name="rxscalajs.Observable.timeout.U">U</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.BehaviorSubject.T">T</span>]</span>
-      </span>
-      
-      <p class="shortcomment cmt">Applies a timeout policy for each item emitted by the Observable, using
-the specified scheduler to run timeout timers.</p><div class="fullcomment"><div class="comment cmt"><p>Applies a timeout policy for each item emitted by the Observable, using
-the specified scheduler to run timeout timers. If the next item isn't
-observed within the specified timeout duration starting from its
-predecessor, a specified fallback Observable sequence produces future
-items and notifications from that point on.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/timeout.2s.png" alt="" />
-</p></div><dl class="paramcmts block"><dt class="param">due</dt><dd class="cmt"><p>maximum duration between items before a timeout occurs</p></dd><dt class="param">errorToSend</dt><dd class="cmt"><p>the error to send.</p></dd><dt>returns</dt><dd class="cmt"><p>the source Observable modified so that it will switch to the
-        fallback Observable in case of a timeout</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
-    </li><li name="rxscalajs.Observable#timeout" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="timeout[U](due:Int,errorToSend:U,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]"></a><a id="timeout[U](Int,U,Scheduler):Observable[T]"></a>
-      <span class="permalink">
-      <a href="../../rxscalajs/subjects/BehaviorSubject.html#timeout[U](due:Int,errorToSend:U,scheduler:rxscalajs.Scheduler):rxscalajs.Observable[T]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">timeout</span><span class="tparams">[<span name="U">U</span>]</span><span class="params">(<span name="due">due: <span class="extype" name="scala.Int">Int</span></span>, <span name="errorToSend">errorToSend: <span class="extype" name="rxscalajs.Observable.timeout.U">U</span></span>, <span name="scheduler">scheduler: <a href="../Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.BehaviorSubject.T">T</span>]</span>
-      </span>
-      
-      <p class="shortcomment cmt">Applies a timeout policy for each item emitted by the Observable, using
-the specified scheduler to run timeout timers.</p><div class="fullcomment"><div class="comment cmt"><p>Applies a timeout policy for each item emitted by the Observable, using
-the specified scheduler to run timeout timers. If the next item isn't
-observed within the specified timeout duration starting from its
-predecessor, a specified fallback Observable sequence produces future
-items and notifications from that point on.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/timeout.2s.png" alt="" />
-</p></div><dl class="paramcmts block"><dt class="param">due</dt><dd class="cmt"><p>maximum duration between items before a timeout occurs</p></dd><dt class="param">errorToSend</dt><dd class="cmt"><p>the error to send.</p></dd><dt class="param">scheduler</dt><dd class="cmt"><p>Scheduler to run the timeout timers on</p></dd><dt>returns</dt><dd class="cmt"><p>the source Observable modified so that it will switch to the
         fallback Observable in case of a timeout</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#timeoutWith" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="timeoutWith[R](due:Int,withObservable:rxscalajs.Observable[R]):rxscalajs.Observable[R]"></a><a id="timeoutWith[R](Int,Observable[R]):Observable[R]"></a>
