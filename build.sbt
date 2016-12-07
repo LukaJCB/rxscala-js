@@ -5,7 +5,7 @@ name := "RxScala.js"
 
 normalizedName := "rxscala-js"
 
-version := "0.11.0"
+version := "0.11.1"
 
 organization := "com.github.lukajcb"
 
@@ -21,7 +21,7 @@ libraryDependencies ++= Seq(
 
 testFrameworks += new TestFramework("utest.runner.Framework")
 
-jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-rc.4" % "test" / "bundles/Rx.min.js" commonJSName "Rx"
+jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.0-rc.5" % "test" / "bundles/Rx.min.js" commonJSName "Rx"
 
 ghpages.settings
 

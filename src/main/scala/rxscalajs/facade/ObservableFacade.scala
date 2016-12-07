@@ -162,7 +162,7 @@ import scala.scalajs.js.annotation.JSName
 
 
     def timeInterval(scheduler: Scheduler = ???): ObservableFacade[TimeInterval[T]] = js.native
-    def timeout[T2](due: Int | Date, errorToSend: T2 = ???, scheduler: Scheduler = ???): ObservableFacade[T] = js.native
+    def timeout(due: Int | Date, scheduler: Scheduler = ???): ObservableFacade[T] = js.native
     def timeoutWith[ R](due: Int | Date, withObservable: ObservableFacade[R], scheduler: Scheduler = ???): ObservableFacade[R] = js.native
     def timestamp(scheduler: Scheduler = ???): ObservableFacade[Timestamp[T]] = js.native
     def toArray(): ObservableFacade[js.Array[_ <: T]] = js.native

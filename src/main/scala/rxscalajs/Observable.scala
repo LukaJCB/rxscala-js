@@ -2345,71 +2345,31 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/timeout.2s.png" alt="" />
     *
     * @param due maximum duration between items before a timeout occurs
-    * @param errorToSend the error to send.
-    * @param scheduler Scheduler to run the timeout timers on
-    *
-    * @return the source Observable modified so that it will switch to the
-    *         fallback Observable in case of a timeout
-    */
-  def timeout[U](due: Int, errorToSend: U, scheduler: Scheduler): Observable[T] = {
-    new Observable(inner.timeout(due, errorToSend, scheduler))
-  }
-
-  /**
-    * Applies a timeout policy for each item emitted by the Observable, using
-    * the specified scheduler to run timeout timers. If the next item isn't
-    * observed within the specified timeout duration starting from its
-    * predecessor, a specified fallback Observable sequence produces future
-    * items and notifications from that point on.
-    * <p>
-    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/timeout.2s.png" alt="" />
-    *
-    * @param due maximum duration between items before a timeout occurs
-    * @param errorToSend the error to send.
-    *
-    * @return the source Observable modified so that it will switch to the
-    *         fallback Observable in case of a timeout
-    */
-  def timeout[U](due: Int, errorToSend: U): Observable[T] = {
-    new Observable(inner.timeout(due, errorToSend))
-  }
-
-  /**
-    * Applies a timeout policy for each item emitted by the Observable, using
-    * the specified scheduler to run timeout timers. If the next item isn't
-    * observed within the specified timeout duration starting from its
-    * predecessor, a specified fallback Observable sequence produces future
-    * items and notifications from that point on.
-    * <p>
-    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/timeout.2s.png" alt="" />
-    *
-    * @param due maximum duration between items before a timeout occurs
-    *
-    * @return the source Observable modified so that it will switch to the
-    *         fallback Observable in case of a timeout
-    */
-  def timeout[U](due: Int): Observable[T] = {
-    new Observable(inner.timeout(due))
-  }
-
-  /**
-    * Applies a timeout policy for each item emitted by the Observable, using
-    * the specified scheduler to run timeout timers. If the next item isn't
-    * observed within the specified timeout duration starting from its
-    * predecessor, a specified fallback Observable sequence produces future
-    * items and notifications from that point on.
-    * <p>
-    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/timeout.2s.png" alt="" />
-    *
-    * @param due maximum duration between items before a timeout occurs
     * @param scheduler Scheduler to run the timeout timers on
     *
     * @return the source Observable modified so that it will switch to the
     *         fallback Observable in case of a timeout
     */
   def timeout[U](due: Int, scheduler: Scheduler): Observable[T] = {
-    new Observable(inner
-      .timeout(due, scheduler = scheduler))
+    new Observable(inner.timeout(due, scheduler))
+  }
+
+  /**
+    * Applies a timeout policy for each item emitted by the Observable, using
+    * the specified scheduler to run timeout timers. If the next item isn't
+    * observed within the specified timeout duration starting from its
+    * predecessor, a specified fallback Observable sequence produces future
+    * items and notifications from that point on.
+    * <p>
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/timeout.2s.png" alt="" />
+    *
+    * @param due maximum duration between items before a timeout occurs
+    *
+    * @return the source Observable modified so that it will switch to the
+    *         fallback Observable in case of a timeout
+    */
+  def timeout(due: Int): Observable[T] = {
+    new Observable(inner.timeout(due))
   }
 
   /**
