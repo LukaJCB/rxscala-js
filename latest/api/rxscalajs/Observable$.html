@@ -524,9 +524,9 @@ callbacks.</p></dd><dt>returns</dt><dd class="cmt"><p>A function which returns t
               
         </dd></dl></div>
     </li><li name="rxscalajs.Observable#combineLatest" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="combineLatest[T,R](sources:scala.collection.immutable.Seq[rxscalajs.Observable[T]])(combineFunction:scala.collection.immutable.Seq[T]=&gt;R):rxscalajs.Observable[R]"></a><a id="combineLatest[T,R](Seq[Observable[T]])((Seq[T])⇒R):Observable[R]"></a>
+      <a id="combineLatest[T](sources:scala.collection.immutable.Seq[rxscalajs.Observable[T]]):rxscalajs.Observable[scala.collection.immutable.Seq[T]]"></a><a id="combineLatest[T](Seq[Observable[T]]):Observable[Seq[T]]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable$.html#combineLatest[T,R](sources:scala.collection.immutable.Seq[rxscalajs.Observable[T]])(combineFunction:scala.collection.immutable.Seq[T]=&gt;R):rxscalajs.Observable[R]" title="Permalink">
+      <a href="../rxscalajs/Observable$.html#combineLatest[T](sources:scala.collection.immutable.Seq[rxscalajs.Observable[T]]):rxscalajs.Observable[scala.collection.immutable.Seq[T]]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -535,7 +535,27 @@ callbacks.</p></dd><dt>returns</dt><dd class="cmt"><p>A function which returns t
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">combineLatest</span><span class="tparams">[<span name="T">T</span>, <span name="R">R</span>]</span><span class="params">(<span name="sources">sources: <span class="extype" name="scala.collection.immutable.Seq">Seq</span>[<a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatest.T">T</span>]]</span>)</span><span class="params">(<span name="combineFunction">combineFunction: (<span class="extype" name="scala.collection.immutable.Seq">Seq</span>[<span class="extype" name="rxscalajs.Observable.combineLatest.T">T</span>]) ⇒ <span class="extype" name="rxscalajs.Observable.combineLatest.R">R</span></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatest.R">R</span>]</span>
+        <span class="name">combineLatest</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="sources">sources: <span class="extype" name="scala.collection.immutable.Seq">Seq</span>[<a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatest.T">T</span>]]</span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="scala.collection.immutable.Seq">Seq</span>[<span class="extype" name="rxscalajs.Observable.combineLatest.T">T</span>]]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Combines a list of source Observables by emitting an item that aggregates the latest values of each of
+the source Observables each time an item is received from any of the source Observables.</p><div class="fullcomment"><div class="comment cmt"><p>Combines a list of source Observables by emitting an item that aggregates the latest values of each of
+the source Observables each time an item is received from any of the source Observables.
+</p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>the common base type of source values</p></dd><dt class="param">sources</dt><dd class="cmt"><p>the list of source Observables</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits items that are the result of combining the items emitted by the source
+        Observables</p></dd></dl></div>
+    </li><li name="rxscalajs.Observable#combineLatestWith" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="combineLatestWith[T,R](sources:scala.collection.immutable.Seq[rxscalajs.Observable[T]])(combineFunction:scala.collection.immutable.Seq[T]=&gt;R):rxscalajs.Observable[R]"></a><a id="combineLatestWith[T,R](Seq[Observable[T]])((Seq[T])⇒R):Observable[R]"></a>
+      <span class="permalink">
+      <a href="../rxscalajs/Observable$.html#combineLatestWith[T,R](sources:scala.collection.immutable.Seq[rxscalajs.Observable[T]])(combineFunction:scala.collection.immutable.Seq[T]=&gt;R):rxscalajs.Observable[R]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">combineLatestWith</span><span class="tparams">[<span name="T">T</span>, <span name="R">R</span>]</span><span class="params">(<span name="sources">sources: <span class="extype" name="scala.collection.immutable.Seq">Seq</span>[<a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatestWith.T">T</span>]]</span>)</span><span class="params">(<span name="combineFunction">combineFunction: (<span class="extype" name="scala.collection.immutable.Seq">Seq</span>[<span class="extype" name="rxscalajs.Observable.combineLatestWith.T">T</span>]) ⇒ <span class="extype" name="rxscalajs.Observable.combineLatestWith.R">R</span></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.combineLatestWith.R">R</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Combines a list of source Observables by emitting an item that aggregates the latest values of each of
