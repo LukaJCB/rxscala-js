@@ -3037,6 +3037,21 @@ object Observable {
 
   /**
     * Combines a list of source Observables by emitting an item that aggregates the latest values of each of
+    * the source Observables each time an item is received from any of the source Observables.
+    *
+    * @tparam T the common base type of source values
+    * @param sources the list of source Observables
+    *
+    * @return an Observable that emits items that are the result of combining the items emitted by the source
+    *         Observables
+    */
+
+  def combineLatest[T](sources: Seq[Observable[T]]): Observable[Seq[T]] = {
+    sources.foldLeft(Observable.of(Seq[T]()))((acc, cur) => acc.combineLatestWith(cur)(_ :+ _))
+  }
+
+  /**
+    * Combines a list of source Observables by emitting an item that aggregates the latest values of each of
     * the source Observables each time an item is received from any of the source Observables, where this
     * aggregation is defined by a specified function.
     *
@@ -3048,16 +3063,8 @@ object Observable {
     * @return an Observable that emits items that are the result of combining the items emitted by the source
     *         Observables by means of the given aggregation function
     */
-  def combineLatest[T, R](sources: Seq[Observable[T]])(combineFunction: Seq[T] => R): Observable[R] = {
-    val func = combineFunction.asInstanceOf[js.Array[_ <: T] => R]
-    _combineLatest(sources.map(_.inner).toJSArray, func)
-  }
-
-  private def _combineLatest[T, R](
-    sources: js.Array[ObservableFacade[T]],
-    combineFunction: js.Array[_ <: T] => R
-  ): Observable[R] = {
-    new Observable(ObservableFacade.combineLatest(sources, combineFunction))
+  def combineLatestWith[T,R](sources: Seq[Observable[T]])(combineFunction: Seq[T] => R): Observable[R] = {
+    combineLatest(sources).map(combineFunction)
   }
 
   /**

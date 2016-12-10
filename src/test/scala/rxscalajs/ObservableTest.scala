@@ -282,6 +282,18 @@ object ObservableTest extends TestSuite {
         assert(x)
       }
     }
+    'FactoryTests {
+      'CombineLatest {
+        val xs = Vector(1,2,3,4).map(x => Observable.just(x))
+        val obs = Observable.combineLatest(xs)
+        obs(println)
+      }
+      'CombineLatestWith {
+        val xs = List(1,2,3,4).map(x => Observable.just(x))
+        val obs = Observable.combineLatestWith(xs)(_.sum)
+        obs(println)
+      }
+    }
     'WrapperTests{
 
       val obs = Observable.just(1,11,21,1211,111221)
