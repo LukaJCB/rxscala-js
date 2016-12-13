@@ -822,22 +822,6 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return an Observable that emits the result of applying the transformation function to each item emitted
     *         by the source Observable and concatinating the Observables obtained from this transformation
     */
-  def concatMap[R](project: (T, Int) => Observable[R]): Observable[R] = {
-    new Observable(inner.concatMap(toReturnFacade(project)))
-  }
-
-  /**
-    * Returns a new Observable that emits items resulting from applying a function that you supply to each item
-    * emitted by the source Observable, where that function returns an Observable, and then emitting the items
-    * that result from concatinating those resulting Observables.
-    *
-    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/concatMap.png" alt="" />
-    *
-    * @param project a function that, when applied to an item emitted by the source Observable, returns an Observable
-    *
-    * @return an Observable that emits the result of applying the transformation function to each item emitted
-    *         by the source Observable and concatinating the Observables obtained from this transformation
-    */
   def concatMap[R](project: T => Observable[R]): Observable[R] = {
     new Observable(inner.concatMap(toReturnFacade(project)))
   }
@@ -1589,22 +1573,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     mergeAll()
   }
 
-  /**
-    * Returns an [[Observable]] that emits items based on applying a function that you supply to each item emitted
-    * by the source [[Observable]] , where that function returns an [[Observable]] , and then merging those resulting
-    * [[Observable]]s and emitting the results of this merger, while limiting the maximum number of concurrent
-    * subscriptions to these [[Observable]]s.
-    *
-    * <img width="640" height="380" src="http://reactivex.io/documentation/operators/images/flatMap.c.png" alt="" />
-    *
-    * @param project a function that, when applied to an item emitted by the source [[Observable]], returns an [[Observable]]
-    *
-    * @return an [[Observable]] that emits the result of applying the transformation function to each item emitted
-    *         by the source [[Observable]] and merging the results of the [[Observable]]s obtained from this transformation
-    */
-  def mergeMap[R](project: (T, Int) => Observable[R]): Observable[R] = {
-    new Observable(inner.mergeMap[R](toReturnFacade(project)))
-  }
+
   /**
     * Returns an [[Observable]] that emits items based on applying a function that you supply to each item emitted
     * by the source [[Observable]] , where that function returns an [[Observable]] , and then merging those resulting
@@ -2153,21 +2122,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     new Observable[U](inner.asInstanceOf[ObservableFacade[Observable[U]]].map((n: Observable[U]) => n.get).switch())
   }
 
-  /**
-    * Returns a new Observable by applying a function that you supply to each item emitted by the source
-    * Observable that returns an Observable, and then emitting the items emitted by the most recently emitted
-    * of these Observables.
-    *
-    * <img width="640" height="350" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/switchMap.png" alt="" />
-    *
-    * @param project a function that, when applied to an item emitted by the source Observable, returns an Observable
-    *
-    * @return an Observable that emits the items emitted by the Observable returned from applying a function to
-    *         the most recently emitted item emitted by the source Observable
-    */
-  def switchMap[R](project: (T, Int) => Observable[R]): Observable[R] = {
-    new Observable(inner.switchMap(toReturnFacade(project)))
-  }
+
   /**
     * Returns a new Observable by applying a function that you supply to each item emitted by the source
     * Observable that returns an Observable, and then emitting the items emitted by the most recently emitted

@@ -286,12 +286,12 @@ object ObservableTest extends TestSuite {
       'CombineLatest {
         val xs = Vector(1,2,3,4).map(x => Observable.just(x))
         val obs = Observable.combineLatest(xs)
-        obs(println)
+        obs(unit)
       }
       'CombineLatestWith {
         val xs = List(1,2,3,4).map(x => Observable.just(x))
         val obs = Observable.combineLatestWith(xs)(_.sum)
-        obs(println)
+        obs(unit)
       }
     }
     'WrapperTests{
@@ -332,8 +332,8 @@ object ObservableTest extends TestSuite {
         hoObs.concatAll.subscribe(unit)
       }
       'ConcatMap {
-        obs.concatMap((n: Int, index: Int) => Observable.range(0, n)).subscribe(unit)
-        obs.concatMap[String]((n: Int, index: Int) => Observable.of("Hello", "world")).subscribe(unit)
+        obs.concatMap(n=> Observable.range(0, n)).subscribe(unit)
+        obs.concatMap[String](n=> Observable.of("Hello", "world")).subscribe(unit)
       }
       'ConcatMapTo {
         obs.concatMapTo(Observable.just('H')).subscribe(unit)
@@ -429,7 +429,7 @@ object ObservableTest extends TestSuite {
         hoObs.mergeAll(3).subscribe(unit)
       }
       'MergeMap {
-        obs.mergeMap((n: Int, index: Int) => Observable.of(n)).subscribe(unit)
+        obs.mergeMap((n: Int) => Observable.of(n)).subscribe(unit)
         obs.mergeMap(n => Observable.just(n)).subscribe(unit)
       }
       'MergeMapTo {
@@ -501,7 +501,7 @@ object ObservableTest extends TestSuite {
         hoObs.switch.subscribe(unit)
       }
       'SwitchMap {
-        val func = (n: Observable[Int], n2: Int) => Observable.of(n2)
+        val func = (n: Observable[Int]) => Observable.of(n)
         hoObs.switchMap(func).subscribe(unit)
       }
       'SwitchMapTo {
