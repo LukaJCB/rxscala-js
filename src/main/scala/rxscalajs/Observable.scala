@@ -5,7 +5,6 @@ import org.scalajs.dom.raw.Event
 import rxscalajs.facade._
 import rxscalajs.subscription._
 
-import scala.collection.immutable.Seq
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
 import scala.scalajs.js
