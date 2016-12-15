@@ -570,6 +570,30 @@ The period of time each buffer is collecting values before it should be emitted,
 replaced with a new buffer.</p></dd><dt>returns</dt><dd class="cmt"><p>
 An <a href="../Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> which produces connected non-overlapping buffers with a fixed duration.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#bufferTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="bufferTime(bufferTimeSpan:Int,bufferCreationInterval:Int):rxscalajs.Observable[List[T]]"></a><a id="bufferTime(Int,Int):Observable[List[T]]"></a>
+      <span class="permalink">
+      <a href="../../rxscalajs/subjects/ReplaySubject.html#bufferTime(bufferTimeSpan:Int,bufferCreationInterval:Int):rxscalajs.Observable[List[T]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">bufferTime</span><span class="params">(<span name="bufferTimeSpan">bufferTimeSpan: <span class="extype" name="scala.Int">Int</span></span>, <span name="bufferCreationInterval">bufferCreationInterval: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="rxscalajs.subjects.ReplaySubject.T">T</span>]]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Creates an Observable which produces buffers of collected values.</p><div class="fullcomment"><div class="comment cmt"><p>Creates an Observable which produces buffers of collected values. This Observable starts a new buffer
+periodically, which is determined by the <code>timeshift</code> argument. Each buffer is emitted after a fixed timespan
+specified by the <code>timespan</code> argument. When the source Observable completes or encounters an error, the
+current buffer is emitted and the event is propagated.
+</p></div><dl class="paramcmts block"><dt class="param">bufferTimeSpan</dt><dd class="cmt"><p>
+The period of time each buffer is collecting values before it should be emitted.</p></dd><dt class="param">bufferCreationInterval</dt><dd class="cmt"><p>
+The period of time after which a new buffer will be created.</p></dd><dt>returns</dt><dd class="cmt"><p>
+An <a href="../Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> which produces new buffers periodically, and these are emitted after
+a fixed timespan has elapsed.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+    </li><li name="rxscalajs.Observable#bufferTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="bufferTime(bufferTimeSpan:scala.concurrent.duration.FiniteDuration,bufferCreationInterval:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[List[T]]"></a><a id="bufferTime(FiniteDuration,FiniteDuration):Observable[List[T]]"></a>
       <span class="permalink">
       <a href="../../rxscalajs/subjects/ReplaySubject.html#bufferTime(bufferTimeSpan:scala.concurrent.duration.FiniteDuration,bufferCreationInterval:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[List[T]]" title="Permalink">
@@ -1197,6 +1221,26 @@ Observable that are followed by another item within a computed debounce duration
 </p></div><dl class="paramcmts block"><dt class="param">debounceSelector</dt><dd class="cmt"><p>function to retrieve a sequence that indicates the throttle duration for each item</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that omits items emitted by the source Observable that are followed by another item
         within a computed debounce duration</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#debounceTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="debounceTime(timeout:Int):rxscalajs.Observable[T]"></a><a id="debounceTime(Int):Observable[T]"></a>
+      <span class="permalink">
+      <a href="../../rxscalajs/subjects/ReplaySubject.html#debounceTime(timeout:Int):rxscalajs.Observable[T]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">debounceTime</span><span class="params">(<span name="timeout">timeout: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.ReplaySubject.T">T</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Debounces by dropping all values that are followed by newer values before the timeout value expires.</p><div class="fullcomment"><div class="comment cmt"><p>Debounces by dropping all values that are followed by newer values before the timeout value expires. The timer resets on each <code>onNext</code> call.</p><p>NOTE: If events keep firing faster than the timeout then no data will be emitted.</p><p><img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/debounce.png" alt="" /></p><p>Information on debounce vs throttle:
+- <a href="http://drupalmotion.com/article/debounce-and-throttle-visual-explanation" target="_blank">http://drupalmotion.com/article/debounce-and-throttle-visual-explanation</a>
+- <a href="http://unscriptable.com/2009/03/20/debouncing-javascript-methods/" target="_blank">http://unscriptable.com/2009/03/20/debouncing-javascript-methods/</a>
+- <a href="http://www.illyriad.co.uk/blog/index.php/2011/09/javascript-dont-spam-your-server-debounce-and-throttle/" target="_blank">http://www.illyriad.co.uk/blog/index.php/2011/09/javascript-dont-spam-your-server-debounce-and-throttle/</a></p></div><dl class="paramcmts block"><dt class="param">timeout</dt><dd class="cmt"><p>
+The time each value has to be 'the most recent' of the Observable to ensure that it's not dropped.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable which filters out values which are too quickly followed up with newer values.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><dt>See also</dt><dd><span class="cmt"><p><code>Observable.throttleWithTimeout</code></p></span></dd></dl></div>
+    </li><li name="rxscalajs.Observable#debounceTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="debounceTime(timeout:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]"></a><a id="debounceTime(FiniteDuration):Observable[T]"></a>
       <span class="permalink">
       <a href="../../rxscalajs/subjects/ReplaySubject.html#debounceTime(timeout:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]" title="Permalink">
@@ -1237,6 +1281,25 @@ if the source Observable is empty.</p><p><img width="640" height="305" src="http
 </p></div><dl class="paramcmts block"><dt class="param">defaultValue</dt><dd class="cmt"><p>the item to emit if the source Observable emits no items. This is a by-name parameter, so it is
 only evaluated if the source Observable doesn't emit anything.</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits either the specified default item if the source Observable emits no
         items, or the items emitted by the source Observable</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+    </li><li name="rxscalajs.Observable#delay" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="delay(delay:Int):rxscalajs.Observable[T]"></a><a id="delay(Int):Observable[T]"></a>
+      <span class="permalink">
+      <a href="../../rxscalajs/subjects/ReplaySubject.html#delay(delay:Int):rxscalajs.Observable[T]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">delay</span><span class="params">(<span name="delay">delay: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.ReplaySubject.T">T</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Returns an Observable that emits the items emitted by the source Observable shifted forward in time by a
+specified delay.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that emits the items emitted by the source Observable shifted forward in time by a
+specified delay. Error notifications from the source Observable are not delayed.</p><p><img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/delay.png" alt="" />
+</p></div><dl class="paramcmts block"><dt class="param">delay</dt><dd class="cmt"><p>the delay to shift the source by</p></dd><dt>returns</dt><dd class="cmt"><p>the source Observable shifted in time by the specified delay</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#delay" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="delay(delay:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]"></a><a id="delay(FiniteDuration):Observable[T]"></a>
       <span class="permalink">
@@ -2752,6 +2815,26 @@ whenever the specified sampler Observable emits an item or completes.</p><p><img
 the Observable to use for sampling the source Observable</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the results of sampling the items emitted by this Observable whenever
         the sampler Observable emits an item or completes</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#sampleTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sampleTime(delay:Int):rxscalajs.Observable[T]"></a><a id="sampleTime(Int):Observable[T]"></a>
+      <span class="permalink">
+      <a href="../../rxscalajs/subjects/ReplaySubject.html#sampleTime(delay:Int):rxscalajs.Observable[T]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">sampleTime</span><span class="params">(<span name="delay">delay: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.ReplaySubject.T">T</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Returns an Observable that emits the results of sampling the items emitted by the source
+Observable at a specified time interval.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that emits the results of sampling the items emitted by the source
+Observable at a specified time interval.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/sample.png" alt="" />
+</p></div><dl class="paramcmts block"><dt class="param">delay</dt><dd class="cmt"><p>the sampling rate</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that emits the results of sampling the items emitted by the source
+        Observable at the specified time interval</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+    </li><li name="rxscalajs.Observable#sampleTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="sampleTime(delay:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]"></a><a id="sampleTime(FiniteDuration):Observable[T]"></a>
       <span class="permalink">
       <a href="../../rxscalajs/subjects/ReplaySubject.html#sampleTime(delay:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]" title="Permalink">
@@ -3287,6 +3370,24 @@ that receives a value from the source Observable, for computing the silencing
 duration for each source value, returned as an Observable or a Promise.</p></dd><dt>returns</dt><dd class="cmt"><p>An Observable that performs the throttle operation to
         limit the rate of emissions from the source.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#throttleTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="throttleTime(delay:Int):rxscalajs.Observable[T]"></a><a id="throttleTime(Int):Observable[T]"></a>
+      <span class="permalink">
+      <a href="../../rxscalajs/subjects/ReplaySubject.html#throttleTime(delay:Int):rxscalajs.Observable[T]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">throttleTime</span><span class="params">(<span name="delay">delay: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.ReplaySubject.T">T</span>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Debounces by dropping all values that are followed by newer values before the timeout value expires.</p><div class="fullcomment"><div class="comment cmt"><p>Debounces by dropping all values that are followed by newer values before the timeout value expires. The timer resets on each <code>onNext</code> call.</p><p>NOTE: If events keep firing faster than the timeout then no data will be emitted.</p><p><img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/throttleWithTimeout.png" alt="" />
+</p></div><dl class="paramcmts block"><dt class="param">delay</dt><dd class="cmt"><p>
+The time each value has to be 'the most recent' of the <a href="../Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> to ensure that it's not dropped.</p></dd><dt>returns</dt><dd class="cmt"><p>Observable which performs the throttle operation.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd><dt>See also</dt><dd><span class="cmt"><p><code>Observable.debounce</code></p></span></dd></dl></div>
+    </li><li name="rxscalajs.Observable#throttleTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="throttleTime(delay:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]"></a><a id="throttleTime(FiniteDuration):Observable[T]"></a>
       <span class="permalink">
       <a href="../../rxscalajs/subjects/ReplaySubject.html#throttleTime(delay:scala.concurrent.duration.FiniteDuration):rxscalajs.Observable[T]" title="Permalink">
@@ -3680,6 +3781,30 @@ or encounters an error, the current window is emitted and the event is propagate
 The period of time each window is collecting values before it should be emitted, and
 replaced with a new window.</p></dd><dt class="param">scheduler</dt><dd class="cmt"><p>
 The <a href="../Scheduler.html" class="extype" name="rxscalajs.Scheduler">rxscalajs.Scheduler</a> to use when determining the end and start of a window.</p></dd><dt>returns</dt><dd class="cmt"><p>
+An <a href="../Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> which produces connected non-overlapping windows which are emitted after
+a fixed duration or when the window has reached maximum capacity (which ever occurs first).</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
+    </li><li name="rxscalajs.Observable#windowTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="windowTime(timespan:Int,timeshift:Int):rxscalajs.Observable[rxscalajs.Observable[T]]"></a><a id="windowTime(Int,Int):Observable[Observable[T]]"></a>
+      <span class="permalink">
+      <a href="../../rxscalajs/subjects/ReplaySubject.html#windowTime(timespan:Int,timeshift:Int):rxscalajs.Observable[rxscalajs.Observable[T]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">windowTime</span><span class="params">(<span name="timespan">timespan: <span class="extype" name="scala.Int">Int</span></span>, <span name="timeshift">timeshift: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.subjects.ReplaySubject.T">T</span>]]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Creates an Observable which produces windows of collected values.</p><div class="fullcomment"><div class="comment cmt"><p>Creates an Observable which produces windows of collected values. This Observable produces connected
+non-overlapping windows, each of a fixed duration specified by the <code>timespan</code> argument or a maximum size
+specified by the <code>count</code> argument (which ever is reached first). When the source Observable completes
+or encounters an error, the current window is emitted and the event is propagated.
+</p></div><dl class="paramcmts block"><dt class="param">timespan</dt><dd class="cmt"><p>
+The period of time each window is collecting values before it should be emitted, and
+replaced with a new window.</p></dd><dt class="param">timeshift</dt><dd class="cmt"><p>the period of time after which a new window will be created</p></dd><dt>returns</dt><dd class="cmt"><p>
 An <a href="../Observable.html" class="extype" name="rxscalajs.Observable">rxscalajs.Observable</a> which produces connected non-overlapping windows which are emitted after
 a fixed duration or when the window has reached maximum capacity (which ever occurs first).</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../Observable.html" class="extype" name="rxscalajs.Observable">Observable</a></dd></dl></div>
     </li><li name="rxscalajs.Observable#windowTime" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
