@@ -297,6 +297,25 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     new Observable(inner
       .bufferTime(bufferTimeSpan.toMillis.toInt, bufferCreationInterval.toMillis.toInt).map((n: js.Array[_ <: T]) => n.toList))
   }
+  /**
+    * Creates an Observable which produces buffers of collected values. This Observable starts a new buffer
+    * periodically, which is determined by the `timeshift` argument. Each buffer is emitted after a fixed timespan
+    * specified by the `timespan` argument. When the source Observable completes or encounters an error, the
+    * current buffer is emitted and the event is propagated.
+    *
+    * @param bufferTimeSpan
+    * The period of time each buffer is collecting values before it should be emitted.
+    * @param bufferCreationInterval
+    * The period of time after which a new buffer will be created.
+    *
+    * @return
+    * An [[rxscalajs.Observable]] which produces new buffers periodically, and these are emitted after
+    * a fixed timespan has elapsed.
+    */
+  def bufferTime(bufferTimeSpan: Int, bufferCreationInterval: Int): Observable[List[T]] = {
+    new Observable(inner
+      .bufferTime(bufferTimeSpan, bufferCreationInterval).map((n: js.Array[_ <: T]) => n.toList))
+  }
 
   /**
     * Creates an Observable which produces buffers of collected values.
@@ -895,6 +914,25 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
   }
 
   /**
+    * Debounces by dropping all values that are followed by newer values before the timeout value expires. The timer resets on each `onNext` call.
+    *
+    * NOTE: If events keep firing faster than the timeout then no data will be emitted.
+    *
+    * <img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/debounce.png" alt="" />
+    *
+    * $debounceVsThrottle
+    *
+    * @param timeout
+    * The time each value has to be 'the most recent' of the Observable to ensure that it's not dropped.
+    *
+    * @return An Observable which filters out values which are too quickly followed up with newer values.
+    * @see `Observable.throttleWithTimeout`
+    */
+  def debounceTime(timeout: Int): Observable[T] = {
+    new Observable(inner.debounceTime(timeout))
+  }
+
+  /**
     * Returns an Observable that emits the items emitted by the source Observable or a specified default item
     * if the source Observable is empty.
     *
@@ -938,6 +976,20 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     */
   def delay(delay: FiniteDuration): Observable[T] = {
     new Observable(inner.delay(delay.toMillis.toInt))
+  }
+
+  /**
+    * Returns an Observable that emits the items emitted by the source Observable shifted forward in time by a
+    * specified delay. Error notifications from the source Observable are not delayed.
+    *
+    * <img width="640" height="310" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/delay.png" alt="" />
+    *
+    * @param delay the delay to shift the source by
+    *
+    * @return the source Observable shifted in time by the specified delay
+    */
+  def delay(delay: Int): Observable[T] = {
+    new Observable(inner.delay(delay))
   }
 
   /**
@@ -1880,6 +1932,21 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
   }
 
   /**
+    * Returns an Observable that emits the results of sampling the items emitted by the source
+    * Observable at a specified time interval.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/sample.png" alt="" />
+    *
+    * @param delay the sampling rate
+    *
+    * @return an Observable that emits the results of sampling the items emitted by the source
+    *         Observable at the specified time interval
+    */
+  def sampleTime(delay: Int): Observable[T] = {
+    new Observable(inner.sampleTime(delay))
+  }
+
+  /**
     * Returns an Observable that applies a function of your choosing to the first item emitted by a
     * source Observable, then feeds the result of that function along with the second item emitted
     * by an Observable into the same function, and so on until all items have been emitted by the
@@ -2279,6 +2346,23 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
   }
 
   /**
+    * Debounces by dropping all values that are followed by newer values before the timeout value expires. The timer resets on each `onNext` call.
+    *
+    * NOTE: If events keep firing faster than the timeout then no data will be emitted.
+    *
+    * <img width="640" height="305" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/throttleWithTimeout.png" alt="" />
+    *
+    * @param delay
+    * The time each value has to be 'the most recent' of the [[rxscalajs.Observable]] to ensure that it's not dropped.
+    *
+    * @return Observable which performs the throttle operation.
+    * @see `Observable.debounce`
+    */
+  def throttleTime(delay: Int): Observable[T] = {
+    new Observable(inner.throttleTime(delay))
+  }
+
+  /**
     * Returns an Observable that emits records of the time interval between consecutive items emitted by the
     * source Observable.
     * <p>
@@ -2488,6 +2572,25 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     */
   def windowTime(timespan: FiniteDuration, timeshift: FiniteDuration): Observable[Observable[T]] = {
     new Observable(inner.windowTime(timespan.toMillis.toInt, timeshift.toMillis.toInt).map((o: ObservableFacade[T]) => new Observable(o)))
+  }
+
+  /**
+    * Creates an Observable which produces windows of collected values. This Observable produces connected
+    * non-overlapping windows, each of a fixed duration specified by the `timespan` argument or a maximum size
+    * specified by the `count` argument (which ever is reached first). When the source Observable completes
+    * or encounters an error, the current window is emitted and the event is propagated.
+    *
+    * @param timespan
+    * The period of time each window is collecting values before it should be emitted, and
+    * replaced with a new window.
+    * @param timeshift the period of time after which a new window will be created
+    *
+    * @return
+    * An [[rxscalajs.Observable]] which produces connected non-overlapping windows which are emitted after
+    * a fixed duration or when the window has reached maximum capacity (which ever occurs first).
+    */
+  def windowTime(timespan: Int, timeshift: Int): Observable[Observable[T]] = {
+    new Observable(inner.windowTime(timespan, timeshift).map((o: ObservableFacade[T]) => new Observable(o)))
   }
   /**
     * Creates an Observable which produces windows of collected values. This Observable produces connected
@@ -3034,6 +3137,21 @@ object Observable {
   def interval(duration: Duration = Duration.Zero): Observable[Int] = {
     new Observable(ObservableFacade.interval(duration.toMillis.toInt))
   }
+
+  /**
+    * Emits `0`, `1`, `2`, `...` with a delay of `duration` between consecutive numbers.
+    *
+    * <img width="640" height="195" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/interval.png" alt="" />
+    *
+    * @param duration
+    * duration in milliseconds between two consecutive numbers
+    *
+    * @return An Observable that emits a number each time interval.
+    */
+  def interval(duration: Int): Observable[Int] = {
+    new Observable(ObservableFacade.interval(duration))
+  }
+
 
   /**
     * Converts a sequence of values into an Observable.
