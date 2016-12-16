@@ -5,7 +5,7 @@ name := "RxScala.js"
 
 normalizedName := "rxscala-js"
 
-version := "0.13.1"
+version := "0.13.2"
 
 organization := "com.github.lukajcb"
 

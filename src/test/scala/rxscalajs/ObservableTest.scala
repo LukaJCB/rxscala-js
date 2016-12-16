@@ -84,7 +84,13 @@ object ObservableTest extends TestSuite {
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2).subscribe(unit)
         obs.distinctUntilChanged((n: Int, n2: Int) => n > n2, (n: Int) => n).subscribe(unit)
       }
-
+      'Empty {
+        ObservableFacade.empty().subscribe(unit)
+        ObservableFacade.empty(Scheduler.async).subscribe(unit)
+      }
+      'Never {
+        ObservableFacade.never().subscribe(unit)
+      }
       'Every {
         obs.every((n: Int, n2: Int) => n > n2).subscribe(unit)
       }
@@ -600,6 +606,12 @@ object ObservableTest extends TestSuite {
         })
         o.subscribe(unit)
         assert(x)
+      }
+      'Empty {
+        Observable.empty.subscribe(unit)
+      }
+      'Never {
+        Observable.never.subscribe(unit)
       }
       'FromIterable {
         val iterable = List(1,24,3,35,5,34)

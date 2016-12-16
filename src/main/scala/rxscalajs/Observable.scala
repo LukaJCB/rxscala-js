@@ -3025,6 +3025,19 @@ object Observable {
     ObservableFacade.bindNodeCallback(callbackFunc, selector, scheduler)
   }
 
+
+  /**
+    * Creates an Observable that emits no items to the Observer and immediately emits a complete notification.
+    *
+    * <img width="640" height="170" src="http://reactivex.io/rxjs/img/empty.png" alt="" />
+    *
+    * This static operator is useful for creating a simple Observable that only emits the complete notification.
+    * It can be used for composing with other Observables, such as in a mergeMap.
+    *
+    * @return an Observable that emits only the complete notification.
+    */
+  def empty: Observable[Nothing] = new Observable(ObservableFacade.empty())
+
   /**
     *
     * @param sources
@@ -3151,6 +3164,17 @@ object Observable {
   def interval(duration: Int): Observable[Int] = {
     new Observable(ObservableFacade.interval(duration))
   }
+
+  /**
+    * Returns an Observable that never sends any items or notifications to an Observer.
+    *
+    * <img width="640" height="185" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/never.png" alt="" />
+    *
+    * This Observable is useful primarily for testing purposes.
+    *
+    * @return an Observable that never sends any items or notifications to an Observer
+    */
+  def never: Observable[Nothing] = new Observable(ObservableFacade.never())
 
 
   /**
