@@ -21,7 +21,7 @@ libraryDependencies ++= Seq(
 
 testFrameworks += new TestFramework("utest.runner.Framework")
 
-jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.1" % "test" / "bundles/Rx.min.js" commonJSName "Rx"
+jsDependencies += "org.webjars.npm" % "rxjs" % "5.0.3" % "test" / "bundles/Rx.min.js" commonJSName "Rx"
 
 ghpages.settings
 
