@@ -16,7 +16,7 @@ crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.1")
 
 libraryDependencies ++= Seq(
   "org.scala-js" %%% "scalajs-dom" % "0.9.1",
-  "com.lihaoyi" %%% "utest" % "0.4.4" % "test"
+  "com.lihaoyi" %%% "utest" % "0.4.5" % "test"
 )
 
 testFrameworks += new TestFramework("utest.runner.Framework")
