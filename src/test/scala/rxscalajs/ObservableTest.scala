@@ -632,6 +632,13 @@ object ObservableTest extends TestSuite {
 
         Observable.forkJoin(o,o2).subscribe(unit)
       }
+      'StartWithMany {
+        val o = Observable.never.startWithMany(-3,-2,-1)
+        o.bufferCount(3).subscribe(list => {
+          assert(list == List(-3,-2,-1))
+          assert(list != List(-3,-1,-2))
+        })
+      }
 
       'ForComprehensions {
           for {

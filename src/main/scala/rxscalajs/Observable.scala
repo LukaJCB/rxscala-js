@@ -2171,6 +2171,21 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
   def startWith[U >: T](elem: U): Observable[U] = {
     new Observable[U](inner.startWith(elem))
   }
+
+  /**
+    * Returns an Observable that emits a specified sequence of items before it begins to emit items emitted by the source Observable.
+    * <p>
+    * <img width="640" height="315" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/startWith.png" alt="" />
+    *
+    * @param elements the items to emit
+    *
+    * @return an Observable that emits the specified item before it begins to emit items emitted by the source Observable
+    */
+  def startWithMany[U >: T](elements: U*): Observable[U] = {
+    val self: Observable[U] = this
+    elements.foldRight(self)((cur, acc) => acc.startWith(cur))
+  }
+
   /**
     * Given an Observable that emits Observables, creates a single Observable that
     * emits the items emitted by the most recently published of those Observables.
