@@ -3279,4 +3279,7 @@ object Observable {
     new Observable(ObservableFacade.zip(observables.map(_.inner).toJSArray, func))
   }
 
+
+  def fromJSObservable[T](jsObservable: ObservableFacade[T]) = new Observable(jsObservable)
+
 }
