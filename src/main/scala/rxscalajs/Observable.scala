@@ -3132,7 +3132,7 @@ object Observable {
     */
 
   def combineLatest[T](sources: Seq[Observable[T]]): Observable[Seq[T]] = {
-    sources.foldLeft(Observable.of(Seq[T]()))((acc, cur) => acc.combineLatestWith(cur)(_ :+ _))
+    sources.foldLeft(Observable.of(Seq.empty[T]))((acc, cur) => acc.combineLatestWith(cur)(_ :+ _))
   }
 
   /**
