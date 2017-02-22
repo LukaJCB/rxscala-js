@@ -2,6 +2,7 @@ package rxscalajs.subscription
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.|
 
 
 @js.native
@@ -21,14 +22,14 @@ trait AnonymousSubscription extends js.Object {
   * This interface is the equivalent of `IDisposable` in the .NET Rx implementation.
   */
 class Subscription protected () extends AnonymousSubscription {
-  def add(teardown: AnonymousSubscription ): Subscription = js.native
+  def add(teardown: Subscription | js.Function0[Unit]): Subscription = js.native
   def remove(sub: Subscription): Unit = js.native
   def this(unsubscribe: js.Function0[Unit] = js.native) = this()
 
-  val closed: Boolean = js.native
+  def closed: Boolean = js.native
 
   @JSName("closed")
-  val isUnsubscribed: Boolean = js.native
+  def isUnsubscribed: Boolean = js.native
 }
 
 @js.native

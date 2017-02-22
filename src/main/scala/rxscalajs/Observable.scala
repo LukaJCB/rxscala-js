@@ -2814,7 +2814,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     *         before the Observable has finished sending them
     * @see <a href="http://reactivex.io/documentation/operators/subscribe.html">ReactiveX operators documentation: Subscribe</a>
     */
-  def subscribe(observer: Observer[T]): AnonymousSubscription = {
+  def subscribe(observer: Observer[T]): Subscription = {
     val complete: () => Unit = observer.complete _
     inner
       .subscribe(observer.next _: js.Function1[T, Unit],
