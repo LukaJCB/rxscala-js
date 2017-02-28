@@ -5,6 +5,7 @@ import rxscalajs.subscription.{AnonymousSubscription, ObserverFacade, Subscripti
 import scala.scalajs.js
 import scala.scalajs.js._
 import org.scalajs.dom._
+import rxscalajs.dom.{AjaxRequest, AjaxResponse}
 
 import scala.scalajs.js.annotation.JSName
 
@@ -190,7 +191,7 @@ import scala.scalajs.js.annotation.JSName
   object ObservableFacade extends js.Object {
     type CreatorFacade = Unit | js.Function0[Unit]
 
-    def ajax[T2](request: String | js.Object): ObservableFacade[T2]  = js.native
+    def ajax(request: String | AjaxRequest): ObservableFacade[AjaxResponse]  = js.native
 
     def bindCallback[T,T2](callbackFunc: js.Function, selector: js.Function, scheduler: Scheduler): js.Function1[T2, ObservableFacade[T]]  = js.native
 

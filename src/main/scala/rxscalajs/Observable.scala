@@ -2,6 +2,7 @@ package rxscalajs
 
 import org.scalajs.dom.Element
 import org.scalajs.dom.raw.Event
+import rxscalajs.dom.{Ajax, Request, Response}
 import rxscalajs.facade._
 import rxscalajs.subscription._
 
@@ -2970,8 +2971,10 @@ object Observable {
   }
 
   def ajax(url: String): Observable[js.Dynamic] = new Observable(ObservableFacade.ajax(url))
+    .map(_.asInstanceOf[js.Dynamic])
 
-  def ajax(settings: js.Object): Observable[js.Dynamic] = new Observable(ObservableFacade.ajax(settings))
+  def ajax(settings: Request): Observable[Response] = new Observable(ObservableFacade.ajax(Ajax.toJsRequest(settings)))
+    .map(Ajax.fromJsResponse)
   /**
     * Converts a callback API to a function that returns an Observable.
     *
