@@ -641,10 +641,12 @@ object ObservableTest extends TestSuite {
       }
 
       'ForComprehensions {
+        val forObs =
           for {
             o <- hoObs
-            n <- o
-          } yield (n > 100)
+            (i1,i2) <- o zip obs
+          } yield i1 > i2
+        forObs.subscribe(unit)
       }
       'SubscriptionTests {
         val sub = intervalObs.subscribe(unit)

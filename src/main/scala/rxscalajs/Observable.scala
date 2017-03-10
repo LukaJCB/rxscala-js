@@ -2836,6 +2836,19 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     subscribe(onNext)
   }
 
+  def withFilter(p: T => Boolean): WithFilter[T] = new WithFilter[T](p, this)
+
+  class WithFilter[+A](p : A => Boolean, observable: Observable[A]) {
+    def map[B](f: A => B): Observable[B] = observable filter p map f
+
+    def flatMap[B](f: A => Observable[B]): Observable[B] =
+      observable filter p flatMap f
+
+    def foreach(onNext: A => Unit): Unit = observable filter p subscribe onNext
+
+    def withFilter(q: A => Boolean): Observable[A] = observable filter (a => p(a) && q(a))
+  }
+
   private def get = inner
 
   implicit def toFacade[A](observable: Observable[A]): ObservableFacade[A] = observable.get
