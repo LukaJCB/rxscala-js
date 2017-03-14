@@ -15,7 +15,7 @@ import scala.scalajs.js.annotation.JSName
     def subscribe(observer: ObserverFacade[_ >: T]): Subscription = js.native
   }
 
-  @js.native
+  @js.native @JSGlobal
   class GroupedObservableFacade[K,T] protected() extends ObservableFacade[T] {
     def this(key: K, groupSubject: SubjectFacade[T], refCountSubscription: Subscription) = this()
     val key: K = js.native
@@ -26,14 +26,14 @@ import scala.scalajs.js.annotation.JSName
   @js.native
   trait Timestamp[+T] extends js.Object { def value: T; def timestamp: Double }
 
-  @js.native
+  @js.native @JSGlobal
   class ErrorObservableFacade protected() extends ObservableFacade[js.Any] {
     def this(error: js.Any,scheduler: Scheduler = ???) = this()
   }
 
 
   @js.native
-  @JSName("Rx.Observable")
+  @JSGlobal("Rx.Observable")
   class ObservableFacade[+T] protected() extends Subscribable[T] {
     def this(subscribe: js.Function = js.native) = this()
 
@@ -187,7 +187,7 @@ import scala.scalajs.js.annotation.JSName
   }
 
   @js.native
-  @JSName("Rx.Observable")
+  @JSGlobal("Rx.Observable")
   object ObservableFacade extends js.Object {
     type CreatorFacade = Unit | js.Function0[Unit]
 
