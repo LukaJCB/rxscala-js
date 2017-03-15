@@ -12,7 +12,7 @@ import scala.scalajs.js
 import scala.scalajs.js.JSConverters._
 import scala.scalajs.js._
 import scala.util.{Failure, Success}
-
+import scala.language.implicitConversions
 
 
 /**
