@@ -2969,7 +2969,7 @@ object Observable {
     }
     def unitOrFn(in: Creator): CreatorFacade = {
       in match {
-        case b: (() => Unit) => b: js.Function0[Unit]
+        case b: scala.Function0[_] => b.asInstanceOf[() => Unit]: js.Function0[Unit]
         case _ => (): Unit
       }
     }
