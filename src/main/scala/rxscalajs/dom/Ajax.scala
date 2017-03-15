@@ -1,6 +1,7 @@
 package rxscalajs.dom
 
 import scala.scalajs.js
+import scala.scalajs.js.JSON
 
 
 final case class Request(url: String,
@@ -28,8 +29,9 @@ object Ajax {
   }
 
   def fromJsResponse(response: AjaxResponse): Response = {
+    val body = response.responseText.getOrElse(JSON.stringify(response.response))
     Response(
-      response.responseText,
+      body,
       response.status.toInt,
       response.responseType
     )

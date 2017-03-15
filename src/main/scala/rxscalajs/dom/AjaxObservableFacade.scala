@@ -62,7 +62,7 @@ class AjaxResponse protected () extends js.Object {
   var request: AjaxRequest = js.native
   var status: Double = js.native
   var response: js.Any = js.native
-  var responseText: String = js.native
+  var responseText: js.UndefOr[String] = js.native
   var responseType: String = js.native
 }
 
