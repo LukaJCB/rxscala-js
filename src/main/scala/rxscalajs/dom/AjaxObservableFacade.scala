@@ -83,13 +83,4 @@ class AjaxTimeoutError protected () extends AjaxError {
   def this(xhr: XMLHttpRequest, request: AjaxRequest) = this()
 }
 
-@js.native
-object Rxscalajs extends js.GlobalScope {
-  def ajaxGet[T](url: String, resultSelector: js.Function1[AjaxResponse, T] = ???, headers: Object = ???): AjaxObservableFacade[T] = js.native
-  def ajaxPost[T](url: String, body: js.Any = ???, headers: Object = ???): ObservableFacade[T] = js.native
-  def ajaxDelete[T](url: String, headers: Object = ???): ObservableFacade[T] = js.native
-  def ajaxPut[T](url: String, body: js.Any = ???, headers: Object = ???): ObservableFacade[T] = js.native
-  def ajaxGetJSON[T, R](url: String, resultSelector: js.Function1[T, R] = ???, headers: Object = ???): ObservableFacade[R] = js.native
-}
-
 
