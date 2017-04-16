@@ -1,5 +1,7 @@
 package rxscalajs.dom
 
+import org.scalajs.dom.XMLHttpRequest
+
 import scala.scalajs.js
 import scala.scalajs.js.JSON
 
@@ -12,7 +14,7 @@ final case class Request(url: String,
                          responseType: String = "",
                          method: String = "GET")
 
-final case class Response(body: String, status: Int, responseType: String, response: js.Dynamic)
+final case class Response(body: String, status: Int, responseType: String, xhr: XMLHttpRequest, response: js.Dynamic)
 
 object Ajax {
   import scala.scalajs.js.JSConverters._
@@ -29,11 +31,15 @@ object Ajax {
   }
 
   def fromJsResponse(response: AjaxResponse): Response = {
-    val body = response.responseText.getOrElse(JSON.stringify(response.response))
+    val body = response.responseText.getOrElse{
+      if (response.responseType == "json") JSON.stringify(response.response)
+      else response.response.toString
+    }
     Response(
       body,
       response.status.toInt,
       response.responseType,
+      response.xhr,
       response.response.asInstanceOf[js.Dynamic]
     )
   }
