@@ -24,7 +24,7 @@ Getting Started
 Add the following to your sbt build definition:
 
 
-    libraryDependencies += "com.github.lukajcb" %%% "rxscala-js" % "0.13.4"
+    libraryDependencies += "com.github.lukajcb" %%% "rxscala-js" % "0.13.6"
 
 
 then import the types from the package `rxscalajs`.
