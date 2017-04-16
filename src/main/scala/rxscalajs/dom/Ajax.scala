@@ -12,7 +12,7 @@ final case class Request(url: String,
                          responseType: String = "",
                          method: String = "GET")
 
-final case class Response(body: String, status: Int, responseType: String)
+final case class Response(body: String, status: Int, responseType: String, response: js.Dynamic)
 
 object Ajax {
   import scala.scalajs.js.JSConverters._
@@ -33,7 +33,8 @@ object Ajax {
     Response(
       body,
       response.status.toInt,
-      response.responseType
+      response.responseType,
+      response.response.asInstanceOf[js.Dynamic]
     )
   }
 }
