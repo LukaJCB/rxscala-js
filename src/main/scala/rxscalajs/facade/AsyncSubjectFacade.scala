@@ -6,7 +6,7 @@ import scala.scalajs.js.annotation.JSName
 
 
 @js.native
-@JSName("Rx.AsyncSubject")
+@JSGlobal("Rx.AsyncSubject")
 class AsyncSubjectFacade[T] extends SubjectFacade[T] {
   var value: T = js.native
   var hasNext: Boolean = js.native

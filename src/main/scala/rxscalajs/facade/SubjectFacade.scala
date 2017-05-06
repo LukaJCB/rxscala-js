@@ -7,7 +7,7 @@ import scala.scalajs.js.annotation._
 
 
 @js.native
-@JSName("Rx.Subject")
+@JSGlobal("Rx.Subject")
 class SubjectFacade[T] protected() extends ObservableFacade[T] with AnonymousSubscription with ObserverFacade[T] {
   def this(destination: ObserverFacade[T] = ???, source: ObservableFacade[T] = ???) = this()
 
@@ -18,7 +18,7 @@ class SubjectFacade[T] protected() extends ObservableFacade[T] with AnonymousSub
   def throwIfUnsubscribed(): js.Dynamic = js.native
 }
 
-@js.native
+@js.native @JSGlobal
 object SubjectFacade extends js.Object {
   var create: js.Function = js.native
 }
