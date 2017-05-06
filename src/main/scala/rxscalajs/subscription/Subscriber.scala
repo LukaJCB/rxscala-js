@@ -2,10 +2,10 @@ package rxscalajs.subscription
 
 import scala.scalajs.js
 import scala.scalajs.js.|
+import scala.scalajs.js.annotation.JSGlobal
 
 
-
-@js.native
+@js.native @JSGlobal
 /**
 * An extension of the [[ObserverFacade]] trait which adds subscription handling
 * (unsubscribe, isUnsubscribed, and `add` methods) and backpressure handling
@@ -25,7 +25,7 @@ class Subscriber[T]  () extends Subscription {
   def error(err: js.Any = ???): Unit = js.native
 }
 
-@js.native
+@js.native @JSGlobal
 object Subscriber extends js.Object {
   def create[T](next: js.Function1[T, Unit] = ???, error: js.Function1[js.Any, Unit] = ???, complete: js.Function0[Unit] = ???): Subscriber[T] = js.native
 }

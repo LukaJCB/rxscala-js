@@ -1,15 +1,15 @@
 package rxscalajs.dom
 
 import rxscalajs.subscription.Subscriber
-
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import js.|
 import org.scalajs.dom._
 
 
 import rxscalajs.facade.ObservableFacade
 
-  @js.native
+@js.native
 trait AjaxRequest extends js.Object {
   var url: String = js.native
   var body: js.Any = js.native
@@ -38,23 +38,23 @@ AjaxCreationMethod extends js.Object {
   def getJSON[T, R](url: String, resultSelector: js.Function1[T, R] = ???, headers: Object = ???): ObservableFacade[R] = js.native
 }
 
-@js.native
+@js.native @JSGlobal
 class AjaxObservableFacade[T] protected() extends ObservableFacade[T] {
   def this(urlOrRequest: String | AjaxRequest) = this()
 }
 
-@js.native
+@js.native @JSGlobal
 object AjaxObservableFacade extends js.Object {
   var create: AjaxCreationMethod = js.native
 }
 
-@js.native
+@js.native @JSGlobal
 class AjaxSubscriber[T] protected () extends Subscriber[Event] {
   def this(destination: Subscriber[T], request: AjaxRequest) = this()
   var request: AjaxRequest = js.native
 }
 
-@js.native
+@js.native @JSGlobal
 class AjaxResponse protected () extends js.Object {
   def this(originalEvent: Event, xhr: XMLHttpRequest, request: AjaxRequest) = this()
   var originalEvent: Event = js.native
@@ -66,11 +66,12 @@ class AjaxResponse protected () extends js.Object {
   var responseType: String = js.native
 }
 
-@js.native
+@js.native @JSGlobal
 class Error protected() extends js.Object
 
 
 @js.native
+@JSGlobal
 class AjaxError protected () extends Error {
   def this(message: String, xhr: XMLHttpRequest, request: AjaxRequest) = this()
   var xhr: XMLHttpRequest = js.native
@@ -78,7 +79,7 @@ class AjaxError protected () extends Error {
   var status: Double = js.native
 }
 
-@js.native
+@js.native @JSGlobal
 class AjaxTimeoutError protected () extends AjaxError {
   def this(xhr: XMLHttpRequest, request: AjaxRequest) = this()
 }

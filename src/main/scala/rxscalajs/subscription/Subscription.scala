@@ -3,7 +3,7 @@ package rxscalajs.subscription
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.|
-
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait AnonymousSubscription extends js.Object {
@@ -15,7 +15,7 @@ trait AnonymousSubscription extends js.Object {
 }
 
 
-@js.native
+@js.native @JSGlobal
 /**
   * Subscriptions are returned from all `Observable.subscribe` methods to allow unsubscribing.
   *
@@ -33,7 +33,7 @@ class Subscription protected () extends AnonymousSubscription {
 }
 
 @js.native
-@JSName("Rx.Subscription")
+@JSGlobal("Rx.Subscription")
 object Subscription extends js.Object {
   var EMPTY: Subscription = js.native
 }
