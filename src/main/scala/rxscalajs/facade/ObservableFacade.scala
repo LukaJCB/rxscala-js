@@ -1,7 +1,7 @@
 package rxscalajs.facade
 import rxscalajs._
-import rxscalajs.subscription.{AnonymousSubscription, ObserverFacade, Subscription}
-
+import rxscalajs.subscription.{ObserverFacade, Subscription}
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js
 import scala.scalajs.js._
 import org.scalajs.dom._

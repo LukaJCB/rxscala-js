@@ -1,6 +1,6 @@
 package rxscalajs.facade
 import rxscalajs.Scheduler
-
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 

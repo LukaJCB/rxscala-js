@@ -3,7 +3,7 @@ package rxscalajs.subscription
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.|
-
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait AnonymousSubscription extends js.Object {

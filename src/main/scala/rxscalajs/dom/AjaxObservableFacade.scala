@@ -1,15 +1,15 @@
 package rxscalajs.dom
 
 import rxscalajs.subscription.Subscriber
-
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import js.|
 import org.scalajs.dom._
 
 
 import rxscalajs.facade.ObservableFacade
 
-  @js.native
+@js.native
 trait AjaxRequest extends js.Object {
   var url: String = js.native
   var body: js.Any = js.native
@@ -70,7 +70,8 @@ class AjaxResponse protected () extends js.Object {
 class Error protected() extends js.Object
 
 
-@js.native @JSGlobal
+@js.native
+@JSGlobal
 class AjaxError protected () extends Error {
   def this(message: String, xhr: XMLHttpRequest, request: AjaxRequest) = this()
   var xhr: XMLHttpRequest = js.native

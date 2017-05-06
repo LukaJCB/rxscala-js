@@ -1,7 +1,7 @@
 package rxscalajs.facade
 
 import rxscalajs.subscription.Subscription
-
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js
 
 
