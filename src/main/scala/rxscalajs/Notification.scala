@@ -11,7 +11,7 @@ import js.|
   import rxscalajs.facade.ObservableFacade
 
 @js.native
-@JSGlobal("Rx.Notification")
+@JSImport("rxjs/Rx", "Notification", globalFallback = "Rx.Notification")
 /**
   * Emitted by Observables returned by [[rxscalajs.Observable.materialize]].
   */
@@ -38,7 +38,7 @@ class Notification[T] protected () extends js.Object {
 }
 
 @js.native
-@JSGlobal("Rx.Notification")
+@JSImport("rxjs/Rx", "Notification", globalFallback = "Rx.Notification")
 object Notification extends js.Object {
   def createNext[T](value: T): Notification[T] = js.native
   def createError[T](err: js.Any = js.native): Notification[T] = js.native
