@@ -1,12 +1,11 @@
 package rxscalajs.dom
 
 import rxscalajs.subscription.Subscriber
+
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSGlobal
+import scala.scalajs.js.annotation.JSImport
 import js.|
 import org.scalajs.dom._
-
-
 import rxscalajs.facade.ObservableFacade
 
 @js.native
@@ -28,8 +27,7 @@ trait AjaxRequest extends js.Object {
 }
 
 @js.native
-trait
-AjaxCreationMethod extends js.Object {
+trait AjaxCreationMethod extends js.Object {
   def apply[T](urlOrRequest: String | AjaxRequest): ObservableFacade[T] = js.native
   def get[T](url: String, resultSelector: js.Function1[AjaxResponse, T] = ???, headers: Object = ???): ObservableFacade[T] = js.native
   def post[T](url: String, body: js.Any = ???, headers: Object = ???): ObservableFacade[T] = js.native
@@ -38,23 +36,27 @@ AjaxCreationMethod extends js.Object {
   def getJSON[T, R](url: String, resultSelector: js.Function1[T, R] = ???, headers: Object = ???): ObservableFacade[R] = js.native
 }
 
-@js.native @JSGlobal
+@js.native
+@JSImport("rxjs/Rx", "AjaxObservable", globalFallback = "Rx.AjaxObservable")
 class AjaxObservableFacade[T] protected() extends ObservableFacade[T] {
   def this(urlOrRequest: String | AjaxRequest) = this()
 }
 
-@js.native @JSGlobal
+@js.native
+@JSImport("rxjs/Rx", "AjaxObservable", globalFallback = "Rx.AjaxObservable")
 object AjaxObservableFacade extends js.Object {
   var create: AjaxCreationMethod = js.native
 }
 
-@js.native @JSGlobal
+@js.native
+@JSImport("rxjs/Rx", "AjaxSubscriber", globalFallback = "Rx.AjaxSubscriber")
 class AjaxSubscriber[T] protected () extends Subscriber[Event] {
   def this(destination: Subscriber[T], request: AjaxRequest) = this()
   var request: AjaxRequest = js.native
 }
 
-@js.native @JSGlobal
+@js.native
+@JSImport("rxjs/Rx", "AjaxResponse", globalFallback = "Rx.AjaxResponse")
 class AjaxResponse protected () extends js.Object {
   def this(originalEvent: Event, xhr: XMLHttpRequest, request: AjaxRequest) = this()
   var originalEvent: Event = js.native
@@ -66,12 +68,13 @@ class AjaxResponse protected () extends js.Object {
   var responseType: String = js.native
 }
 
-@js.native @JSGlobal
+@js.native
+@JSImport("rxjs/Rx", "Error", globalFallback = "Rx.Error")
 class Error protected() extends js.Object
 
 
 @js.native
-@JSGlobal
+@JSImport("rxjs/Rx", "AjaxError", globalFallback = "Rx.AjaxError")
 class AjaxError protected () extends Error {
   def this(message: String, xhr: XMLHttpRequest, request: AjaxRequest) = this()
   var xhr: XMLHttpRequest = js.native
@@ -79,7 +82,8 @@ class AjaxError protected () extends Error {
   var status: Double = js.native
 }
 
-@js.native @JSGlobal
+@js.native
+@JSImport("rxjs/Rx", "AjaxTimeoutError", globalFallback = "Rx.AjaxTimeoutError")
 class AjaxTimeoutError protected () extends AjaxError {
   def this(xhr: XMLHttpRequest, request: AjaxRequest) = this()
 }

@@ -1,12 +1,12 @@
 package rxscalajs.facade
-import rxscalajs.subscription.{Subscriber, AnonymousSubscription}
+import rxscalajs.subscription.{AnonymousSubscription, Subscriber}
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSGlobal
+import scala.scalajs.js.annotation.JSImport
 
 
 @js.native
-@JSGlobal("Rx.AsyncSubject")
+@JSImport("rxjs/Rx", "AsyncSubject", globalFallback = "Rx.AsyncSubject")
 class AsyncSubjectFacade[T] extends SubjectFacade[T] {
   var value: T = js.native
   var hasNext: Boolean = js.native
