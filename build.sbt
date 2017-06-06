@@ -9,9 +9,9 @@ version := "0.14.0"
 
 organization := "com.github.lukajcb"
 
-scalaVersion := "2.12.1"
+scalaVersion := "2.12.2"
 
-crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.1")
+crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.2")
 
 
 libraryDependencies ++= Seq(
