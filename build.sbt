@@ -9,9 +9,9 @@ version := "0.14.0"
 
 organization := "com.github.lukajcb"
 
-scalaVersion := "2.12.1"
+scalaVersion := "2.12.3"
 
-crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.1")
+crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.3")
 
 
 libraryDependencies ++= Seq(
@@ -21,7 +21,7 @@ libraryDependencies ++= Seq(
 
 testFrameworks += new TestFramework("utest.runner.Framework")
 
-jsDependencies += "org.webjars.npm" % "rxjs" % "5.3.0" % "test" / "bundles/Rx.min.js" commonJSName "Rx"
+jsDependencies += "org.webjars.npm" % "rxjs" % "5.4.3" % "test" / "bundles/Rx.min.js" commonJSName "Rx"
 
 ghpages.settings
 
