@@ -49,7 +49,6 @@ import scala.scalajs.js.annotation.JSName
     def bufferToggle[T2,O](openings: Subscribable[O], closingSelector:  js.Function1[O, Subscribable[T2]]): ObservableFacade[js.Array[_ <: T]] = js.native
     def bufferWhen[T2](closingSelector: js.Function0[ObservableFacade[T2]]): ObservableFacade[js.Array[_ <: T]] = js.native
 
-    def cache(bufferSize: Int = ???, windowTime: Int = ???, scheduler: Scheduler = ???): ObservableFacade[T] = js.native
     def `catch`[U](selector:js.Function1[js.Any, ObservableFacade[U]]): ObservableFacade[U] = js.native
     def onErrorResumeNext[U >: T](resumeFunction: js.Function1[js.Any, ObservableFacade[U]]): ObservableFacade[U] = js.native
     def combineAll[T2,R](project:  js.Function1[js.Array[T2],R] = ???): ObservableFacade[R] = js.native
