@@ -57,7 +57,7 @@ import scala.scalajs.js.annotation.JSName
 
     def combineLatest[T2, R](v2: ObservableFacade[T2], project:  js.Function2[T,T2,R] = ???): ObservableFacade[R] = js.native
 
-    def concat[U](that: ObservableFacade[U], scheduler: Scheduler = ???): ObservableFacade[U] = js.native
+    def concat[U >: T](that: ObservableFacade[U], scheduler: Scheduler = ???): ObservableFacade[U] = js.native
 
     def concatAll[U](): ObservableFacade[U] = js.native
 

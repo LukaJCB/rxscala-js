@@ -812,7 +812,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
     * @return an Observable that emits items that are the result of combining the items emitted by
     *         this and that, one after the other
     */
-  def concat[U](other: Observable[U]): Observable[U] = {
+  def concat[U >: T](other: Observable[U]): Observable[U] = {
     new Observable(inner concat other)
   }
 
