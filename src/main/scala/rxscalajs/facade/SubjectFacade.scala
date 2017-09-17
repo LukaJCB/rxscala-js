@@ -7,7 +7,7 @@ import scala.scalajs.js.annotation._
 
 
 @js.native
-@JSName("Rx.Subject")
+@JSImport("rxjs/Rx", "Subject", globalFallback = "Rx.Subject")
 class SubjectFacade[T] protected() extends ObservableFacade[T] with AnonymousSubscription with ObserverFacade[T] {
   def this(destination: ObserverFacade[T] = ???, source: ObservableFacade[T] = ???) = this()
 
@@ -19,6 +19,7 @@ class SubjectFacade[T] protected() extends ObservableFacade[T] with AnonymousSub
 }
 
 @js.native
+@JSImport("rxjs/Rx", "Subject", globalFallback = "Rx.Subject")
 object SubjectFacade extends js.Object {
   var create: js.Function = js.native
 }

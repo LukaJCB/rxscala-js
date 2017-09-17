@@ -28,7 +28,7 @@ trait Scheduler extends js.Object {
 }
 
 @js.native
-@JSName("Rx.Scheduler")
+@JSImport("rxjs/Rx", "Scheduler", globalFallback = "Rx.Scheduler")
 /**
   * Represents an object that schedules units of work.
   */

@@ -2,10 +2,11 @@ package rxscalajs.subscription
 
 import scala.scalajs.js
 import scala.scalajs.js.|
-
+import scala.scalajs.js.annotation.JSImport
 
 
 @js.native
+@JSImport("rxjs/Rx", "Subscriber", globalFallback = "Rx.Subscriber")
 /**
 * An extension of the [[ObserverFacade]] trait which adds subscription handling
 * (unsubscribe, isUnsubscribed, and `add` methods) and backpressure handling
@@ -26,6 +27,7 @@ class Subscriber[T]  () extends Subscription {
 }
 
 @js.native
+@JSImport("rxjs/Rx", "Subscriber", globalFallback = "Rx.Subscriber")
 object Subscriber extends js.Object {
   def create[T](next: js.Function1[T, Unit] = ???, error: js.Function1[js.Any, Unit] = ???, complete: js.Function0[Unit] = ???): Subscriber[T] = js.native
 }
