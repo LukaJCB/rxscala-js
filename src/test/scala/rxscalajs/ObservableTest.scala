@@ -1,10 +1,12 @@
 package rxscalajs
 
-import rxscalajs.facade.{GroupedObservableFacade, ObservableFacade, SubjectFacade}
+import cats.{Applicative, Functor, Monad}
+import rxscalajs.facade.{GroupedObservableFacade, ObservableFacade}
 import rxscalajs.subjects.{AsyncSubject, BehaviorSubject, ReplaySubject}
 import rxscalajs.subscription._
 import utest._
 
+import scala.collection.mutable
 import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.duration._
 import scala.scalajs.js
@@ -703,6 +705,47 @@ object ObservableTest extends TestSuite {
         s.next(10)
 
         intervalObs.subscribe(s)
+      }
+    }
+
+    'InstanceTests {
+      import cats.implicits._
+
+      def toList[A](o: Observable[A]): List[A] = {
+        val buffer = mutable.ArrayBuffer[A]()
+
+        o(x => buffer.append(x))
+
+        buffer.toList
+      }
+
+      'Functor {
+        val o = Observable.of(1,2,3)
+        val mapped = Functor[Observable].map(o)(_ + 1)
+
+        assert(toList(mapped) == List(2,3,4))
+
+      }
+
+      'Applicative  {
+        val o = Observable.of(1,2)
+        val t = Applicative[Observable].replicateA(2, o)
+
+        assert(toList(t) == List(List(1,1), List(1,2), List(2,1), List(2,2)))
+
+      }
+
+      'Monad {
+        val o = Observable.just(1, 2)
+
+        val t = Monad[Observable].flatMap(o)(n => Observable.of(0 to n: _*))
+
+        assert(toList(t) == List(0, 1, 0, 1, 2))
+
+        val o2 = Observable.of(Observable.of(1,2), Observable.of(3))
+        val flat = Monad[Observable].flatten(o2)
+
+        assert(toList(flat) == List(1,2,3))
       }
     }
 

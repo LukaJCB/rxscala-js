@@ -5,7 +5,7 @@ name := "RxScala.js"
 
 normalizedName := "rxscala-js"
 
-version := "0.14.1"
+version := "0.15.0"
 
 organization := "com.github.lukajcb"
 
@@ -16,7 +16,8 @@ crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.3")
 
 libraryDependencies ++= Seq(
   "org.scala-js" %%% "scalajs-dom" % "0.9.1",
-  "com.lihaoyi" %%% "utest" % "0.4.5" % "test"
+  "org.typelevel" %%% "cats-core" % "0.9.0",
+  "com.lihaoyi" %%% "utest" % "0.4.5" % Test
 )
 
 testFrameworks += new TestFramework("utest.runner.Framework")

@@ -1,5 +1,6 @@
 package rxscalajs
 
+import cats.{MonadError, Monoid, MonoidK}
 import org.scalajs.dom.Element
 import org.scalajs.dom.raw.Event
 import rxscalajs.dom.{Ajax, Request, Response}
@@ -2781,7 +2782,7 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
 
 }
 
-object Observable {
+object Observable extends ObservableInstances {
 
   type Creator = Unit | (() => Unit)
 
@@ -3197,4 +3198,43 @@ object Observable {
 
   def fromJSObservable[T](jsObservable: ObservableFacade[T]) = new Observable(jsObservable)
 
+}
+
+private[rxscalajs] trait ObservableInstances {
+  implicit val observableMonad: MonadError[Observable, js.Any] = new MonadError[Observable, js.Any] {
+
+    def flatMap[A, B](fa: Observable[A])(f: (A) => Observable[B]): Observable[B] =
+      fa.flatMap(f)
+
+    def tailRecM[A, B](a: A)(f: A => Observable[Either[A, B]]): Observable[B] = f(a).flatMap {
+      case Left(e) => tailRecM(e)(f)
+      case Right(x) => pure(x)
+    }
+
+    def pure[A](x: A): Observable[A] = Observable.just(x)
+
+    def raiseError[A](e: js.Any): Observable[A] = Observable.create[A](_.error(e))
+
+    def handleErrorWith[A](fa: Observable[A])(f: (js.Any) => Observable[A]): Observable[A] =
+      fa.catchError(f)
+
+    override def map[A, B](fa: Observable[A])(f: (A) => B): Observable[B] = fa.map(f)
+
+    override def flatten[A](ffa: Observable[Observable[A]]): Observable[A] = ffa.flatten
+
+
+  }
+
+  implicit val observableMonoidK: MonoidK[Observable] = new MonoidK[Observable] {
+    def empty[A]: Observable[A] = Observable.empty
+
+    def combineK[A](x: Observable[A], y: Observable[A]): Observable[A] = x.merge(y)
+  }
+
+  implicit def observableMonoid[A: Monoid]: Monoid[Observable[A]] = new Monoid[Observable[A]] {
+    def empty: Observable[A] = Observable.empty
+
+    def combine(x: Observable[A], y: Observable[A]): Observable[A] =
+      x.combineLatestWith(y)(Monoid[A].combine)
+  }
 }
