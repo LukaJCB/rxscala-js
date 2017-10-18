@@ -19,6 +19,15 @@ object ObservableTest extends TestSuite {
 
   def tests = TestSuite {
     val unit = (n: Any) => ()
+
+    def toList[A](o: Observable[A]): List[A] = {
+      val buffer = mutable.ArrayBuffer[A]()
+
+      o(x => buffer.append(x))
+
+      buffer.toList
+    }
+
     'FacadeTests {
       val obs = ObservableFacade.of(1,11,21,1211,111221)
       val intervalObs = ObservableFacade.interval(100).take(5)
@@ -487,6 +496,16 @@ object ObservableTest extends TestSuite {
         obs.scan((n: Int, n2: Int) => n + n2).subscribe(unit)
         obs.scan(-20)((n: Int, n2: Int) => n + n2).subscribe(unit)
       }
+      'ScanM {
+        import cats.implicits._
+
+        val o = Observable.just(1, 2, 3, 4)
+        val scanned = o.scanM(0)((acc, cur) => Option(acc + cur))
+
+        val list = toList(Observable.just(1, 2, 3, 4).scan(0)(_ + _).map(Option.apply))
+
+        assert(toList(scanned) == list)
+      }
       'Share {
         obs.share.subscribe(unit)
       }
@@ -711,13 +730,7 @@ object ObservableTest extends TestSuite {
     'InstanceTests {
       import cats.implicits._
 
-      def toList[A](o: Observable[A]): List[A] = {
-        val buffer = mutable.ArrayBuffer[A]()
 
-        o(x => buffer.append(x))
-
-        buffer.toList
-      }
 
       'Functor {
         val o = Observable.of(1,2,3)

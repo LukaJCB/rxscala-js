@@ -1,6 +1,6 @@
 package rxscalajs
 
-import cats.{MonadError, Monoid, MonoidK}
+import cats.{Monad, MonadError, Monoid, MonoidK}
 import org.scalajs.dom.Element
 import org.scalajs.dom.raw.Event
 import rxscalajs.dom.{Ajax, Request, Response}
@@ -1872,6 +1872,22 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
   def scan[R](seed: R)(accumulator: (R, T) => R): Observable[R] = {
     new Observable(inner.scan(accumulator, seed))
   }
+
+  /**
+    * Similar to scan, but uses monadic accumulation instead.
+    *
+    * @param seed
+    * the initial (seed) accumulator value
+    * @param accumulator
+    * an accumulator function to be invoked on each item emitted by the source
+    *
+    * @return an Observable that emits the monadic result of each call to the accumulator function
+    */
+  def scanM[M[_]: Monad, R](seed: R)(accumulator: (R, T) => M[R]): Observable[M[R]] =
+    scan(Monad[M].pure(seed)) { (mr, t) =>
+      Monad[M].flatMap(mr)(r => accumulator(r, t))
+    }
+
   /**
     * Returns an Observable that applies a function of your choosing to the first item emitted by a
     * source Observable, then feeds the result of that function along with the second item emitted
