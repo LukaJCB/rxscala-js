@@ -1874,6 +1874,17 @@ class Observable[+T] protected[rxscalajs](val inner: ObservableFacade[T]) {
   }
 
   /**
+    * Similar to scan, but uses a monoid for accumulation instead.
+    *
+    * @param f
+    * a function to map this Observable to a monoid
+    *
+    * @return an Observable that emits the result of the accumulation
+    */
+  def scanMap[R: Monoid](f: T => R): Observable[R] =
+    map(f).scan(Monoid[R].empty)(Monoid[R].combine)
+
+  /**
     * Similar to scan, but uses monadic accumulation instead.
     *
     * @param seed

@@ -496,13 +496,23 @@ object ObservableTest extends TestSuite {
         obs.scan((n: Int, n2: Int) => n + n2).subscribe(unit)
         obs.scan(-20)((n: Int, n2: Int) => n + n2).subscribe(unit)
       }
+      'ScanMap {
+        import cats.implicits._
+
+        val o = Observable.just(1, 2, 3, 4)
+        val scanned = o.scanMap(identity)
+
+        val list = toList(o.scan(0)(_ + _))
+
+        assert(toList(scanned) == list)
+      }
       'ScanM {
         import cats.implicits._
 
         val o = Observable.just(1, 2, 3, 4)
         val scanned = o.scanM(0)((acc, cur) => Option(acc + cur))
 
-        val list = toList(Observable.just(1, 2, 3, 4).scan(0)(_ + _).map(Option.apply))
+        val list = toList(o.scan(0)(_ + _).map(Option.apply))
 
         assert(toList(scanned) == list)
       }
