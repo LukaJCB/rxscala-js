@@ -241,7 +241,7 @@ subscriber."></a>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">Observable</span>
+        <span class="name">Observable</span><span class="result"> extends <span class="extype" name="rxscalajs.ObservableInstances">ObservableInstances</span></span>
       </span>
       </h4>
 
@@ -250,7 +250,7 @@ subscriber."></a>
           <span class="toggle">
             Linear Supertypes
           </span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="rxscalajs.ObservableInstances">ObservableInstances</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -276,7 +276,7 @@ subscriber."></a>
                   <span class="filtertype">Inherited<br />
                   </span>
                   <ol id="linearization">
-                    <li class="in" name="rxscalajs.Observable"><span>Observable</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                    <li class="in" name="rxscalajs.Observable"><span>Observable</span></li><li class="in" name="rxscalajs.ObservableInstances"><span>ObservableInstances</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                   </ol>
                 </div><div class="ancestors">
               <span class="filtertype"></span>
@@ -299,9 +299,9 @@ subscriber."></a>
         <div id="types" class="types members">
               <h3>Type Members</h3>
               <ol><li name="rxscalajs.Observable.Creator" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Creator=scala.scalajs.js.|[Unit,()=&gt;Unit]"></a><a id="Creator:Creator"></a>
+      <a id="Creator=Unit|()=&gt;Unit"></a><a id="Creator:Creator"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable$.html#Creator=scala.scalajs.js.|[Unit,()=&gt;Unit]" title="Permalink">
+      <a href="../rxscalajs/Observable$.html#Creator=Unit|()=&gt;Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -371,9 +371,9 @@ subscriber."></a>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="rxscalajs.Observable#ajax" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ajax(settings:scala.scalajs.js.Object):rxscalajs.Observable[scala.scalajs.js.Dynamic]"></a><a id="ajax(Object):Observable[Dynamic]"></a>
+      <a id="ajax(settings:rxscalajs.dom.Request):rxscalajs.Observable[rxscalajs.dom.Response]"></a><a id="ajax(Request):Observable[Response]"></a>
       <span class="permalink">
-      <a href="../rxscalajs/Observable$.html#ajax(settings:scala.scalajs.js.Object):rxscalajs.Observable[scala.scalajs.js.Dynamic]" title="Permalink">
+      <a href="../rxscalajs/Observable$.html#ajax(settings:rxscalajs.dom.Request):rxscalajs.Observable[rxscalajs.dom.Response]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -382,7 +382,7 @@ subscriber."></a>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">ajax</span><span class="params">(<span name="settings">settings: <span class="extype" name="scala.scalajs.js.Object">Object</span></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="scala.scalajs.js.Dynamic">Dynamic</span>]</span>
+        <span class="name">ajax</span><span class="params">(<span name="settings">settings: <a href="dom/Request.html" class="extype" name="rxscalajs.dom.Request">Request</a></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<a href="dom/Response.html" class="extype" name="rxscalajs.dom.Response">Response</a>]</span>
       </span>
       
       
@@ -414,7 +414,7 @@ subscriber."></a>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="f">f: (<a href="Observer.html" class="extype" name="rxscalajs.Observer">Observer</a>[<span class="extype" name="rxscalajs.Observable.apply.T">T</span>]) ⇒ <a href="#Creator=scala.scalajs.js.|[Unit,()=&gt;Unit]" class="extmbr" name="rxscalajs.Observable.Creator">Creator</a></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.apply.T">T</span>]</span>
+        <span class="name">apply</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="f">f: (<a href="Observer.html" class="extype" name="rxscalajs.Observer">Observer</a>[<span class="extype" name="rxscalajs.Observable.apply.T">T</span>]) ⇒ <a href="#Creator=Unit|()=&gt;Unit" class="extmbr" name="rxscalajs.Observable.Creator">Creator</a></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.apply.T">T</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Returns an Observable that will execute the specified function when someone subscribes to it.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that will execute the specified function when someone subscribes to it.</p><p><img width="640" height="200" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/create.png" alt="" /></p><p>Write the function you pass so that it behaves as an Observable: It should invoke the
@@ -516,7 +516,7 @@ callbacks.</p></dd><dt>returns</dt><dd class="cmt"><p>A function which returns t
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java/lang/index.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
@@ -577,7 +577,7 @@ aggregation is defined by a specified function.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">create</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="f">f: (<a href="Observer.html" class="extype" name="rxscalajs.Observer">Observer</a>[<span class="extype" name="rxscalajs.Observable.create.T">T</span>]) ⇒ <a href="#Creator=scala.scalajs.js.|[Unit,()=&gt;Unit]" class="extmbr" name="rxscalajs.Observable.Creator">Creator</a></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.create.T">T</span>]</span>
+        <span class="name">create</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="f">f: (<a href="Observer.html" class="extype" name="rxscalajs.Observer">Observer</a>[<span class="extype" name="rxscalajs.Observable.create.T">T</span>]) ⇒ <a href="#Creator=Unit|()=&gt;Unit" class="extmbr" name="rxscalajs.Observable.Creator">Creator</a></span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.create.T">T</span>]</span>
       </span>
       
       <p class="shortcomment cmt">Returns an Observable that will execute the specified function when someone subscribes to it.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an Observable that will execute the specified function when someone subscribes to it.</p><p><img width="640" height="200" src="https://raw.githubusercontent.com/wiki/ReactiveX/RxJava/images/rx-operators/create.png" alt="" /></p><p>Write the function you pass so that it behaves as an Observable: It should invoke the
@@ -655,7 +655,7 @@ It can be used for composing with other Observables, such as in a mergeMap.
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java/lang/index.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="symbol">classOf[java.lang.Throwable]</span>
@@ -736,6 +736,22 @@ type of items to be emitted by the resulting Observable</p></dd><dt class="param
       <p class="shortcomment cmt">Creates an Observable that emits events of a specific type coming from the given event target.</p><div class="fullcomment"><div class="comment cmt"><p>Creates an Observable that emits events of a specific type coming from the given event target.</p><p>Creates an Observable by attaching an event listener to an &quot;event target&quot;, which may be an object with addEventListener and removeEventListener, a Node.js EventEmitter, a jQuery style EventEmitter, a NodeList from the DOM, or an HTMLCollection from the DOM.
 The event handler is attached when the output Observable is subscribed, and removed when the Subscription is unsubscribed.
 </p></div></div>
+    </li><li name="rxscalajs.Observable#fromJSObservable" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="fromJSObservable[T](jsObservable:rxscalajs.facade.ObservableFacade[T]):rxscalajs.Observable[T]"></a><a id="fromJSObservable[T](ObservableFacade[T]):Observable[T]"></a>
+      <span class="permalink">
+      <a href="../rxscalajs/Observable$.html#fromJSObservable[T](jsObservable:rxscalajs.facade.ObservableFacade[T]):rxscalajs.Observable[T]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fromJSObservable</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="jsObservable">jsObservable: <a href="facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.Observable.fromJSObservable.T">T</span>]</span>)</span><span class="result">: <a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.Observable.fromJSObservable.T">T</span>]</span>
+      </span>
+      
+      
     </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <span class="permalink">
@@ -907,6 +923,54 @@ the source Array</p></dd><dt>returns</dt><dd class="cmt"><p>an Observable that e
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="rxscalajs.ObservableInstances#observableMonad" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="observableMonad:cats.MonadError[rxscalajs.Observable,scala.scalajs.js.Any]"></a><a id="observableMonad:MonadError[Observable,Any]"></a>
+      <span class="permalink">
+      <a href="../rxscalajs/Observable$.html#observableMonad:cats.MonadError[rxscalajs.Observable,scala.scalajs.js.Any]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">observableMonad</span><span class="result">: <span class="extype" name="cats.MonadError">MonadError</span>[<a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>, <span class="extype" name="scala.scalajs.js.Any">Any</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ObservableInstances</dd></dl></div>
+    </li><li name="rxscalajs.ObservableInstances#observableMonoid" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="observableMonoid[A](implicitevidence$3:cats.Monoid[A]):cats.Monoid[rxscalajs.Observable[A]]"></a><a id="observableMonoid[A](Monoid[A]):Monoid[Observable[A]]"></a>
+      <span class="permalink">
+      <a href="../rxscalajs/Observable$.html#observableMonoid[A](implicitevidence$3:cats.Monoid[A]):cats.Monoid[rxscalajs.Observable[A]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">observableMonoid</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="cats.Monoid">Monoid</span>[<span class="extype" name="rxscalajs.ObservableInstances.observableMonoid.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="cats.Monoid">Monoid</span>[<a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>[<span class="extype" name="rxscalajs.ObservableInstances.observableMonoid.A">A</span>]]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ObservableInstances</dd></dl></div>
+    </li><li name="rxscalajs.ObservableInstances#observableMonoidK" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="observableMonoidK:cats.MonoidK[rxscalajs.Observable]"></a><a id="observableMonoidK:MonoidK[Observable]"></a>
+      <span class="permalink">
+      <a href="../rxscalajs/Observable$.html#observableMonoidK:cats.MonoidK[rxscalajs.Observable]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">observableMonoidK</span><span class="result">: <span class="extype" name="cats.MonoidK">MonoidK</span>[<a href="Observable.html" class="extype" name="rxscalajs.Observable">Observable</a>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ObservableInstances</dd></dl></div>
     </li><li name="rxscalajs.Observable#of" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="of[T](elements:T*):rxscalajs.Observable[T]"></a><a id="of[T](T*):Observable[T]"></a>
       <span class="permalink">
@@ -1117,7 +1181,9 @@ the items to be emitted by the resulting Observable</p></dd><dt>returns</dt><dd 
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="rxscalajs.ObservableInstances">
+              <h3>Inherited from <span class="extype" name="rxscalajs.ObservableInstances">ObservableInstances</span></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>

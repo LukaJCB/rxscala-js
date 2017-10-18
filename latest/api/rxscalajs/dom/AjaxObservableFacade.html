@@ -109,6 +109,12 @@
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="rxscalajs">rxscalajs</a></dd></dl></div>
     </li><li class="current-entities indented2">
                         <span class="separator"></span>
+                        <a class="object" href="Ajax$.html" title=""></a>
+                        <a href="Ajax$.html" title="">
+                          Ajax
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
                         <a class="trait" href="AjaxCreationMethod.html" title=""></a>
                         <a href="AjaxCreationMethod.html" title="">
                           AjaxCreationMethod
@@ -157,9 +163,15 @@
                         </a>
                       </li><li class="current-entities indented2">
                         <span class="separator"></span>
-                        <a class="object" href="Rxscalajs$.html" title=""></a>
-                        <a href="Rxscalajs$.html" title="">
-                          Rxscalajs
+                        <a class="class" href="Request.html" title=""></a>
+                        <a href="Request.html" title="">
+                          Request
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="class" href="Response.html" title=""></a>
+                        <a href="Response.html" title="">
+                          Response
                         </a>
                       </li>
               </ul>
@@ -195,6 +207,17 @@
                 <span class="name">@RawJSType</span><span class="args">()</span>
               
                 <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@JSImport</span><span class="args">(<span>
+      
+      <span class="symbol">&quot;rxjs/Rx&quot;</span>
+    </span>, <span>
+      
+      <span class="symbol">&quot;AjaxObservable&quot;</span>
+    </span>, <span>
+      
+      <span class="symbol">&quot;Rx.AjaxObservable&quot;</span>
+    </span>)</span>
               
         </dd></dl><div class="toggleContainer block">
           <span class="toggle">
@@ -247,9 +270,9 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="rxscalajs.dom.AjaxObservableFacade#&lt;init&gt;" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(urlOrRequest:scala.scalajs.js.|[String,rxscalajs.dom.AjaxRequest]):rxscalajs.dom.AjaxObservableFacade[T]"></a><a id="&lt;init&gt;:AjaxObservableFacade[T]"></a>
+      <a id="&lt;init&gt;(urlOrRequest:String|rxscalajs.dom.AjaxRequest):rxscalajs.dom.AjaxObservableFacade[T]"></a><a id="&lt;init&gt;:AjaxObservableFacade[T]"></a>
       <span class="permalink">
-      <a href="../../rxscalajs/dom/AjaxObservableFacade.html#&lt;init&gt;(urlOrRequest:scala.scalajs.js.|[String,rxscalajs.dom.AjaxRequest]):rxscalajs.dom.AjaxObservableFacade[T]" title="Permalink">
+      <a href="../../rxscalajs/dom/AjaxObservableFacade.html#&lt;init&gt;(urlOrRequest:String|rxscalajs.dom.AjaxRequest):rxscalajs.dom.AjaxObservableFacade[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -480,22 +503,6 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a></dd></dl></div>
-    </li><li name="rxscalajs.facade.ObservableFacade#cache" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="cache(bufferSize:Int,windowTime:Int,scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[T]"></a><a id="cache(Int,Int,Scheduler):ObservableFacade[T]"></a>
-      <span class="permalink">
-      <a href="../../rxscalajs/dom/AjaxObservableFacade.html#cache(bufferSize:Int,windowTime:Int,scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[T]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">cache</span><span class="params">(<span name="bufferSize">bufferSize: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">???</span></span>, <span name="windowTime">windowTime: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">???</span></span>, <span name="scheduler">scheduler: <a href="../Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a> = <span class="symbol">???</span></span>)</span><span class="result">: <a href="../facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.dom.AjaxObservableFacade.T">T</span>]</span>
-      </span>
-      
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a></dd></dl></div>
     </li><li name="rxscalajs.facade.ObservableFacade#catch" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="catch[U](selector:scala.scalajs.js.Function1[scala.scalajs.js.Any,rxscalajs.facade.ObservableFacade[U]]):rxscalajs.facade.ObservableFacade[U]"></a><a id="catch[U](Function1[Any,ObservableFacade[U]]):ObservableFacade[U]"></a>
       <span class="permalink">
@@ -527,7 +534,7 @@
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java/lang/index.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
@@ -567,9 +574,9 @@
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a></dd></dl></div>
     </li><li name="rxscalajs.facade.ObservableFacade#concat" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="concat[U](that:rxscalajs.facade.ObservableFacade[U],scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[U]"></a><a id="concat[U](ObservableFacade[U],Scheduler):ObservableFacade[U]"></a>
+      <a id="concat[U&gt;:T](that:rxscalajs.facade.ObservableFacade[U],scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[U]"></a><a id="concat[U&gt;:T](ObservableFacade[U],Scheduler):ObservableFacade[U]"></a>
       <span class="permalink">
-      <a href="../../rxscalajs/dom/AjaxObservableFacade.html#concat[U](that:rxscalajs.facade.ObservableFacade[U],scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[U]" title="Permalink">
+      <a href="../../rxscalajs/dom/AjaxObservableFacade.html#concat[U&gt;:T](that:rxscalajs.facade.ObservableFacade[U],scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[U]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -578,7 +585,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">concat</span><span class="tparams">[<span name="U">U</span>]</span><span class="params">(<span name="that">that: <a href="../facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.facade.ObservableFacade.concat.U">U</span>]</span>, <span name="scheduler">scheduler: <a href="../Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a> = <span class="symbol">???</span></span>)</span><span class="result">: <a href="../facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.facade.ObservableFacade.concat.U">U</span>]</span>
+        <span class="name">concat</span><span class="tparams">[<span name="U">U &gt;: <span class="extype" name="rxscalajs.dom.AjaxObservableFacade.T">T</span></span>]</span><span class="params">(<span name="that">that: <a href="../facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.facade.ObservableFacade.concat.U">U</span>]</span>, <span name="scheduler">scheduler: <a href="../Scheduler.html" class="extype" name="rxscalajs.Scheduler">Scheduler</a> = <span class="symbol">???</span></span>)</span><span class="result">: <a href="../facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a>[<span class="extype" name="rxscalajs.facade.ObservableFacade.concat.U">U</span>]</span>
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a></dd></dl></div>
@@ -727,9 +734,9 @@
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a></dd></dl></div>
     </li><li name="rxscalajs.facade.ObservableFacade#delay" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="delay(delay:scala.scalajs.js.|[Int,scala.scalajs.js.Date],scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[T]"></a><a id="delay(|[Int,Date],Scheduler):ObservableFacade[T]"></a>
+      <a id="delay(delay:Int|scala.scalajs.js.Date,scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[T]"></a><a id="delay(|[Int,Date],Scheduler):ObservableFacade[T]"></a>
       <span class="permalink">
-      <a href="../../rxscalajs/dom/AjaxObservableFacade.html#delay(delay:scala.scalajs.js.|[Int,scala.scalajs.js.Date],scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[T]" title="Permalink">
+      <a href="../../rxscalajs/dom/AjaxObservableFacade.html#delay(delay:Int|scala.scalajs.js.Date,scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -981,7 +988,7 @@
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java/lang/index.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="symbol">classOf[java.lang.Throwable]</span>
@@ -2083,9 +2090,9 @@
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a></dd></dl></div>
     </li><li name="rxscalajs.facade.ObservableFacade#timeout" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="timeout(due:scala.scalajs.js.|[Int,scala.scalajs.js.Date],scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[T]"></a><a id="timeout(|[Int,Date],Scheduler):ObservableFacade[T]"></a>
+      <a id="timeout(due:Int|scala.scalajs.js.Date,scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[T]"></a><a id="timeout(|[Int,Date],Scheduler):ObservableFacade[T]"></a>
       <span class="permalink">
-      <a href="../../rxscalajs/dom/AjaxObservableFacade.html#timeout(due:scala.scalajs.js.|[Int,scala.scalajs.js.Date],scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[T]" title="Permalink">
+      <a href="../../rxscalajs/dom/AjaxObservableFacade.html#timeout(due:Int|scala.scalajs.js.Date,scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -2099,9 +2106,9 @@
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../facade/ObservableFacade.html" class="extype" name="rxscalajs.facade.ObservableFacade">ObservableFacade</a></dd></dl></div>
     </li><li name="rxscalajs.facade.ObservableFacade#timeoutWith" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="timeoutWith[R](due:scala.scalajs.js.|[Int,scala.scalajs.js.Date],withObservable:rxscalajs.facade.ObservableFacade[R],scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[R]"></a><a id="timeoutWith[R](|[Int,Date],ObservableFacade[R],Scheduler):ObservableFacade[R]"></a>
+      <a id="timeoutWith[R](due:Int|scala.scalajs.js.Date,withObservable:rxscalajs.facade.ObservableFacade[R],scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[R]"></a><a id="timeoutWith[R](|[Int,Date],ObservableFacade[R],Scheduler):ObservableFacade[R]"></a>
       <span class="permalink">
-      <a href="../../rxscalajs/dom/AjaxObservableFacade.html#timeoutWith[R](due:scala.scalajs.js.|[Int,scala.scalajs.js.Date],withObservable:rxscalajs.facade.ObservableFacade[R],scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[R]" title="Permalink">
+      <a href="../../rxscalajs/dom/AjaxObservableFacade.html#timeoutWith[R](due:Int|scala.scalajs.js.Date,withObservable:rxscalajs.facade.ObservableFacade[R],scheduler:rxscalajs.Scheduler):rxscalajs.facade.ObservableFacade[R]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
