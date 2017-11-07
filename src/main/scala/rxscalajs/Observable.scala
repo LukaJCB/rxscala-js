@@ -1,6 +1,6 @@
 package rxscalajs
 
-import cats.{Monad, MonadError, Monoid, MonoidK}
+import cats.{Applicative, Monad, MonadError, Monoid, MonoidK, Parallel, ~>}
 import org.scalajs.dom.Element
 import org.scalajs.dom.raw.Event
 import rxscalajs.dom.{Ajax, Request, Response}
@@ -3263,5 +3263,19 @@ private[rxscalajs] trait ObservableInstances {
 
     def combine(x: Observable[A], y: Observable[A]): Observable[A] =
       x.combineLatestWith(y)(Monoid[A].combine)
+  }
+
+  implicit def observableParallel: Parallel[Observable, CombineObservable] = new Parallel[Observable, CombineObservable] {
+    def monad = observableMonad
+
+    def applicative = CombineObservable.combineObservableApplicative
+
+    def sequential = new (CombineObservable ~> Observable) {
+      def apply[A](fa: CombineObservable[A]) = fa.value
+    }
+
+    def parallel = new (Observable ~> CombineObservable) {
+      def apply[A](fa: Observable[A]) = new CombineObservable(fa)
+    }
   }
 }
